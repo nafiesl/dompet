@@ -23,6 +23,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @include('layouts.partials.noty')
     @stack('scripts')
 </body>
 </html>

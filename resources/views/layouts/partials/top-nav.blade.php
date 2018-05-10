@@ -35,6 +35,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
+                            <li>{{ link_to_route('password.change', __('auth.change_password')) }}</li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -43,6 +44,7 @@
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <input type="submit" value="{{ __('auth.logout') }}" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </li>
