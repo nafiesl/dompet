@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Authentication Routes...
+Route::post('login', 'Api\Auth\LoginController@login')->name('api.login');
+
+Route::group(['middleware' => 'auth:api', 'as' => 'api.', 'namespace' => 'Api'], function () {
+    /**
+     * User Profile Endpoint
+     */
+    Route::get('user', 'Auth\ProfileController@show')->name('user');
 });
