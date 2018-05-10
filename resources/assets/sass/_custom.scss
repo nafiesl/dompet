@@ -1,0 +1,79 @@
+/*!
+ * Custom css for Laravel
+ * By Nafies Luthfi
+ * Code licensed under the MIT License.
+ * For details, see https://opensource.org/licenses/MIT
+ */
+
+.page-header {
+    margin: 0 0 22px;
+}
+
+.navbar-toggle {
+    padding: 5px 10px;
+}
+
+.panel h1, .panel .h1 {
+    margin-top: 0;
+}
+
+h3.page-header div.pull-right {
+    margin-top: -8px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+/* Form */
+.form-group.required .control-label {
+    position: relative;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: -2px;
+    right: -8px;
+}
+
+/* Table */
+table .text-top { vertical-align: top !important; }
+table .text-middle { vertical-align: middle !important; }
+table .text-bottom { vertical-align: bottom !important; }
+table.small-text { font-size: 12px; }
+.table .form-group { margin-bottom: 0px; }
+.table .form-group .form-control { border-radius: 0px; padding: 4px 6px; height: 26px; }
+/* End of Table */
+
+// Nav Tabs
+.nav.nav-tabs > li > a {
+    padding: 6px 10px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border-top: 2px solid #f0ad4e;
+    padding-bottom: 5px;
+}
+// End of Nav Tabs
+
+/* Select2 */
+.select2-container .select2-selection--single { height: 36px !important; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 34px !important; }
+.select2-container--default .select2-selection--single .select2-selection__arrow { height: 34px !important; }
+/* End of Select2 */
+
+/* xs-navbar */
+a.xs-navbar {
+    color: #777;
+    float: left;
+    padding: 14px 10px;
+    font-size: 14px;
+    line-height: 22px;
+    height: 50px;
+}
+a.xs-navbar:hover {
+    text-decoration: none;
+}
+/* End of xs-navbar */
