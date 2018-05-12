@@ -7,9 +7,10 @@ use Faker\Generator as Faker;
 $factory->define(Transaction::class, function (Faker $faker) {
 
     return [
-        'name' => $faker->word,
+        'amount'      => 99.99,
+        'date'        => date('Y-m-d'),
         'description' => $faker->sentence,
-        'creator_id' => function () {
+        'creator_id'  => function () {
             return factory(User::class)->create()->id;
         },
     ];

@@ -10,14 +10,14 @@
     @endcan
     </div>
     {{ trans('transaction.list') }}
-    <small>{{ trans('app.total') }} : {{ $transactions->total() }} {{ trans('transaction.transaction') }}</small>
+    <small>{{ trans('app.total') }} : {{ $transactions->count() }} {{ trans('transaction.transaction') }}</small>
 </h1>
 <div class="row">
     <div class="col-md-8">
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
                 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}
-                {!! FormField::text('q', ['value' => request('q'), 'label' => trans('transaction.search'), 'class' => 'input-sm']) !!}
+                {!! FormField::text('date', ['value' => request('date'), 'label' => trans('transaction.search'), 'class' => 'input-sm']) !!}
                 {{ Form::submit(trans('transaction.search'), ['class' => 'btn btn-sm']) }}
                 {{ link_to_route('transactions.index', trans('app.reset')) }}
                 {{ Form::close() }}
@@ -26,7 +26,8 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ trans('app.table_no') }}</th>
-                        <th>{{ trans('transaction.name') }}</th>
+                        <th>{{ trans('transaction.date') }}</th>
+                        <th>{{ trans('transaction.amount') }}</th>
                         <th>{{ trans('transaction.description') }}</th>
                         <th class="text-center">{{ trans('app.action') }}</th>
                     </tr>
@@ -34,15 +35,16 @@
                 <tbody>
                     @foreach($transactions as $key => $transaction)
                     <tr>
-                        <td class="text-center">{{ $transactions->firstItem() + $key }}</td>
-                        <td>{{ $transaction->name }}</td>
+                        <td class="text-center">{{ 1 + $key }}</td>
+                        <td>{{ $transaction->date }}</td>
+                        <td>{{ $transaction->amount }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-center">
                         @can('update', $transaction)
                             {!! link_to_route(
                                 'transactions.index',
                                 trans('app.edit'),
-                                ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'q'),
+                                ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'date'),
                                 ['id' => 'edit-transaction-'.$transaction->id]
                             ) !!} |
                         @endcan
@@ -50,7 +52,7 @@
                             {!! link_to_route(
                                 'transactions.index',
                                 trans('app.delete'),
-                                ['action' => 'delete', 'id' => $transaction->id] + Request::only('page', 'q'),
+                                ['action' => 'delete', 'id' => $transaction->id] + Request::only('page', 'date'),
                                 ['id' => 'del-transaction-'.$transaction->id]
                             ) !!}
                         @endcan
@@ -59,7 +61,6 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="panel-body">{{ $transactions->appends(Request::except('page'))->render() }}</div>
         </div>
     </div>
     <div class="col-md-4">

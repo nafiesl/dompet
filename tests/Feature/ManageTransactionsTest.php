@@ -17,7 +17,7 @@ class ManageTransactionsTest extends TestCase
 
         $this->loginAsUser();
         $this->visit(route('transactions.index'));
-        $this->see($transaction->name);
+        $this->see($transaction->amount);
     }
 
     /** @test */
@@ -30,14 +30,16 @@ class ManageTransactionsTest extends TestCase
         $this->seePageIs(route('transactions.index', ['action' => 'create']));
 
         $this->submitForm(trans('transaction.create'), [
-            'name'        => 'Transaction 1 name',
+            'amount'      => 99.99,
+            'date'        => '2017-01-01',
             'description' => 'Transaction 1 description',
         ]);
 
         $this->seePageIs(route('transactions.index'));
 
         $this->seeInDatabase('transactions', [
-            'name'        => 'Transaction 1 name',
+            'amount'      => 99.99,
+            'date'        => '2017-01-01',
             'description' => 'Transaction 1 description',
         ]);
     }
@@ -46,21 +48,24 @@ class ManageTransactionsTest extends TestCase
     public function user_can_edit_a_transaction_within_search_query()
     {
         $this->loginAsUser();
-        $transaction = factory(Transaction::class)->create(['name' => 'Testing 123']);
+        $date = date('Y-m-d');
+        $transaction = factory(Transaction::class)->create(['amount' => 99.99, 'date' => $date]);
 
-        $this->visit(route('transactions.index', ['q' => '123']));
+        $this->visit(route('transactions.index', ['date' => $date]));
         $this->click('edit-transaction-'.$transaction->id);
-        $this->seePageIs(route('transactions.index', ['action' => 'edit', 'id' => $transaction->id, 'q' => '123']));
+        $this->seePageIs(route('transactions.index', ['action' => 'edit', 'date' => $date, 'id' => $transaction->id]));
 
         $this->submitForm(trans('transaction.update'), [
-            'name'        => 'Transaction 1 name',
+            'amount'      => 99.99,
+            'date'        => $date,
             'description' => 'Transaction 1 description',
         ]);
 
-        $this->seePageIs(route('transactions.index', ['q' => '123']));
+        $this->seePageIs(route('transactions.index', ['date' => $date]));
 
         $this->seeInDatabase('transactions', [
-            'name'        => 'Transaction 1 name',
+            'amount'      => 99.99,
+            'date'        => $date,
             'description' => 'Transaction 1 description',
         ]);
     }

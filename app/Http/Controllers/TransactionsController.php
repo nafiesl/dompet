@@ -15,15 +15,16 @@ class TransactionsController extends Controller
     public function index()
     {
         $editableTransaction = null;
-        $transactions = Transaction::where(function ($query) {
-            $query->where('name', 'like', '%'.request('q').'%');
+        $date = request('date', date('Y-m-d'));
+        $transactions = Transaction::where(function ($query) use ($date) {
+            $query->where('date', $date);
         })->paginate(25);
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));
         }
 
-        return view('transactions.index', compact('transactions', 'editableTransaction'));
+        return view('transactions.index', compact('transactions', 'editableTransaction', 'date'));
     }
 
     /**
@@ -36,12 +37,11 @@ class TransactionsController extends Controller
     {
         $this->authorize('create', new Transaction);
 
-        $this->validate($request, [
-            'name' => 'required|max:60',
-            'description' => 'nullable|max:255',
+        $newTransaction = $request->validate([
+            'date'        => 'required|date|date_format:Y-m-d',
+            'amount'      => 'required|max:60',
+            'description' => 'required|max:255',
         ]);
-
-        $newTransaction = $request->only('name', 'description');
         $newTransaction['creator_id'] = auth()->id();
 
         Transaction::create($newTransaction);
@@ -60,14 +60,15 @@ class TransactionsController extends Controller
     {
         $this->authorize('update', $transaction);
 
-        $this->validate($request, [
-            'name' => 'required|max:60',
-            'description' => 'nullable|max:255',
+        $transactionData = $this->validate($request, [
+            'date'        => 'required|date|date_format:Y-m-d',
+            'amount'      => 'required|max:60',
+            'description' => 'required|max:255',
         ]);
 
-        $routeParam = request()->only('page', 'q');
+        $routeParam = request()->only('page', 'date');
 
-        $transaction->update($request->only('name', 'description'));
+        $transaction->update($transactionData);
 
         return redirect()->route('transactions.index', $routeParam);
     }
@@ -86,7 +87,7 @@ class TransactionsController extends Controller
             'transaction_id' => 'required',
         ]);
 
-        $routeParam = request()->only('page', 'q');
+        $routeParam = request()->only('page', 'date');
 
         if (request('transaction_id') == $transaction->id && $transaction->delete()) {
             return redirect()->route('transactions.index', $routeParam);
