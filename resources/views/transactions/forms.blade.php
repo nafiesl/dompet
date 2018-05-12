@@ -1,30 +1,62 @@
 @can('create', new App\Transaction)
 @if (Request::get('action') == 'add-income')
-    {!! Form::open(['route' => 'transactions.store']) !!}
-    {{ Form::hidden('in_out', 1) }}
-    {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
-    {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
-    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
-    {!! Form::submit(trans('transaction.add_income'), ['class' => 'btn btn-success']) !!}
-    {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
-    {!! Form::close() !!}
-@endcan
-@if (Request::get('action') == 'add-spending')
-    {!! Form::open(['route' => 'transactions.store']) !!}
-    {{ Form::hidden('in_out', 0) }}
-    {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
-    {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
-    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
-    {!! Form::submit(trans('transaction.add_spending'), ['class' => 'btn btn-success']) !!}
-    {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
-    {!! Form::close() !!}
-@endcan
+    <div id="transactionModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ link_to_route('transactions.index', '&times;', [], ['class' => 'close']) }}
+                    <h4 class="modal-title">{{ __('transaction.add_income') }}</h4>
+                </div>
+                {!! Form::open(['route' => 'transactions.store']) !!}
+                {{ Form::hidden('in_out', 1) }}
+                <div class="modal-body">
+                    {!! FormField::text('date', ['required' => true, 'label' => trans('app.date')]) !!}
+                    {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
+                    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
+                </div>
+                <div class="modal-footer">
+                    {!! Form::submit(trans('transaction.add_income'), ['class' => 'btn btn-success']) !!}
+                    {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 @endif
+@if (Request::get('action') == 'add-spending')
+    <div id="transactionModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ link_to_route('transactions.index', '&times;', [], ['class' => 'close']) }}
+                    <h4 class="modal-title">{{ __('transaction.add_spending') }}</h4>
+                </div>
+                {!! Form::open(['route' => 'transactions.store']) !!}
+                {{ Form::hidden('in_out', 0) }}
+                <div class="modal-body">
+                    {!! FormField::text('date', ['required' => true, 'label' => trans('app.date')]) !!}
+                    {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
+                    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
+                </div>
+                <div class="modal-footer">
+                    {!! Form::submit(trans('transaction.add_spending'), ['class' => 'btn btn-success']) !!}
+                    {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+@endif
+@endcan
 @if (Request::get('action') == 'edit' && $editableTransaction)
 @can('update', $editableTransaction)
     {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction],'method' => 'patch']) !!}
-    {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
-    {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
+    <div class="row">
+        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => trans('app.date')]) !!}</div>
+        <div class="col-md-6">{!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}</div>
+    </div>
     {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
     @if (request('date'))
         {{ Form::hidden('date', request('date')) }}

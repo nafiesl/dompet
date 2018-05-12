@@ -25,10 +25,10 @@ class ManageTransactionsTest extends TestCase
     {
         $date = '2017-01-01';
         $this->loginAsUser();
-        $this->visit(route('transactions.index'));
+        $this->visit(route('transactions.index', ['date' => $date]));
 
         $this->click(__('transaction.add_income'));
-        $this->seePageIs(route('transactions.index', ['action' => 'add-income']));
+        $this->seePageIs(route('transactions.index', ['action' => 'add-income', 'date' => $date]));
 
         $this->submitForm(__('transaction.add_income'), [
             'amount'      => 99.99,
@@ -52,10 +52,10 @@ class ManageTransactionsTest extends TestCase
     {
         $date = '2017-01-01';
         $this->loginAsUser();
-        $this->visit(route('transactions.index'));
+        $this->visit(route('transactions.index', ['date' => $date]));
 
         $this->click(__('transaction.add_spending'));
-        $this->seePageIs(route('transactions.index', ['action' => 'add-spending']));
+        $this->seePageIs(route('transactions.index', ['action' => 'add-spending', 'date' => $date]));
 
         $this->submitForm(__('transaction.add_spending'), [
             'amount'      => 99.99,

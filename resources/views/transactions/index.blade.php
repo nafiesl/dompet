@@ -6,8 +6,8 @@
 <h1 class="page-header">
     <div class="pull-right">
     @can('create', new App\Transaction)
-        {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income'], ['class' => 'btn btn-success']) }}
-        {{ link_to_route('transactions.index', trans('transaction.add_spending'), ['action' => 'add-spending'], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income', 'date' => $date], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', trans('transaction.add_spending'), ['action' => 'add-spending', 'date' => $date], ['class' => 'btn btn-success']) }}
     @endcan
     </div>
     {{ trans('transaction.list') }}
@@ -65,3 +65,14 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    $('#transactionModal').modal({
+        show: true,
+        backdrop: 'static',
+    });
+})();
+</script>
+@endpush
