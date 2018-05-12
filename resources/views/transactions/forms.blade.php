@@ -3,7 +3,7 @@
     {!! Form::open(['route' => 'transactions.store']) !!}
     {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
     {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
-    {!! FormField::textarea('description', ['label' => trans('transaction.description')]) !!}
+    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
     {!! Form::submit(trans('transaction.create'), ['class' => 'btn btn-success']) !!}
     {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
     {!! Form::close() !!}
@@ -14,12 +14,9 @@
     {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction],'method' => 'patch']) !!}
     {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
     {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
-    {!! FormField::textarea('description', ['label' => trans('transaction.description')]) !!}
-    @if (request('q'))
-        {{ Form::hidden('q', request('q')) }}
-    @endif
-    @if (request('page'))
-        {{ Form::hidden('page', request('page')) }}
+    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
+    @if (request('date'))
+        {{ Form::hidden('date', request('date')) }}
     @endif
     {!! Form::submit(trans('transaction.update'), ['class' => 'btn btn-success']) !!}
     {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
@@ -48,8 +45,7 @@
                 ['class'=>'btn btn-danger'],
                 [
                     'transaction_id' => $editableTransaction->id,
-                    'page' => request('page'),
-                    'q' => request('q'),
+                    'date' => request('date'),
                 ]
             ) !!}
             {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}

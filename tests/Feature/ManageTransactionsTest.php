@@ -23,6 +23,7 @@ class ManageTransactionsTest extends TestCase
     /** @test */
     public function user_can_create_a_transaction()
     {
+        $date = '2017-01-01';
         $this->loginAsUser();
         $this->visit(route('transactions.index'));
 
@@ -31,15 +32,15 @@ class ManageTransactionsTest extends TestCase
 
         $this->submitForm(trans('transaction.create'), [
             'amount'      => 99.99,
-            'date'        => '2017-01-01',
+            'date'        => $date,
             'description' => 'Transaction 1 description',
         ]);
 
-        $this->seePageIs(route('transactions.index'));
+        $this->seePageIs(route('transactions.index', ['date' => $date]));
 
         $this->seeInDatabase('transactions', [
             'amount'      => 99.99,
-            'date'        => '2017-01-01',
+            'date'        => $date,
             'description' => 'Transaction 1 description',
         ]);
     }

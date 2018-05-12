@@ -17,7 +17,7 @@
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
                 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}
-                {!! FormField::text('date', ['value' => request('date'), 'label' => trans('transaction.search'), 'class' => 'input-sm']) !!}
+                {!! FormField::text('date', ['value' => $date, 'label' => trans('transaction.search'), 'class' => 'input-sm']) !!}
                 {{ Form::submit(trans('transaction.search'), ['class' => 'btn btn-sm']) }}
                 {{ link_to_route('transactions.index', trans('app.reset')) }}
                 {{ Form::close() }}

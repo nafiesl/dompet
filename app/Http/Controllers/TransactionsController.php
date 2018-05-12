@@ -46,7 +46,9 @@ class TransactionsController extends Controller
 
         Transaction::create($newTransaction);
 
-        return redirect()->route('transactions.index');
+        flash(__('transaction.created'), 'success');
+
+        return redirect()->route('transactions.index', ['date' => $newTransaction['date']]);
     }
 
     /**
@@ -66,9 +68,11 @@ class TransactionsController extends Controller
             'description' => 'required|max:255',
         ]);
 
-        $routeParam = request()->only('page', 'date');
+        $routeParam = request()->only('date');
 
         $transaction->update($transactionData);
+
+        flash(__('transaction.updated'), 'success');
 
         return redirect()->route('transactions.index', $routeParam);
     }
@@ -87,11 +91,15 @@ class TransactionsController extends Controller
             'transaction_id' => 'required',
         ]);
 
-        $routeParam = request()->only('page', 'date');
+        $routeParam = request()->only('date');
 
         if (request('transaction_id') == $transaction->id && $transaction->delete()) {
+            flash(__('transaction.deleted'), 'warning');
+
             return redirect()->route('transactions.index', $routeParam);
         }
+
+        flash(__('transaction.undeleted'), 'error');
 
         return back();
     }
