@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->string('date');
             $table->unsignedDecimal('amount', 12);
+            $table->boolean('in_out')->unsigned();
             $table->string('description');
             $table->unsignedInteger('creator_id');
             $table->timestamps();

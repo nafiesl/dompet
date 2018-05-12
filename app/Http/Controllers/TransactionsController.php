@@ -17,7 +17,7 @@ class TransactionsController extends Controller
         $editableTransaction = null;
         $date = request('date', date('Y-m-d'));
         $transactions = Transaction::where(function ($query) use ($date) {
-            $query->where('date', $date);
+            $query->where('date', 'like', $date.'%');
         })->paginate(25);
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
@@ -40,13 +40,18 @@ class TransactionsController extends Controller
         $newTransaction = $request->validate([
             'date'        => 'required|date|date_format:Y-m-d',
             'amount'      => 'required|max:60',
+            'in_out'      => 'required|boolean',
             'description' => 'required|max:255',
         ]);
         $newTransaction['creator_id'] = auth()->id();
 
         Transaction::create($newTransaction);
 
-        flash(__('transaction.created'), 'success');
+        if ($newTransaction['in_out']) {
+            flash(__('transaction.income_added'), 'success');
+        } else {
+            flash(__('transaction.spending_added'), 'success');
+        }
 
         return redirect()->route('transactions.index', ['date' => $newTransaction['date']]);
     }

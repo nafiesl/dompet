@@ -1,10 +1,21 @@
-@if (Request::get('action') == 'create')
 @can('create', new App\Transaction)
+@if (Request::get('action') == 'add-income')
     {!! Form::open(['route' => 'transactions.store']) !!}
+    {{ Form::hidden('in_out', 1) }}
     {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
     {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
     {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
-    {!! Form::submit(trans('transaction.create'), ['class' => 'btn btn-success']) !!}
+    {!! Form::submit(trans('transaction.add_income'), ['class' => 'btn btn-success']) !!}
+    {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
+    {!! Form::close() !!}
+@endcan
+@if (Request::get('action') == 'add-spending')
+    {!! Form::open(['route' => 'transactions.store']) !!}
+    {{ Form::hidden('in_out', 0) }}
+    {!! FormField::text('date', ['required' => true, 'label' => trans('transaction.date')]) !!}
+    {!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}
+    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
+    {!! Form::submit(trans('transaction.add_spending'), ['class' => 'btn btn-success']) !!}
     {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
     {!! Form::close() !!}
 @endcan

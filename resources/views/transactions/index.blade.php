@@ -6,7 +6,8 @@
 <h1 class="page-header">
     <div class="pull-right">
     @can('create', new App\Transaction)
-        {{ link_to_route('transactions.index', trans('transaction.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income'], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', trans('transaction.add_spending'), ['action' => 'add-spending'], ['class' => 'btn btn-success']) }}
     @endcan
     </div>
     {{ trans('transaction.list') }}
@@ -26,7 +27,8 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ trans('app.table_no') }}</th>
-                        <th>{{ trans('transaction.date') }}</th>
+                        <th class="text-center">{{ trans('app.date') }}</th>
+                        <th class="text-center">{{ trans('transaction.transaction') }}</th>
                         <th>{{ trans('transaction.amount') }}</th>
                         <th>{{ trans('transaction.description') }}</th>
                         <th class="text-center">{{ trans('app.action') }}</th>
@@ -36,7 +38,8 @@
                     @foreach($transactions as $key => $transaction)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td>{{ $transaction->date }}</td>
+                        <td class="text-center">{{ $transaction->date }}</td>
+                        <td class="text-center">{{ $transaction->in_out }}</td>
                         <td>{{ $transaction->amount }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-center">

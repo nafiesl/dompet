@@ -21,27 +21,56 @@ class ManageTransactionsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_a_transaction()
+    public function user_can_create_an_income_transaction()
     {
         $date = '2017-01-01';
         $this->loginAsUser();
         $this->visit(route('transactions.index'));
 
-        $this->click(trans('transaction.create'));
-        $this->seePageIs(route('transactions.index', ['action' => 'create']));
+        $this->click(trans('transaction.add_income'));
+        $this->seePageIs(route('transactions.index', ['action' => 'add-income']));
 
-        $this->submitForm(trans('transaction.create'), [
+        $this->submitForm(trans('transaction.add_income'), [
             'amount'      => 99.99,
             'date'        => $date,
-            'description' => 'Transaction 1 description',
+            'description' => 'Income description',
         ]);
 
         $this->seePageIs(route('transactions.index', ['date' => $date]));
+        $this->see(__('transaction.income_added'));
 
         $this->seeInDatabase('transactions', [
+            'in_out'      => 1, // 0:spending, 1:income
             'amount'      => 99.99,
             'date'        => $date,
-            'description' => 'Transaction 1 description',
+            'description' => 'Income description',
+        ]);
+    }
+
+    /** @test */
+    public function user_can_create_a_spending_transaction()
+    {
+        $date = '2017-01-01';
+        $this->loginAsUser();
+        $this->visit(route('transactions.index'));
+
+        $this->click(trans('transaction.add_spending'));
+        $this->seePageIs(route('transactions.index', ['action' => 'add-spending']));
+
+        $this->submitForm(trans('transaction.add_spending'), [
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Spending description',
+        ]);
+
+        $this->seePageIs(route('transactions.index', ['date' => $date]));
+        $this->see(__('transaction.spending_added'));
+
+        $this->seeInDatabase('transactions', [
+            'in_out'      => 0, // 0:spending, 1:income
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Spending description',
         ]);
     }
 

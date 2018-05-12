@@ -2,18 +2,20 @@
 
 return [
     // Labels
-    'transaction'     => 'Transaksi',
-    'list'           => 'Daftar Transaksi',
-    'search'         => 'Cari Transaksi',
-    'detail'         => 'Detail Transaksi',
-    'not_found'      => 'Transaksi tidak ditemukan.',
-    'empty'          => 'Belum ada Transaksi',
-    'back_to_show'   => 'Kembali ke detail Transaksi',
-    'back_to_index'  => 'Kembali ke daftar Transaksi',
+    'transaction'   => 'Transaksi',
+    'list'          => 'Daftar Transaksi',
+    'search'        => 'Cari Transaksi',
+    'detail'        => 'Detail Transaksi',
+    'not_found'     => 'Transaksi tidak ditemukan.',
+    'empty'         => 'Belum ada Transaksi',
+    'back_to_show'  => 'Kembali ke detail Transaksi',
+    'back_to_index' => 'Kembali ke daftar Transaksi',
 
     // Actions
-    'create'         => 'Input Transaksi Baru',
-    'created'        => 'Input Transaksi baru telah berhasil.',
+    'add_income'     => 'Input Pemasukan',
+    'income_added'   => 'Pemasukan berhasil diinput.',
+    'add_spending'   => 'Input Pengeluaran',
+    'spending_added' => 'Pengeluaran berhasil diinput.',
     'show'           => 'Lihat Detail Transaksi',
     'edit'           => 'Edit Transaksi',
     'update'         => 'Update Transaksi',
@@ -25,6 +27,6 @@ return [
     'undeleteable'   => 'Data Transaksi tidak dapat dihapus.',
 
     // Attributes
-    'name'           => 'Nama Transaksi',
-    'description'    => 'Deskripsi Transaksi',
+    'amount'      => 'Jumlah',
+    'description' => 'Deskripsi Transaksi',
 ];
