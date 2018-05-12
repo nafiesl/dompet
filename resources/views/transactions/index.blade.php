@@ -43,22 +43,14 @@
                         <td>{{ $transaction->amount }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-center">
-                        @can('update', $transaction)
-                            {!! link_to_route(
-                                'transactions.index',
-                                trans('app.edit'),
-                                ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'date'),
-                                ['id' => 'edit-transaction-'.$transaction->id]
-                            ) !!} |
-                        @endcan
-                        @can('delete', $transaction)
-                            {!! link_to_route(
-                                'transactions.index',
-                                trans('app.delete'),
-                                ['action' => 'delete', 'id' => $transaction->id] + Request::only('page', 'date'),
-                                ['id' => 'del-transaction-'.$transaction->id]
-                            ) !!}
-                        @endcan
+                            @can('update', $transaction)
+                                {!! link_to_route(
+                                    'transactions.index',
+                                    trans('app.edit'),
+                                    ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'date'),
+                                    ['id' => 'edit-transaction-'.$transaction->id]
+                                ) !!}
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

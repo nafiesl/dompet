@@ -27,10 +27,10 @@ class ManageTransactionsTest extends TestCase
         $this->loginAsUser();
         $this->visit(route('transactions.index'));
 
-        $this->click(trans('transaction.add_income'));
+        $this->click(__('transaction.add_income'));
         $this->seePageIs(route('transactions.index', ['action' => 'add-income']));
 
-        $this->submitForm(trans('transaction.add_income'), [
+        $this->submitForm(__('transaction.add_income'), [
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Income description',
@@ -54,10 +54,10 @@ class ManageTransactionsTest extends TestCase
         $this->loginAsUser();
         $this->visit(route('transactions.index'));
 
-        $this->click(trans('transaction.add_spending'));
+        $this->click(__('transaction.add_spending'));
         $this->seePageIs(route('transactions.index', ['action' => 'add-spending']));
 
-        $this->submitForm(trans('transaction.add_spending'), [
+        $this->submitForm(__('transaction.add_spending'), [
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Spending description',
@@ -85,7 +85,7 @@ class ManageTransactionsTest extends TestCase
         $this->click('edit-transaction-'.$transaction->id);
         $this->seePageIs(route('transactions.index', ['action' => 'edit', 'date' => $date, 'id' => $transaction->id]));
 
-        $this->submitForm(trans('transaction.update'), [
+        $this->submitForm(__('transaction.update'), [
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Transaction 1 description',
@@ -106,7 +106,7 @@ class ManageTransactionsTest extends TestCase
         $this->loginAsUser();
         $transaction = factory(Transaction::class)->create();
 
-        $this->visit(route('transactions.index', [$transaction->id]));
+        $this->visit(route('transactions.index', ['action' => 'edit', 'id' => $transaction->id]));
         $this->click('del-transaction-'.$transaction->id);
         $this->seePageIs(route('transactions.index', ['action' => 'delete', 'id' => $transaction->id]));
 
@@ -114,7 +114,9 @@ class ManageTransactionsTest extends TestCase
             'id' => $transaction->id,
         ]);
 
-        $this->press(trans('app.delete_confirm_button'));
+        $this->press(__('app.delete_confirm_button'));
+
+        $this->see(__('transaction.deleted'));
 
         $this->dontSeeInDatabase('transactions', [
             'id' => $transaction->id,
