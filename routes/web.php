@@ -20,3 +20,11 @@ Route::get('change-password', 'Auth\ChangePasswordController@show')->name('passw
 Route::patch('change-password', 'Auth\ChangePasswordController@update')->name('password.change');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    /**
+     * Transactions Routes
+     */
+    Route::resource('transactions', 'TransactionsController');
+});
