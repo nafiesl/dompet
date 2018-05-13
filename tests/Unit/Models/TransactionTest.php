@@ -3,9 +3,9 @@
 namespace Tests\Unit\Models;
 
 use App\User;
+use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase as TestCase;
 
 class TransactionTest extends TestCase
 {
@@ -33,5 +33,15 @@ class TransactionTest extends TestCase
 
         $this->assertInstanceOf(User::class, $transaction->creator);
         $this->assertEquals($transaction->creator_id, $transaction->creator->id);
+    }
+
+    /** @test */
+    public function a_transaction_has_type_attribute()
+    {
+        $transaction = factory(Transaction::class)->make(['in_out' => 1]);
+        $this->assertEquals(__('transaction.income'), $transaction->type);
+
+        $transaction->in_out = 0;
+        $this->assertEquals(__('transaction.spending'), $transaction->type);
     }
 }

@@ -39,7 +39,7 @@
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-center">{{ $transaction->date }}</td>
-                        <td class="text-center">{{ $transaction->in_out }}</td>
+                        <td class="text-center">{{ $transaction->type }}</td>
                         <td>{{ $transaction->amount }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-center">

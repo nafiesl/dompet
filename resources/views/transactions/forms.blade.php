@@ -101,7 +101,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     {{ link_to_route('transactions.index', '&times;', ['date' => $editableTransaction->date], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('transaction.delete') }}</h4>
+                    <h4 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h4>
                 </div>
                 <div class="modal-body">
                     <label class="control-label">{{ __('app.date') }}</label>
