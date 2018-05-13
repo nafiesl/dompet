@@ -68,6 +68,7 @@ class TransactionsController extends Controller
         $this->authorize('update', $transaction);
 
         $transactionData = $this->validate($request, [
+            'in_out'      => 'required|boolean',
             'date'        => 'required|date|date_format:Y-m-d',
             'amount'      => 'required|max:60',
             'description' => 'required|max:255',

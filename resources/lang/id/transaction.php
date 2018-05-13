@@ -5,6 +5,8 @@ return [
     'transaction'   => 'Transaksi',
     'list'          => 'Daftar Transaksi',
     'search'        => 'Cari Transaksi',
+    'income'        => 'Pemasukan',
+    'spending'      => 'Pengeluaran',
     'detail'        => 'Detail Transaksi',
     'not_found'     => 'Transaksi tidak ditemukan.',
     'empty'         => 'Belum ada Transaksi',

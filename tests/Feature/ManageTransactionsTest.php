@@ -79,13 +79,18 @@ class ManageTransactionsTest extends TestCase
     {
         $this->loginAsUser();
         $date = date('Y-m-d');
-        $transaction = factory(Transaction::class)->create(['amount' => 99.99, 'date' => $date]);
+        $transaction = factory(Transaction::class)->create([
+            'in_out' => 0,
+            'amount' => 99.99,
+            'date'   => $date,
+        ]);
 
         $this->visit(route('transactions.index', ['date' => $date]));
         $this->click('edit-transaction-'.$transaction->id);
         $this->seePageIs(route('transactions.index', ['action' => 'edit', 'date' => $date, 'id' => $transaction->id]));
 
         $this->submitForm(__('transaction.update'), [
+            'in_out'      => 1,
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Transaction 1 description',

@@ -52,26 +52,39 @@
 @endcan
 @if (Request::get('action') == 'edit' && $editableTransaction)
 @can('update', $editableTransaction)
-    {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction],'method' => 'patch']) !!}
-    <div class="row">
-        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => trans('app.date')]) !!}</div>
-        <div class="col-md-6">{!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}</div>
+    <div id="transactionModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ link_to_route('transactions.index', '&times;', ['date' => $date], ['class' => 'close']) }}
+                    <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
+                </div>
+                {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction],'method' => 'patch']) !!}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => trans('app.date')]) !!}</div>
+                        <div class="col-md-6">{!! FormField::text('amount', ['required' => true, 'label' => trans('transaction.amount')]) !!}</div>
+                    </div>
+                    {!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => trans('transaction.transaction')]) !!}
+                    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
+                </div>
+                <div class="modal-footer">
+                    {!! Form::submit(trans('transaction.update'), ['class' => 'btn btn-success']) !!}
+                    {{ link_to_route('transactions.index', trans('app.cancel'), ['date' => $date], ['class' => 'btn btn-default']) }}
+                    @can('delete', $editableTransaction)
+                        {!! link_to_route(
+                            'transactions.index',
+                            trans('app.delete'),
+                            ['action' => 'delete', 'id' => $editableTransaction->id] + Request::only('page', 'date'),
+                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-right']
+                        ) !!}
+                    @endcan
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
     </div>
-    {!! FormField::textarea('description', ['required' => true, 'label' => trans('transaction.description')]) !!}
-    @if (request('date'))
-        {{ Form::hidden('date', request('date')) }}
-    @endif
-    {!! Form::submit(trans('transaction.update'), ['class' => 'btn btn-success']) !!}
-    {{ link_to_route('transactions.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
-    @can('delete', $editableTransaction)
-        {!! link_to_route(
-            'transactions.index',
-            trans('app.delete'),
-            ['action' => 'delete', 'id' => $editableTransaction->id] + Request::only('page', 'date'),
-            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-right']
-        ) !!}
-    @endcan
-    {!! Form::close() !!}
 @endcan
 @endif
 @if (Request::get('action') == 'delete' && $editableTransaction)
