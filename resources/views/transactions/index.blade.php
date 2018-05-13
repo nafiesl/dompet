@@ -14,11 +14,19 @@
     <small>{{ trans('app.total') }} : {{ $transactions->count() }} {{ trans('transaction.transaction') }}</small>
 </h1>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
                 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}
-                {!! FormField::text('date', ['value' => $date, 'label' => trans('transaction.search'), 'class' => 'input-sm']) !!}
+                {!! FormField::text('query', [
+                    'value' => request('query'), 'label' => __('transaction.search'),
+                    'class' => 'input-sm', 'placeholder' => __('transaction.search_text'),
+                ]) !!}
+                {!! FormField::text('date', [
+                    'value' => $date, 'label' => false,
+                    'class' => 'input-sm date-select',
+                    'style' => 'width:90px'
+                ]) !!}
                 {{ Form::submit(trans('transaction.search'), ['class' => 'btn btn-sm']) }}
                 {{ link_to_route('transactions.index', trans('app.reset')) }}
                 {{ Form::close() }}
@@ -35,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($transactions as $key => $transaction)
+                    @forelse ($transactions as $key => $transaction)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-center">{{ $transaction->date }}</td>
@@ -53,7 +61,9 @@
                             @endcan
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr><td colspan="6">{{ __('transaction.not_found') }}</td></tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -66,12 +76,23 @@
 </div>
 @endsection
 
+@section('styles')
+    {{ Html::style(url('css/plugins/jquery.datetimepicker.css')) }}
+@endsection
+
 @push('scripts')
+    {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
 <script>
 (function () {
     $('#transactionModal').modal({
         show: true,
         backdrop: 'static',
+    });
+    $('.date-select').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d',
+        closeOnDateSelect: true,
+        scrollInput: false
     });
 })();
 </script>

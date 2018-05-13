@@ -16,12 +16,11 @@ class TransactionsController extends Controller
     {
         $editableTransaction = null;
         $date = request('date', date('Y-m-d'));
-        $transactions = Transaction::where(function ($query) use ($date) {
-            $query->where('date', 'like', $date.'%');
-        })
-            ->forUser(auth()->user())
-            ->latest()
-            ->get();
+        $transactionQuery = Transaction::forUser(auth()->user());
+        $transactionQuery->where('date', 'like', $date.'%');
+        $transactionQuery->where('description', 'like', '%'.request('query').'%');
+
+        $transactions = $transactionQuery->latest()->get();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));
