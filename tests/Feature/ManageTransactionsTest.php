@@ -21,6 +21,45 @@ class ManageTransactionsTest extends TestCase
     }
 
     /** @test */
+    public function user_can_see_transaction_list_by_selected_date()
+    {
+        $user = $this->loginAsUser();
+        $yesterday = today()->subDay()->format('Y-m-d');
+        $yesterdayTransaction = factory(Transaction::class)->create([
+            'date'        => $yesterday,
+            'description' => 'Yesterday Transaction',
+            'creator_id'  => $user->id,
+        ]);
+
+        $this->visit(route('transactions.index'));
+        $this->dontSee($yesterdayTransaction->description);
+
+        $this->visit(route('transactions.index', ['date' => $yesterday]));
+        $this->see($yesterdayTransaction->description);
+    }
+
+    /** @test */
+    public function transaction_list_for_today_by_default()
+    {
+        $user = $this->loginAsUser();
+        $todayTransaction = factory(Transaction::class)->create([
+            'date'        => today()->format('Y-m-d'),
+            'description' => 'Today Transaction',
+            'creator_id'  => $user->id,
+        ]);
+        $yesterday = today()->subDay()->format('Y-m-d');
+        $yesterdayTransaction = factory(Transaction::class)->create([
+            'date'        => $yesterday,
+            'description' => 'Yesterday Transaction',
+            'creator_id'  => $user->id,
+        ]);
+
+        $this->visit(route('transactions.index'));
+        $this->see($todayTransaction->description);
+        $this->dontSee($yesterdayTransaction->description);
+    }
+
+    /** @test */
     public function user_can_create_an_income_transaction()
     {
         $date = '2017-01-01';
