@@ -44,4 +44,16 @@ class TransactionTest extends TestCase
         $transaction->in_out = 0;
         $this->assertEquals(__('transaction.spending'), $transaction->type);
     }
+
+    /** @test */
+    public function a_transaction_has_for_user_scope()
+    {
+        $transactionOwner = $this->createUser();
+        $transaction = factory(Transaction::class)->create([
+            'creator_id' => $transactionOwner->id,
+        ]);
+        $othersTransaction = factory(Transaction::class)->create();
+
+        $this->assertCount(1, Transaction::forUser($transactionOwner)->get());
+    }
 }

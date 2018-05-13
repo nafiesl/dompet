@@ -28,4 +28,9 @@ class Transaction extends Model
     {
         return $this->in_out ? __('transaction.income') : __('transaction.spending');
     }
+
+    public function scopeForUser($query, User $user)
+    {
+        $query->where('creator_id', $user->id);
+    }
 }

@@ -18,7 +18,10 @@ class TransactionsController extends Controller
         $date = request('date', date('Y-m-d'));
         $transactions = Transaction::where(function ($query) use ($date) {
             $query->where('date', 'like', $date.'%');
-        })->paginate(25);
+        })
+            ->forUser(auth()->user())
+            ->latest()
+            ->get();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));

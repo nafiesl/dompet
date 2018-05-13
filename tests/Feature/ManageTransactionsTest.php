@@ -13,9 +13,9 @@ class ManageTransactionsTest extends TestCase
     /** @test */
     public function user_can_see_transaction_list_in_transaction_index_page()
     {
-        $transaction = factory(Transaction::class)->create();
+        $user = $this->loginAsUser();
+        $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
 
-        $this->loginAsUser();
         $this->visit(route('transactions.index'));
         $this->see($transaction->amount);
     }
@@ -77,12 +77,13 @@ class ManageTransactionsTest extends TestCase
     /** @test */
     public function user_can_edit_a_transaction_within_search_query()
     {
-        $this->loginAsUser();
         $date = date('Y-m-d');
+        $user = $this->loginAsUser();
         $transaction = factory(Transaction::class)->create([
-            'in_out' => 0,
-            'amount' => 99.99,
-            'date'   => $date,
+            'in_out'     => 0,
+            'amount'     => 99.99,
+            'date'       => $date,
+            'creator_id' => $user->id,
         ]);
 
         $this->visit(route('transactions.index', ['date' => $date]));
