@@ -33,8 +33,8 @@
                     <tr>
                         <th class="text-center">{{ trans('app.table_no') }}</th>
                         <th class="text-center">{{ trans('app.date') }}</th>
-                        <th class="text-right">{{ trans('transaction.amount') }}</th>
                         <th>{{ trans('transaction.description') }}</th>
+                        <th class="text-right">{{ trans('transaction.amount') }}</th>
                         <th class="text-center">{{ trans('app.action') }}</th>
                     </tr>
                 </thead>
@@ -42,9 +42,9 @@
                     @forelse ($transactions as $key => $transaction)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td class="text-center">{{ $transaction->date }}</td>
-                        <td class="text-right">{{ $transaction->amount_string }}</td>
+                        <td class="text-center">{{ substr($transaction->date, -2) }}</td>
                         <td>{{ $transaction->description }}</td>
+                        <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
                             @can('update', $transaction)
                                 {!! link_to_route(
@@ -62,13 +62,13 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="2" class="text-right">{{ __('app.total') }}</th>
+                        <th colspan="3" class="text-right">{{ __('app.total') }}</th>
                         <th class="text-right">
                             {{ number_format($transactions->sum(function ($transaction) {
                                 return $transaction->in_out ? $transaction->amount : -$transaction->amount;
                             }), 2) }}
                         </th>
-                        <th colspan="2">&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </tfoot>
             </table>
