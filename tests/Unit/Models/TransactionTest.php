@@ -61,12 +61,13 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
-    public function a_transaction_has_year_and_month_attribute()
+    public function a_transaction_has_year_month_and_date_only_attribute()
     {
-        $transaction = factory(Transaction::class)->make(['date' => '2017-01-01']);
+        $transaction = factory(Transaction::class)->make(['date' => '2017-01-31']);
 
         $this->assertEquals('2017', $transaction->year);
         $this->assertEquals('01', $transaction->month);
+        $this->assertEquals('31', $transaction->date_only);
     }
 
     /** @test */

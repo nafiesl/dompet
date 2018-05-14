@@ -42,7 +42,7 @@
                     @forelse ($transactions as $key => $transaction)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td class="text-center">{{ substr($transaction->date, -2) }}</td>
+                        <td class="text-center">{{ $transaction->date_only }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">

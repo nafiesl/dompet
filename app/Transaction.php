@@ -30,6 +30,11 @@ class Transaction extends Model
         return $this->in_out ? __('transaction.income') : __('transaction.spending');
     }
 
+    public function getDateOnlyAttribute()
+    {
+        return substr($this->date, -2);
+    }
+
     public function getMonthAttribute()
     {
         return Carbon::parse($this->date)->format('m');
