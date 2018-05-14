@@ -14,7 +14,7 @@
     <small>{{ trans('app.total') }} : {{ $transactions->count() }} {{ trans('transaction.transaction') }}</small>
 </h1>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
                 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}
@@ -36,8 +36,7 @@
                     <tr>
                         <th class="text-center">{{ trans('app.table_no') }}</th>
                         <th class="text-center">{{ trans('app.date') }}</th>
-                        <th class="text-center">{{ trans('transaction.transaction') }}</th>
-                        <th>{{ trans('transaction.amount') }}</th>
+                        <th class="text-right">{{ trans('transaction.amount') }}</th>
                         <th>{{ trans('transaction.description') }}</th>
                         <th class="text-center">{{ trans('app.action') }}</th>
                     </tr>
@@ -47,8 +46,7 @@
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-center">{{ $transaction->date }}</td>
-                        <td class="text-center">{{ $transaction->type }}</td>
-                        <td>{{ $transaction->amount }}</td>
+                        <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-center">
                             @can('update', $transaction)
@@ -62,9 +60,20 @@
                         </td>
                     </tr>
                     @empty
-                    <tr><td colspan="6">{{ __('transaction.not_found') }}</td></tr>
+                    <tr><td colspan="5">{{ __('transaction.not_found') }}</td></tr>
                     @endforelse
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2" class="text-right">{{ __('app.total') }}</th>
+                        <th class="text-right">
+                            {{ number_format($transactions->sum(function ($transaction) {
+                                return $transaction->in_out ? $transaction->amount : -$transaction->amount;
+                            }), 2) }}
+                        </th>
+                        <th colspan="2">&nbsp;</th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

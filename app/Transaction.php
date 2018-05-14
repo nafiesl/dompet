@@ -29,6 +29,17 @@ class Transaction extends Model
         return $this->in_out ? __('transaction.income') : __('transaction.spending');
     }
 
+    public function getAmountStringAttribute()
+    {
+        $amountString = number_format($this->amount, 2);
+
+        if ($this->in_out == 0) {
+            $amountString = '- '.$amountString;
+        }
+
+        return $amountString;
+    }
+
     public function scopeForUser($query, User $user)
     {
         $query->where('creator_id', $user->id);

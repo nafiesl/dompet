@@ -46,6 +46,21 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
+    public function a_transaction_has_amount_string_attribute()
+    {
+        $amount = 1099.00;
+
+        $transaction = factory(Transaction::class)->make([
+            'in_out' => 1,
+            'amount' => $amount,
+        ]);
+        $this->assertEquals(number_format($amount, 2), $transaction->amount_string);
+
+        $transaction->in_out = 0;
+        $this->assertEquals('- '.number_format($amount, 2), $transaction->amount_string);
+    }
+
+    /** @test */
     public function a_transaction_has_for_user_scope()
     {
         $transactionOwner = $this->createUser();

@@ -20,7 +20,7 @@ class TransactionsController extends Controller
         $transactionQuery->where('date', 'like', $date.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
 
-        $transactions = $transactionQuery->latest()->get();
+        $transactions = $transactionQuery->get();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));
