@@ -76,6 +76,7 @@ a.xs-navbar {
 a.xs-navbar:hover {
     text-decoration: none;
 }
+.navbar-header:after { clear:none; }
 /* End of xs-navbar */
 
 @media (min-width: 768px) {
