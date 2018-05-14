@@ -12,6 +12,7 @@ return [
     'logged_out'    => 'Anda telah logout.',
     'user_inactive' => 'User ini tidak aktif.',
     'remember_me'   => 'Ingat Saya',
+    'have_account'  => 'Saya sudah mendaftar',
 
     // Password
     'change_password'          => 'Ganti Password',

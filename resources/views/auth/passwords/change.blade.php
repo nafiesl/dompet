@@ -3,7 +3,7 @@
 @section('title', __('auth.change_password'))
 
 @section('content')
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
         <div class="panel-heading"><h3 class="panel-title">{{ __('auth.change_password') }}</h3></div>
         {!! Form::open(['route' => 'password.change', 'method' => 'patch']) !!}

@@ -3,7 +3,7 @@
 @section('title', trans('transaction.list'))
 
 @section('content')
-<h1 class="page-header">
+<h3 class="page-header">
     <div class="pull-right">
     @can('create', new App\Transaction)
         {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success']) }}
@@ -12,9 +12,9 @@
     </div>
     {{ trans('transaction.list') }}
     <small>{{ trans('app.total') }} : {{ $transactions->count() }} {{ trans('transaction.transaction') }}</small>
-</h1>
+</h3>
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
                 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}

@@ -77,3 +77,7 @@ a.xs-navbar:hover {
     text-decoration: none;
 }
 /* End of xs-navbar */
+
+@media (min-width: 768px) {
+    .container { max-width: 730px; }
+}
