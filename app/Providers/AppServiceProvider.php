@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         require_once app_path().'/Helpers/functions.php';
+        require_once app_path().'/Helpers/date_time.php';
     }
 
     /**

@@ -12,7 +12,7 @@
                 {{ Form::hidden('in_out', 1) }}
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
+                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', date('Y-m-d')), 'class' => 'date-select']) !!}</div>
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
@@ -39,7 +39,7 @@
                 {{ Form::hidden('in_out', 0) }}
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
+                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', date('Y-m-d')), 'class' => 'date-select']) !!}</div>
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
@@ -62,10 +62,10 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('transactions.index', '&times;', ['date' => $date], ['class' => 'close']) }}
+                    {{ link_to_route('transactions.index', '&times;', ['month' => $month, 'year' => $year], ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
                 </div>
-                {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction],'method' => 'patch']) !!}
+                {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch']) !!}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
@@ -76,12 +76,12 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('transaction.update'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('transactions.index', __('app.cancel'), ['date' => $date], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $month, 'year' => $year], ['class' => 'btn btn-default']) }}
                     @can('delete', $editableTransaction)
                         {!! link_to_route(
                             'transactions.index',
                             __('app.delete'),
-                            ['action' => 'delete', 'id' => $editableTransaction->id] + Request::only('page', 'date'),
+                            ['action' => 'delete', 'id' => $editableTransaction->id] + Request::only('page', 'month', 'year'),
                             ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-left']
                         ) !!}
                     @endcan
@@ -107,7 +107,7 @@
                     <label class="control-label">{{ __('app.date') }}</label>
                     <p>{{ $editableTransaction->date }}</p>
                     <label class="control-label">{{ __('transaction.amount') }}</label>
-                    <p>{{ $editableTransaction->amount }}</p>
+                    <p>{{ $editableTransaction->amount_string }}</p>
                     <label class="control-label">{{ __('transaction.description') }}</label>
                     <p>{{ $editableTransaction->description }}</p>
                     {!! $errors->first('transaction_id', '<span class="form-error small">:message</span>') !!}
@@ -121,10 +121,10 @@
                         ['class'=>'btn btn-danger'],
                         [
                             'transaction_id' => $editableTransaction->id,
-                            'date' => request('date'),
+                            'month' => $editableTransaction->month, 'year' => $editableTransaction->year,
                         ]
                     ) !!}
-                    {{ link_to_route('transactions.index', __('app.cancel'), ['date' => $editableTransaction->date], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $editableTransaction->month, 'year' => $editableTransaction->year], ['class' => 'btn btn-default']) }}
                 </div>
             </div>
         </div>

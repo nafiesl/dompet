@@ -15,9 +15,11 @@ class TransactionsController extends Controller
     public function index()
     {
         $editableTransaction = null;
-        $date = request('date', date('Y-m-d'));
+        $yearMonth = $this->getYearMonth();
+        $year = request('year', date('Y'));
+        $month = request('month', date('m'));
         $transactionQuery = Transaction::forUser(auth()->user());
-        $transactionQuery->where('date', 'like', $date.'%');
+        $transactionQuery->where('date', 'like', $yearMonth.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
 
         $transactions = $transactionQuery->get();
@@ -26,7 +28,9 @@ class TransactionsController extends Controller
             $editableTransaction = Transaction::find(request('id'));
         }
 
-        return view('transactions.index', compact('transactions', 'editableTransaction', 'date'));
+        return view('transactions.index', compact(
+            'transactions', 'editableTransaction', 'yearMonth', 'month', 'year'
+        ));
     }
 
     /**
@@ -47,7 +51,7 @@ class TransactionsController extends Controller
         ]);
         $newTransaction['creator_id'] = auth()->id();
 
-        Transaction::create($newTransaction);
+        $transaction = Transaction::create($newTransaction);
 
         if ($newTransaction['in_out']) {
             flash(__('transaction.income_added'), 'success');
@@ -55,7 +59,9 @@ class TransactionsController extends Controller
             flash(__('transaction.spending_added'), 'success');
         }
 
-        return redirect()->route('transactions.index', ['date' => $newTransaction['date']]);
+        return redirect()->route('transactions.index', [
+            'month' => $transaction->month, 'year' => $transaction->year,
+        ]);
     }
 
     /**
@@ -76,13 +82,13 @@ class TransactionsController extends Controller
             'description' => 'required|max:255',
         ]);
 
-        $routeParam = request()->only('date');
-
         $transaction->update($transactionData);
 
         flash(__('transaction.updated'), 'success');
 
-        return redirect()->route('transactions.index', $routeParam);
+        return redirect()->route('transactions.index', [
+            'month' => $transaction->month, 'year' => $transaction->year,
+        ]);
     }
 
     /**
@@ -99,16 +105,31 @@ class TransactionsController extends Controller
             'transaction_id' => 'required',
         ]);
 
-        $routeParam = request()->only('date');
-
         if (request('transaction_id') == $transaction->id && $transaction->delete()) {
             flash(__('transaction.deleted'), 'warning');
 
-            return redirect()->route('transactions.index', $routeParam);
+            return redirect()->route('transactions.index', [
+                'month' => $transaction->month, 'year' => $transaction->year,
+            ]);
         }
 
         flash(__('transaction.undeleted'), 'error');
 
         return back();
+    }
+
+    protected function getYearMonth()
+    {
+        $year = request('year', date('Y'));
+        $month = request('month', date('m'));
+        $yearMonth = $year.'-'.$month;
+
+        $explodedYearMonth = explode('-', $yearMonth);
+
+        if (count($explodedYearMonth) == 2 && checkdate($explodedYearMonth[1], '01', $explodedYearMonth[0])) {
+            return $explodedYearMonth[0].'-'.$explodedYearMonth[1];
+        }
+
+        return date('Y-m');
     }
 }

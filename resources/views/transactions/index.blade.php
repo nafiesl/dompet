@@ -6,8 +6,8 @@
 <h1 class="page-header">
     <div class="pull-right">
     @can('create', new App\Transaction)
-        {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income', 'date' => $date], ['class' => 'btn btn-success']) }}
-        {{ link_to_route('transactions.index', trans('transaction.add_spending'), ['action' => 'add-spending', 'date' => $date], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', trans('transaction.add_spending'), ['action' => 'add-spending', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success']) }}
     @endcan
     </div>
     {{ trans('transaction.list') }}
@@ -22,12 +22,9 @@
                     'value' => request('query'), 'label' => __('transaction.search'),
                     'class' => 'input-sm', 'placeholder' => __('transaction.search_text'),
                 ]) !!}
-                {!! FormField::text('date', [
-                    'value' => $date, 'label' => false,
-                    'class' => 'input-sm date-select',
-                    'style' => 'width:90px'
-                ]) !!}
-                {{ Form::submit(trans('transaction.search'), ['class' => 'btn btn-sm']) }}
+                {{ Form::select('month', getMonths(), $month, ['class' => 'form-control input-sm']) }}
+                {{ Form::select('year', getYears(), $year, ['class' => 'form-control input-sm']) }}
+                {{ Form::submit(trans('app.submit'), ['class' => 'btn btn-sm']) }}
                 {{ link_to_route('transactions.index', trans('app.reset')) }}
                 {{ Form::close() }}
             </div>
@@ -53,7 +50,7 @@
                                 {!! link_to_route(
                                     'transactions.index',
                                     trans('app.edit'),
-                                    ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'date'),
+                                    ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'month', 'year'),
                                     ['id' => 'edit-transaction-'.$transaction->id]
                                 ) !!}
                             @endcan

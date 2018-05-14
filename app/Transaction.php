@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
@@ -27,6 +28,16 @@ class Transaction extends Model
     public function getTypeAttribute()
     {
         return $this->in_out ? __('transaction.income') : __('transaction.spending');
+    }
+
+    public function getMonthAttribute()
+    {
+        return Carbon::parse($this->date)->format('m');
+    }
+
+    public function getYearAttribute()
+    {
+        return Carbon::parse($this->date)->format('Y');
     }
 
     public function getAmountStringAttribute()

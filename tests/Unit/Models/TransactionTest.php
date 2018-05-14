@@ -61,6 +61,15 @@ class TransactionTest extends TestCase
     }
 
     /** @test */
+    public function a_transaction_has_year_and_month_attribute()
+    {
+        $transaction = factory(Transaction::class)->make(['date' => '2017-01-01']);
+
+        $this->assertEquals('2017', $transaction->year);
+        $this->assertEquals('01', $transaction->month);
+    }
+
+    /** @test */
     public function a_transaction_has_for_user_scope()
     {
         $transactionOwner = $this->createUser();
