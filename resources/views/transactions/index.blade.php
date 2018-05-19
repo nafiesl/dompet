@@ -42,7 +42,13 @@
                     @forelse ($transactions as $key => $transaction)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td class="text-center">{{ $transaction->date_only }}</td>
+                        <td class="text-center">
+                            {{ link_to_route('transactions.index', $transaction->date_only, [
+                                'date' => $transaction->date_only,
+                                'month' => $month,
+                                'year' => $year,
+                            ]) }}
+                        </td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
