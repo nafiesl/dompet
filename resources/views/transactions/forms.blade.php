@@ -11,10 +11,12 @@
                 {!! Form::open(['route' => 'transactions.store']) !!}
                 {{ Form::hidden('in_out', 1) }}
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', date('Y-m-d')), 'class' => 'date-select']) !!}</div>
+                    </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
-                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', date('Y-m-d')), 'class' => 'date-select']) !!}</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -38,10 +40,12 @@
                 {!! Form::open(['route' => 'transactions.store']) !!}
                 {{ Form::hidden('in_out', 0) }}
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', date('Y-m-d')), 'class' => 'date-select']) !!}</div>
+                    </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
-                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', date('Y-m-d')), 'class' => 'date-select']) !!}</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -67,12 +71,14 @@
                 </div>
                 {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch']) !!}
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
+                    </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
-                        <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
+                        <div class="col-md-6">{!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => __('transaction.transaction')]) !!}</div>
                     </div>
-                    {!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => __('transaction.transaction')]) !!}
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('transaction.update'), ['class' => 'btn btn-success']) !!}
