@@ -28,7 +28,7 @@
                 {{ link_to_route('transactions.index', trans('app.reset')) }}
                 {{ Form::close() }}
             </div>
-            <table class="table table-condensed">
+            <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center">{{ trans('app.table_no') }}</th>
@@ -40,15 +40,22 @@
                 </thead>
                 <tbody>
                     @forelse ($transactions as $key => $transaction)
+                    @php
+                        $groups = $transactions->where('date_only', $transaction->date_only);
+                        $firstGroup = $groups->first();
+                        $groupCount = $groups->count();
+                    @endphp
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td class="text-center">
-                            {{ link_to_route('transactions.index', $transaction->date_only, [
-                                'date' => $transaction->date_only,
-                                'month' => $month,
-                                'year' => $year,
-                            ]) }}
-                        </td>
+                        @if ($firstGroup->id == $transaction->id)
+                            <td class="text-center text-middle" rowspan="{{ $groupCount }}">
+                                {{ link_to_route('transactions.index', $transaction->date_only, [
+                                    'date' => $transaction->date_only,
+                                    'month' => $month,
+                                    'year' => $year,
+                                ]) }}
+                            </td>
+                        @endif
                         <td>{{ $transaction->description }}</td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
