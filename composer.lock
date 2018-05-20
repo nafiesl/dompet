@@ -758,16 +758,16 @@
         },
         {
             "name": "luthfi/formfield",
-            "version": "0.2.5",
+            "version": "0.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nafiesl/FormField.git",
-                "reference": "4634633beadea61e0d872c1f69b4e40458537a90"
+                "reference": "4ff19b00f1007e755191ceb6fdb8a4293b7298fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nafiesl/FormField/zipball/4634633beadea61e0d872c1f69b4e40458537a90",
-                "reference": "4634633beadea61e0d872c1f69b4e40458537a90",
+                "url": "https://api.github.com/repos/nafiesl/FormField/zipball/4ff19b00f1007e755191ceb6fdb8a4293b7298fc",
+                "reference": "4ff19b00f1007e755191ceb6fdb8a4293b7298fc",
                 "shasum": ""
             },
             "require": {
@@ -806,7 +806,7 @@
                 }
             ],
             "description": "Laravel Form Field the extension of Laravelcollective Form for Laravel 5.3, 5.4 and 5.5 with Twitter Bootstrap 3",
-            "time": "2018-02-15T02:19:59+00:00"
+            "time": "2018-05-17T06:12:29+00:00"
         },
         {
             "name": "monolog/monolog",
