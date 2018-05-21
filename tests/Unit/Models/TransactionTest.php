@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\User;
+use App\Category;
 use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -33,6 +34,16 @@ class TransactionTest extends TestCase
 
         $this->assertInstanceOf(User::class, $transaction->creator);
         $this->assertEquals($transaction->creator_id, $transaction->creator->id);
+    }
+
+    /** @test */
+    public function a_transaction_has_belongs_to_category_relation()
+    {
+        $category = factory(Category::class)->create();
+        $transaction = factory(Transaction::class)->make(['category_id' => $category->id]);
+
+        $this->assertInstanceOf(Category::class, $transaction->category);
+        $this->assertEquals($transaction->category_id, $transaction->category->id);
     }
 
     /** @test */

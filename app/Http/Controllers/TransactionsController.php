@@ -19,12 +19,13 @@ class TransactionsController extends Controller
         $yearMonth = $this->getYearMonth();
         $year = request('year', date('Y'));
         $month = request('month', date('m'));
+
         $transactionQuery = Transaction::forUser(auth()->user());
         $transactionQuery->where('date', 'like', $yearMonth.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
-        $categories = Category::forUser(auth()->user())->pluck('name', 'id');
+        $transactions = $transactionQuery->orderBy('date')->with('category')->get();
 
-        $transactions = $transactionQuery->orderBy('date')->get();
+        $categories = Category::forUser(auth()->user())->pluck('name', 'id');
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));

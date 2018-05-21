@@ -28,6 +28,11 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function getTypeAttribute()
     {
         return $this->in_out ? __('transaction.income') : __('transaction.spending');

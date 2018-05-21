@@ -56,7 +56,10 @@
                                 ]) }}
                             </td>
                         @endif
-                        <td>{{ $transaction->description }}</td>
+                        <td>
+                            <span class="badge pull-right">{{ optional($transaction->category)->name }}</span>
+                            {{ $transaction->description }}
+                        </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
                             @can('update', $transaction)
