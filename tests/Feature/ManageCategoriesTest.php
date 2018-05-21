@@ -13,9 +13,9 @@ class ManageCategoriesTest extends TestCase
     /** @test */
     public function user_can_see_category_list_in_category_index_page()
     {
-        $category = factory(Category::class)->create();
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
-        $this->loginAsUser();
         $this->visit(route('categories.index'));
         $this->see($category->name);
     }
@@ -45,10 +45,10 @@ class ManageCategoriesTest extends TestCase
     /** @test */
     public function user_can_edit_a_category_within_search_query()
     {
-        $this->loginAsUser();
-        $category = factory(Category::class)->create(['name' => 'Testing 123']);
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
-        $this->visit(route('categories.index', ['q' => '123']));
+        $this->visit(route('categories.index'));
         $this->click('edit-category-'.$category->id);
         $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
 
@@ -68,8 +68,8 @@ class ManageCategoriesTest extends TestCase
     /** @test */
     public function user_can_delete_a_category()
     {
-        $this->loginAsUser();
-        $category = factory(Category::class)->create();
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
         $this->visit(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
         $this->click('del-category-'.$category->id);
