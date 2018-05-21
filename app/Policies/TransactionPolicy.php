@@ -20,7 +20,7 @@ class TransactionPolicy
     public function view(User $user, Transaction $transaction)
     {
         // Update $user authorization to view $transaction here.
-        return true;
+        return $user->id == $transaction->creator_id;
     }
 
     /**
@@ -46,7 +46,7 @@ class TransactionPolicy
     public function update(User $user, Transaction $transaction)
     {
         // Update $user authorization to update $transaction here.
-        return true;
+        return $user->id == $transaction->creator_id;
     }
 
     /**
@@ -59,6 +59,6 @@ class TransactionPolicy
     public function delete(User $user, Transaction $transaction)
     {
         // Update $user authorization to delete $transaction here.
-        return true;
+        return $user->id == $transaction->creator_id;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Policies;
 
+use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase as TestCase;
 
 class TransactionPolicyTest extends TestCase
 {
@@ -18,26 +18,35 @@ class TransactionPolicyTest extends TestCase
     }
 
     /** @test */
-    public function user_can_view_transaction()
+    public function user_can_only_view_their_own_transaction()
     {
         $user = $this->createUser();
-        $transaction = factory(Transaction::class)->create();
+        $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
+        $othersTransaction = factory(Transaction::class)->create();
+
         $this->assertTrue($user->can('view', $transaction));
+        $this->assertFalse($user->can('view', $othersTransaction));
     }
 
     /** @test */
-    public function user_can_update_transaction()
+    public function user_can_only_update_their_own_transaction()
     {
         $user = $this->createUser();
-        $transaction = factory(Transaction::class)->create();
+        $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
+        $othersTransaction = factory(Transaction::class)->create();
+
         $this->assertTrue($user->can('update', $transaction));
+        $this->assertFalse($user->can('update', $othersTransaction));
     }
 
     /** @test */
-    public function user_can_delete_transaction()
+    public function user_can_only_delete_their_own_transaction()
     {
         $user = $this->createUser();
-        $transaction = factory(Transaction::class)->create();
+        $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
+        $othersTransaction = factory(Transaction::class)->create();
+
         $this->assertTrue($user->can('delete', $transaction));
+        $this->assertFalse($user->can('delete', $othersTransaction));
     }
 }
