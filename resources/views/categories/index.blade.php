@@ -28,7 +28,7 @@
                     @foreach($categories as $key => $category)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{!! $category->name_label !!}</td>
                         <td>{{ $category->description }}</td>
                         <td class="text-center">
                             @can('update', $category)
@@ -54,13 +54,19 @@
 </div>
 @endsection
 
+@section('styles')
+    {{ Html::style(url('css/plugins/bootstrap-colorpicker.min.css')) }}
+@endsection
+
 @push('scripts')
+    {{ Html::script(url('js/plugins/bootstrap-colorpicker.min.js')) }}
 <script>
 (function () {
     $('#categoryModal').modal({
         show: true,
         backdrop: 'static',
     });
+    $('#color').colorpicker();
 })();
 </script>
 @endpush

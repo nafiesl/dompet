@@ -28,4 +28,5 @@ return [
     // Attributes
     'name'        => 'Nama Kategori',
     'description' => 'Deskripsi Kategori',
+    'color'       => 'Warna Kategori',
 ];

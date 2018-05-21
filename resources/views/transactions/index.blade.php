@@ -57,7 +57,7 @@
                             </td>
                         @endif
                         <td>
-                            <span class="badge pull-right">{{ optional($transaction->category)->name }}</span>
+                            <span class="pull-right">{!! optional($transaction->category)->name_label !!}</span>
                             {{ $transaction->description }}
                         </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'description', 'creator_id'];
+    protected $fillable = ['name', 'description', 'color', 'creator_id'];
 
     public function creator()
     {
@@ -22,5 +22,10 @@ class Category extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function getNameLabelAttribute()
+    {
+        return '<span class="badge" style="background-color: '.$this->color.'">'.$this->name.'</span>';
     }
 }

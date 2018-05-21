@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name', 60);
             $table->string('description')->nullable();
+            $table->char('color', 7)->default('#00aabb');
             $table->unsignedInteger('creator_id');
             $table->timestamps();
         });

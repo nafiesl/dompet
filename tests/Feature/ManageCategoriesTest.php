@@ -32,6 +32,7 @@ class ManageCategoriesTest extends TestCase
         $this->submitForm(trans('category.create'), [
             'name'        => 'Category 1 name',
             'description' => 'Category 1 description',
+            'color'       => '#00aabb',
         ]);
 
         $this->seePageIs(route('categories.index'));
@@ -39,6 +40,7 @@ class ManageCategoriesTest extends TestCase
         $this->seeInDatabase('categories', [
             'name'        => 'Category 1 name',
             'description' => 'Category 1 description',
+            'color'       => '#00aabb',
         ]);
     }
 
@@ -55,6 +57,7 @@ class ManageCategoriesTest extends TestCase
         $this->submitForm(trans('category.update'), [
             'name'        => 'Category 1 name',
             'description' => 'Category 1 description',
+            'color'       => '#00aabb',
         ]);
 
         $this->seePageIs(route('categories.index'));
@@ -62,6 +65,7 @@ class ManageCategoriesTest extends TestCase
         $this->seeInDatabase('categories', [
             'name'        => 'Category 1 name',
             'description' => 'Category 1 description',
+            'color'       => '#00aabb',
         ]);
     }
 

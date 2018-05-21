@@ -43,4 +43,13 @@ class CategoryTest extends TestCase
         $this->assertInstanceOf(Collection::class, $category->transactions);
         $this->assertInstanceOf(Transaction::class, $category->transactions->first());
     }
+
+    /** @test */
+    public function a_category_has_name_label_attribute()
+    {
+        $category = factory(Category::class)->make();
+
+        $nameLabel = '<span class="badge" style="background-color: '.$category->color.'">'.$category->name.'</span>';
+        $this->assertEquals($nameLabel, $category->name_label);
+    }
 }

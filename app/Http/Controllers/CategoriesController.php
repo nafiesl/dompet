@@ -36,7 +36,8 @@ class CategoriesController extends Controller
 
         $newCategory = $this->validate($request, [
             'name'        => 'required|max:60',
-            'description' => 'nullable|max:255',
+            'color'       => 'required|string|max:7',
+            'description' => 'nullable|string|max:255',
         ]);
         $newCategory['creator_id'] = auth()->id();
 
@@ -60,7 +61,8 @@ class CategoriesController extends Controller
 
         $categoryData = $this->validate($request, [
             'name'        => 'required|max:60',
-            'description' => 'nullable|max:255',
+            'color'       => 'required|string|max:7',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $category->update($categoryData);
