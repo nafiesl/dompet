@@ -50,14 +50,14 @@ class ManageCategoriesTest extends TestCase
 
         $this->visit(route('categories.index', ['q' => '123']));
         $this->click('edit-category-'.$category->id);
-        $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id, 'q' => '123']));
+        $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
 
         $this->submitForm(trans('category.update'), [
             'name'        => 'Category 1 name',
             'description' => 'Category 1 description',
         ]);
 
-        $this->seePageIs(route('categories.index', ['q' => '123']));
+        $this->seePageIs(route('categories.index'));
 
         $this->seeInDatabase('categories', [
             'name'        => 'Category 1 name',
@@ -71,7 +71,7 @@ class ManageCategoriesTest extends TestCase
         $this->loginAsUser();
         $category = factory(Category::class)->create();
 
-        $this->visit(route('categories.index', [$category->id]));
+        $this->visit(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
         $this->click('del-category-'.$category->id);
         $this->seePageIs(route('categories.index', ['action' => 'delete', 'id' => $category->id]));
 

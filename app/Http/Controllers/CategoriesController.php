@@ -15,9 +15,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $editableCategory = null;
-        $categories = Category::where(function ($query) {
-            $query->where('name', 'like', '%'.request('q').'%');
-        })->paginate(25);
+        $categories = Category::all();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableCategory = Category::find(request('id'));
@@ -36,15 +34,15 @@ class CategoriesController extends Controller
     {
         $this->authorize('create', new Category);
 
-        $this->validate($request, [
-            'name' => 'required|max:60',
+        $newCategory = $this->validate($request, [
+            'name'        => 'required|max:60',
             'description' => 'nullable|max:255',
         ]);
-
-        $newCategory = $request->only('name', 'description');
         $newCategory['creator_id'] = auth()->id();
 
         Category::create($newCategory);
+
+        flash(__('category.created'), 'success');
 
         return redirect()->route('categories.index');
     }
@@ -60,16 +58,16 @@ class CategoriesController extends Controller
     {
         $this->authorize('update', $category);
 
-        $this->validate($request, [
-            'name' => 'required|max:60',
+        $categoryData = $this->validate($request, [
+            'name'        => 'required|max:60',
             'description' => 'nullable|max:255',
         ]);
 
-        $routeParam = request()->only('page', 'q');
+        $category->update($categoryData);
 
-        $category->update($request->only('name', 'description'));
+        flash(__('category.updated'), 'success');
 
-        return redirect()->route('categories.index', $routeParam);
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -82,16 +80,16 @@ class CategoriesController extends Controller
     {
         $this->authorize('delete', $category);
 
-        $this->validate(request(), [
+        request()->validate([
             'category_id' => 'required',
         ]);
 
-        $routeParam = request()->only('page', 'q');
-
         if (request('category_id') == $category->id && $category->delete()) {
-            return redirect()->route('categories.index', $routeParam);
+            flash(__('category.deleted'), 'warning');
+            return redirect()->route('categories.index');
         }
 
+        flash(__('category.undeleted'), 'warning');
         return back();
     }
 }

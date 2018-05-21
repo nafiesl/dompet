@@ -1,54 +1,94 @@
-@if (Request::get('action') == 'create')
+@if (request('action') == 'create')
 @can('create', new App\Category)
-    {!! Form::open(['route' => 'categories.store']) !!}
-    {!! FormField::text('name', ['required' => true, 'label' => trans('category.name')]) !!}
-    {!! FormField::textarea('description', ['label' => trans('category.description')]) !!}
-    {!! Form::submit(trans('category.create'), ['class' => 'btn btn-success']) !!}
-    {{ link_to_route('categories.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
-    {!! Form::close() !!}
-@endcan
-@endif
-@if (Request::get('action') == 'edit' && $editableCategory)
-@can('update', $editableCategory)
-    {!! Form::model($editableCategory, ['route' => ['categories.update', $editableCategory],'method' => 'patch']) !!}
-    {!! FormField::text('name', ['required' => true, 'label' => trans('category.name')]) !!}
-    {!! FormField::textarea('description', ['label' => trans('category.description')]) !!}
-    @if (request('q'))
-        {{ Form::hidden('q', request('q')) }}
-    @endif
-    @if (request('page'))
-        {{ Form::hidden('page', request('page')) }}
-    @endif
-    {!! Form::submit(trans('category.update'), ['class' => 'btn btn-success']) !!}
-    {{ link_to_route('categories.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
-    {!! Form::close() !!}
-@endcan
-@endif
-@if (Request::get('action') == 'delete' && $editableCategory)
-@can('delete', $editableCategory)
-    <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">{{ trans('category.delete') }}</h3></div>
-        <div class="panel-body">
-            <label class="control-label">{{ trans('category.name') }}</label>
-            <p>{{ $editableCategory->name }}</p>
-            <label class="control-label">{{ trans('category.description') }}</label>
-            <p>{{ $editableCategory->description }}</p>
-            {!! $errors->first('category_id', '<span class="form-error small">:message</span>') !!}
+    <div id="categoryModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
+                    <h4 class="modal-title">{{ __('category.create') }}</h4>
+                </div>
+                {!! Form::open(['route' => 'categories.store']) !!}
+                <div class="modal-body">
+                    {!! FormField::text('name', ['required' => true, 'label' => __('category.name')]) !!}
+                    {!! FormField::textarea('description', ['label' => __('category.description')]) !!}
+                </div>
+                <div class="modal-footer">
+                    {!! Form::submit(__('category.create'), ['class' => 'btn btn-success']) !!}
+                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                </div>
+                {{ Form::close() }}
+            </div>
         </div>
-        <hr style="margin:0">
-        <div class="panel-body">{{ trans('app.delete_confirm') }}</div>
-        <div class="panel-footer">
-            {!! FormField::delete(
-                ['route' => ['categories.destroy', $editableCategory]],
-                trans('app.delete_confirm_button'),
-                ['class'=>'btn btn-danger'],
-                [
-                    'category_id' => $editableCategory->id,
-                    'page' => request('page'),
-                    'q' => request('q'),
-                ]
-            ) !!}
-            {{ link_to_route('categories.index', trans('app.cancel'), [], ['class' => 'btn btn-default']) }}
+    </div>
+@endcan
+@endif
+
+@if (request('action') == 'edit' && $editableCategory)
+@can('update', $editableCategory)
+    <div id="categoryModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
+                    <h4 class="modal-title">{{ __('category.edit') }}</h4>
+                </div>
+                {!! Form::model($editableCategory, ['route' => ['categories.update', $editableCategory], 'method' => 'patch']) !!}
+                <div class="modal-body">
+                    {!! FormField::text('name', ['required' => true, 'label' => __('category.name')]) !!}
+                    {!! FormField::textarea('description', ['label' => __('category.description')]) !!}
+                </div>
+                <div class="modal-footer">
+                    {!! Form::submit(__('category.update'), ['class' => 'btn btn-success']) !!}
+                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    @can('delete', $editableCategory)
+                        {!! link_to_route(
+                            'categories.index',
+                            __('app.delete'),
+                            ['action' => 'delete', 'id' => $editableCategory->id],
+                            ['id' => 'del-category-'.$editableCategory->id, 'class' => 'btn btn-danger pull-left']
+                        ) !!}
+                    @endcan
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+@endcan
+@endif
+
+@if (request('action') == 'delete' && $editableCategory)
+@can('delete', $editableCategory)
+    <div id="categoryModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
+                    <h4 class="modal-title">{{ __('app.delete') }} {{ $editableCategory->type }}</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="control-label">{{ __('category.name') }}</label>
+                    <p>{{ $editableCategory->name }}</p>
+                    <label class="control-label">{{ __('category.description') }}</label>
+                    <p>{{ $editableCategory->description }}</p>
+                    {!! $errors->first('category_id', '<span class="form-error small">:message</span>') !!}
+                </div>
+                <hr style="margin:0">
+                <div class="modal-body">{{ __('app.delete_confirm') }}</div>
+                <div class="modal-footer">
+                    {!! FormField::delete(
+                        ['route' => ['categories.destroy', $editableCategory], 'class' => ''],
+                        __('app.delete_confirm_button'),
+                        ['class'=>'btn btn-danger'],
+                        [
+                            'category_id' => $editableCategory->id,
+                        ]
+                    ) !!}
+                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                </div>
+            </div>
         </div>
     </div>
 @endcan
