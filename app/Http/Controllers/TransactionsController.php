@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,7 @@ class TransactionsController extends Controller
         $transactionQuery = Transaction::forUser(auth()->user());
         $transactionQuery->where('date', 'like', $yearMonth.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
+        $categories = Category::forUser(auth()->user())->pluck('name', 'id');
 
         $transactions = $transactionQuery->orderBy('date')->get();
 
@@ -29,7 +31,8 @@ class TransactionsController extends Controller
         }
 
         return view('transactions.index', compact(
-            'transactions', 'editableTransaction', 'yearMonth', 'month', 'year'
+            'transactions', 'editableTransaction',
+            'yearMonth', 'month', 'year', 'categories'
         ));
     }
 
@@ -48,6 +51,7 @@ class TransactionsController extends Controller
             'amount'      => 'required|max:60',
             'in_out'      => 'required|boolean',
             'description' => 'required|max:255',
+            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
         ]);
         $newTransaction['creator_id'] = auth()->id();
 
@@ -80,6 +84,7 @@ class TransactionsController extends Controller
             'date'        => 'required|date|date_format:Y-m-d',
             'amount'      => 'required|max:60',
             'description' => 'required|max:255',
+            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
         ]);
 
         $transaction->update($transactionData);

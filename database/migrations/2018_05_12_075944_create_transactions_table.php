@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedDecimal('amount', 12);
             $table->boolean('in_out')->unsigned();
             $table->string('description');
+            $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('creator_id');
             $table->timestamps();
         });

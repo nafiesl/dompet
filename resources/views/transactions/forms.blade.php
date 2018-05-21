@@ -17,6 +17,7 @@
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
+                        <div class="col-md-6">{!! FormField::select('category_id', $categories, ['label' => __('category.category'), 'placeholder' => __('category.select')]) !!}</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -46,6 +47,7 @@
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
                         <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
+                        <div class="col-md-6">{!! FormField::select('category_id', $categories, ['label' => __('category.category'), 'placeholder' => __('category.select')]) !!}</div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -73,6 +75,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
+                        <div class="col-md-6">{!! FormField::select('category_id', $categories, ['label' => __('category.category'), 'placeholder' => __('category.select')]) !!}</div>
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">

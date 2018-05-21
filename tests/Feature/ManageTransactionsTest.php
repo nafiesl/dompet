@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Category;
 use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -67,7 +68,8 @@ class ManageTransactionsTest extends TestCase
         $month = '01';
         $year = '2017';
         $date = '2017-01-01';
-        $this->loginAsUser();
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $this->visit(route('transactions.index', ['month' => $month, 'year' => $year]));
 
         $this->click(__('transaction.add_income'));
@@ -77,6 +79,7 @@ class ManageTransactionsTest extends TestCase
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Income description',
+            'category_id' => $category->id,
         ]);
 
         $this->seePageIs(route('transactions.index', ['month' => $month, 'year' => $year]));
@@ -87,6 +90,7 @@ class ManageTransactionsTest extends TestCase
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Income description',
+            'category_id' => $category->id,
         ]);
     }
 
@@ -132,6 +136,7 @@ class ManageTransactionsTest extends TestCase
             'date'       => $date,
             'creator_id' => $user->id,
         ]);
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
         $this->visit(route('transactions.index', ['month' => $month, 'year' => $year]));
         $this->click('edit-transaction-'.$transaction->id);
@@ -145,6 +150,7 @@ class ManageTransactionsTest extends TestCase
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Transaction 1 description',
+            'category_id' => $category->id,
         ]);
 
         $this->seePageIs(route('transactions.index', ['month' => $transaction->month, 'year' => $transaction->year]));
@@ -154,6 +160,7 @@ class ManageTransactionsTest extends TestCase
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Transaction 1 description',
+            'category_id' => $category->id,
         ]);
     }
 

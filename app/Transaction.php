@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $fillable = ['date', 'amount', 'in_out', 'description', 'creator_id'];
+    protected $fillable = [
+        'date', 'amount', 'in_out', 'description',
+        'category_id', 'creator_id',
+    ];
 
     public function nameLink()
     {

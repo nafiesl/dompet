@@ -6,6 +6,7 @@ return [
     'list'          => 'Daftar Kategori',
     'search'        => 'Cari Kategori',
     'detail'        => 'Detail Kategori',
+    'select'        => 'Pilih Kategori',
     'not_found'     => 'Kategori tidak ditemukan',
     'empty'         => 'Belum ada Kategori',
     'back_to_show'  => 'Kembali ke detail Kategori',
