@@ -24,7 +24,8 @@
                 ]) !!}
                 {{ Form::select('month', getMonths(), $month, ['class' => 'form-control input-sm']) }}
                 {{ Form::select('year', getYears(), $year, ['class' => 'form-control input-sm']) }}
-                {{ Form::submit(trans('app.submit'), ['class' => 'btn btn-sm']) }}
+                {!! FormField::select('category_id', $categories, ['label' => false, 'placeholder' => __('category.all'), 'class' => 'input-sm']) !!}
+                {{ Form::submit(trans('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
                 {{ link_to_route('transactions.index', trans('app.reset')) }}
                 {{ Form::close() }}
             </div>
@@ -53,6 +54,7 @@
                                     'date' => $transaction->date_only,
                                     'month' => $month,
                                     'year' => $year,
+                                    'category_id' => request('category_id'),
                                 ]) }}
                             </td>
                         @endif
