@@ -13,4 +13,9 @@ class Category extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeForUser($query, User $user)
+    {
+        $query->where('creator_id', $user->id);
+    }
 }

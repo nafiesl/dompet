@@ -19,4 +19,16 @@ class CategoryTest extends TestCase
         $this->assertInstanceOf(User::class, $category->creator);
         $this->assertEquals($category->creator_id, $category->creator->id);
     }
+
+    /** @test */
+    public function a_category_has_for_user_scope()
+    {
+        $categoryOwner = $this->createUser();
+        $category = factory(Category::class)->create([
+            'creator_id' => $categoryOwner->id,
+        ]);
+        $othersCategory = factory(Category::class)->create();
+
+        $this->assertCount(1, Category::forUser($categoryOwner)->get());
+    }
 }
