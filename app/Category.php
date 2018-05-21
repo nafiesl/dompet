@@ -18,4 +18,9 @@ class Category extends Model
     {
         $query->where('creator_id', $user->id);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

@@ -3,8 +3,9 @@
 namespace Tests\Unit\Policies;
 
 use App\Category;
+use Tests\TestCase;
+use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase as TestCase;
 
 class CategoryPolicyTest extends TestCase
 {
@@ -18,26 +19,40 @@ class CategoryPolicyTest extends TestCase
     }
 
     /** @test */
-    public function user_can_view_category()
+    public function user_can_only_update_their_own_category()
     {
         $user = $this->createUser();
-        $category = factory(Category::class)->create();
-        $this->assertTrue($user->can('view', $category));
-    }
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $othersCategory = factory(Category::class)->create();
 
-    /** @test */
-    public function user_can_update_category()
-    {
-        $user = $this->createUser();
-        $category = factory(Category::class)->create();
         $this->assertTrue($user->can('update', $category));
+        $this->assertFalse($user->can('update', $othersCategory));
     }
 
     /** @test */
-    public function user_can_delete_category()
+    public function user_can_only_delete_their_own_category()
     {
         $user = $this->createUser();
-        $category = factory(Category::class)->create();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $othersCategory = factory(Category::class)->create();
+
         $this->assertTrue($user->can('delete', $category));
+        $this->assertFalse($user->can('delete', $othersCategory));
+    }
+
+    /** @test */
+    public function user_cannot_delete_used_category()
+    {
+        $user = $this->createUser();
+        $usedCategory = factory(Category::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create([
+            'creator_id'  => $user->id,
+            'category_id' => $usedCategory->id,
+        ]);
+
+        $unusedCategory = factory(Category::class)->create(['creator_id' => $user->id]);
+
+        $this->assertFalse($user->can('delete', $usedCategory));
+        $this->assertTrue($user->can('delete', $unusedCategory));
     }
 }

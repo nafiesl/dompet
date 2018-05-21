@@ -11,19 +11,6 @@ class CategoryPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the project.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Category  $category
-     * @return mixed
-     */
-    public function view(User $user, Category $category)
-    {
-        // Update $user authorization to view $category here.
-        return true;
-    }
-
-    /**
      * Determine whether the user can create projects.
      *
      * @param  \App\User  $user
@@ -46,7 +33,7 @@ class CategoryPolicy
     public function update(User $user, Category $category)
     {
         // Update $user authorization to update $category here.
-        return true;
+        return $user->id == $category->creator_id;
     }
 
     /**
@@ -59,6 +46,6 @@ class CategoryPolicy
     public function delete(User $user, Category $category)
     {
         // Update $user authorization to delete $category here.
-        return true;
+        return $user->id == $category->creator_id && $category->transactions->isEmpty();
     }
 }
