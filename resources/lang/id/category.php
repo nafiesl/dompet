@@ -9,7 +9,7 @@ return [
     'select'        => 'Pilih Kategori',
     'all'           => 'Semua Kategori',
     'uncategorized' => 'Tanpa Kategori',
-    'not_found'     => 'Kategori tidak ditemukan',
+    'not_found'     => 'Belum ada Kategori.',
     'empty'         => 'Belum ada Kategori',
     'back_to_show'  => 'Kembali ke detail Kategori',
     'back_to_index' => 'Kembali ke daftar Kategori',

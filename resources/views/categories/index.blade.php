@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($categories as $key => $category)
+                    @forelse($categories as $key => $category)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td>{!! $category->name_label !!}</td>
@@ -41,7 +41,9 @@
                             @endcan
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr><td colspan="4">{{ __('category.not_found') }}</td></tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

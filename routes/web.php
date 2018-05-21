@@ -27,9 +27,9 @@ Route::group(['middleware' => 'auth'], function () {
      * Transactions Routes
      */
     Route::resource('transactions', 'TransactionsController');
-});
 
-/**
- * Categories Routes
- */
-Route::resource('categories', 'CategoriesController');
+    /**
+     * Categories Routes
+     */
+    Route::resource('categories', 'CategoriesController');
+});
