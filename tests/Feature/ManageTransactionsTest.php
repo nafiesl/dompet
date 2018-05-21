@@ -167,8 +167,8 @@ class ManageTransactionsTest extends TestCase
     /** @test */
     public function user_can_delete_a_transaction()
     {
-        $this->loginAsUser();
-        $transaction = factory(Transaction::class)->create();
+        $user = $this->loginAsUser();
+        $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
 
         $this->visit(route('transactions.index', ['action' => 'edit', 'id' => $transaction->id]));
         $this->click('del-transaction-'.$transaction->id);
