@@ -15,6 +15,7 @@
                 {{ link_to_route('register', __('auth.register'), [], ['class' => 'xs-navbar']) }}
             @else
                 {{ link_to_route('transactions.index', __('transaction.transaction'), [], ['class' => 'xs-navbar']) }}
+                {{ link_to_route('categories.index', __('category.category'), [], ['class' => 'xs-navbar']) }}
                 {{ link_to_route('password.change', __('auth.change_password'), [], ['class' => 'xs-navbar']) }}
                 <a class="xs-navbar" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
