@@ -47,6 +47,16 @@ If you are considering to contribute to this repo. It is really nice.
 2. Pull Request for bugfix, typo on labels, or new feature.
 3. Pull Request for `en` lang files for English. Currently we only have `id` lang for Indonesian.
 
-## Lisensi
+## Screenshots
+
+#### Transaction List on a Month
+
+![Dompet Monthly Transaction List](public/screenshots/01-monthly-transaction-list.jpg)
+
+#### Transaction List on Selected Date
+
+![Dompet Daily Transaction List](public/screenshots/02-daily-transaction-list.jpg)
+
+## License
 
 Dompet project is a free and open-sourced software under [MIT License](LICENSE).
