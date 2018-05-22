@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
         </div>
@@ -14,9 +14,18 @@
                 {{ link_to_route('login', __('auth.login'), [], ['class' => 'xs-navbar']) }}
                 {{ link_to_route('register', __('auth.register'), [], ['class' => 'xs-navbar']) }}
             @else
-                {{ link_to_route('transactions.index', __('transaction.transaction'), [], ['class' => 'xs-navbar']) }}
-                {{ link_to_route('categories.index', __('category.category'), [], ['class' => 'xs-navbar']) }}
-                {{ link_to_route('password.change', __('auth.change_password'), [], ['class' => 'xs-navbar']) }}
+                <a class="xs-navbar" href="{{ route('transactions.index') }}" title="{{ __('transaction.transaction') }}">
+                    <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('transaction.transaction') }}</span>
+                </a>
+                <a class="xs-navbar" href="{{ route('categories.index') }}" title="{{ __('category.category') }}">
+                    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('category.category') }}</span>
+                </a>
+                <a class="xs-navbar" href="{{ route('password.change') }}" title="{{ __('auth.change_password') }}">
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('auth.change_password') }}</span>
+                </a>
                 <a class="xs-navbar" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
