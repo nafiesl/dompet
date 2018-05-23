@@ -19,16 +19,30 @@ class TransactionCollection extends ResourceCollection
 
     public function with($request)
     {
-        return ['total' => $this->getTransactionTotal()];
+        $incomeTotal = $this->getIncomeTransactionTotal();
+        $spendingTotal = $this->getSpendingTransactionTotal();
+        $difference = $incomeTotal - $spendingTotal;
+
+        return [
+            'stats' => [
+                'income_total'   => formatNumber($incomeTotal),
+                'spending_total' => formatNumber($spendingTotal),
+                'difference'     => formatNumber($difference),
+            ],
+        ];
     }
 
-    private function getTransactionTotal()
+    private function getIncomeTransactionTotal()
     {
-        $total = $this->resource->sum(function ($transaction) {
-            return $transaction->in_out ? $transaction->amount : -$transaction->amount;
+        return $this->resource->sum(function ($transaction) {
+            return $transaction->in_out ? $transaction->amount : 0;
         });
-        $total = number_format($total, 2);
+    }
 
-        return str_replace('-', '- ', $total);
+    private function getSpendingTransactionTotal()
+    {
+        return $this->resource->sum(function ($transaction) {
+            return $transaction->in_out ? 0 : $transaction->amount;
+        });
     }
 }

@@ -14,3 +14,10 @@ function flash($message = null, $level = 'info')
         $session->flash('flash_notification.level', $level);
     }
 }
+
+function formatNumber(float $number)
+{
+    $number = number_format($number, 2);
+
+    return str_replace('-', '- ', $number);
+}

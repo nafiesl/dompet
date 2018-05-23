@@ -26,7 +26,7 @@ class TransactionListingTest extends TestCase
             'description'    => $transaction->description,
             'category'       => optional($transaction->category)->name,
             'category_color' => optional($transaction->category)->color,
-            'total'          => $transaction->amount_string,
+            'difference'     => $transaction->amount_string,
         ]);
     }
 }
