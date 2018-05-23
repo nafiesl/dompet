@@ -14,6 +14,10 @@ return [
     'back_to_show'  => 'Kembali ke detail Transaksi',
     'back_to_index' => 'Kembali ke daftar Transaksi',
 
+    'income_total'   => 'Total Pemasukan',
+    'spending_total' => 'Total Pengeluaran',
+    'difference'     => 'Selisih',
+
     // Actions
     'add_income'     => 'Input Pemasukan',
     'income_added'   => 'Pemasukan berhasil diinput.',

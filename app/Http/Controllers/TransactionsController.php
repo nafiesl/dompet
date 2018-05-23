@@ -34,9 +34,18 @@ class TransactionsController extends Controller
             $editableTransaction = Transaction::find(request('id'));
         }
 
+        $incomeTotal = $transactions->sum(function ($transaction) {
+            return $transaction->in_out ? $transaction->amount : 0;
+        });
+
+        $spendingTotal = $transactions->sum(function ($transaction) {
+            return $transaction->in_out ? 0 : $transaction->amount;
+        });
+
         return view('transactions.index', compact(
             'transactions', 'editableTransaction',
-            'yearMonth', 'month', 'year', 'categories'
+            'yearMonth', 'month', 'year', 'categories',
+            'incomeTotal', 'spendingTotal'
         ));
     }
 

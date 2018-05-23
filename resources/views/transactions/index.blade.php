@@ -15,6 +15,7 @@
 </h3>
 <div class="row">
     <div class="col-md-12">
+        @include('transactions.partials.stats')
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
                 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}
