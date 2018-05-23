@@ -20,13 +20,7 @@ class TransactionsController extends Controller
         $year = request('year', date('Y'));
         $month = request('month', date('m'));
 
-        $transactionQuery = Transaction::forUser(auth()->user());
-        $transactionQuery->where('date', 'like', $yearMonth.'%');
-        $transactionQuery->where('description', 'like', '%'.request('query').'%');
-        if ($categoryId = request('category_id')) {
-            $transactionQuery->where('category_id', $categoryId);
-        }
-        $transactions = $transactionQuery->orderBy('date')->with('category')->get();
+        $transactions = $this->getTansactionsForUser(auth()->user(), $yearMonth);
 
         $categories = Category::forUser(auth()->user())->pluck('name', 'id');
 

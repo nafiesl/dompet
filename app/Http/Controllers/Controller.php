@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Transaction;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,5 +30,18 @@ class Controller extends BaseController
         }
 
         return date('Y-m');
+    }
+
+    protected function getTansactionsForUser(User $user, $yearMonth)
+    {
+        $transactionQuery = Transaction::forUser($user);
+        $transactionQuery->where('date', 'like', $yearMonth.'%');
+        $transactionQuery->where('description', 'like', '%'.request('query').'%');
+
+        if ($categoryId = request('category_id')) {
+            $transactionQuery->where('category_id', $categoryId);
+        }
+
+        return $transactionQuery->orderBy('date')->with('category')->get();
     }
 }
