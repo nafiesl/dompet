@@ -19,4 +19,9 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.', 'namespace' => 'Api'],
      * User Profile Endpoint
      */
     Route::get('user', 'Auth\ProfileController@show')->name('user');
+
+    /**
+     * Transctions Endpoints
+     */
+    Route::apiResource('transactions', 'TransactionsController');
 });
