@@ -24,4 +24,9 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.', 'namespace' => 'Api'],
      * Transctions Endpoints
      */
     Route::apiResource('transactions', 'TransactionsController');
+
+    /**
+     * Categories Endpoints
+     */
+    Route::resource('categories', 'CategoriesController')->names('categories');
 });
