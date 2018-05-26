@@ -17,6 +17,7 @@ class Transaction extends Resource
         $transaction = $this->resource;
 
         return [
+            'id'             => $transaction->id,
             'date'           => $transaction->date,
             'amount'         => $transaction->amount_string,
             'description'    => $transaction->description,
