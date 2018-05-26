@@ -4,6 +4,7 @@ namespace Tests\Feature\Api;
 
 use App\Category;
 use Tests\TestCase;
+use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TransacionEntryTest extends TestCase
@@ -81,6 +82,49 @@ class TransacionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Spending description',
             'category'    => $category->name,
+        ]);
+    }
+
+    /** @test */
+    public function user_can_edit_a_transaction()
+    {
+        $month = '01';
+        $year = '2017';
+        $date = '2017-01-01';
+        $user = $this->createUser();
+        $transaction = factory(Transaction::class)->create([
+            'in_out'     => 0,
+            'amount'     => 99.99,
+            'date'       => $date,
+            'creator_id' => $user->id,
+        ]);
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+
+        $this->patchJson(route('api.transactions.update', $transaction), [
+            'in_out'      => 1,
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Spending description',
+            'category_id' => $category->id,
+        ], [
+            'Authorization' => 'Bearer '.$user->api_token,
+        ]);
+
+        $this->seeStatusCode(200);
+        $this->seeJson([
+            'message'     => __('transaction.updated'),
+            'amount'      => '99.99',
+            'date'        => $date,
+            'description' => 'Spending description',
+            'category'    => $category->name,
+        ]);
+
+        $this->seeInDatabase('transactions', [
+            'in_out'      => 1, // 0:spending, 1:spending
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Spending description',
+            'category_id' => $category->id,
         ]);
     }
 }

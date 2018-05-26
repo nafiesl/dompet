@@ -46,4 +46,31 @@ class TransactionsController extends Controller
         ];
         return response()->json($responseData, 201);
     }
+
+    /**
+     * Update the specified transaction in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Transaction  $transaction
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Transaction $transaction)
+    {
+        $this->authorize('update', $transaction);
+
+        $transactionData = $this->validate($request, [
+            'in_out'      => 'required|boolean',
+            'date'        => 'required|date|date_format:Y-m-d',
+            'amount'      => 'required|max:60',
+            'description' => 'required|max:255',
+            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
+        ]);
+
+        $transaction->update($transactionData);
+
+        return response()->json([
+            'message' => __('transaction.updated'),
+            'data'    => new TransactionResource($transaction),
+        ]);
+    }
 }
