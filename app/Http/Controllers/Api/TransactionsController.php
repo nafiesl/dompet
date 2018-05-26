@@ -73,4 +73,25 @@ class TransactionsController extends Controller
             'data'    => new TransactionResource($transaction),
         ]);
     }
+
+    /**
+     * Remove the specified transaction from storage.
+     *
+     * @param  \App\Transaction  $transaction
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Transaction $transaction)
+    {
+        $this->authorize('delete', $transaction);
+
+        request()->validate([
+            'transaction_id' => 'required',
+        ]);
+
+        if (request('transaction_id') == $transaction->id && $transaction->delete()) {
+            return response()->json(['message' => __('transaction.deleted')]);
+        }
+
+        return response()->json(['message' => __('transaction.undeleted')]);
+    }
 }

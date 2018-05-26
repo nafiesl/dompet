@@ -127,4 +127,28 @@ class TransacionEntryTest extends TestCase
             'category_id' => $category->id,
         ]);
     }
+
+    /** @test */
+    public function user_can_delete_a_transaction()
+    {
+        $user = $this->createUser();
+        $transaction = factory(Transaction::class)->create([
+            'creator_id' => $user->id,
+        ]);
+
+        $this->deleteJson(route('api.transactions.destroy', $transaction), [
+            'transaction_id' => $transaction->id,
+        ], [
+            'Authorization' => 'Bearer '.$user->api_token,
+        ]);
+
+        $this->seeStatusCode(200);
+        $this->seeJson([
+            'message' => __('transaction.deleted'),
+        ]);
+
+        $this->dontSeeInDatabase('transactions', [
+            'id' => $transaction->id,
+        ]);
+    }
 }
