@@ -41,7 +41,7 @@ class TransacionEntryTest extends TestCase
         $this->seeStatusCode(201);
         $this->seeJson([
             'message'     => __('transaction.income_added'),
-            'amount'      => '99.99',
+            'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Income description',
             'category'    => $category->name,
@@ -78,7 +78,7 @@ class TransacionEntryTest extends TestCase
         $this->seeStatusCode(201);
         $this->seeJson([
             'message'     => __('transaction.spending_added'),
-            'amount'      => '- 99.99',
+            'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Spending description',
             'category'    => $category->name,
@@ -113,7 +113,7 @@ class TransacionEntryTest extends TestCase
         $this->seeStatusCode(200);
         $this->seeJson([
             'message'     => __('transaction.updated'),
-            'amount'      => '99.99',
+            'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Spending description',
             'category'    => $category->name,

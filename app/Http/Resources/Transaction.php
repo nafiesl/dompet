@@ -19,10 +19,15 @@ class Transaction extends Resource
         return [
             'id'             => $transaction->id,
             'date'           => $transaction->date,
-            'amount'         => $transaction->amount_string,
+            'amount'         => (float) $transaction->amount,
+            'amount_string'  => $transaction->amount_string,
             'description'    => $transaction->description,
+            'in_out'         => (int) $transaction->in_out,
+            'category_id'    => $transaction->category_id,
             'category'       => optional($transaction->category)->name,
             'category_color' => optional($transaction->category)->color,
+            'created_at'     => $transaction->created_at->format('Y-m-d H:i:s'),
+            'updated_at'     => $transaction->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }
