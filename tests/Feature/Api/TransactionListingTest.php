@@ -29,4 +29,23 @@ class TransactionListingTest extends TestCase
             'difference'     => $transaction->amount_string,
         ]);
     }
+
+    /** @test */
+    public function user_can_get_a_transaction_detail()
+    {
+        $user = $this->createUser();
+        $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
+
+        $this->getJson(route('api.transactions.show', $transaction), [
+            'Authorization' => 'Bearer '.$user->api_token,
+        ]);
+
+        $this->seeJson([
+            'date'           => $transaction->date,
+            'amount'         => $transaction->amount_string,
+            'description'    => $transaction->description,
+            'category'       => optional($transaction->category)->name,
+            'category_color' => optional($transaction->category)->color,
+        ]);
+    }
 }

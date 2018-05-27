@@ -47,6 +47,11 @@ class TransactionsController extends Controller
         return response()->json($responseData, 201);
     }
 
+    public function show(Transaction $transaction)
+    {
+        return new TransactionResource($transaction);
+    }
+
     /**
      * Update the specified transaction in storage.
      *
