@@ -26,6 +26,7 @@ class Controller extends BaseController
             if (checkdate($explodedYearMonth[1], $date, $explodedYearMonth[0])) {
                 return $explodedYearMonth[0].'-'.$explodedYearMonth[1].'-'.$date;
             }
+
             return $explodedYearMonth[0].'-'.$explodedYearMonth[1];
         }
 

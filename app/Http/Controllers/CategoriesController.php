@@ -72,10 +72,12 @@ class CategoriesController extends Controller
     {
         if ($categoryDeleteForm->save()) {
             flash(__('category.deleted'), 'warning');
+
             return redirect()->route('categories.index');
         }
 
         flash(__('category.undeleted'), 'warning');
+
         return back();
     }
 }
