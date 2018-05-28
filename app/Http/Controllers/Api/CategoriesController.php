@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categories\CreateRequest;
+use App\Http\Requests\Categories\DeleteRequest;
+use App\Http\Requests\Categories\UpdateRequest;
 
 class CategoriesController extends Controller
 {
@@ -23,22 +26,13 @@ class CategoriesController extends Controller
     /**
      * Store a newly created category in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\Categories\CreateRequest $categoryCreateForm
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $categoryCreateForm)
     {
-        $this->authorize('create', new Category);
-
-        $newCategory = $request->validate([
-            'name'        => 'required|max:60',
-            'color'       => 'required|string|max:7',
-            'description' => 'nullable|string|max:255',
-        ]);
-        $newCategory['creator_id'] = auth()->id();
-
-        $category = Category::create($newCategory);
+        $category = $categoryCreateForm->save();
 
         return response()->json([
             'message' => __('category.created'),
@@ -49,21 +43,14 @@ class CategoriesController extends Controller
     /**
      * Update the specified category in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\Categories\UpdateRequest $categoryUpdateForm
      * @param \App\Category $category
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateRequest $categoryUpdateForm, Category $category)
     {
-        $this->authorize('update', $category);
-
-        $categoryData = $request->validate([
-            'name'        => 'required|max:60',
-            'color'       => 'required|string|max:7',
-            'description' => 'nullable|string|max:255',
-        ]);
-        $category->update($categoryData);
+        $category = $categoryUpdateForm->save();
 
         return response()->json([
             'message' => __('category.updated'),
@@ -74,19 +61,14 @@ class CategoriesController extends Controller
     /**
      * Remove the specified category from storage.
      *
-     * @param \App\Category $category
+     * @param \App\Http\Requests\Categories\DeleteRequest $categoryDeleteForm
+     * @param \App\Category                               $category
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(DeleteRequest $categoryDeleteForm, Category $category)
     {
-        $this->authorize('delete', $category);
-
-        request()->validate([
-            'category_id' => 'required',
-        ]);
-
-        if (request('category_id') == $category->id && $category->delete()) {
+        if ($categoryDeleteForm->save()) {
             return response()->json(['message' => __('category.deleted')]);
         }
 

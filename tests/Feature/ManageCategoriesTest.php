@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Category;
-use Tests\TestCase as TestCase;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ManageCategoriesTest extends TestCase
