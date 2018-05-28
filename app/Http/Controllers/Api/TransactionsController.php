@@ -44,6 +44,7 @@ class TransactionsController extends Controller
             'message' => $responseMessage,
             'data'    => new TransactionResource($transaction),
         ];
+
         return response()->json($responseData, 201);
     }
 
