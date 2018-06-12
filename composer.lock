@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc04596a0f667c3ab5853703be451416",
+    "content-hash": "591791e55e4567ab518ac065afe303b0",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2672,21 +2672,21 @@
         },
         {
             "name": "luthfi/simple-crud-generator",
-            "version": "dev-master",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nafiesl/SimpleCrudGenerator.git",
-                "reference": "58deee3511e62b65339fb79af914add772b08d2e"
+                "reference": "d031cbb4acdca5e7d5878b0b711abec8f9d032be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nafiesl/SimpleCrudGenerator/zipball/58deee3511e62b65339fb79af914add772b08d2e",
-                "reference": "58deee3511e62b65339fb79af914add772b08d2e",
+                "url": "https://api.github.com/repos/nafiesl/SimpleCrudGenerator/zipball/d031cbb4acdca5e7d5878b0b711abec8f9d032be",
+                "reference": "d031cbb4acdca5e7d5878b0b711abec8f9d032be",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.4.* || 5.5.* || 5.6.*",
-                "laravel/browser-kit-testing": "^2.0|| ^4.0",
+                "illuminate/support": "5.5.* || 5.6.*",
+                "laravel/browser-kit-testing": "^2.0 || ^4.0",
                 "php": ">=7.0.0"
             },
             "require-dev": {
@@ -2724,7 +2724,7 @@
                 "tdd-workflow",
                 "testing"
             ],
-            "time": "2018-04-26T23:30:28+00:00"
+            "time": "2018-05-29T00:37:48+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -4315,9 +4315,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "luthfi/simple-crud-generator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
