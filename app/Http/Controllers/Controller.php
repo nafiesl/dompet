@@ -43,6 +43,6 @@ class Controller extends BaseController
             $transactionQuery->where('category_id', $categoryId);
         }
 
-        return $transactionQuery->orderBy('date')->with('category')->get();
+        return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
     }
 }
