@@ -20,7 +20,7 @@ class TransactionsController extends Controller
         $year = request('year', date('Y'));
         $month = request('month', date('m'));
 
-        $transactions = $this->getTansactionsForUser(auth()->user(), $yearMonth);
+        $transactions = $this->getTansactions($yearMonth);
 
         $categories = Category::pluck('name', 'id');
 

@@ -33,9 +33,9 @@ class Controller extends BaseController
         return date('Y-m');
     }
 
-    protected function getTansactionsForUser(User $user, $yearMonth)
+    protected function getTansactions($yearMonth)
     {
-        $transactionQuery = Transaction::forUser($user);
+        $transactionQuery = Transaction::query();
         $transactionQuery->where('date', 'like', $yearMonth.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
 

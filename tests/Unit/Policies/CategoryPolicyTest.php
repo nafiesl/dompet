@@ -43,7 +43,7 @@ class CategoryPolicyTest extends TestCase
     /** @test */
     public function user_cannot_delete_used_category()
     {
-        $user = $this->createUser();
+        $user = $this->loginAsUser();
         $usedCategory = factory(Category::class)->create(['creator_id' => $user->id]);
         $transaction = factory(Transaction::class)->create([
             'creator_id'  => $user->id,

@@ -15,7 +15,7 @@ class TransactionsController extends Controller
         $yearMonth = $this->getYearMonth();
 
         return new TransactionCollection(
-            $this->getTansactionsForUser(auth()->user(), $yearMonth)
+            $this->getTansactions($yearMonth)
         );
     }
 

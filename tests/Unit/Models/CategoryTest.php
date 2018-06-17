@@ -37,8 +37,14 @@ class CategoryTest extends TestCase
     /** @test */
     public function a_category_has_many_transactions_relation()
     {
-        $category = factory(Category::class)->create();
-        $transaction = factory(Transaction::class)->create(['category_id' => $category->id]);
+        $categoryOwner = $this->loginAsUser();
+        $category = factory(Category::class)->create([
+            'creator_id' => $categoryOwner->id,
+        ]);
+        $transaction = factory(Transaction::class)->create([
+            'category_id' => $category->id,
+            'creator_id' => $categoryOwner->id,
+        ]);
 
         $this->assertInstanceOf(Collection::class, $category->transactions);
         $this->assertInstanceOf(Transaction::class, $category->transactions->first());

@@ -85,12 +85,12 @@ class TransactionTest extends TestCase
     /** @test */
     public function a_transaction_has_for_user_scope()
     {
-        $transactionOwner = $this->createUser();
+        $transactionOwner = $this->loginAsUser();
         $transaction = factory(Transaction::class)->create([
             'creator_id' => $transactionOwner->id,
         ]);
         $othersTransaction = factory(Transaction::class)->create();
 
-        $this->assertCount(1, Transaction::forUser($transactionOwner)->get());
+        $this->assertCount(1, Transaction::all());
     }
 }

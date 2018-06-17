@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Transaction extends Model
 {
@@ -11,6 +12,15 @@ class Transaction extends Model
         'date', 'amount', 'in_out', 'description',
         'category_id', 'creator_id',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('forUser', function (Builder $builder) {
+            $builder->where('creator_id', auth()->id());
+        });
+    }
 
     public function nameLink()
     {
@@ -61,10 +71,5 @@ class Transaction extends Model
         }
 
         return $amountString;
-    }
-
-    public function scopeForUser($query, User $user)
-    {
-        $query->where('creator_id', $user->id);
     }
 }
