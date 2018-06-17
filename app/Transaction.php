@@ -3,24 +3,18 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Transaction extends Model
 {
+    use ForUser;
+
     protected $fillable = [
         'date', 'amount', 'in_out', 'description',
         'category_id', 'creator_id',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('forUser', function (Builder $builder) {
-            $builder->where('creator_id', auth()->id());
-        });
-    }
 
     public function nameLink()
     {

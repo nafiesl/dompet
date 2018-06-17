@@ -2,21 +2,15 @@
 
 namespace App;
 
+use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Category extends Model
 {
+    use ForUser;
+
     protected $fillable = ['name', 'description', 'color', 'creator_id'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('forUser', function (Builder $builder) {
-            $builder->where('creator_id', auth()->id());
-        });
-    }
 
     public function creator()
     {
