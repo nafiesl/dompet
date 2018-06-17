@@ -3,19 +3,24 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Category extends Model
 {
     protected $fillable = ['name', 'description', 'color', 'creator_id'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('forUser', function (Builder $builder) {
+            $builder->where('creator_id', auth()->id());
+        });
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function scopeForUser($query, User $user)
-    {
-        $query->where('creator_id', $user->id);
     }
 
     public function transactions()

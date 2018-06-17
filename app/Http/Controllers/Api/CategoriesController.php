@@ -17,7 +17,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::forUser(auth()->user())->get();
+        $categories = Category::all();
 
         return $categories;
     }

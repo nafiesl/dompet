@@ -18,7 +18,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $editableCategory = null;
-        $categories = Category::forUser(auth()->user())->get();
+        $categories = Category::all();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableCategory = Category::find(request('id'));

@@ -22,7 +22,7 @@ class TransactionsController extends Controller
 
         $transactions = $this->getTansactionsForUser(auth()->user(), $yearMonth);
 
-        $categories = Category::forUser(auth()->user())->pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));

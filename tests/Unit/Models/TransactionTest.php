@@ -39,7 +39,8 @@ class TransactionTest extends TestCase
     /** @test */
     public function a_transaction_has_belongs_to_category_relation()
     {
-        $category = factory(Category::class)->create();
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $transaction = factory(Transaction::class)->make(['category_id' => $category->id]);
 
         $this->assertInstanceOf(Category::class, $transaction->category);
