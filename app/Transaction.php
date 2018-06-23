@@ -5,7 +5,6 @@ namespace App;
 use Carbon\Carbon;
 use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class Transaction extends Model
 {
