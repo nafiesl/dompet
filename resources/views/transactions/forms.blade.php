@@ -8,7 +8,7 @@
                     {{ link_to_route('transactions.index', '&times;', [], ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('transaction.add_income') }}</h4>
                 </div>
-                {!! Form::open(['route' => 'transactions.store']) !!}
+                {!! Form::open(['route' => 'transactions.store', 'autocomplete' => 'off']) !!}
                 {{ Form::hidden('in_out', 1) }}
                 <div class="modal-body">
                     <div class="row">
@@ -38,7 +38,7 @@
                     {{ link_to_route('transactions.index', '&times;', [], ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('transaction.add_spending') }}</h4>
                 </div>
-                {!! Form::open(['route' => 'transactions.store']) !!}
+                {!! Form::open(['route' => 'transactions.store', 'autocomplete' => 'off']) !!}
                 {{ Form::hidden('in_out', 0) }}
                 <div class="modal-body">
                     <div class="row">
@@ -71,7 +71,7 @@
                     {{ link_to_route('transactions.index', '&times;', ['month' => $month, 'year' => $year], ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
                 </div>
-                {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch']) !!}
+                {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch', 'autocomplete' => 'off']) !!}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">{!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'class' => 'date-select']) !!}</div>
