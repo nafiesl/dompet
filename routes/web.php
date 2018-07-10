@@ -31,4 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
      * Categories Routes
      */
     Route::resource('categories', 'CategoriesController');
+
+    /*
+     * Report Routes
+     */
+    Route::get('/report', 'ReportsController@index')->name('reports.index');
 });

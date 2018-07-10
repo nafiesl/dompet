@@ -18,6 +18,10 @@
                     <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('transaction.transaction') }}</span>
                 </a>
+                <a class="xs-navbar" href="{{ route('reports.index') }}" title="{{ __('report.report') }}">
+                    <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('report.report') }}</span>
+                </a>
                 <a class="xs-navbar" href="{{ route('categories.index') }}" title="{{ __('category.category') }}">
                     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('category.category') }}</span>

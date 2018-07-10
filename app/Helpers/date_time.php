@@ -27,3 +27,20 @@ function getYears()
 
     return $years;
 }
+
+function monthNumber($number)
+{
+    return str_pad($number, 2, '0', STR_PAD_LEFT);
+}
+
+function monthId($monthNumber)
+{
+    if (is_null($monthNumber)) {
+        return $monthNumber;
+    }
+
+    $months = getMonths();
+    $monthNumber = monthNumber($monthNumber);
+
+    return $months[$monthNumber];
+}
