@@ -15,16 +15,27 @@ class ReportsController extends Controller
      */
     public function index(Request $request)
     {
-        $year = $request->get('year', date('Y'));
+        $year = $this->getYearQuery($request->get('year'));
         $data = $this->getYearlyTransactionSummary($year);
 
         return view('reports.index', compact('year', 'data'));
     }
 
     /**
+     * Get correct year from query string.
+     *
+     * @param  int|string  $yearQuery
+     * @return int|string
+     */
+    private function getYearQuery($yearQuery)
+    {
+        return in_array($yearQuery, getYears()) ? $yearQuery : date('Y');
+    }
+
+    /**
      * Get transaction yearly report data.
      *
-     * @param  string  $year
+     * @param  int|string  $year
      * @return \Illuminate\Support\Collection
      */
     private function getYearlyTransactionSummary($year)
