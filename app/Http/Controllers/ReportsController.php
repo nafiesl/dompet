@@ -16,7 +16,7 @@ class ReportsController extends Controller
     public function index(Request $request)
     {
         $year = $this->getYearQuery($request->get('year'));
-        $data = $this->getYearlyTransactionSummary($year);
+        $data = $this->getYearlyTransactionSummary($year, auth()->id());
 
         return view('reports.index', compact('year', 'data'));
     }
@@ -38,7 +38,7 @@ class ReportsController extends Controller
      * @param  int|string  $year
      * @return \Illuminate\Support\Collection
      */
-    private function getYearlyTransactionSummary($year)
+    private function getYearlyTransactionSummary($year, $userId)
     {
         $rawQuery = 'MONTH(date) as month';
         $rawQuery .= ', count(`id`) as count';
@@ -47,6 +47,7 @@ class ReportsController extends Controller
 
         $reportsData = DB::table('transactions')->select(DB::raw($rawQuery))
             ->where(DB::raw('YEAR(date)'), $year)
+            ->where('creator_id', $userId)
             ->groupBy(DB::raw('YEAR(date)'))
             ->groupBy(DB::raw('MONTH(date)'))
             ->orderBy('date', 'asc')
