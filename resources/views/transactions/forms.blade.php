@@ -85,6 +85,8 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('transaction.update'), ['class' => 'btn btn-success']) !!}
+                    {{ Form::hidden('query', request('query')) }}
+                    {{ Form::hidden('queried_category_id', request('category_id')) }}
                     {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $month, 'year' => $year], ['class' => 'btn btn-default']) }}
                     @can('delete', $editableTransaction)
                         {!! link_to_route(

@@ -94,7 +94,10 @@ class TransactionsController extends Controller
         flash(__('transaction.updated'), 'success');
 
         return redirect()->route('transactions.index', [
-            'month' => $transaction->month, 'year' => $transaction->year,
+            'month'       => $transaction->month,
+            'year'        => $transaction->year,
+            'category_id' => $request->get('queried_category_id'),
+            'query'       => $request->get('query'),
         ]);
     }
 

@@ -69,7 +69,7 @@
                                 {!! link_to_route(
                                     'transactions.index',
                                     trans('app.edit'),
-                                    ['action' => 'edit', 'id' => $transaction->id] + Request::only('page', 'month', 'year'),
+                                    ['action' => 'edit', 'id' => $transaction->id] + request(['month', 'year', 'query', 'category_id']),
                                     ['id' => 'edit-transaction-'.$transaction->id]
                                 ) !!}
                             @endcan

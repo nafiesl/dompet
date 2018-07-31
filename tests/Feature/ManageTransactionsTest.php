@@ -125,7 +125,7 @@ class ManageTransactionsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_edit_a_transaction_within_search_query()
+    public function user_can_edit_a_transaction_within_month_and_year_query()
     {
         $month = '01';
         $year = '2017';
@@ -163,6 +163,50 @@ class ManageTransactionsTest extends TestCase
             'description' => 'Transaction 1 description',
             'category_id' => $category->id,
         ]);
+    }
+
+    /** @test */
+    public function user_can_edit_a_transaction_within_search_and_category_query()
+    {
+        $month = '01';
+        $year = '2017';
+        $date = '2017-01-01';
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create([
+            'in_out'      => 0,
+            'amount'      => 99.99,
+            'date'        => $date,
+            'creator_id'  => $user->id,
+            'category_id' => $category->id,
+            'description' => 'Transaction Unique Description',
+        ]);
+
+        $this->visit(route('transactions.index', ['month' => $month, 'year' => $year, 'query' => 'Unique', 'category_id' => $category->id]));
+        $this->click('edit-transaction-'.$transaction->id);
+        $this->seePageIs(route('transactions.index', [
+            'action'      => 'edit',
+            'category_id' => $category->id,
+            'id'          => $transaction->id,
+            'month'       => $month,
+            'query'       => 'Unique',
+            'year'        => $year,
+        ]));
+
+        $this->submitForm(__('transaction.update'), [
+            'in_out'      => 1,
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Transaction 1 description',
+            'category_id' => $category->id,
+        ]);
+
+        $this->seePageIs(route('transactions.index', [
+            'category_id' => $category->id,
+            'month'       => $transaction->month,
+            'query'       => 'Unique',
+            'year'        => $transaction->year,
+        ]));
     }
 
     /** @test */
