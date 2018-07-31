@@ -25,9 +25,10 @@ class ManageTransactionsTest extends TestCase
     public function user_can_see_transaction_list_by_selected_month_and_year()
     {
         $user = $this->loginAsUser();
-        $lastMonth = today()->subMonth()->format('m');
-        $lastMonthYear = today()->subMonth()->format('Y');
-        $lastMonthDate = today()->subMonth()->format('Y-m-d');
+        $lastMonth = today()->subDays(31);
+        $lastMonthNumber = $lastMonth->format('m');
+        $lastMonthYear = $lastMonth->format('Y');
+        $lastMonthDate = $lastMonth->format('Y-m-d');
         $lastMonthTransaction = factory(Transaction::class)->create([
             'date'        => $lastMonthDate,
             'description' => 'Last month Transaction',
@@ -37,7 +38,7 @@ class ManageTransactionsTest extends TestCase
         $this->visit(route('transactions.index'));
         $this->dontSee($lastMonthTransaction->description);
 
-        $this->visit(route('transactions.index', ['month' => $lastMonth, 'year' => $lastMonthYear]));
+        $this->visit(route('transactions.index', ['month' => $lastMonthNumber, 'year' => $lastMonthYear]));
         $this->see($lastMonthTransaction->description);
     }
 
@@ -50,7 +51,7 @@ class ManageTransactionsTest extends TestCase
             'description' => 'Today Transaction',
             'creator_id'  => $user->id,
         ]);
-        $lastMonthDate = today()->subMonth()->format('Y-m-d');
+        $lastMonthDate = today()->subDays(31)->format('Y-m-d');
         $lastMonthTransaction = factory(Transaction::class)->create([
             'date'        => $lastMonthDate,
             'description' => 'Last month transaction',
