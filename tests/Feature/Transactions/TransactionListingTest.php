@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Transactions;
 
+use App\Category;
 use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -39,6 +40,34 @@ class TransactionListingTest extends TestCase
 
         $this->visit(route('transactions.index', ['month' => $lastMonthNumber, 'year' => $lastMonthYear]));
         $this->see($lastMonthTransaction->description);
+    }
+
+    /** @test */
+    public function user_can_see_transaction_list_by_selected_category_and_search_query()
+    {
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create();
+        factory(Transaction::class)->create([
+            'date'        => today()->subDays(3)->format('Y-m-d'),
+            'description' => 'Three days ago transaction',
+            'category_id' => null,
+            'creator_id'  => $user->id,
+        ]);
+        factory(Transaction::class)->create([
+            'date'        => today()->format('Y-m-d'),
+            'description' => 'Today listed transaction',
+            'category_id' => $category->id,
+            'creator_id'  => $user->id,
+        ]);
+
+        $this->visit(route('transactions.index'));
+        $this->see('Three days ago transaction');
+        $this->see('Today listed transaction');
+
+        $this->visit(route('transactions.index', ['query' => 'listed', 'category_id' => $category->id]));
+        $this->seeRouteIs('transactions.index', ['category_id' => $category->id, 'query' => 'listed']);
+        $this->dontSee('Three days ago listed transaction');
+        $this->see('Today listed transaction');
     }
 
     /** @test */
