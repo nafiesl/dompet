@@ -21,7 +21,7 @@ class TransactionEntryTest extends TestCase
         $this->visit(route('transactions.index', ['month' => $month, 'year' => $year]));
 
         $this->click(__('transaction.add_income'));
-        $this->seePageIs(route('transactions.index', ['action' => 'add-income', 'month' => $month, 'year' => $year]));
+        $this->seeRouteIs('transactions.index', ['action' => 'add-income', 'month' => $month, 'year' => $year]);
 
         $this->submitForm(__('transaction.add_income'), [
             'amount'      => 99.99,
@@ -30,7 +30,7 @@ class TransactionEntryTest extends TestCase
             'category_id' => $category->id,
         ]);
 
-        $this->seePageIs(route('transactions.index', ['month' => $month, 'year' => $year]));
+        $this->seeRouteIs('transactions.index', ['month' => $month, 'year' => $year]);
         $this->see(__('transaction.income_added'));
 
         $this->seeInDatabase('transactions', [
@@ -52,7 +52,7 @@ class TransactionEntryTest extends TestCase
         $this->visit(route('transactions.index', ['month' => $month, 'year' => $year]));
 
         $this->click(__('transaction.add_spending'));
-        $this->seePageIs(route('transactions.index', ['action' => 'add-spending', 'month' => $month, 'year' => $year]));
+        $this->seeRouteIs('transactions.index', ['action' => 'add-spending', 'month' => $month, 'year' => $year]);
 
         $this->submitForm(__('transaction.add_spending'), [
             'amount'      => 99.99,
@@ -60,7 +60,7 @@ class TransactionEntryTest extends TestCase
             'description' => 'Spending description',
         ]);
 
-        $this->seePageIs(route('transactions.index', ['month' => $month, 'year' => $year]));
+        $this->seeRouteIs('transactions.index', ['month' => $month, 'year' => $year]);
         $this->see(__('transaction.spending_added'));
 
         $this->seeInDatabase('transactions', [

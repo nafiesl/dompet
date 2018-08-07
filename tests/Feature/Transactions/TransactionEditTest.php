@@ -26,12 +26,12 @@ class TransactionEditTest extends TestCase
         ]);
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
-        $this->visit(route('transactions.index', ['month' => $month, 'year' => $year]));
+        $this->visitRoute('transactions.index', ['month' => $month, 'year' => $year]);
         $this->click('edit-transaction-'.$transaction->id);
-        $this->seePageIs(route('transactions.index', [
+        $this->seeRouteIs('transactions.index', [
             'action' => 'edit', 'id'   => $transaction->id,
             'month'  => $month, 'year' => $year,
-        ]));
+        ]);
 
         $this->submitForm(__('transaction.update'), [
             'in_out'      => 1,
@@ -41,7 +41,7 @@ class TransactionEditTest extends TestCase
             'category_id' => $category->id,
         ]);
 
-        $this->seePageIs(route('transactions.index', ['month' => $transaction->month, 'year' => $transaction->year]));
+        $this->seeRouteIs('transactions.index', ['month' => $transaction->month, 'year' => $transaction->year]);
         $this->see(__('transaction.updated'));
 
         $this->seeInDatabase('transactions', [
@@ -69,16 +69,16 @@ class TransactionEditTest extends TestCase
             'description' => 'Transaction Unique Description',
         ]);
 
-        $this->visit(route('transactions.index', ['month' => $month, 'year' => $year, 'query' => 'Unique', 'category_id' => $category->id]));
+        $this->visitRoute('transactions.index', ['month' => $month, 'year' => $year, 'query' => 'Unique', 'category_id' => $category->id]);
         $this->click('edit-transaction-'.$transaction->id);
-        $this->seePageIs(route('transactions.index', [
+        $this->seeRouteIs('transactions.index', [
             'action'      => 'edit',
             'category_id' => $category->id,
             'id'          => $transaction->id,
             'month'       => $month,
             'query'       => 'Unique',
             'year'        => $year,
-        ]));
+        ]);
 
         $this->submitForm(__('transaction.update'), [
             'in_out'      => 1,
@@ -88,12 +88,12 @@ class TransactionEditTest extends TestCase
             'category_id' => $category->id,
         ]);
 
-        $this->seePageIs(route('transactions.index', [
+        $this->seeRouteIs('transactions.index', [
             'category_id' => $category->id,
             'month'       => $transaction->month,
             'query'       => 'Unique',
             'year'        => $transaction->year,
-        ]));
+        ]);
     }
 
     /** @test */
@@ -102,9 +102,9 @@ class TransactionEditTest extends TestCase
         $user = $this->loginAsUser();
         $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
 
-        $this->visit(route('transactions.index', ['action' => 'edit', 'id' => $transaction->id]));
+        $this->visitRoute('transactions.index', ['action' => 'edit', 'id' => $transaction->id]);
         $this->click('del-transaction-'.$transaction->id);
-        $this->seePageIs(route('transactions.index', ['action' => 'delete', 'id' => $transaction->id]));
+        $this->seeRouteIs('transactions.index', ['action' => 'delete', 'id' => $transaction->id]);
 
         $this->seeInDatabase('transactions', [
             'id' => $transaction->id,
@@ -112,7 +112,7 @@ class TransactionEditTest extends TestCase
 
         $this->press(__('app.delete_confirm_button'));
 
-        $this->seePageIs(route('transactions.index', ['month' => $transaction->month, 'year' => $transaction->year]));
+        $this->seeRouteIs('transactions.index', ['month' => $transaction->month, 'year' => $transaction->year]);
         $this->see(__('transaction.deleted'));
 
         $this->dontSeeInDatabase('transactions', [

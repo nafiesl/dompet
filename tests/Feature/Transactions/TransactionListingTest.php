@@ -17,7 +17,7 @@ class TransactionListingTest extends TestCase
         $user = $this->loginAsUser();
         $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
 
-        $this->visit(route('transactions.index'));
+        $this->visitRoute('transactions.index');
         $this->see($transaction->amount);
     }
 
@@ -35,10 +35,10 @@ class TransactionListingTest extends TestCase
             'creator_id'  => $user->id,
         ]);
 
-        $this->visit(route('transactions.index'));
+        $this->visitRoute('transactions.index');
         $this->dontSee($lastMonthTransaction->description);
 
-        $this->visit(route('transactions.index', ['month' => $lastMonthNumber, 'year' => $lastMonthYear]));
+        $this->visitRoute('transactions.index', ['month' => $lastMonthNumber, 'year' => $lastMonthYear]);
         $this->see($lastMonthTransaction->description);
     }
 
@@ -60,11 +60,11 @@ class TransactionListingTest extends TestCase
             'creator_id'  => $user->id,
         ]);
 
-        $this->visit(route('transactions.index'));
+        $this->visitRoute('transactions.index');
         $this->see('Three days ago transaction');
         $this->see('Today listed transaction');
 
-        $this->visit(route('transactions.index', ['query' => 'listed', 'category_id' => $category->id]));
+        $this->visitRoute('transactions.index', ['query' => 'listed', 'category_id' => $category->id]);
         $this->seeRouteIs('transactions.index', ['category_id' => $category->id, 'query' => 'listed']);
         $this->dontSee('Three days ago listed transaction');
         $this->see('Today listed transaction');
@@ -86,7 +86,7 @@ class TransactionListingTest extends TestCase
             'creator_id'  => $user->id,
         ]);
 
-        $this->visit(route('transactions.index'));
+        $this->visitRoute('transactions.index');
         $this->see($thisMonthTransaction->description);
         $this->dontSee($lastMonthTransaction->description);
     }
