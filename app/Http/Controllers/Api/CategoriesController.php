@@ -67,7 +67,7 @@ class CategoriesController extends Controller
      */
     public function destroy(DeleteRequest $categoryDeleteForm, Category $category)
     {
-        if ($categoryDeleteForm->save()) {
+        if ($categoryDeleteForm->delete()) {
             return response()->json(['message' => __('category.deleted')]);
         }
 

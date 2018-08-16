@@ -67,7 +67,7 @@ class CategoriesController extends Controller
      */
     public function destroy(DeleteRequest $categoryDeleteForm, Category $category)
     {
-        if ($categoryDeleteForm->save()) {
+        if ($categoryDeleteForm->delete()) {
             flash(__('category.deleted'), 'warning');
 
             return redirect()->route('categories.index');

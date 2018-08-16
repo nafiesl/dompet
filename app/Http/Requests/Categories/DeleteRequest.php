@@ -33,7 +33,7 @@ class DeleteRequest extends FormRequest
      *
      * @return bool
      */
-    public function save()
+    public function delete()
     {
         $category = $this->route('category');
 
