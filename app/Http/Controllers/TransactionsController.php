@@ -11,7 +11,7 @@ class TransactionsController extends Controller
     /**
      * Display a listing of the transaction.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -42,7 +42,7 @@ class TransactionsController extends Controller
      * Store a newly created transaction in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -75,7 +75,7 @@ class TransactionsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Transaction  $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector
      */
     public function update(Request $request, Transaction $transaction)
     {
@@ -105,7 +105,7 @@ class TransactionsController extends Controller
      * Remove the specified transaction from storage.
      *
      * @param  \App\Transaction  $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Routing\Redirector
      */
     public function destroy(Transaction $transaction)
     {
