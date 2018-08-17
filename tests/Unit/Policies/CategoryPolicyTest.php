@@ -19,6 +19,17 @@ class CategoryPolicyTest extends TestCase
     }
 
     /** @test */
+    public function user_can_only_view_their_own_category_detail()
+    {
+        $user = $this->createUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $othersCategory = factory(Category::class)->create();
+
+        $this->assertTrue($user->can('view', $category));
+        $this->assertFalse($user->can('view', $othersCategory));
+    }
+
+    /** @test */
     public function user_can_only_update_their_own_category()
     {
         $user = $this->createUser();

@@ -11,7 +11,7 @@ class CategoryPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create projects.
+     * Determine whether the user can create category.
      *
      * @param  \App\User  $user
      * @param  \App\Category  $category
@@ -24,7 +24,19 @@ class CategoryPolicy
     }
 
     /**
-     * Determine whether the user can update the project.
+     * Determine whether the user can view the category.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Category  $category
+     * @return mixed
+     */
+    public function view(User $user, Category $category)
+    {
+        return $user->id == $category->creator_id;
+    }
+
+    /**
+     * Determine whether the user can update the category.
      *
      * @param  \App\User  $user
      * @param  \App\Category  $category
@@ -37,7 +49,7 @@ class CategoryPolicy
     }
 
     /**
-     * Determine whether the user can delete the project.
+     * Determine whether the user can delete the category.
      *
      * @param  \App\User  $user
      * @param  \App\Category  $category
