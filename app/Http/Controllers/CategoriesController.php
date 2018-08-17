@@ -46,9 +46,11 @@ class CategoriesController extends Controller
     {
         $year = request('year', date('Y'));
         $transactions = $this->getCategoryTransactions($category, $year, request('query'));
+        $incomeTotal = $this->getIncomeTotal($transactions);
+        $spendingTotal = $this->getSpendingTotal($transactions);
 
         return view('categories.show', compact(
-            'category', 'transactions', 'year'
+            'category', 'transactions', 'year', 'incomeTotal', 'spendingTotal'
         ));
     }
 

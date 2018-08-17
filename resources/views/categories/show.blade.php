@@ -7,6 +7,8 @@
 {{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-default pull-right']) }}
 <h3 class="page-header">{{ $category->name }}<small>{{ __('category.transactions') }}</small></h3>
 
+@include('transactions.partials.stats')
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default table-responsive">

@@ -127,30 +127,4 @@ class TransactionsController extends Controller
 
         return back();
     }
-
-    /**
-     * Get income total of a transaction listing.
-     *
-     * @param  \Illuminate\Database\Eloquent\Collection  $transactions
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    private function getIncomeTotal($transactions)
-    {
-        return $transactions->sum(function ($transaction) {
-            return $transaction->in_out ? $transaction->amount : 0;
-        });
-    }
-
-    /**
-     * Get spending total of a transaction listing.
-     *
-     * @param  \Illuminate\Database\Eloquent\Collection  $transactions
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    private function getSpendingTotal($transactions)
-    {
-        return $transactions->sum(function ($transaction) {
-            return $transaction->in_out ? 0 : $transaction->amount;
-        });
-    }
 }
