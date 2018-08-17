@@ -31,4 +31,8 @@ return [
     'name'        => 'Nama Kategori',
     'description' => 'Deskripsi Kategori',
     'color'       => 'Warna Kategori',
+
+    // Relations
+    'transactions'      => 'List Transaksi',
+    'view_transactions' => 'Lihat Transaksi',
 ];

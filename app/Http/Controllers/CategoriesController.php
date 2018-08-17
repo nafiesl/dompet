@@ -42,6 +42,33 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index');
     }
 
+    public function show(Category $category)
+    {
+        $year = request('year', date('Y'));
+        $transactions = $this->getCategoryTransactions($category, $year, request('query'));
+
+        return view('categories.show', compact(
+            'category', 'transactions', 'year'
+        ));
+    }
+
+    /**
+     * Get transaction listing of a category
+     *
+     * @param  \App\Category   $category
+     * @param  string  $year
+     * @param  string|null  $query
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function getCategoryTransactions(Category $category, string $year, string $query = null)
+    {
+        $transactionQuery = $category->transactions();
+        $transactionQuery->where('description', 'like', '%'.$query.'%');
+        $transactionQuery->whereYear('created_at', $year);
+
+        return $transactionQuery->latest()->get();
+    }
+
     /**
      * Update the specified category in storage.
      *

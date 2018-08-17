@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', trans('category.list'))
+@section('title', __('category.list'))
 
 @section('content')
 <h3 class="page-header">
     <div class="pull-right">
-    @can('create', new App\Category)
-        {{ link_to_route('categories.index', trans('category.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
-    @endcan
+        @can('create', new App\Category)
+            {{ link_to_route('categories.index', __('category.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
+        @endcan
     </div>
-    {{ trans('category.list') }}
-    <small>{{ trans('app.total') }} : {{ $categories->count() }} {{ trans('category.category') }}</small>
+    {{ __('category.list') }}
+    <small>{{ __('app.total') }} : {{ $categories->count() }} {{ __('category.category') }}</small>
 </h3>
 <div class="row">
     <div class="col-md-12">
@@ -18,10 +18,10 @@
             <table class="table table-condensed">
                 <thead>
                     <tr>
-                        <th class="text-center">{{ trans('app.table_no') }}</th>
-                        <th>{{ trans('category.name') }}</th>
-                        <th>{{ trans('category.description') }}</th>
-                        <th class="text-center">{{ trans('app.action') }}</th>
+                        <th class="text-center">{{ __('app.table_no') }}</th>
+                        <th>{{ __('category.name') }}</th>
+                        <th>{{ __('category.description') }}</th>
+                        <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,13 +31,24 @@
                         <td>{!! $category->name_label !!}</td>
                         <td>{{ $category->description }}</td>
                         <td class="text-center">
+                            @can('view', $category)
+                                {{ link_to_route(
+                                    'categories.show',
+                                    __('category.view_transactions'),
+                                    $category,
+                                    ['class' => 'btn btn-xs btn-default']
+                                ) }}
+                            @endcan
                             @can('update', $category)
-                                {!! link_to_route(
+                                {{ link_to_route(
                                     'categories.index',
-                                    trans('app.edit'),
+                                    __('app.edit'),
                                     ['action' => 'edit', 'id' => $category->id],
-                                    ['id' => 'edit-category-'.$category->id]
-                                ) !!}
+                                    [
+                                        'id' => 'edit-category-'.$category->id,
+                                        'class' => 'btn btn-xs btn-warning',
+                                    ]
+                                ) }}
                             @endcan
                         </td>
                     </tr>
