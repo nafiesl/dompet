@@ -18,4 +18,7 @@ return [
         '11' => 'Nopember',
         '12' => 'Desember',
     ],
+
+    'start_date' => 'Tanggal Mulai',
+    'end_date'   => 'Tanggal Akhir',
 ];

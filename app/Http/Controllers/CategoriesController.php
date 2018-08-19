@@ -42,31 +42,43 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index');
     }
 
+    /**
+     * Show transaction listing of a category.
+     *
+     * @param  \App\Category  $category
+     * @return \Illuminate\View\View
+     */
     public function show(Category $category)
     {
         $year = request('year', date('Y'));
-        $transactions = $this->getCategoryTransactions($category, $year, request('query'));
+        $startDate = request('start_date', date('Y-m').'-01');
+        $endDate = request('end_date', date('Y-m-d'));
+        $transactions = $this->getCategoryTransactions(
+            $category, $startDate, $endDate, request('query')
+        );
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
 
         return view('categories.show', compact(
-            'category', 'transactions', 'year', 'incomeTotal', 'spendingTotal'
+            'category', 'transactions', 'year', 'incomeTotal', 'spendingTotal',
+            'startDate', 'endDate'
         ));
     }
 
     /**
-     * Get transaction listing of a category
+     * Get transaction listing of a category.
      *
      * @param  \App\Category   $category
-     * @param  string  $year
+     * @param  string  $startDate
+     * @param  string  $endDate
      * @param  string|null  $query
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getCategoryTransactions(Category $category, string $year, string $query = null)
+    private function getCategoryTransactions(Category $category, string $startDate, string $endDate, string $query = null)
     {
         $transactionQuery = $category->transactions();
         $transactionQuery->where('description', 'like', '%'.$query.'%');
-        $transactionQuery->whereYear('created_at', $year);
+        $transactionQuery->whereBetween('created_at', [$startDate, $endDate]);
 
         return $transactionQuery->latest()->get();
     }

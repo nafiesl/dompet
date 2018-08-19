@@ -5,7 +5,7 @@
 @section('content')
 
 {{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-default pull-right']) }}
-<h3 class="page-header">{{ $category->name }}<small>{{ __('category.transactions') }}</small></h3>
+<h3 class="page-header">{{ $category->name }} <small>{{ __('category.transactions') }}</small></h3>
 
 @include('transactions.partials.stats')
 
@@ -19,7 +19,14 @@
                     'class' => 'input-sm', 'placeholder' => __('transaction.search_text'),
                     'style' => 'width:150px'
                 ]) !!}
-                {{ Form::select('year', getYears(), $year, ['class' => 'form-control input-sm']) }}
+                {!! FormField::text('start_date', [
+                    'value' => request('start_date'), 'label' => false, 'value' => $startDate,
+                    'class' => 'input-sm date-select', 'placeholder' => __('time.start_date'),
+                ]) !!}
+                {!! FormField::text('end_date', [
+                    'value' => request('end_date'), 'label' => false, 'value' => $endDate,
+                    'class' => 'input-sm date-select', 'placeholder' => __('time.end_date'),
+                ]) !!}
                 {{ Form::submit(__('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
                 {{ link_to_route('categories.show', __('app.reset'), $category) }}
                 {{ Form::close() }}
@@ -63,10 +70,12 @@
 
 @section('styles')
     {{ Html::style(url('css/plugins/bootstrap-colorpicker.min.css')) }}
+    {{ Html::style(url('css/plugins/jquery.datetimepicker.css')) }}
 @endsection
 
 @push('scripts')
     {{ Html::script(url('js/plugins/bootstrap-colorpicker.min.js')) }}
+    {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
 <script>
 (function () {
     $('#categoryModal').modal({
@@ -74,6 +83,12 @@
         backdrop: 'static',
     });
     $('#color').colorpicker();
+    $('.date-select').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d',
+        closeOnDateSelect: true,
+        scrollInput: false
+    });
 })();
 </script>
 @endpush
