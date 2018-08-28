@@ -78,7 +78,7 @@ class CategoriesController extends Controller
     {
         $transactionQuery = $category->transactions();
         $transactionQuery->where('description', 'like', '%'.$query.'%');
-        $transactionQuery->whereBetween('created_at', [$startDate, $endDate]);
+        $transactionQuery->whereBetween('date', [$startDate, $endDate]);
 
         return $transactionQuery->latest()->get();
     }
