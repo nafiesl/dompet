@@ -53,9 +53,11 @@ class CategoriesController extends Controller
         $year = request('year', date('Y'));
         $startDate = request('start_date', date('Y-m').'-01');
         $endDate = request('end_date', date('Y-m-d'));
-        $transactions = $this->getCategoryTransactions(
-            $category, $startDate, $endDate, request('query')
-        );
+        $transactions = $this->getCategoryTransactions($category, [
+            'start_date' => $startDate,
+            'end_date'   => $endDate,
+            'query'      => request('query'),
+        ]);
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
 
@@ -69,13 +71,15 @@ class CategoriesController extends Controller
      * Get transaction listing of a category.
      *
      * @param  \App\Category   $category
-     * @param  string  $startDate
-     * @param  string  $endDate
-     * @param  string|null  $query
+     * @param  array  $criteria
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    private function getCategoryTransactions(Category $category, string $startDate, string $endDate, string $query = null)
+    private function getCategoryTransactions(Category $category, array $criteria)
     {
+        $query = $criteria['query'];
+        $endDate = $criteria['end_date'];
+        $startDate = $criteria['start_date'];
+
         $transactionQuery = $category->transactions();
         $transactionQuery->where('description', 'like', '%'.$query.'%');
         $transactionQuery->whereBetween('date', [$startDate, $endDate]);
