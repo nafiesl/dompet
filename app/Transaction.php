@@ -15,16 +15,6 @@ class Transaction extends Model
         'category_id', 'creator_id',
     ];
 
-    public function nameLink()
-    {
-        return link_to_route('transactions.show', $this->name, [$this], [
-            'title' => trans(
-                'app.show_detail_title',
-                ['name' => $this->name, 'type' => trans('transaction.transaction')]
-            ),
-        ]);
-    }
-
     public function creator()
     {
         return $this->belongsTo(User::class);

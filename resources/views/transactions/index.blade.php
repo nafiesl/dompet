@@ -60,7 +60,16 @@
                             </td>
                         @endif
                         <td>
-                            <span class="pull-right">{!! optional($transaction->category)->name_label !!}</span>
+                            <span class="pull-right">
+                                @php
+                                    $categoryRoute = route('categories.show', [
+                                        $transaction->category_id,
+                                        'start_date' => $year.'-'.$month.'-01',
+                                        'end_date' => $year.'-'.$month.'-'.date('t'),
+                                    ]);
+                                @endphp
+                                <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
+                            </span>
                             {{ $transaction->description }}
                         </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
