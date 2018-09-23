@@ -14,9 +14,13 @@ return [
     'back_to_show'  => 'Kembali ke detail Transaksi',
     'back_to_index' => 'Kembali ke daftar Transaksi',
 
-    'income_total'   => 'Total Pemasukan',
-    'spending_total' => 'Total Pengeluaran',
-    'difference'     => 'Selisih',
+    'income_total'    => 'Total Pemasukan',
+    'spending_total'  => 'Total Pengeluaran',
+    'difference'      => 'Selisih',
+    'start_balance'   => 'Saldo Awal',
+    'end_balance'     => 'Saldo Akhir',
+    'current_balance' => 'Saldo Saat Ini',
+    'balance'         => 'Saldo',
 
     // Actions
     'add_income'     => 'Input Pemasukan',

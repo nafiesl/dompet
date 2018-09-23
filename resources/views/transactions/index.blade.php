@@ -64,8 +64,8 @@
                                 @php
                                     $categoryRoute = route('categories.show', [
                                         $transaction->category_id,
-                                        'start_date' => $year.'-'.$month.'-01',
-                                        'end_date' => $year.'-'.$month.'-'.date('t'),
+                                        'start_date' => $startDate = $year.'-'.$month.'-01',
+                                        'end_date' => $endDate = $year.'-'.$month.'-'.date('t'),
                                     ]);
                                 @endphp
                                 <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
@@ -95,6 +95,34 @@
                             {{ formatNumber($transactions->sum(function ($transaction) {
                                 return $transaction->in_out ? $transaction->amount : -$transaction->amount;
                             })) }}
+                        </th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.start_balance') }}</th>
+                        <th class="text-right">
+                            {{ formatNumber(balance($startDate)) }}
+                        </th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.income_total') }}</th>
+                        <th class="text-right">
+                            {{ formatNumber($incomeTotal) }}
+                        </th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.spending_total') }}</th>
+                        <th class="text-right">
+                            {{ formatNumber($spendingTotal) }}
+                        </th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.end_balance') }}</th>
+                        <th class="text-right">
+                            {{ formatNumber(balance($endDate)) }}
                         </th>
                         <th>&nbsp;</th>
                     </tr>
