@@ -89,12 +89,36 @@
                     @endforelse
                 </tbody>
                 <tfoot>
+                    <tr><th colspan="5" class="text-right">&nbsp;</th></tr>
                     <tr>
-                        <th colspan="3" class="text-right">{{ __('app.total') }}</th>
+                        <th colspan="3" class="text-right">{{ __('transaction.start_balance') }}</th>
                         <th class="text-right">
-                            {{ number_format($transactions->sum(function ($transaction) {
-                                return $transaction->in_out ? $transaction->amount : -$transaction->amount;
-                            }), 2) }}
+                            @if ($transactions->last())
+                                {{ formatNumber(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
+                            @else
+                                0
+                            @endif
+                        </th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.income_total') }}</th>
+                        <th class="text-right">{{ formatNumber($incomeTotal) }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.spending_total') }}</th>
+                        <th class="text-right">{{ formatNumber($spendingTotal) }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.end_balance') }}</th>
+                        <th class="text-right">
+                            @if ($transactions->first())
+                                {{ formatNumber(balance($transactions->first()->date)) }}
+                            @else
+                                0
+                            @endif
                         </th>
                         <th>&nbsp;</th>
                     </tr>

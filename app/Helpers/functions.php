@@ -21,3 +21,26 @@ function formatNumber(float $number)
 
     return str_replace('-', '- ', $number);
 }
+
+/**
+ * Get balance amount based on transactions.
+ *
+ * @param  string|null  $perDate
+ * @param  string|null  $startDate
+ * @return float
+ */
+function balance($perDate = null, $startDate = null)
+{
+    $transactionQuery = DB::table('transactions');
+    if ($perDate) {
+        $transactionQuery->where('date', '<=', $perDate);
+    }
+    if ($startDate) {
+        $transactionQuery->where('date', '>=', $startDate);
+    }
+    $transactions = $transactionQuery->where('creator_id', auth()->id())->get();
+
+    return $transactions->sum(function ($transaction) {
+        return $transaction->in_out ? $transaction->amount : -$transaction->amount;
+    });
+}

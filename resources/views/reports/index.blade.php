@@ -42,9 +42,9 @@
                 <tr>
                     <td class="text-center">{{ monthId($monthNumber) }}</td>
                     <td class="text-center">{{ $any ? $data[$monthNumber]->count : 0 }}</td>
-                    <td class="text-right">{{ number_format($income = ($any ? $data[$monthNumber]->income : 0), 2) }}</td>
-                    <td class="text-right">{{ number_format($spending = ($any ? $data[$monthNumber]->spending : 0), 2) }}</td>
-                    <td class="text-right">{{ number_format($difference = ($any ? $data[$monthNumber]->difference : 0), 2) }}</td>
+                    <td class="text-right">{{ formatNumber($income = ($any ? $data[$monthNumber]->income : 0)) }}</td>
+                    <td class="text-right">{{ formatNumber($spending = ($any ? $data[$monthNumber]->spending : 0)) }}</td>
+                    <td class="text-right">{{ formatNumber($difference = ($any ? $data[$monthNumber]->difference : 0)) }}</td>
                     <td class="text-center">
                         {{ link_to_route(
                             'transactions.index',
@@ -67,9 +67,9 @@
                 <tr>
                     <th class="text-center">{{ trans('app.total') }}</th>
                     <th class="text-center">{{ $data->sum('count') }}</th>
-                    <th class="text-right">{{ number_format($data->sum('income')) }}</th>
-                    <th class="text-right">{{ number_format($data->sum('spending')) }}</th>
-                    <th class="text-right">{{ number_format($data->sum('difference')) }}</th>
+                    <th class="text-right">{{ formatNumber($data->sum('income')) }}</th>
+                    <th class="text-right">{{ formatNumber($data->sum('spending')) }}</th>
+                    <th class="text-right">{{ formatNumber($data->sum('difference')) }}</th>
                     <td>&nbsp;</td>
                 </tr>
             </tfoot>

@@ -6,6 +6,13 @@
                 {{ config('app.name', 'Laravel') }}
             </a>
         </div>
+        <div class="nav navbar-nav" style="margin: 0;">
+            @auth
+            <a href="{{ route('home') }}" class="xs-navbar" title="{{ __('transaction.current_balance') }}">
+                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> {{ formatNumber(balance(date('Y-m-d'))) }}
+            </a>
+            @endauth
+        </div>
 
         <!-- Right Side Of Navbar -->
         <div class="nav navbar-nav navbar-right" style="margin: 0;">
