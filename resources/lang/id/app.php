@@ -18,6 +18,8 @@ return [
     'remark'            => 'Keterangan',
     'level'             => 'Level',
     'not_available'     => 'Tidak Tersedia',
+    'current_balance'   => 'Saldo Saat Ini',
+    'balance'           => 'Saldo',
 
     // Action
     'add'                   => 'Tambah',
