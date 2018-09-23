@@ -64,8 +64,8 @@
                                 @php
                                     $categoryRoute = route('categories.show', [
                                         $transaction->category_id,
-                                        'start_date' => $startDate = $year.'-'.$month.'-01',
-                                        'end_date' => $endDate = $year.'-'.$month.'-'.date('t'),
+                                        'start_date' => $year.'-'.$month.'-01',
+                                        'end_date' => $year.'-'.$month.'-'.date('t'),
                                     ]);
                                 @endphp
                                 <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
@@ -89,40 +89,36 @@
                     @endforelse
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th colspan="3" class="text-right">{{ __('app.total') }}</th>
-                        <th class="text-right">
-                            {{ formatNumber($transactions->sum(function ($transaction) {
-                                return $transaction->in_out ? $transaction->amount : -$transaction->amount;
-                            })) }}
-                        </th>
-                        <th>&nbsp;</th>
-                    </tr>
+                    <tr><th colspan="5" class="text-right">&nbsp;</th></tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.start_balance') }}</th>
                         <th class="text-right">
-                            {{ formatNumber(balance($startDate)) }}
+                            @if ($transactions->last())
+                                {{ formatNumber(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
+                            @else
+                                0
+                            @endif
                         </th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.income_total') }}</th>
-                        <th class="text-right">
-                            {{ formatNumber($incomeTotal) }}
-                        </th>
+                        <th class="text-right">{{ formatNumber($incomeTotal) }}</th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.spending_total') }}</th>
-                        <th class="text-right">
-                            {{ formatNumber($spendingTotal) }}
-                        </th>
+                        <th class="text-right">{{ formatNumber($spendingTotal) }}</th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.end_balance') }}</th>
                         <th class="text-right">
-                            {{ formatNumber(balance($endDate)) }}
+                            @if ($transactions->first())
+                                {{ formatNumber(balance($transactions->first()->date)) }}
+                            @else
+                                0
+                            @endif
                         </th>
                         <th>&nbsp;</th>
                     </tr>
