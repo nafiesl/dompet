@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', trans('transaction.list'))
+@section('title', __('transaction.list'))
 
 @section('content')
 <h3 class="page-header">
     <div class="pull-right">
     @can('create', new App\Transaction)
-        {{ link_to_route('transactions.index', trans('transaction.add_income'), ['action' => 'add-income', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success']) }}
-        {{ link_to_route('transactions.index', trans('transaction.add_spending'), ['action' => 'add-spending', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', __('transaction.add_income'), ['action' => 'add-income', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success']) }}
+        {{ link_to_route('transactions.index', __('transaction.add_spending'), ['action' => 'add-spending', 'month' => $month, 'year' => $year], ['class' => 'btn btn-danger']) }}
     @endcan
     </div>
-    {{ trans('transaction.list') }}
-    <small>{{ trans('app.total') }} : {{ $transactions->count() }} {{ trans('transaction.transaction') }}</small>
+    {{ __('transaction.list') }}
+    <small>{{ __('app.total') }} : {{ $transactions->count() }} {{ __('transaction.transaction') }}</small>
 </h3>
 <div class="row">
     <div class="col-md-12">
@@ -26,18 +26,18 @@
                 {{ Form::select('month', getMonths(), $month, ['class' => 'form-control input-sm']) }}
                 {{ Form::select('year', getYears(), $year, ['class' => 'form-control input-sm']) }}
                 {!! FormField::select('category_id', $categories, ['label' => false, 'placeholder' => __('category.all'), 'class' => 'input-sm']) !!}
-                {{ Form::submit(trans('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
-                {{ link_to_route('transactions.index', trans('app.reset')) }}
+                {{ Form::submit(__('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
+                {{ link_to_route('transactions.index', __('app.reset')) }}
                 {{ Form::close() }}
             </div>
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>
-                        <th class="text-center">{{ trans('app.table_no') }}</th>
-                        <th class="text-center">{{ trans('app.date') }}</th>
-                        <th>{{ trans('transaction.description') }}</th>
-                        <th class="text-right">{{ trans('transaction.amount') }}</th>
-                        <th class="text-center">{{ trans('app.action') }}</th>
+                        <th class="text-center">{{ __('app.table_no') }}</th>
+                        <th class="text-center">{{ __('app.date') }}</th>
+                        <th>{{ __('transaction.description') }}</th>
+                        <th class="text-right">{{ __('transaction.amount') }}</th>
+                        <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,7 +77,7 @@
                             @can('update', $transaction)
                                 {!! link_to_route(
                                     'transactions.index',
-                                    trans('app.edit'),
+                                    __('app.edit'),
                                     ['action' => 'edit', 'id' => $transaction->id] + request(['month', 'year', 'query', 'category_id']),
                                     ['id' => 'edit-transaction-'.$transaction->id]
                                 ) !!}
