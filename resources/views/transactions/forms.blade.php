@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {!! Form::submit(__('transaction.add_spending'), ['class' => 'btn btn-success']) !!}
+                    {!! Form::submit(__('transaction.add_spending'), ['class' => 'btn btn-danger']) !!}
                     {{ link_to_route('transactions.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
                 </div>
                 {{ Form::close() }}
