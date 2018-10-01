@@ -19,4 +19,16 @@ class PartnerTest extends TestCase
         $this->assertInstanceOf(User::class, $partner->creator);
         $this->assertEquals($partner->creator_id, $partner->creator->id);
     }
+
+    /** @test */
+    public function a_partner_has_for_user_scope()
+    {
+        $partnerOwner = $this->loginAsUser();
+        $partner = factory(Partner::class)->create([
+            'creator_id' => $partnerOwner->id,
+        ]);
+        $othersPartner = factory(Partner::class)->create();
+
+        $this->assertCount(1, Partner::all());
+    }
 }

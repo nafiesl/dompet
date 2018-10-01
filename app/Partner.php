@@ -3,10 +3,13 @@
 namespace App;
 
 use App\User;
+use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
 
 class Partner extends Model
 {
+    use ForUser;
+
     /**
      * The attributes that are mass assignable.
      *
