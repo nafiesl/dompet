@@ -5,7 +5,6 @@ use App\Partner;
 use Faker\Generator as Faker;
 
 $factory->define(Partner::class, function (Faker $faker) {
-
     return [
         'name' => $faker->word,
         'description' => $faker->sentence,

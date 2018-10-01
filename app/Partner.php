@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\User;
 use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
 
