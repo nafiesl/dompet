@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Transactions;
 
+use App\Partner;
 use App\Category;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -18,6 +19,7 @@ class TransactionEntryTest extends TestCase
         $date = '2017-01-01';
         $user = $this->loginAsUser();
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $this->visit(route('transactions.index', ['month' => $month, 'year' => $year]));
 
         $this->click(__('transaction.add_income'));
@@ -28,6 +30,7 @@ class TransactionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
+            'partner_id'  => $partner->id,
         ]);
 
         $this->seeRouteIs('transactions.index', ['month' => $month, 'year' => $year]);
@@ -39,6 +42,7 @@ class TransactionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
+            'partner_id'  => $partner->id,
         ]);
     }
 

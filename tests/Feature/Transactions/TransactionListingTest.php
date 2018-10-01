@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Transactions;
 
+use App\Partner;
 use App\Category;
 use Tests\TestCase;
 use App\Transaction;
@@ -47,26 +48,27 @@ class TransactionListingTest extends TestCase
     {
         $user = $this->loginAsUser();
         $category = factory(Category::class)->create();
+        $todayDate = today()->format('Y-m-d');
         factory(Transaction::class)->create([
-            'date'        => today()->subDays(3)->format('Y-m-d'),
-            'description' => 'Three days ago transaction',
+            'date'        => $todayDate,
+            'description' => 'Unlisted transaction',
             'category_id' => null,
             'creator_id'  => $user->id,
         ]);
         factory(Transaction::class)->create([
-            'date'        => today()->format('Y-m-d'),
+            'date'        => $todayDate,
             'description' => 'Today listed transaction',
             'category_id' => $category->id,
             'creator_id'  => $user->id,
         ]);
 
         $this->visitRoute('transactions.index');
-        $this->see('Three days ago transaction');
+        $this->see('Unlisted transaction');
         $this->see('Today listed transaction');
 
         $this->visitRoute('transactions.index', ['query' => 'listed', 'category_id' => $category->id]);
         $this->seeRouteIs('transactions.index', ['category_id' => $category->id, 'query' => 'listed']);
-        $this->dontSee('Three days ago listed transaction');
+        $this->dontSee('Unlisted transaction');
         $this->see('Today listed transaction');
     }
 
@@ -89,5 +91,33 @@ class TransactionListingTest extends TestCase
         $this->visitRoute('transactions.index');
         $this->see($thisMonthTransaction->description);
         $this->dontSee($lastMonthTransaction->description);
+    }
+
+    /** @test */
+    public function user_can_see_transaction_list_by_selected_partner()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $todayDate = today()->format('Y-m-d');
+        factory(Transaction::class)->create([
+            'date'        => $todayDate,
+            'description' => 'Unlisted transaction',
+            'partner_id'  => null,
+            'creator_id'  => $user->id,
+        ]);
+        factory(Transaction::class)->create([
+            'date'        => $todayDate,
+            'description' => 'Today listed transaction',
+            'partner_id'  => $partner->id,
+            'creator_id'  => $user->id,
+        ]);
+
+        $this->visitRoute('transactions.index');
+        $this->see('Unlisted transaction');
+        $this->see('Today listed transaction');
+
+        $this->visitRoute('transactions.index', ['partner_id' => $partner->id]);
+        $this->dontSee('Unlisted transaction');
+        $this->see('Today listed transaction');
     }
 }

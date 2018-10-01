@@ -29,6 +29,7 @@ class TransactionsController extends Controller
             'in_out'      => 'required|boolean',
             'description' => 'required|max:255',
             'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
+            'partner_id'  => 'nullable|exists:partners,id,creator_id,'.auth()->id(),
         ]);
         $newTransaction['creator_id'] = auth()->id();
 
@@ -70,6 +71,7 @@ class TransactionsController extends Controller
             'amount'      => 'required|max:60',
             'description' => 'required|max:255',
             'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
+            'partner_id'  => 'nullable|exists:partners,id,creator_id,'.auth()->id(),
         ]);
 
         $transaction->update($transactionData);

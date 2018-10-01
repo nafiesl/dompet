@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactionsTable extends Migration
+class CreatePartnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('partners', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('date');
-            $table->unsignedDecimal('amount', 12);
-            $table->boolean('in_out')->unsigned();
-            $table->string('description');
-            $table->unsignedInteger('category_id')->nullable();
-            $table->unsignedInteger('partner_id')->nullable();
+            $table->string('name', 60);
+            $table->string('description')->nullable();
             $table->unsignedInteger('creator_id');
             $table->timestamps();
+
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('restrict');
         });
     }
 
@@ -33,6 +31,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('partners');
     }
 }

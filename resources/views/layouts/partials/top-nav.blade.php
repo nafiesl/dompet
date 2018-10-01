@@ -33,6 +33,10 @@
                     <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('category.category') }}</span>
                 </a>
+                <a class="xs-navbar" href="{{ route('partners.index') }}" title="{{ __('partner.partner') }}">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('partner.partner') }}</span>
+                </a>
                 <a class="xs-navbar" href="{{ route('password.change') }}" title="{{ __('auth.change_password') }}">
                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('auth.change_password') }}</span>
