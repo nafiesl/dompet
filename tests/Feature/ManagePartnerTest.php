@@ -43,21 +43,21 @@ class ManagePartnerTest extends TestCase
     }
 
     /** @test */
-    public function user_can_edit_a_partner_within_search_query()
+    public function user_can_edit_a_partner()
     {
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['name' => 'Testing 123', 'creator_id' => $user->id]);
 
-        $this->visitRoute('partners.index', ['q' => '123']);
+        $this->visitRoute('partners.index');
         $this->click('edit-partner-'.$partner->id);
-        $this->seeRouteIs('partners.index', ['action' => 'edit', 'id' => $partner->id, 'q' => '123']);
+        $this->seeRouteIs('partners.index', ['action' => 'edit', 'id' => $partner->id]);
 
         $this->submitForm(__('partner.update'), [
             'name'        => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
-        $this->seeRouteIs('partners.index', ['q' => '123']);
+        $this->seeRouteIs('partners.index');
 
         $this->seeInDatabase('partners', [
             'name'        => 'Partner 1 name',

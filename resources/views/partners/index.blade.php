@@ -3,25 +3,18 @@
 @section('title', __('partner.list'))
 
 @section('content')
-<h1 class="page-header">
+<h3 class="page-header">
     <div class="pull-right">
         @can('create', new App\Partner)
             {{ link_to_route('partners.index', __('partner.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
         @endcan
     </div>
     {{ __('partner.list') }}
-    <small>{{ __('app.total') }} : {{ $partners->total() }} {{ __('partner.partner') }}</small>
-</h1>
+    <small>{{ __('app.total') }} : {{ $partners->count() }} {{ __('partner.partner') }}</small>
+</h3>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
-                {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
-                {!! FormField::text('q', ['label' => __('partner.search'), 'placeholder' => __('partner.search_text'), 'class' => 'input-sm']) !!}
-                {{ Form::submit(__('partner.search'), ['class' => 'btn btn-sm']) }}
-                {{ link_to_route('partners.index', __('app.reset')) }}
-                {{ Form::close() }}
-            </div>
             <table class="table table-condensed">
                 <thead>
                     <tr>
@@ -32,9 +25,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($partners as $key => $partner)
+                    @forelse($partners as $key => $partner)
                     <tr>
-                        <td class="text-center">{{ $partners->firstItem() + $key }}</td>
+                        <td class="text-center">{{ 1 + $key }}</td>
                         <td>{{ $partner->name }}</td>
                         <td>{{ $partner->description }}</td>
                         <td class="text-center">
@@ -42,16 +35,20 @@
                                 {{ link_to_route(
                                     'partners.index',
                                     __('app.edit'),
-                                    ['action' => 'edit', 'id' => $partner->id] + Request::only('page', 'q'),
-                                    ['id' => 'edit-partner-'.$partner->id]
+                                    ['action' => 'edit', 'id' => $partner->id],
+                                    [
+                                        'id' => 'edit-partner-'.$partner->id,
+                                        'class' => 'btn btn-xs btn-warning',
+                                    ]
                                 ) }}
                             @endcan
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr><td colspan="4">{{ __('partner.not_found') }}</td></tr>
+                    @endforelse
                 </tbody>
             </table>
-            <div class="panel-body">{{ $partners->appends(Request::except('page'))->render() }}</div>
         </div>
     </div>
     <div class="col-md-4">
@@ -61,3 +58,14 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    $('#partnerModal').modal({
+        show: true,
+        backdrop: 'static',
+    });
+})();
+</script>
+@endpush
