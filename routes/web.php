@@ -36,4 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
      * Report Routes
      */
     Route::get('/report', 'ReportsController@index')->name('reports.index');
+
+    /*
+     * Partners Routes
+     */
+    Route::resource('partners', 'PartnerController');
 });
