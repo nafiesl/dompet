@@ -5,7 +5,7 @@ return [
     'transaction'   => 'Transaksi',
     'list'          => 'Daftar Transaksi',
     'search'        => 'Cari Transaksi',
-    'search_text'   => 'Deskripsi transaksi...',
+    'search_text'   => 'Cari transaksi...',
     'income'        => 'Pemasukan',
     'spending'      => 'Pengeluaran',
     'detail'        => 'Detail Transaksi',
