@@ -42,6 +42,10 @@ class Controller extends BaseController
             $transactionQuery->where('category_id', $categoryId);
         }
 
+        if ($partnerId = request('partner_id')) {
+            $transactionQuery->where('partner_id', $partnerId);
+        }
+
         return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
     }
 

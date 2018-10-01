@@ -2,16 +2,17 @@
 
 return [
     // Labels
-    'partner'     => 'Partner',
-    'list'           => 'Daftar Partner',
-    'search'         => 'Cari Partner',
-    'search_text'    => 'Nama ...',
-    'select'         => 'Pilih Partner',
-    'detail'         => 'Detail Partner',
-    'not_found'      => 'Partner tidak ditemukan',
-    'empty'          => 'Belum ada Partner',
-    'back_to_show'   => 'Kembali ke detail Partner',
-    'back_to_index'  => 'Kembali ke daftar Partner',
+    'partner'       => 'Partner',
+    'list'          => 'Daftar Partner',
+    'search'        => 'Cari Partner',
+    'search_text'   => 'Nama ...',
+    'all'           => 'Semua Partner',
+    'select'        => 'Pilih Partner',
+    'detail'        => 'Detail Partner',
+    'not_found'     => 'Partner tidak ditemukan',
+    'empty'         => 'Belum ada Partner',
+    'back_to_show'  => 'Kembali ke detail Partner',
+    'back_to_index' => 'Kembali ke daftar Partner',
 
     // Actions
     'create'         => 'Input Partner Baru',
@@ -27,6 +28,6 @@ return [
     'undeleteable'   => 'Data Partner tidak dapat dihapus.',
 
     // Attributes
-    'name'           => 'Nama Partner',
-    'description'    => 'Deskripsi Partner',
+    'name'        => 'Nama Partner',
+    'description' => 'Deskripsi Partner',
 ];

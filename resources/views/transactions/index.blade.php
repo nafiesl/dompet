@@ -26,6 +26,7 @@
                 {{ Form::select('month', getMonths(), $month, ['class' => 'form-control input-sm']) }}
                 {{ Form::select('year', getYears(), $year, ['class' => 'form-control input-sm']) }}
                 {!! FormField::select('category_id', $categories, ['label' => false, 'placeholder' => __('category.all'), 'class' => 'input-sm']) !!}
+                {!! FormField::select('partner_id', $partners, ['label' => false, 'placeholder' => __('partner.all'), 'class' => 'input-sm']) !!}
                 {{ Form::submit(__('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
                 {{ link_to_route('transactions.index', __('app.reset')) }}
                 {{ Form::close() }}
