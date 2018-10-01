@@ -103,6 +103,7 @@ class TransacionEntryTest extends TestCase
             'creator_id' => $user->id,
         ]);
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
         $this->patchJson(route('api.transactions.update', $transaction), [
             'in_out'      => 1,
@@ -110,6 +111,7 @@ class TransacionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
+            'partner_id'  => $partner->id,
         ], [
             'Authorization' => 'Bearer '.$user->api_token,
         ]);
@@ -129,6 +131,7 @@ class TransacionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
+            'partner_id'  => $partner->id,
         ]);
     }
 
