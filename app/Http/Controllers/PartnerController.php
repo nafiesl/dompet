@@ -64,9 +64,7 @@ class PartnerController extends Controller
         ]);
         $partner->update($partnerData);
 
-        $routeParam = request()->only('page', 'q');
-
-        return redirect()->route('partners.index', $routeParam);
+        return redirect()->route('partners.index');
     }
 
     /**
@@ -84,9 +82,7 @@ class PartnerController extends Controller
         ]);
 
         if (request('partner_id') == $partner->id && $partner->delete()) {
-            $routeParam = request()->only('page', 'q');
-
-            return redirect()->route('partners.index', $routeParam);
+            return redirect()->route('partners.index');
         }
 
         return back();
