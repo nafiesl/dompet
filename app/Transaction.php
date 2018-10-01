@@ -17,7 +17,7 @@ class Transaction extends Model
      */
     protected $fillable = [
         'date', 'amount', 'in_out', 'description',
-        'category_id', 'creator_id',
+        'category_id', 'partner_id', 'creator_id',
     ];
 
     /**

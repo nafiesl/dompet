@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use App\Partner;
 use App\Category;
 use Tests\TestCase;
 use App\Transaction;
@@ -19,6 +20,7 @@ class TransacionEntryTest extends TestCase
         $date = '2017-01-01';
         $user = $this->createUser();
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
         $this->postJson(route('api.transactions.store'), [
             'in_out'      => 1,
@@ -26,6 +28,7 @@ class TransacionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
+            'partner_id'  => $partner->id,
         ], [
             'Authorization' => 'Bearer '.$user->api_token,
         ]);
@@ -36,6 +39,7 @@ class TransacionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
+            'partner_id'  => $partner->id,
         ]);
 
         $this->seeStatusCode(201);
