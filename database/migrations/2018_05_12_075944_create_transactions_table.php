@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->boolean('in_out')->unsigned();
             $table->string('description');
             $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('partner_id')->nullable();
             $table->unsignedInteger('creator_id');
             $table->timestamps();
         });

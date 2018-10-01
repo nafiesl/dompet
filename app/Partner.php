@@ -26,4 +26,14 @@ class Partner extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Partner has many transactions relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

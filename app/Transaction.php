@@ -41,6 +41,16 @@ class Transaction extends Model
     }
 
     /**
+     * Transaction belongs to partner relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
+    /**
      * Get transaction type attribute.
      *
      * @return string
