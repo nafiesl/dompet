@@ -6,10 +6,17 @@ use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TransactionCollection;
+use App\Http\Requests\Transactions\CreateRequest;
+use App\Http\Requests\Transactions\UpdateRequest;
 use App\Http\Resources\Transaction as TransactionResource;
 
 class TransactionsController extends Controller
 {
+    /**
+     * Return a listing of the transaction.
+     *
+     * @return \App\Http\Resources\TransactionCollection
+     */
     public function index()
     {
         $yearMonth = $this->getYearMonth();
@@ -19,25 +26,19 @@ class TransactionsController extends Controller
         );
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created transaction in storage.
+     *
+     * @param  \App\Http\Requests\Transactions\CreateRequest  $transactionCreateForm
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(CreateRequest $transactionCreateForm)
     {
-        $this->authorize('create', new Transaction);
-
-        $newTransaction = $request->validate([
-            'date'        => 'required|date|date_format:Y-m-d',
-            'amount'      => 'required|max:60',
-            'in_out'      => 'required|boolean',
-            'description' => 'required|max:255',
-            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
-            'partner_id'  => 'nullable|exists:partners,id,creator_id,'.auth()->id(),
-        ]);
-        $newTransaction['creator_id'] = auth()->id();
-
-        $transaction = Transaction::create($newTransaction);
+        $transaction = $transactionCreateForm->save();
 
         $responseMessage = __('transaction.income_added');
 
-        if ($newTransaction['in_out'] == 0) {
+        if ($transaction['in_out'] == 0) {
             $responseMessage = __('transaction.spending_added');
         }
 
@@ -49,6 +50,12 @@ class TransactionsController extends Controller
         return response()->json($responseData, 201);
     }
 
+    /**
+     * Show the specified transaction data.
+     *
+     * @param  \App\Transaction $transaction
+     * @return \App\Http\Controllers\Api\TransactionResource
+     */
     public function show(Transaction $transaction)
     {
         return new TransactionResource($transaction);
@@ -57,24 +64,13 @@ class TransactionsController extends Controller
     /**
      * Update the specified transaction in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Transactions\UpdateRequest  $transactionUpdateForm
      * @param  \App\Transaction  $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(UpdateRequest $transactionUpdateForm, Transaction $transaction)
     {
-        $this->authorize('update', $transaction);
-
-        $transactionData = $this->validate($request, [
-            'in_out'      => 'required|boolean',
-            'date'        => 'required|date|date_format:Y-m-d',
-            'amount'      => 'required|max:60',
-            'description' => 'required|max:255',
-            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
-            'partner_id'  => 'nullable|exists:partners,id,creator_id,'.auth()->id(),
-        ]);
-
-        $transaction->update($transactionData);
+        $transaction = $transactionUpdateForm->save();
 
         return response()->json([
             'message' => __('transaction.updated'),
@@ -86,7 +82,7 @@ class TransactionsController extends Controller
      * Remove the specified transaction from storage.
      *
      * @param  \App\Transaction  $transaction
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Transaction $transaction)
     {
