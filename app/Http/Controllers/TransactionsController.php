@@ -6,6 +6,8 @@ use App\Partner;
 use App\Category;
 use App\Transaction;
 use Illuminate\Http\Request;
+use App\Http\Requests\Transactions\CreateRequest;
+use App\Http\Requests\Transactions\UpdateRequest;
 
 class TransactionsController extends Controller
 {
@@ -43,26 +45,14 @@ class TransactionsController extends Controller
     /**
      * Store a newly created transaction in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Transactions\CreateRequest  $transactionCreateForm
      * @return \Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(CreateRequest $transactionCreateForm)
     {
-        $this->authorize('create', new Transaction);
+        $transaction = $transactionCreateForm->save();
 
-        $newTransaction = $request->validate([
-            'date'        => 'required|date|date_format:Y-m-d',
-            'amount'      => 'required|max:60',
-            'in_out'      => 'required|boolean',
-            'description' => 'required|max:255',
-            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
-            'partner_id'  => 'nullable|exists:partners,id,creator_id,'.auth()->id(),
-        ]);
-        $newTransaction['creator_id'] = auth()->id();
-
-        $transaction = Transaction::create($newTransaction);
-
-        if ($newTransaction['in_out']) {
+        if ($transaction['in_out']) {
             flash(__('transaction.income_added'), 'success');
         } else {
             flash(__('transaction.spending_added'), 'success');
@@ -76,32 +66,23 @@ class TransactionsController extends Controller
     /**
      * Update the specified transaction in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Transactions\UpdateRequest  $transactionUpateForm
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(UpdateRequest $transactionUpateForm, Transaction $transaction)
     {
         $this->authorize('update', $transaction);
 
-        $transactionData = $this->validate($request, [
-            'in_out'      => 'required|boolean',
-            'date'        => 'required|date|date_format:Y-m-d',
-            'amount'      => 'required|max:60',
-            'description' => 'required|max:255',
-            'category_id' => 'nullable|exists:categories,id,creator_id,'.auth()->id(),
-            'partner_id'  => 'nullable|exists:partners,id,creator_id,'.auth()->id(),
-        ]);
-
-        $transaction->update($transactionData);
+        $transaction = $transactionUpateForm->save();
 
         flash(__('transaction.updated'), 'success');
 
         return redirect()->route('transactions.index', [
             'month'       => $transaction->month,
             'year'        => $transaction->year,
-            'category_id' => $request->get('queried_category_id'),
-            'query'       => $request->get('query'),
+            'category_id' => $transactionUpateForm->get('queried_category_id'),
+            'query'       => $transactionUpateForm->get('query'),
         ]);
     }
 
@@ -115,9 +96,7 @@ class TransactionsController extends Controller
     {
         $this->authorize('delete', $transaction);
 
-        $this->validate(request(), [
-            'transaction_id' => 'required',
-        ]);
+        request()->validate(['transaction_id' => 'required']);
 
         if (request('transaction_id') == $transaction->id && $transaction->delete()) {
             flash(__('transaction.deleted'), 'warning');
