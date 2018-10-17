@@ -78,7 +78,3 @@ a.xs-navbar:hover {
 }
 .navbar-header:after { clear:none; }
 /* End of xs-navbar */
-
-@media (min-width: 768px) {
-    .container { max-width: 730px; }
-}
