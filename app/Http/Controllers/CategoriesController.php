@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Partner;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categories\CreateRequest;
@@ -51,9 +52,11 @@ class CategoriesController extends Controller
     public function show(Category $category)
     {
         $year = request('year', date('Y'));
+        $partners = Partner::pluck('name', 'id');
         $startDate = request('start_date', date('Y-m').'-01');
         $endDate = request('end_date', date('Y-m-d'));
         $transactions = $this->getCategoryTransactions($category, [
+            'partner_id' => request('partner_id'),
             'start_date' => $startDate,
             'end_date'   => $endDate,
             'query'      => request('query'),
@@ -63,7 +66,7 @@ class CategoriesController extends Controller
 
         return view('categories.show', compact(
             'category', 'transactions', 'year', 'incomeTotal', 'spendingTotal',
-            'startDate', 'endDate'
+            'startDate', 'endDate', 'partners'
         ));
     }
 
@@ -79,9 +82,11 @@ class CategoriesController extends Controller
         $query = $criteria['query'];
         $endDate = $criteria['end_date'];
         $startDate = $criteria['start_date'];
+        $partnerId = $criteria['partner_id'];
 
         $transactionQuery = $category->transactions();
         $transactionQuery->where('description', 'like', '%'.$query.'%');
+        $transactionQuery->where('partner_id', $partnerId);
         $transactionQuery->whereBetween('date', [$startDate, $endDate]);
 
         return $transactionQuery->latest()->get();
