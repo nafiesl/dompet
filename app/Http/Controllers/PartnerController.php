@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Partner;
+use App\Category;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
@@ -45,6 +46,57 @@ class PartnerController extends Controller
         Partner::create($newPartner);
 
         return redirect()->route('partners.index');
+    }
+
+    /**
+     * Show transaction listing of a partner.
+     *
+     * @param  \App\Partner  $partner
+     * @return \Illuminate\View\View
+     */
+    public function show(Partner $partner)
+    {
+        $year = request('year', date('Y'));
+        $categories = Category::pluck('name', 'id');
+        $startDate = request('start_date', date('Y-m').'-01');
+        $endDate = request('end_date', date('Y-m-d'));
+        $transactions = $this->getPartnerTransactions($partner, [
+            'category_id' => request('category_id'),
+            'start_date'  => $startDate,
+            'end_date'    => $endDate,
+            'query'       => request('query'),
+        ]);
+        $incomeTotal = $this->getIncomeTotal($transactions);
+        $spendingTotal = $this->getSpendingTotal($transactions);
+
+        return view('partners.show', compact(
+            'partner', 'transactions', 'year', 'incomeTotal', 'spendingTotal',
+            'startDate', 'endDate', 'categories'
+        ));
+    }
+
+    /**
+     * Get transaction listing of a partner.
+     *
+     * @param  \App\Partner   $partner
+     * @param  array  $criteria
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function getPartnerTransactions(Partner $partner, array $criteria)
+    {
+        $query = $criteria['query'];
+        $endDate = $criteria['end_date'];
+        $startDate = $criteria['start_date'];
+        $categoryId = $criteria['category_id'];
+
+        $transactionQuery = $partner->transactions();
+        $transactionQuery->where('description', 'like', '%'.$query.'%');
+        $transactionQuery->whereBetween('date', [$startDate, $endDate]);
+        if ($categoryId) {
+            $transactionQuery->where('category_id', $categoryId);
+        }
+
+        return $transactionQuery->latest()->get();
     }
 
     /**

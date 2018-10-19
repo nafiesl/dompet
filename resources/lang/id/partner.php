@@ -31,4 +31,8 @@ return [
     // Attributes
     'name'        => 'Nama Partner',
     'description' => 'Deskripsi Partner',
+
+    // Relations
+    'transactions'      => 'List Transaksi Partner',
+    'view_transactions' => 'Lihat Transaksi',
 ];

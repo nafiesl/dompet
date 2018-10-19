@@ -86,8 +86,10 @@ class CategoriesController extends Controller
 
         $transactionQuery = $category->transactions();
         $transactionQuery->where('description', 'like', '%'.$query.'%');
-        $transactionQuery->where('partner_id', $partnerId);
         $transactionQuery->whereBetween('date', [$startDate, $endDate]);
+        if ($partnerId) {
+            $transactionQuery->where('partner_id', $partnerId);
+        }
 
         return $transactionQuery->latest()->get();
     }

@@ -31,6 +31,14 @@
                         <td>{{ $partner->name }}</td>
                         <td>{{ $partner->description }}</td>
                         <td class="text-center">
+                            @can('view', $partner)
+                                {{ link_to_route(
+                                    'partners.show',
+                                    __('partner.view_transactions'),
+                                    $partner,
+                                    ['class' => 'btn btn-xs btn-default']
+                                ) }}
+                            @endcan
                             @can('update', $partner)
                                 {{ link_to_route(
                                     'partners.index',

@@ -33,6 +33,6 @@ return [
     'color'       => 'Warna Kategori',
 
     // Relations
-    'transactions'      => 'List Transaksi',
+    'transactions'      => 'List Transaksi Kategori',
     'view_transactions' => 'Lihat Transaksi',
 ];
