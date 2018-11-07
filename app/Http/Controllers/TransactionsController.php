@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Partner;
 use App\Category;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -26,7 +25,7 @@ class TransactionsController extends Controller
         $transactions = $this->getTansactions($yearMonth);
 
         $categories = Category::pluck('name', 'id');
-        $partners = Partner::pluck('name', 'id');
+        $partners = $this->getPartnerList();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));

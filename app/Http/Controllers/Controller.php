@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Partner;
 use App\Transaction;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -73,5 +74,15 @@ class Controller extends BaseController
         return $transactions->sum(function ($transaction) {
             return $transaction->in_out ? 0 : $transaction->amount;
         });
+    }
+
+    /**
+     * Get partner list.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function getPartnerList()
+    {
+        return Partner::pluck('name', 'id');
     }
 }

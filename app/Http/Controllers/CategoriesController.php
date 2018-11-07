@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Partner;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categories\CreateRequest;
@@ -52,7 +51,7 @@ class CategoriesController extends Controller
     public function show(Category $category)
     {
         $year = request('year', date('Y'));
-        $partners = Partner::pluck('name', 'id');
+        $partners = $this->getPartnerList();
         $startDate = request('start_date', date('Y-m').'-01');
         $endDate = request('end_date', date('Y-m-d'));
         $transactions = $this->getCategoryTransactions($category, [
