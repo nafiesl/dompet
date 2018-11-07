@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Requests\Transactions\CreateRequest;
@@ -24,7 +23,7 @@ class TransactionsController extends Controller
 
         $transactions = $this->getTansactions($yearMonth);
 
-        $categories = Category::pluck('name', 'id');
+        $categories = $this->getCategoryList();
         $partners = $this->getPartnerList();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {

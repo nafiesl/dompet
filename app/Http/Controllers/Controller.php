@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Partner;
+use App\Category;
 use App\Transaction;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -83,6 +84,16 @@ class Controller extends BaseController
      */
     protected function getPartnerList()
     {
-        return Partner::pluck('name', 'id');
+        return Partner::orderBy('name')->pluck('name', 'id');
+    }
+
+    /**
+     * Get category list.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function getCategoryList()
+    {
+        return Category::orderBy('name')->pluck('name', 'id');
     }
 }

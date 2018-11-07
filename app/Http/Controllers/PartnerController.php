@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Partner;
-use App\Category;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
@@ -57,7 +56,7 @@ class PartnerController extends Controller
     public function show(Partner $partner)
     {
         $year = request('year', date('Y'));
-        $categories = Category::pluck('name', 'id');
+        $categories = $this->getCategoryList();
         $startDate = request('start_date', date('Y-m').'-01');
         $endDate = request('end_date', date('Y-m-d'));
         $transactions = $this->getPartnerTransactions($partner, [
