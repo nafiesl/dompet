@@ -76,6 +76,18 @@ class TransactionsController extends Controller
 
         flash(__('transaction.updated'), 'success');
 
+        if ($referencePage = $transactionUpateForm->get('reference_page')) {
+            if ($referencePage == 'partner') {
+                return redirect()->route('partners.show', [
+                    $transaction->partner_id,
+                    'start_date'  => $transactionUpateForm->get('start_date'),
+                    'end_date'    => $transactionUpateForm->get('end_date'),
+                    'category_id' => $transactionUpateForm->get('queried_category_id'),
+                    'query'       => $transactionUpateForm->get('query'),
+                ]);
+            }
+        }
+
         return redirect()->route('transactions.index', [
             'month'       => $transaction->month,
             'year'        => $transaction->year,

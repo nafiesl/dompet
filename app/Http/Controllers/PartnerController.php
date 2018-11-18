@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Partner;
+use App\Transaction;
 use Illuminate\Http\Request;
 
 class PartnerController extends Controller
@@ -55,6 +56,7 @@ class PartnerController extends Controller
      */
     public function show(Partner $partner)
     {
+        $editableTransaction = null;
         $year = request('year', date('Y'));
         $categories = $this->getCategoryList();
         $startDate = request('start_date', date('Y-m').'-01');
@@ -68,9 +70,15 @@ class PartnerController extends Controller
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
 
+        if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
+            $partners = $this->getPartnerList();
+            $editableTransaction = Transaction::find(request('id'));
+        }
+
         return view('partners.show', compact(
             'partner', 'transactions', 'year', 'incomeTotal', 'spendingTotal',
-            'startDate', 'endDate', 'categories'
+            'startDate', 'endDate', 'categories', 'editableTransaction',
+            'partners'
         ));
     }
 
