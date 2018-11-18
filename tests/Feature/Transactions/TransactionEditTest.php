@@ -180,4 +180,47 @@ class TransactionEditTest extends TestCase
             'partner_id'  => $partner->id,
         ]);
     }
+
+    /** @test */
+    public function user_can_delete_a_transaction_from_partner_transactions_page()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create([
+            'in_out'     => 0,
+            'amount'     => 99.99,
+            'date'       => '2017-01-01',
+            'creator_id' => $user->id,
+            'partner_id' => $partner->id,
+        ]);
+
+        $this->visitRoute('partners.show', [
+            $partner->id,
+            'action'     => 'edit',
+            'id'         => $transaction->id,
+            'start_date' => '2017-01-01',
+            'end_date'   => '2017-01-31',
+        ]);
+        $this->click('del-transaction-'.$transaction->id);
+        $this->seeRouteIs('partners.show', [
+            $partner->id,
+            'action'     => 'delete',
+            'end_date'   => '2017-01-31',
+            'id'         => $transaction->id,
+            'start_date' => '2017-01-01',
+        ]);
+
+        $this->press(__('app.delete_confirm_button'));
+
+        $this->seeRouteIs('partners.show', [
+            $partner->id,
+            'end_date'   => '2017-01-31',
+            'start_date' => '2017-01-01',
+        ]);
+        $this->see(__('transaction.deleted'));
+
+        $this->dontSeeInDatabase('transactions', [
+            'id' => $transaction->id,
+        ]);
+    }
 }

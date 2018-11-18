@@ -107,9 +107,20 @@ class TransactionsController extends Controller
         $this->authorize('delete', $transaction);
 
         request()->validate(['transaction_id' => 'required']);
-
         if (request('transaction_id') == $transaction->id && $transaction->delete()) {
             flash(__('transaction.deleted'), 'warning');
+
+            if ($referencePage = request('reference_page')) {
+                if ($referencePage == 'partner') {
+                    return redirect()->route('partners.show', [
+                        $transaction->partner_id,
+                        'start_date'  => request('start_date'),
+                        'end_date'    => request('end_date'),
+                        'category_id' => request('queried_category_id'),
+                        'query'       => request('query'),
+                    ]);
+                }
+            }
 
             return redirect()->route('transactions.index', [
                 'month' => $transaction->month, 'year' => $transaction->year,

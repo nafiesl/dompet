@@ -5,7 +5,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('partners.show', '&times;', request(['start_date', 'end_date', 'query', 'cateogry_id']), ['class' => 'close']) }}
+                    {{ link_to_route('partners.show', '&times;', [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
                 </div>
                 {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch', 'autocomplete' => 'off']) !!}
@@ -28,12 +28,12 @@
                     {{ Form::hidden('start_date', request('start_date')) }}
                     {{ Form::hidden('end_date', request('end_date')) }}
                     {{ Form::hidden('reference_page', 'partner') }}
-                    {{ link_to_route('partners.show', __('app.cancel'), request(['start_date', 'end_date', 'query', 'cateogry_id']), ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-default']) }}
                     @can('delete', $editableTransaction)
                         {!! link_to_route(
                             'partners.show',
                             __('app.delete'),
-                            ['action' => 'delete', 'id' => $editableTransaction->id] + Request::only('page', 'month', 'year'),
+                            [$partner->id, 'action' => 'delete', 'id' => $editableTransaction->id] + request(['start_date', 'end_date', 'query', 'category_id']),
                             ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-left']
                         ) !!}
                     @endcan
@@ -48,14 +48,11 @@
 @if (request('action') == 'delete' && $editableTransaction)
 @can('delete', $editableTransaction)
     <div id="transactionModal" class="modal" role="dialog">
-                    {{ Form::hidden('start_date', request('start_date')) }}
-                    {{ Form::hidden('end_date', request('end_date')) }}
-                    {{ Form::hidden('reference_page', 'partner') }}
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('partners.show', '&times;', ['date' => $editableTransaction->date], ['class' => 'close']) }}
+                    {{ link_to_route('partners.show', '&times;', [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h4>
                 </div>
                 <div class="modal-body">
@@ -86,10 +83,14 @@
                         ['class'=>'btn btn-danger'],
                         [
                             'transaction_id' => $editableTransaction->id,
-                            'month' => $editableTransaction->month, 'year' => $editableTransaction->year,
+                            'queried_category_id' => request('category_id'),
+                            'start_date' => request('start_date'),
+                            'end_date' => request('end_date'),
+                            'reference_page' => 'partner',
+                            'query' => request('query'),
                         ]
                     ) !!}
-                    {{ link_to_route('partners.show', __('app.cancel'), ['month' => $editableTransaction->month, 'year' => $editableTransaction->year], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-default']) }}
                 </div>
             </div>
         </div>
