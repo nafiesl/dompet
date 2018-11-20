@@ -86,6 +86,15 @@ class TransactionsController extends Controller
                     'query'       => $transactionUpateForm->get('query'),
                 ]);
             }
+            if ($referencePage == 'category') {
+                return redirect()->route('categories.show', [
+                    $transaction->category_id,
+                    'start_date' => $transactionUpateForm->get('start_date'),
+                    'end_date'   => $transactionUpateForm->get('end_date'),
+                    'partner_id' => $transactionUpateForm->get('queried_partner_id'),
+                    'query'      => $transactionUpateForm->get('query'),
+                ]);
+            }
         }
 
         return redirect()->route('transactions.index', [
@@ -118,6 +127,15 @@ class TransactionsController extends Controller
                         'end_date'    => request('end_date'),
                         'category_id' => request('queried_category_id'),
                         'query'       => request('query'),
+                    ]);
+                }
+                if ($referencePage == 'category') {
+                    return redirect()->route('categories.show', [
+                        $transaction->category_id,
+                        'start_date' => request('start_date'),
+                        'end_date'   => request('end_date'),
+                        'partner_id' => request('queried_partner_id'),
+                        'query'      => request('query'),
                     ]);
                 }
             }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categories\CreateRequest;
 use App\Http\Requests\Categories\DeleteRequest;
@@ -63,9 +64,14 @@ class CategoriesController extends Controller
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
 
+        if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
+            $categories = $this->getCategoryList();
+            $editableTransaction = Transaction::find(request('id'));
+        }
+
         return view('categories.show', compact(
             'category', 'transactions', 'year', 'incomeTotal', 'spendingTotal',
-            'startDate', 'endDate', 'partners'
+            'startDate', 'endDate', 'partners', 'editableTransaction', 'categories'
         ));
     }
 

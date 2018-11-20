@@ -39,6 +39,7 @@
                         <th class="text-center col-md-2">{{ __('app.date') }}</th>
                         <th class="col-md-7">{{ __('transaction.description') }}</th>
                         <th class="text-right col-md-2">{{ __('transaction.amount') }}</th>
+                        <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,9 +49,19 @@
                         <td class="text-center">{{ $transaction->date }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
+                        <td class="text-center">
+                            @can('update', $transaction)
+                                {!! link_to_route(
+                                    'categories.show',
+                                    __('app.edit'),
+                                    [$category->id, 'action' => 'edit', 'id' => $transaction->id] + request(['start_date', 'end_date', 'query', 'partner_id']),
+                                    ['id' => 'edit-transaction-'.$transaction->id]
+                                ) !!}
+                            @endcan
+                        </td>
                     </tr>
                     @empty
-                    <tr><td colspan="4">{{ __('transaction.not_found') }}</td></tr>
+                    <tr><td colspan="5">{{ __('transaction.not_found') }}</td></tr>
                     @endforelse
                 </tbody>
                 <tfoot>
@@ -61,12 +72,16 @@
                                 return $transaction->in_out ? $transaction->amount : -$transaction->amount;
                             })) }}
                         </th>
+                        <th>&nbsp;</th>
                     </tr>
                 </tfoot>
             </div>
         </table>
     </div>
 </div>
+@if(Request::has('action'))
+@include('categories.partials.transaction-forms')
+@endif
 @endsection
 
 @section('styles')
@@ -79,11 +94,10 @@
     {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
 <script>
 (function () {
-    $('#categoryModal').modal({
+    $('#transactionModal').modal({
         show: true,
         backdrop: 'static',
     });
-    $('#color').colorpicker();
     $('.date-select').datetimepicker({
         timepicker:false,
         format:'Y-m-d',
