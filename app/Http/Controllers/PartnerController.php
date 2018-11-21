@@ -103,7 +103,7 @@ class PartnerController extends Controller
             $transactionQuery->where('category_id', $categoryId);
         }
 
-        return $transactionQuery->latest()->get();
+        return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
     }
 
     /**
