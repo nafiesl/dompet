@@ -96,7 +96,7 @@ class CategoriesController extends Controller
             $transactionQuery->where('partner_id', $partnerId);
         }
 
-        return $transactionQuery->latest()->get();
+        return $transactionQuery->orderBy('date', 'desc')->with('partner')->get();
     }
 
     /**

@@ -47,7 +47,10 @@
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-center">{{ $transaction->date }}</td>
-                        <td>{{ $transaction->description }}</td>
+                        <td>
+                            {{ $transaction->description }}
+                            <span class="pull-right label label-default">{{ optional($transaction->partner)->name }}</span>
+                        </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
                             @can('update', $transaction)
