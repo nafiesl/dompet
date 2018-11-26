@@ -24,13 +24,12 @@ class CreateRequestTest extends TestCase
     /** @test */
     public function it_fails_for_empty_attributes()
     {
-        $validator = $this->assertValidationFails(new TransactionCreateRequest(), []);
-        $errors = $validator->getMessageBag();
-
-        $this->assertCount(4, $errors);
-        $this->assertEquals(__('validation.required'), $errors->first('date'));
-        $this->assertEquals(__('validation.required'), $errors->first('in_out'));
-        $this->assertEquals(__('validation.required'), $errors->first('amount'));
-        $this->assertEquals(__('validation.required'), $errors->first('description'));
+        $this->assertValidationFails(new TransactionCreateRequest(), [], function ($errors) {
+            $this->assertCount(4, $errors);
+            $this->assertEquals(__('validation.required'), $errors->first('date'));
+            $this->assertEquals(__('validation.required'), $errors->first('in_out'));
+            $this->assertEquals(__('validation.required'), $errors->first('amount'));
+            $this->assertEquals(__('validation.required'), $errors->first('description'));
+        });
     }
 }
