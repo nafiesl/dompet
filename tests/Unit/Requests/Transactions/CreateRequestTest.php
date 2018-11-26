@@ -32,4 +32,20 @@ class CreateRequestTest extends TestCase
             $this->assertEquals(__('validation.required'), $errors->first('description'));
         });
     }
+
+    /** @test */
+    public function it_fails_if_description_is_more_than_255_characters()
+    {
+        $this->assertValidationFails(new TransactionCreateRequest(), [
+            'date'        => '2018-03-03',
+            'amount'      => '150000',
+            'in_out'      => '1', // 0:spending, 1:income
+            'description' => str_repeat('Transaction description.', 11),
+        ], function ($errors) {
+            $this->assertEquals(
+                __('validation.max.string', ['attribute' => 'description', 'max' => 255]),
+                $errors->first('description')
+            );
+        });
+    }
 }
