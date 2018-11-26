@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 trait ValidateFormRequest
 {
-    public function assertValidationPasses(FormRequest $formRequest, array $attributes)
+    protected function assertValidationPasses(FormRequest $formRequest, array $attributes)
     {
         $validator = $this->getValidator($formRequest, $attributes);
 
@@ -16,7 +16,7 @@ trait ValidateFormRequest
         return $validator;
     }
 
-    public function assertValidationFails(FormRequest $formRequest, array $attributes)
+    protected function assertValidationFails(FormRequest $formRequest, array $attributes)
     {
         $validator = $this->getValidator($formRequest, $attributes);
 

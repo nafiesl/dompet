@@ -2,34 +2,29 @@
 
 namespace Tests\Unit\Requests\Transactions;
 
-use Validator;
 use Tests\TestCase;
+use Tests\Traits\ValidateFormRequest;
 use App\Http\Requests\Transactions\CreateRequest as TransactionCreateRequest;
 
 class CreateRequestTest extends TestCase
 {
+    use ValidateFormRequest;
+
     /** @test */
     public function it_pass_for_required_attributes()
     {
-        $formRequest = new TransactionCreateRequest();
-        $attributes = [
+        $this->assertValidationPasses(new TransactionCreateRequest(), [
             'date'        => '2018-03-03',
             'amount'      => '150000',
             'in_out'      => '1', // 0:spending, 1:income
             'description' => 'Transaction description.',
-        ];
-        $validator = Validator::make($attributes, $formRequest->rules(), $formRequest->rules());
-
-        $this->assertTrue($validator->passes());
+        ]);
     }
 
     /** @test */
     public function it_fails_for_empty_attributes()
     {
-        $formRequest = new TransactionCreateRequest();
-        $validator = Validator::make([], $formRequest->rules(), $formRequest->rules());
-
-        $this->assertFalse($validator->passes());
+        $validator = $this->assertValidationFails(new TransactionCreateRequest(), []);
         $errors = $validator->getMessageBag();
 
         $this->assertCount(4, $errors);
