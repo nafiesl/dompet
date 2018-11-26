@@ -2,6 +2,7 @@
 
 namespace Tests\Traits;
 
+use Closure;
 use Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,11 +17,15 @@ trait ValidateFormRequest
         return $validator;
     }
 
-    protected function assertValidationFails(FormRequest $formRequest, array $attributes)
+    protected function assertValidationFails(FormRequest $formRequest, array $attributes, Closure $callback = null)
     {
         $validator = $this->getValidator($formRequest, $attributes);
 
         $this->assertTrue($validator->fails());
+
+        if ($callback) {
+            call_user_func($callback, $validator->getMessageBag());
+        }
 
         return $validator;
     }
