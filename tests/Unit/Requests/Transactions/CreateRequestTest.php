@@ -13,12 +13,7 @@ class CreateRequestTest extends TestCase
     /** @test */
     public function it_pass_for_required_attributes()
     {
-        $this->assertValidationPasses(new TransactionCreateRequest(), [
-            'date'        => '2018-03-03',
-            'amount'      => '150000',
-            'in_out'      => '1', // 0:spending, 1:income
-            'description' => 'Transaction description.',
-        ]);
+        $this->assertValidationPasses(new TransactionCreateRequest(), $this->getCreateAttributes());
     }
 
     /** @test */
@@ -36,16 +31,25 @@ class CreateRequestTest extends TestCase
     /** @test */
     public function it_fails_if_description_is_more_than_255_characters()
     {
-        $this->assertValidationFails(new TransactionCreateRequest(), [
-            'date'        => '2018-03-03',
-            'amount'      => '150000',
-            'in_out'      => '1', // 0:spending, 1:income
+        $attributes = $this->getCreateAttributes([
             'description' => str_repeat('Transaction description.', 11),
-        ], function ($errors) {
+        ]);
+
+        $this->assertValidationFails(new TransactionCreateRequest(), $attributes, function ($errors) {
             $this->assertEquals(
                 __('validation.max.string', ['attribute' => 'description', 'max' => 255]),
                 $errors->first('description')
             );
         });
+    }
+
+    private function getCreateAttributes($overrides = [])
+    {
+        return array_merge([
+            'date'        => '2018-03-03',
+            'amount'      => '150000',
+            'in_out'      => '1', // 0:spending, 1:income
+            'description' => 'Transaction description.',
+        ], $overrides);
     }
 }
