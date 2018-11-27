@@ -2,13 +2,15 @@
 
 namespace Tests\Unit\Requests\Transactions;
 
+use App\Category;
 use Tests\TestCase;
 use Tests\Traits\ValidateFormRequest;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Requests\Transactions\CreateRequest as TransactionCreateRequest;
 
 class CreateRequestTest extends TestCase
 {
-    use ValidateFormRequest;
+    use RefreshDatabase, ValidateFormRequest;
 
     /** @test */
     public function it_pass_for_required_attributes()
@@ -39,6 +41,59 @@ class CreateRequestTest extends TestCase
             $this->assertEquals(
                 __('validation.max.string', ['attribute' => 'description', 'max' => 255]),
                 $errors->first('description')
+            );
+        });
+    }
+
+    /** @test */
+    public function it_fails_if_in_out_filled_with_non_boolean_value()
+    {
+        $attributes = $this->getCreateAttributes(['in_out' => '2']);
+
+        $this->assertValidationFails(new TransactionCreateRequest(), $attributes, function ($errors) {
+            $this->assertEquals(
+                __('validation.boolean', ['attribute' => 'in out']),
+                $errors->first('in_out')
+            );
+        });
+
+        $attributes = $this->getCreateAttributes(['in_out' => 'text']);
+        $this->assertValidationFails(new TransactionCreateRequest(), $attributes);
+    }
+
+    /** @test */
+    public function it_pass_for_user_category_selection()
+    {
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $attributes = $this->getCreateAttributes(['category_id' => $category->id]);
+
+        $this->assertValidationPasses(new TransactionCreateRequest(), $attributes);
+    }
+
+    /** @test */
+    public function it_fails_if_selected_category_does_not_exists()
+    {
+        $attributes = $this->getCreateAttributes(['category_id' => 999]);
+
+        $this->assertValidationFails(new TransactionCreateRequest(), $attributes, function ($errors) {
+            $this->assertEquals(
+                __('validation.exists', ['attribute' => 'category id']),
+                $errors->first('category_id')
+            );
+        });
+    }
+
+    /** @test */
+    public function it_fails_if_selected_category_that_belongs_to_other_user()
+    {
+        $category = factory(Category::class)->create();
+        $attributes = $this->getCreateAttributes(['category_id' => $category->id]);
+
+        $this->assertValidationFails(new TransactionCreateRequest(), $attributes, function ($errors) {
+            $this->assertEquals(
+                __('validation.exists', ['attribute' => 'category id']),
+                $errors->first('category_id')
             );
         });
     }
