@@ -49,4 +49,13 @@ class PartnerTest extends TestCase
         $this->assertInstanceOf(Collection::class, $partner->transactions);
         $this->assertInstanceOf(Transaction::class, $partner->transactions->first());
     }
+
+    /** @test */
+    public function a_partner_has_name_label_attribute()
+    {
+        $partner = factory(Partner::class)->make();
+
+        $nameLabel = '<span class="label label-default">'.$partner->name.'</span>';
+        $this->assertEquals($nameLabel, $partner->name_label);
+    }
 }

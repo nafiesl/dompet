@@ -35,4 +35,14 @@ class Partner extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    /**
+     * Get partner name label attribute.
+     *
+     * @return string
+     */
+    public function getNameLabelAttribute()
+    {
+        return '<span class="label label-default">'.$this->name.'</span>';
+    }
 }
