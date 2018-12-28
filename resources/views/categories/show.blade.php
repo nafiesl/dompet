@@ -49,7 +49,7 @@
                         <td class="text-center">{{ $transaction->date }}</td>
                         <td>
                             {{ $transaction->description }}
-                            <span class="pull-right label label-default">{{ optional($transaction->partner)->name }}</span>
+                            <span class="pull-right">{!!optional($transaction->partner)->name_label !!}</span>
                         </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
