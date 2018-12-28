@@ -63,6 +63,14 @@
                         <td>
                             <span class="pull-right">
                                 @php
+                                    $partnerRoute = route('partners.show', [
+                                        $transaction->partner_id,
+                                        'start_date' => $year.'-'.$month.'-01',
+                                        'end_date' => $year.'-'.$month.'-'.date('t'),
+                                    ]);
+                                @endphp
+                                <a href="{{ $partnerRoute }}">{!! optional($transaction->partner)->name_label !!}</a>
+                                @php
                                     $categoryRoute = route('categories.show', [
                                         $transaction->category_id,
                                         'start_date' => $year.'-'.$month.'-01',

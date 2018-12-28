@@ -48,7 +48,7 @@ class Controller extends BaseController
             $transactionQuery->where('partner_id', $partnerId);
         }
 
-        return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
+        return $transactionQuery->orderBy('date', 'desc')->with('category', 'partner')->get();
     }
 
     /**
