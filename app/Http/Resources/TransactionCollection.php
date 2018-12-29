@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class TransactionCollection extends ResourceCollection
@@ -22,12 +23,23 @@ class TransactionCollection extends ResourceCollection
         $incomeTotal = $this->getIncomeTransactionTotal();
         $spendingTotal = $this->getSpendingTransactionTotal();
         $difference = $incomeTotal - $spendingTotal;
+        $transactions = $this->resource;
+        $startBalance = 0;
+        $endBalance = 0;
+        if ($transactions->last()) {
+            $startBalance = balance(Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'));
+        }
+        if ($transactions->first()) {
+            $endBalance = balance($transactions->first()->date);
+        }
 
         return [
             'stats' => [
+                'start_balance'  => formatNumber($startBalance),
                 'income_total'   => formatNumber($incomeTotal),
                 'spending_total' => formatNumber($spendingTotal),
                 'difference'     => formatNumber($difference),
+                'end_balance'    => formatNumber($endBalance),
             ],
         ];
     }
