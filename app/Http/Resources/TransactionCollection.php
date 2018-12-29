@@ -20,14 +20,16 @@ class TransactionCollection extends ResourceCollection
 
     public function with($request)
     {
+        $transactions = $this->resource;
         $incomeTotal = $this->getIncomeTransactionTotal();
         $spendingTotal = $this->getSpendingTransactionTotal();
-        $difference = $incomeTotal - $spendingTotal;
-        $transactions = $this->resource;
         $startBalance = 0;
         $endBalance = 0;
         if ($transactions->last()) {
-            $startBalance = balance(Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'));
+            $startBalance = balance(
+                Carbon::parse($transactions->last()->date)
+                    ->subDay()->format('Y-m-d')
+            );
         }
         if ($transactions->first()) {
             $endBalance = balance($transactions->first()->date);
@@ -38,7 +40,7 @@ class TransactionCollection extends ResourceCollection
                 'start_balance'  => formatNumber($startBalance),
                 'income_total'   => formatNumber($incomeTotal),
                 'spending_total' => formatNumber($spendingTotal),
-                'difference'     => formatNumber($difference),
+                'difference'     => formatNumber($incomeTotal - $spendingTotal),
                 'end_balance'    => formatNumber($endBalance),
             ],
         ];
