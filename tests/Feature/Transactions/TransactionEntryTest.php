@@ -5,11 +5,11 @@ namespace Tests\Feature\Transactions;
 use App\Partner;
 use App\Category;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TransactionEntryTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function user_can_create_an_income_transaction()

@@ -7,11 +7,11 @@ use App\Category;
 use App\Transaction;
 use Tests\TestCase as TestCase;
 use Illuminate\Support\Collection;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function a_category_has_belongs_to_creator_relation()

@@ -5,11 +5,11 @@ namespace Tests\Unit\Policies;
 use App\Category;
 use Tests\TestCase;
 use App\Transaction;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryPolicyTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function user_can_create_category()

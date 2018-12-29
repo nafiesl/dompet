@@ -4,11 +4,11 @@ namespace Tests\Feature\Api;
 
 use Tests\TestCase;
 use App\Transaction;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TransactionListingTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function user_can_get_their_transaction_list()

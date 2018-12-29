@@ -7,11 +7,11 @@ use App\Partner;
 use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PartnerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function a_partner_has_belongs_to_creator_relation()

@@ -6,11 +6,11 @@ use App\Partner;
 use App\Category;
 use Tests\TestCase;
 use App\Transaction;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TransactionEditTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function user_can_edit_a_transaction_within_month_and_year_query()

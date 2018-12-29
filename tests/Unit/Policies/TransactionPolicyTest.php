@@ -4,11 +4,11 @@ namespace Tests\Unit\Policies;
 
 use Tests\TestCase;
 use App\Transaction;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TransactionPolicyTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function user_can_create_transaction()

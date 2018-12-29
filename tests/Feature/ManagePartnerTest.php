@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use App\Partner;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManagePartnerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
     public function user_can_see_partner_list_in_partner_index_page()
