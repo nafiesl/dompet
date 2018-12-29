@@ -37,11 +37,11 @@ class TransactionCollection extends ResourceCollection
 
         return [
             'stats' => [
-                'start_balance'  => formatNumber($startBalance),
-                'income_total'   => formatNumber($incomeTotal),
-                'spending_total' => formatNumber($spendingTotal),
-                'difference'     => formatNumber($incomeTotal - $spendingTotal),
-                'end_balance'    => formatNumber($endBalance),
+                'start_balance'  => format_number($startBalance),
+                'income_total'   => format_number($incomeTotal),
+                'spending_total' => format_number($spendingTotal),
+                'difference'     => format_number($incomeTotal - $spendingTotal),
+                'end_balance'    => format_number($endBalance),
             ],
         ];
     }

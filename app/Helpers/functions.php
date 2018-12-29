@@ -15,7 +15,7 @@ function flash($message = null, $level = 'info')
     }
 }
 
-function formatNumber(float $number)
+function format_number(float $number)
 {
     $number = number_format($number, 2);
 

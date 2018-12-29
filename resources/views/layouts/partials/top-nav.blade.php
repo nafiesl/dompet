@@ -9,7 +9,7 @@
         <div class="nav navbar-nav" style="margin: 0;">
             @auth
             <a href="{{ route('home') }}" class="xs-navbar" title="{{ __('transaction.current_balance') }}">
-                <img src="{{ asset('images/icons8-coins-16.png') }}" alt=""> {{ formatNumber(balance(date('Y-m-d'))) }}
+                <img src="{{ asset('images/icons8-coins-16.png') }}" alt=""> {{ format_number(balance(date('Y-m-d'))) }}
             </a>
             @endauth
         </div>

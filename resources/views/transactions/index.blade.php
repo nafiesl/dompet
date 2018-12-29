@@ -103,7 +103,7 @@
                         <th colspan="3" class="text-right">{{ __('transaction.start_balance') }}</th>
                         <th class="text-right">
                             @if ($transactions->last())
-                                {{ formatNumber(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
+                                {{ format_number(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
                             @else
                                 0
                             @endif
@@ -112,19 +112,19 @@
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.income_total') }}</th>
-                        <th class="text-right">{{ formatNumber($incomeTotal) }}</th>
+                        <th class="text-right">{{ format_number($incomeTotal) }}</th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.spending_total') }}</th>
-                        <th class="text-right">{{ formatNumber($spendingTotal) }}</th>
+                        <th class="text-right">{{ format_number($spendingTotal) }}</th>
                         <th>&nbsp;</th>
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">{{ __('transaction.end_balance') }}</th>
                         <th class="text-right">
                             @if ($transactions->first())
-                                {{ formatNumber(balance($transactions->first()->date)) }}
+                                {{ format_number(balance($transactions->first()->date)) }}
                             @else
                                 0
                             @endif

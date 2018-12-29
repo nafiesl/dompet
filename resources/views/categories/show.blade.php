@@ -71,7 +71,7 @@
                     <tr>
                         <th colspan="3" class="text-right">{{ __('app.total') }}</th>
                         <th class="text-right">
-                            {{ formatNumber($transactions->sum(function ($transaction) {
+                            {{ format_number($transactions->sum(function ($transaction) {
                                 return $transaction->in_out ? $transaction->amount : -$transaction->amount;
                             })) }}
                         </th>
