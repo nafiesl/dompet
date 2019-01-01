@@ -11,7 +11,7 @@ class PartnerController extends Controller
     /**
      * Get a listing of the partner.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -22,7 +22,7 @@ class PartnerController extends Controller
      * Store a newly created partner in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -47,7 +47,7 @@ class PartnerController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Partner $partner)
     {
@@ -70,7 +70,7 @@ class PartnerController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Partner  $partner
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request, Partner $partner)
     {

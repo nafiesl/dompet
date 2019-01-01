@@ -25,8 +25,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created category in storage.
      *
-     * @param \App\Http\Requests\Categories\CreateRequest $categoryCreateForm
-     *
+     * @param  \App\Http\Requests\Categories\CreateRequest  $categoryCreateForm
      * @return \Illuminate\Http\Response
      */
     public function store(CreateRequest $categoryCreateForm)
@@ -42,9 +41,8 @@ class CategoriesController extends Controller
     /**
      * Update the specified category in storage.
      *
-     * @param \App\Http\Requests\Categories\UpdateRequest $categoryUpdateForm
-     * @param \App\Category $category
-     *
+     * @param  \App\Http\Requests\Categories\UpdateRequest  $categoryUpdateForm
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRequest $categoryUpdateForm, Category $category)
@@ -60,9 +58,8 @@ class CategoriesController extends Controller
     /**
      * Remove the specified category from storage.
      *
-     * @param \App\Http\Requests\Categories\DeleteRequest $categoryDeleteForm
-     * @param \App\Category                               $category
-     *
+     * @param  \App\Http\Requests\Categories\DeleteRequest  $categoryDeleteForm
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(DeleteRequest $categoryDeleteForm, Category $category)

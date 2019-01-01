@@ -88,9 +88,7 @@ class TransactionsController extends Controller
     {
         $this->authorize('delete', $transaction);
 
-        request()->validate([
-            'transaction_id' => 'required',
-        ]);
+        request()->validate(['transaction_id' => 'required']);
 
         if (request('transaction_id') == $transaction->id && $transaction->delete()) {
             return response()->json(['message' => __('transaction.deleted')]);
