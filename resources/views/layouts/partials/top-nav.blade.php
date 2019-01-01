@@ -3,7 +3,11 @@
         <div class="navbar-header">
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ route('home') }}">
-                {{ config('app.name', 'Laravel') }}
+                @guest
+                    {{ config('app.name', 'Laravel') }}
+                @else
+                    {{ auth()->user()->name }}
+                @endguest
             </a>
         </div>
         <div class="nav navbar-nav" style="margin: 0;">
