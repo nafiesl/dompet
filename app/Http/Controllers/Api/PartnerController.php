@@ -76,11 +76,9 @@ class PartnerController extends Controller
     {
         $this->authorize('delete', $partner);
 
-        request()->validate([
-            'partner_id' => 'required',
-        ]);
+        $partnerData = $request->validate(['partner_id' => 'required']);
 
-        if (request('partner_id') == $partner->id && $partner->delete()) {
+        if ($partnerData['partner_id'] == $partner->id && $partner->delete()) {
             return response()->json(['message' => __('partner.deleted')]);
         }
 
