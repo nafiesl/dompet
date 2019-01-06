@@ -6,7 +6,7 @@ use App\Partner;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ManagePartnersTest extends TestCase
+class ManagePartnerTest extends TestCase
 {
     use RefreshDatabase;
 
