@@ -22,7 +22,7 @@ Those are basic concept of the personal bookkeeping service.
 This application can be installed on local server and online server with these specifications :
 
 #### Server Requirements
-1. PHP 7.0 (and meet [Laravel 5.5 server requirements](https://laravel.com/docs/5.5#server-requirements)),
+1. PHP 7.1.3 (and meet [Laravel 5.7 server requirements](https://laravel.com/docs/5.7#server-requirements)),
 2. MySQL or MariaDB database,
 3. SQlite (for automated testing).
 
@@ -33,7 +33,8 @@ This application can be installed on local server and online server with these s
 3. `$ composer install`
 4. `$ cp .env.example .env`
 5. `$ php artisan key:generate`
-6. Create new MySQL database for this application
+6. Create new MySQL database for this application  
+(with simple command: `$ mysqladmin -urootuser -p create dompet_db`)
 7. Set database credentials on `.env` file
 8. `$ php artisan migrate`
 9. `$ php artisan serve`
