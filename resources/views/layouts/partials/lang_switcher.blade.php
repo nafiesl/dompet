@@ -1,2 +1,15 @@
-{!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_en_lang')], 'en', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_en'] + (config('app.locale') == 'en' ? ['disabled' => 'disabled'] : []), ['lang' => 'en']) !!}
-{!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_id_lang')], 'id', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_id'] + (config('app.locale') == 'id' ? ['disabled' => 'disabled'] : []), ['lang' => 'id']) !!}
+@foreach (['en', 'id'] as $langKey)
+{!! FormField::formButton(
+    [
+        'method' => 'patch',
+        'route' => 'lang.switch',
+        'title' => __('app.switch_'.$langKey.'_lang')
+    ],
+    $langKey,
+    [
+        'class' => 'btn btn-default btn-xs navbar-btn',
+        'id' => 'lang_'.$langKey
+    ] + (config('app.locale') == $langKey ? ['disabled' => 'disabled'] : []),
+    ['lang' => $langKey]
+) !!}
+@endforeach
