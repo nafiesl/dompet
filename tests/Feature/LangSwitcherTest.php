@@ -21,4 +21,17 @@ class LangSwitcherTest extends TestCase
 
         $this->seeInSession('lang', 'en');
     }
+
+    /** @test */
+    public function user_can_switch_id_lang()
+    {
+        $user = $this->loginAsUser();
+
+        $this->visitRoute('home');
+        $this->seeElement('button', ['id' => 'lang_id']);
+
+        $this->press('lang_id');
+
+        $this->seeInSession('lang', 'id');
+    }
 }
