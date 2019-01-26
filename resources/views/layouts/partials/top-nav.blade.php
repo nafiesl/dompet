@@ -45,6 +45,7 @@
                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('auth.change_password') }}</span>
                 </a>
+                {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch'], 'en', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_en'], ['lang' => 'en']) !!}
                 <a class="xs-navbar" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
