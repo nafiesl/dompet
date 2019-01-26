@@ -15,6 +15,8 @@
             <a href="{{ route('home') }}" class="xs-navbar" title="{{ __('transaction.current_balance') }}">
                 <img src="{{ asset('images/icons8-coins-16.png') }}" alt=""> {{ format_number(balance(date('Y-m-d'))) }}
             </a>
+            {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_en_lang')], 'en', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_en'], ['lang' => 'en']) !!}
+            {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_id_lang')], 'id', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_id'], ['lang' => 'id']) !!}
             @endauth
         </div>
 
@@ -45,8 +47,6 @@
                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('auth.change_password') }}</span>
                 </a>
-                {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch'], 'en', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_en'], ['lang' => 'en']) !!}
-                {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch'], 'id', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_id'], ['lang' => 'id']) !!}
                 <a class="xs-navbar" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
