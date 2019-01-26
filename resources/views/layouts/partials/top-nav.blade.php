@@ -15,8 +15,7 @@
             <a href="{{ route('home') }}" class="xs-navbar" title="{{ __('transaction.current_balance') }}">
                 <img src="{{ asset('images/icons8-coins-16.png') }}" alt=""> {{ format_number(balance(date('Y-m-d'))) }}
             </a>
-            {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_en_lang')], 'en', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_en'], ['lang' => 'en']) !!}
-            {!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_id_lang')], 'id', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_id'], ['lang' => 'id']) !!}
+            @include ('layouts.partials.lang_switcher')
             @endauth
         </div>
 

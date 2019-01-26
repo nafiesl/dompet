@@ -1,0 +1,2 @@
+{!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_en_lang')], 'en', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_en'], ['lang' => 'en']) !!}
+{!! FormField::formButton(['route' => 'lang.switch', 'method' => 'patch', 'title' => __('app.switch_id_lang')], 'id', ['class' => 'btn btn-default btn-xs navbar-btn', 'id' => 'lang_id'], ['lang' => 'id']) !!}
