@@ -2,7 +2,7 @@
 
 return [
     // Labels
-    'master'        => 'Category',
+    'category'      => 'Category',
     'list'          => 'Category List',
     'search'        => 'Search Category',
     'detail'        => 'Category Detail',

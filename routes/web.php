@@ -41,4 +41,9 @@ Route::group(['middleware' => 'auth'], function () {
      * Partners Routes
      */
     Route::resource('partners', 'PartnerController');
+
+    /*
+     * Lang switcher routes
+     */
+    Route::patch('lang_switch', 'LangSwitcherController@update')->name('lang.switch');
 });

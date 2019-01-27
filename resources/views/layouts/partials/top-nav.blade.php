@@ -15,6 +15,7 @@
             <a href="{{ route('home') }}" class="xs-navbar" title="{{ __('transaction.current_balance') }}">
                 <img src="{{ asset('images/icons8-coins-16.png') }}" alt=""> {{ format_number(balance(date('Y-m-d'))) }}
             </a>
+            @include ('layouts.partials.lang_switcher')
             @endauth
         </div>
 
