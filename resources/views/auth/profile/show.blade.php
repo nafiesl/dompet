@@ -15,6 +15,9 @@
                     <tr><td>{{ __('user.email') }}</td><td>{{ $user->email }}</td></tr>
                 </tbody>
             </table>
+            <div class="panel-footer">
+                <a href="{{ route('profile.edit') }}" class="btn btn-success">{{ __('user.profile_edit') }}</a>
+            </div>
         </div>
     </div>
 </div>

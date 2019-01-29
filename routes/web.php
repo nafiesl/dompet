@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
      * User Profile Routes
      */
     Route::get('profile', 'Auth\ProfileController@show')->name('profile.show');
+    Route::get('profile/edit', 'Auth\ProfileController@edit')->name('profile.edit');
+    Route::patch('profile/update', 'Auth\ProfileController@update')->name('profile.update');
 
     /*
      * Transactions Routes
