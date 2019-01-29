@@ -42,7 +42,7 @@ class ProfileController extends Controller
     {
         $userData = $request->validate([
             'name'  => 'required|max:60',
-            'email' => 'required|max:255',
+            'email' => 'required|max:255|unique:users,email,'.auth()->id(),
         ]);
 
         auth()->user()->update($userData);
