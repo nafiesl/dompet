@@ -23,6 +23,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'TransactionsController@index')->name('home');
 
     /*
+     * User Profile Routes
+     */
+    Route::get('profile', 'Auth\ProfileController@show')->name('profile.show');
+
+    /*
      * Transactions Routes
      */
     Route::resource('transactions', 'TransactionsController');
