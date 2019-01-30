@@ -23,6 +23,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'TransactionsController@index')->name('home');
 
     /*
+     * User Profile Routes
+     */
+    Route::get('profile', 'Auth\ProfileController@show')->name('profile.show');
+    Route::get('profile/edit', 'Auth\ProfileController@edit')->name('profile.edit');
+    Route::patch('profile/update', 'Auth\ProfileController@update')->name('profile.update');
+
+    /*
      * Transactions Routes
      */
     Route::resource('transactions', 'TransactionsController');
