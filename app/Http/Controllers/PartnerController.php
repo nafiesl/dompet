@@ -16,8 +16,7 @@ class PartnerController extends Controller
     public function index()
     {
         $editablePartner = null;
-        $partnerQuery = Partner::query();
-        $partnerQuery->where('name', 'like', '%'.request('q').'%');
+        $partnerQuery = Partner::orderBy('name');
         $partners = $partnerQuery->paginate(25);
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {

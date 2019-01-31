@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $editableCategory = null;
-        $categories = Category::all();
+        $categories = Category::orderBy('name')->get();
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableCategory = Category::find(request('id'));
