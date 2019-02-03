@@ -58,6 +58,10 @@ If you are considering to contribute to this repo. It is really nice.
 
 ![Dompet Daily Transaction List](public/screenshots/02-daily-transaction-list.jpg)
 
+#### Transaction Sumary Report
+
+![Dompet Daily Transaction List](public/screenshots/03-transaction-summary-report.jpg)
+
 ## License
 
 Dompet project is a free and open-sourced software under [MIT License](LICENSE).
