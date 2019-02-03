@@ -10,7 +10,7 @@ Easy bookkeeping for personal income and spending (amount of money).
 To aquire our objective, we need this features on the application:
 
 - User can register.
-- User can see transaction history by date.
+- User can see transaction history by date of their own.
 - User add transactions for income and spending.
 - User can categorize the transaction.
 - User can see transaction summary on each month or a year.
@@ -46,7 +46,6 @@ If you are considering to contribute to this repo. It is really nice.
 
 1. Submit Issue if you found any errors or bugs or if you want to propose new feature.
 2. Pull Request for bugfix, typo on labels, or new feature.
-3. Pull Request for `en` lang files for English. Currently we only have `id` lang for Indonesian.
 
 ## Screenshots
 
@@ -57,6 +56,10 @@ If you are considering to contribute to this repo. It is really nice.
 #### Transaction List on Selected Date
 
 ![Dompet Daily Transaction List](public/screenshots/02-daily-transaction-list.jpg)
+
+#### Transaction Sumary Report
+
+![Dompet Daily Transaction List](public/screenshots/03-transaction-summary-report.jpg)
 
 ## License
 
