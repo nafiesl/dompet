@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Transactions Routes
      */
+    Route::get('transactions/export-csv', 'Transactions\ExportController@csv')->name('transactions.exports.csv');
     Route::resource('transactions', 'TransactionsController');
 
     /*

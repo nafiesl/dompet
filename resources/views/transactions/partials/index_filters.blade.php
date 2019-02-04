@@ -9,4 +9,5 @@
     {!! FormField::select('partner_id', $partners, ['label' => false, 'value' => request('partner_id'), 'placeholder' => __('partner.all'), 'class' => 'input-sm']) !!}
     {{ Form::submit(__('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
     {{ link_to_route('transactions.index', __('app.reset')) }}
+    {{ link_to_route('transactions.exports.csv', __('transaction.download'), request()->all(), ['class' => 'btn btn-info btn-sm pull-right']) }}
 {{ Form::close() }}
