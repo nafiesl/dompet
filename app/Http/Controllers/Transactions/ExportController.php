@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Transactions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
+use App\Services\Transactions\CsvTransformer;
 
 class ExportController extends Controller
 {
@@ -12,28 +13,7 @@ class ExportController extends Controller
     {
         $yearMonth = $this->getYearMonth();
         $transactions = $this->getTansactions($yearMonth);
-
-        $output = implode("; ", [
-            __('app.date'),
-            __('app.description'),
-            __('transaction.in_out'),
-            __('transaction.amount'),
-            __('category.category'),
-            __('partner.partner'),
-        ]);
-        $output .= "\n";
-
-        foreach ($transactions as $transaction) {
-            $output .= implode("; ", [
-                $transaction->date,
-                $transaction->description,
-                $transaction->in_out,
-                $transaction->amount,
-                optional($transaction->category)->name,
-                optional($transaction->partner)->name,
-            ]);
-            $output .= "\n";
-        }
+        $output = (new CsvTransformer($transactions))->toString();
 
         return Response::make(rtrim($output, "\n"), 200, [
             'Content-type'        => 'text/csv',
