@@ -36,7 +36,7 @@ return [
     'deleted'        => 'Transaction has been deleted.',
     'undeleted'      => 'Transaction data not deleted.',
     'undeleteable'   => 'Transaction data cannot be deleted.',
-    'download'       => 'Download',
+    'download'       => 'Download CSV',
 
     // Attributes
     'amount'      => 'Amount',

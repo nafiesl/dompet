@@ -36,7 +36,7 @@ return [
     'deleted'        => 'Hapus data Transaksi telah berhasil.',
     'undeleted'      => 'Data Transaksi gagal dihapus.',
     'undeleteable'   => 'Data Transaksi tidak dapat dihapus.',
-    'download'       => 'Download',
+    'download'       => 'Download CSV',
 
     // Attributes
     'amount'      => 'Jumlah',
