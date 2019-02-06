@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Partners Routes
      */
+    Route::get('partners/{partner}/export-csv', 'Transactions\ExportController@byPartner')->name('transactions.exports.by_partner');
     Route::resource('partners', 'PartnerController');
 
     /*

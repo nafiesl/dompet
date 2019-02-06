@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transactions;
 
+use App\Partner;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,6 +33,24 @@ class ExportController extends Controller
             'start_date' => $startDate,
             'end_date'   => $endDate,
             'query'      => request('query'),
+        ]);
+        $output = (new CsvTransformer($transactions))->toString();
+
+        return Response::make(rtrim($output, "\n"), 200, [
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=transactions_'.date('YmdHis').'.csv',
+        ]);
+    }
+
+    public function byPartner(Partner $partner)
+    {
+        $startDate = request('start_date', date('Y-m').'-01');
+        $endDate = request('end_date', date('Y-m-d'));
+        $transactions = $this->getPartnerTransactions($partner, [
+            'category_id' => request('category_id'),
+            'start_date'  => $startDate,
+            'end_date'    => $endDate,
+            'query'       => request('query'),
         ]);
         $output = (new CsvTransformer($transactions))->toString();
 

@@ -82,30 +82,6 @@ class PartnerController extends Controller
     }
 
     /**
-     * Get transaction listing of a partner.
-     *
-     * @param  \App\Partner   $partner
-     * @param  array  $criteria
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    private function getPartnerTransactions(Partner $partner, array $criteria)
-    {
-        $query = $criteria['query'];
-        $endDate = $criteria['end_date'];
-        $startDate = $criteria['start_date'];
-        $categoryId = $criteria['category_id'];
-
-        $transactionQuery = $partner->transactions();
-        $transactionQuery->where('description', 'like', '%'.$query.'%');
-        $transactionQuery->whereBetween('date', [$startDate, $endDate]);
-        if ($categoryId) {
-            $transactionQuery->where('category_id', $categoryId);
-        }
-
-        return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
-    }
-
-    /**
      * Update the specified partner in storage.
      *
      * @param  \Illuminate\Http\Request  $request
