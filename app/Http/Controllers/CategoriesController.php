@@ -76,30 +76,6 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Get transaction listing of a category.
-     *
-     * @param  \App\Category   $category
-     * @param  array  $criteria
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    private function getCategoryTransactions(Category $category, array $criteria)
-    {
-        $query = $criteria['query'];
-        $endDate = $criteria['end_date'];
-        $startDate = $criteria['start_date'];
-        $partnerId = $criteria['partner_id'];
-
-        $transactionQuery = $category->transactions();
-        $transactionQuery->where('description', 'like', '%'.$query.'%');
-        $transactionQuery->whereBetween('date', [$startDate, $endDate]);
-        if ($partnerId) {
-            $transactionQuery->where('partner_id', $partnerId);
-        }
-
-        return $transactionQuery->orderBy('date', 'desc')->with('partner')->get();
-    }
-
-    /**
      * Update the specified category in storage.
      *
      * @param  \App\Http\Requests\Categories\UpdateRequest  $categoryUpdateForm

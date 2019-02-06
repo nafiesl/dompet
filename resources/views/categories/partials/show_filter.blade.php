@@ -1,6 +1,6 @@
 {{ Form::open(['method' => 'get','class' => 'form-inline']) }}
     {!! FormField::text('query', [
-        'value' => request('query'), 'label' => __('transaction.search'),
+        'value' => request('query'), 'label' => false,
         'class' => 'input-sm', 'placeholder' => __('transaction.search_text'),
         'style' => 'width:150px'
     ]) !!}
@@ -15,4 +15,5 @@
     {!! FormField::select('partner_id', $partners, ['label' => false, 'value' => request('partner_id'), 'placeholder' => __('partner.all'), 'class' => 'input-sm']) !!}
     {{ Form::submit(__('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
     {{ link_to_route('categories.show', __('app.reset'), $category) }}
+    {{ link_to_route('transactions.exports.by_category', __('transaction.download'), [$category] + request()->all(), ['class' => 'btn btn-info btn-sm pull-right']) }}
 {{ Form::close() }}
