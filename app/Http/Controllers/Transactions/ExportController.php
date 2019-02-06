@@ -25,7 +25,6 @@ class ExportController extends Controller
 
     public function byCategory(Category $category)
     {
-        $year = request('year', date('Y'));
         $startDate = request('start_date', date('Y-m').'-01');
         $endDate = request('end_date', date('Y-m-d'));
         $transactions = $this->getCategoryTransactions($category, [
