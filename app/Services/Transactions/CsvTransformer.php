@@ -44,6 +44,7 @@ class CsvTransformer
             __('category.category'),
             __('partner.partner'),
         ]);
+
         return $headerString."\n";
     }
 

@@ -37,7 +37,6 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
-
     public function update(Request $request)
     {
         $userData = $request->validate([
