@@ -36,8 +36,10 @@ return [
     'deleted'        => 'Transaction has been deleted.',
     'undeleted'      => 'Transaction data not deleted.',
     'undeleteable'   => 'Transaction data cannot be deleted.',
+    'download'       => 'Download CSV',
 
     // Attributes
     'amount'      => 'Amount',
     'description' => 'Transaction Description',
+    'in_out'      => 'Income/Spending',
 ];

@@ -32,11 +32,13 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Transactions Routes
      */
+    Route::get('transactions/export-csv', 'Transactions\ExportController@csv')->name('transactions.exports.csv');
     Route::resource('transactions', 'TransactionsController');
 
     /*
      * Categories Routes
      */
+    Route::get('categories/{category}/export-csv', 'Transactions\ExportController@byCategory')->name('transactions.exports.by_category');
     Route::resource('categories', 'CategoriesController');
 
     /*
@@ -47,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Partners Routes
      */
+    Route::get('partners/{partner}/export-csv', 'Transactions\ExportController@byPartner')->name('transactions.exports.by_partner');
     Route::resource('partners', 'PartnerController');
 
     /*
