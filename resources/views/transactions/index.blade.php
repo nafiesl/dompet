@@ -160,8 +160,8 @@
                     <hr style="margin: 6px 0">
                 @endforeach
                 <div class="row">
-                    <div class="col-xs-6 text-right">{{ __('transaction.start_balance') }}</div>
-                    <div class="col-xs-6 text-right">
+                    <div class="col-xs-6 text-right strong">{{ __('transaction.start_balance') }}</div>
+                    <div class="col-xs-6 text-right strong">
                         @if ($transactions->last())
                             {{ format_number(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
                         @else
@@ -170,16 +170,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6 text-right">{{ __('transaction.income_total') }}</div>
-                    <div class="col-xs-6 text-right">{{ format_number($incomeTotal) }}</div>
+                    <div class="col-xs-6 text-right strong">{{ __('transaction.income_total') }}</div>
+                    <div class="col-xs-6 text-right strong">{{ format_number($incomeTotal) }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6 text-right">{{ __('transaction.spending_total') }}</div>
-                    <div class="col-xs-6 text-right">{{ format_number($spendingTotal) }}</div>
+                    <div class="col-xs-6 text-right strong">{{ __('transaction.spending_total') }}</div>
+                    <div class="col-xs-6 text-right strong">{{ format_number($spendingTotal) }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6 text-right">{{ __('transaction.end_balance') }}</div>
-                    <div class="col-xs-6 text-right">
+                    <div class="col-xs-6 text-right strong">{{ __('transaction.end_balance') }}</div>
+                    <div class="col-xs-6 text-right strong">
                         @if ($transactions->first())
                             {{ format_number(balance($transactions->first()->date)) }}
                         @else
