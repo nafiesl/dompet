@@ -157,7 +157,9 @@
                         @endphp
                         <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
                     </div>
-                    <hr style="margin: 6px 0">
+                    @if (!$loop->last)
+                        <hr style="margin: 6px 0">
+                    @endif
                 @endforeach
             </div>
             @enddesktop
