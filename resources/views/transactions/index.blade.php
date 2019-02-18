@@ -15,6 +15,7 @@
             <div class="panel-heading">
                 @include('transactions.partials.index_filters')
             </div>
+            @desktop
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>
@@ -117,6 +118,13 @@
                     </tr>
                 </tfoot>
             </table>
+            @elsedesktop
+            <div class="panel-body">
+                @foreach ($transactions as $transaction)
+                    @include('transactions.partials.single_transaction_mobile', ['transaction' => $transaction, 'month' => $month, 'year' => $year])
+                @endforeach
+                @include('transactions.partials.transaction_summary_mobile', ['transactions' => $transactions])
+            @enddesktop
         </div>
     </div>
     <div class="col-md-4">
