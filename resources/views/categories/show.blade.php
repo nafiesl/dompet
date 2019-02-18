@@ -68,6 +68,7 @@
                 @foreach ($transactions as $transaction)
                     @include('categories.partials.single_transaction_mobile', ['transaction' => $transaction])
                 @endforeach
+            </div>
             @enddesktop
         </div>
     </div>

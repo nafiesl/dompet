@@ -70,6 +70,7 @@
                 @foreach ($transactions as $transaction)
                     @include('partners.partials.single_transaction_mobile', ['transaction' => $transaction])
                 @endforeach
+            </div>
             @enddesktop
         </div>
     </div>
