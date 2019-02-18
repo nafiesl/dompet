@@ -15,6 +15,7 @@
             <div class="panel-heading">
                 @include('categories.partials.show_filter')
             </div>
+            @desktop
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>
@@ -61,8 +62,14 @@
                         <th>&nbsp;</th>
                     </tr>
                 </tfoot>
-            </div>
-        </table>
+            </table>
+            @elsedesktop
+            <div class="panel-body">
+                @foreach ($transactions as $transaction)
+                    @include('categories.partials.single_transaction_mobile', ['transaction' => $transaction])
+                @endforeach
+            @enddesktop
+        </div>
     </div>
 </div>
 @if(Request::has('action'))
