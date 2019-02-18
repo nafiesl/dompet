@@ -121,73 +121,9 @@
             @elsedesktop
             <div class="panel-body">
                 @foreach ($transactions as $transaction)
-                    <span class="pull-right">{{ $transaction->amount_string }}</span>
-                    {{ link_to_route('transactions.index', $transaction->date, [
-                        'date' => $transaction->date_only,
-                        'month' => $month,
-                        'year' => $year,
-                        'category_id' => request('category_id'),
-                    ]) }}
-                    <div>
-                        {{ $transaction->description }}
-                        @can('update', $transaction)
-                            {!! link_to_route(
-                                'transactions.index',
-                                __('app.edit'),
-                                ['action' => 'edit', 'id' => $transaction->id] + request(['month', 'year', 'query', 'category_id']),
-                                ['id' => 'edit-transaction-'.$transaction->id, 'class' => 'pull-right text-danger']
-                            ) !!}
-                        @endcan
-                    </div>
-                    <div>
-                        @php
-                            $partnerRoute = route('partners.show', [
-                                $transaction->partner_id,
-                                'start_date' => $year.'-'.$month.'-01',
-                                'end_date' => $year.'-'.$month.'-'.date('t'),
-                            ]);
-                        @endphp
-                        <a href="{{ $partnerRoute }}">{!! optional($transaction->partner)->name_label !!}</a>
-                        @php
-                            $categoryRoute = route('categories.show', [
-                                $transaction->category_id,
-                                'start_date' => $year.'-'.$month.'-01',
-                                'end_date' => $year.'-'.$month.'-'.date('t'),
-                            ]);
-                        @endphp
-                        <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
-                    </div>
-                    <hr style="margin: 6px 0">
+                    @include('transactions.partials.single_transaction_mobile', ['transaction' => $transaction, 'month' => $month, 'year' => $year])
                 @endforeach
-                <div class="row">
-                    <div class="col-xs-6 text-right strong">{{ __('transaction.start_balance') }}</div>
-                    <div class="col-xs-6 text-right strong">
-                        @if ($transactions->last())
-                            {{ format_number(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
-                        @else
-                            0
-                        @endif
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6 text-right strong">{{ __('transaction.income_total') }}</div>
-                    <div class="col-xs-6 text-right strong">{{ format_number($incomeTotal) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6 text-right strong">{{ __('transaction.spending_total') }}</div>
-                    <div class="col-xs-6 text-right strong">{{ format_number($spendingTotal) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6 text-right strong">{{ __('transaction.end_balance') }}</div>
-                    <div class="col-xs-6 text-right strong">
-                        @if ($transactions->first())
-                            {{ format_number(balance($transactions->first()->date)) }}
-                        @else
-                            0
-                        @endif
-                    </div>
-                </div>
-            </div>
+                @include('transactions.partials.transaction_summary_mobile', ['transactions' => $transactions])
             @enddesktop
         </div>
     </div>
