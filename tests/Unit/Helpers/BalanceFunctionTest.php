@@ -112,6 +112,19 @@ class BalanceFunctionTest extends TestCase
     }
 
     /** @test */
+    public function balance_function_accepts_category_id_and_partner_id_parameter()
+    {
+        $user = $this->loginAsUser();
+
+        factory(Transaction::class)->create(['date' => '2015-01-03', 'amount' => 10000, 'in_out' => 1, 'creator_id' => $user->id, 'category_id' => 1, 'partner_id' => 1]);
+        factory(Transaction::class)->create(['date' => '2015-01-05', 'amount' => 900, 'in_out' => 0, 'creator_id' => $user->id, 'category_id' => 1, 'partner_id' => 2]);
+        factory(Transaction::class)->create(['date' => '2015-01-20', 'amount' => 4000, 'in_out' => 1, 'creator_id' => $user->id, 'category_id' => 2, 'partner_id' => 2]);
+
+        // Assert balance from '2015-01-03' until '2015-01-30' with category_id 1 and partner_id 2
+        $this->assertEquals(-900, balance('2015-01-31', '2015-01-03', 1, 2));
+    }
+
+    /** @test */
     public function unauthenticated_user_has_0_balance()
     {
         factory(Transaction::class)->create();
