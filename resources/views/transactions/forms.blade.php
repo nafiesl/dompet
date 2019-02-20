@@ -17,7 +17,17 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
+                        <div class="col-md-6">
+                            <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
+                                <label for="amount" class="control-label">Jumlah</label>
+                                <div class="input-group"><span class="input-group-addon">Rp</span>
+                                    <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ old('amount') }}" required>
+                                </div>
+                                @if ($errors->has('amount'))
+                                    <span class="help-block small">{{ $errors->first('amount') }}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.no_partner')]) !!}</div>
                     </div>
                 </div>
@@ -48,7 +58,17 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
+                        <div class="col-md-6">
+                            <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
+                                <label for="amount" class="control-label">Jumlah</label>
+                                <div class="input-group"><span class="input-group-addon">Rp</span>
+                                    <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ old('amount') }}" required>
+                                </div>
+                                @if ($errors->has('amount'))
+                                    <span class="help-block small">{{ $errors->first('amount') }}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.no_partner')]) !!}</div>
                     </div>
                 </div>
@@ -81,7 +101,17 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-4">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount')]) !!}</div>
+                        <div class="col-md-4">
+                            <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
+                                <label for="amount" class="control-label">Jumlah</label>
+                                <div class="input-group"><span class="input-group-addon">Rp</span>
+                                    <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ isset($editableTransaction) ? round($editableTransaction->amount, 0) : old('amount') }}" required>
+                                </div>
+                                @if ($errors->has('amount'))
+                                    <span class="help-block small">{{ $errors->first('amount') }}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="col-md-4">{!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => __('transaction.transaction')]) !!}</div>
                         <div class="col-md-4">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.empty')]) !!}</div>
                     </div>
