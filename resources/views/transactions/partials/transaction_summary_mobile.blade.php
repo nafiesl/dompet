@@ -1,8 +1,11 @@
 <div class="row">
     <div class="col-xs-6 text-right strong">{{ __('transaction.start_balance') }}</div>
     <div class="col-xs-6 text-right strong">
+        @php
+            $balance = 0;
+        @endphp
         @if ($transactions->last())
-            {{ format_number(balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
+            {{ format_number($balance = balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
         @else
             0
         @endif
@@ -20,7 +23,7 @@
     <div class="col-xs-6 text-right strong">{{ __('transaction.end_balance') }}</div>
     <div class="col-xs-6 text-right strong">
         @if ($transactions->first())
-            {{ format_number(balance($transactions->first()->date)) }}
+            {{ format_number($balance + $incomeTotal - $spendingTotal) }}
         @else
             0
         @endif
