@@ -82,6 +82,26 @@
                     <tr><td colspan="5">{{ __('transaction.not_found') }}</td></tr>
                     @endforelse
                 </tbody>
+                @if (request('category_id') || request('partner_id'))
+                <tfoot>
+                    <tr><th colspan="5" class="text-right">&nbsp;</th></tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.income_total') }}</th>
+                        <th class="text-right">{{ format_number($incomeTotal) }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.spending_total') }}</th>
+                        <th class="text-right">{{ format_number($spendingTotal) }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-right">{{ __('transaction.difference') }}</th>
+                        <th class="text-right">{{ number_format($incomeTotal - $spendingTotal, 2) }}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </tfoot>
+                @else
                 <tfoot>
                     <tr><th colspan="5" class="text-right">&nbsp;</th></tr>
                     <tr>
@@ -91,7 +111,7 @@
                                 $balance = 0;
                             @endphp
                             @if ($transactions->last())
-                                {{ format_number($balance = balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d')), null, request('category_id'), request('partner_id')) }}
+                                {{ format_number($balance = balance(Carbon\Carbon::parse($transactions->last()->date)->subDay()->format('Y-m-d'))) }}
                             @else
                                 0
                             @endif
@@ -120,6 +140,7 @@
                         <th>&nbsp;</th>
                     </tr>
                 </tfoot>
+                @endif
             </table>
             @elsedesktop
             <div class="panel-body">
