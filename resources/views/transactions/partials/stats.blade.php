@@ -1,8 +1,8 @@
 <div class="panel panel-default table-responsive">
     <table class="table table-condensed table-bordered">
         <tr>
-            <td class="col-xs-2 text-center">{{ trans('transaction.income_total') }}</td>
-            <td class="col-xs-2 text-center">{{ trans('transaction.spending_total') }}</td>
+            <td class="col-xs-2 text-center">{{ trans('transaction.income') }}</td>
+            <td class="col-xs-2 text-center">{{ trans('transaction.spending') }}</td>
             <td class="col-xs-2 text-center">{{ trans('transaction.difference') }}</td>
         </tr>
         <tr>
