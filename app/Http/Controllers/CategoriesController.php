@@ -51,6 +51,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
+        $categories = [];
         $editableTransaction = null;
         $year = request('year', date('Y'));
         $partners = $this->getPartnerList();

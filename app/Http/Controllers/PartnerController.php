@@ -55,6 +55,7 @@ class PartnerController extends Controller
      */
     public function show(Partner $partner)
     {
+        $partners = [];
         $editableTransaction = null;
         $year = request('year', date('Y'));
         $categories = $this->getCategoryList();
@@ -76,8 +77,7 @@ class PartnerController extends Controller
 
         return view('partners.show', compact(
             'partner', 'transactions', 'year', 'incomeTotal', 'spendingTotal',
-            'startDate', 'endDate', 'categories', 'editableTransaction',
-            'partners'
+            'startDate', 'endDate', 'categories', 'editableTransaction', 'partners'
         ));
     }
 
