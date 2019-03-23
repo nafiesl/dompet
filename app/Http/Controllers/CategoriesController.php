@@ -51,6 +51,7 @@ class CategoriesController extends Controller
      */
     public function show(Category $category)
     {
+        $editableTransaction = null;
         $year = request('year', date('Y'));
         $partners = $this->getPartnerList();
         $startDate = request('start_date', date('Y-m').'-01');
