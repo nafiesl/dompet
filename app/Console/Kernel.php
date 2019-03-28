@@ -24,8 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Auto backup database.
+        $backupCommand = 'db:backup --database=mysql';
+        $backupCommand .= ' --destination=local --compression=gzip';
+        $backupCommand .= ' --destinationPath=backup/auto.'.date('Y-m-d_Hi');
+        $schedule->command($backupCommand)->dailyAt('07:00');
     }
 
     /**
