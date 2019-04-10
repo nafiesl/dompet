@@ -16,7 +16,7 @@
         ) !!}
     @endcan
 </div>
-<div>
+<div style="margin-bottom: 6px;">
     @php
         $partnerRoute = route('partners.show', [
             $transaction->partner_id,
@@ -34,4 +34,3 @@
     @endphp
     <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
 </div>
-<hr style="margin: 6px 0">

@@ -144,8 +144,11 @@
             </table>
             @elsedesktop
             <div class="panel-body">
-                @foreach ($transactions as $transaction)
-                    @include('transactions.partials.single_transaction_mobile', ['transaction' => $transaction, 'month' => $month, 'year' => $year])
+                @foreach ($transactions->groupBy('date') as $groupedTransactions)
+                    @foreach ($groupedTransactions as $date => $transaction)
+                        @include('transactions.partials.single_transaction_mobile', ['transaction' => $transaction, 'month' => $month, 'year' => $year])
+                    @endforeach
+                    <hr style="margin: 6px 0">
                 @endforeach
                 @include('transactions.partials.transaction_summary_mobile', ['transactions' => $transactions])
             @enddesktop
