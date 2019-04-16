@@ -1,5 +1,8 @@
 # Dompet
 
+[![Build Status](https://travis-ci.org/nafiesl/dompet.svg?branch=master)](https://travis-ci.org/nafiesl/dompet)
+[![Coverage Status](https://coveralls.io/repos/github/nafiesl/dompet/badge.svg?branch=master)](https://coveralls.io/github/nafiesl/dompet?branch=master)
+
 Dompet is a personal bookkeeping web application, built with Laravel 5.
 
 ## Objective
