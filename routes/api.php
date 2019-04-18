@@ -13,6 +13,7 @@
 
 // Authentication Routes...
 Route::post('login', 'Api\Auth\LoginController@login')->name('api.login');
+Route::post('register', 'Api\Auth\RegisterController@register')->name('api.register');
 
 Route::group(['middleware' => 'auth:api', 'as' => 'api.', 'namespace' => 'Api'], function () {
     /*
