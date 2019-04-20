@@ -15,6 +15,12 @@ function flash($message = null, $level = 'info')
     }
 }
 
+/**
+ * Format number to string.
+ *
+ * @param  float  $number
+ * @return string
+ */
 function format_number(float $number)
 {
     $number = number_format($number, 2);
