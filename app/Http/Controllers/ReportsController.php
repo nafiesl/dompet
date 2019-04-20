@@ -29,7 +29,7 @@ class ReportsController extends Controller
      */
     private function getYearQuery($yearQuery)
     {
-        return in_array($yearQuery, getYears()) ? $yearQuery : date('Y');
+        return in_array($yearQuery, get_years()) ? $yearQuery : date('Y');
     }
 
     /**

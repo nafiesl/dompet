@@ -23,7 +23,12 @@ function get_months()
     ];
 }
 
-function getYears()
+/**
+ * Get array of year list starting from 2018.
+ *
+ * @return array
+ */
+function get_years()
 {
     $yearRange = range(2018, date('Y'));
     foreach ($yearRange as $year) {

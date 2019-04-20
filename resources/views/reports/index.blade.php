@@ -7,7 +7,7 @@
 
 {{ Form::open(['method' => 'get', 'class' => 'form-inline well well-sm']) }}
 {{ Form::label('year', __('report.view_yearly_label'), ['class' => 'control-label']) }}
-{{ Form::select('year', getYears(), $year, ['class' => 'form-control']) }}
+{{ Form::select('year', get_years(), $year, ['class' => 'form-control']) }}
 {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info btn-sm']) }}
 {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-default btn-sm']) }}
 {{ Form::close() }}
