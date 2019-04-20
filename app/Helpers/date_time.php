@@ -1,6 +1,11 @@
 <?php
 
-function getMonths()
+/**
+ * Get array of month list.
+ *
+ * @return array
+ */
+function get_months()
 {
     return [
         '01' => __('time.months.01'),
@@ -39,7 +44,7 @@ function monthId($monthNumber)
         return $monthNumber;
     }
 
-    $months = getMonths();
+    $months = get_months();
     $monthNumber = monthNumber($monthNumber);
 
     return $months[$monthNumber];

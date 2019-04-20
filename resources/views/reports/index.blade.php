@@ -35,7 +35,7 @@
             </thead>
             <tbody>
                 @php $chartData = []; @endphp
-                @foreach(getMonths() as $monthNumber => $monthName)
+                @foreach(get_months() as $monthNumber => $monthName)
                 @php
                     $any = isset($data[$monthNumber]);
                 @endphp
