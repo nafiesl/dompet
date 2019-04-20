@@ -40,7 +40,7 @@
                     $any = isset($data[$monthNumber]);
                 @endphp
                 <tr>
-                    <td class="text-center">{{ monthId($monthNumber) }}</td>
+                    <td class="text-center">{{ month_id($monthNumber) }}</td>
                     <td class="text-center">{{ $any ? $data[$monthNumber]->count : 0 }}</td>
                     <td class="text-right">{{ format_number($income = ($any ? $data[$monthNumber]->income : 0)) }}</td>
                     <td class="text-right">{{ format_number($spending = ($any ? $data[$monthNumber]->spending : 0)) }}</td>
@@ -52,14 +52,14 @@
                             ['month' => $monthNumber, 'year' => $year],
                             [
                                 'class' => 'btn btn-info btn-xs',
-                                'title' => __('report.monthly', ['year_month' => monthId($monthNumber)]),
-                                'title' => __('report.monthly', ['year_month' => monthId($monthNumber).' '.$year]),
+                                'title' => __('report.monthly', ['year_month' => month_id($monthNumber)]),
+                                'title' => __('report.monthly', ['year_month' => month_id($monthNumber).' '.$year]),
                             ]
                         ) }}
                     </td>
                 </tr>
                 @php
-                    $chartData[] = ['month' => monthId($monthNumber), 'income' => $income, 'spending' => $spending, 'difference' => $difference];
+                    $chartData[] = ['month' => month_id($monthNumber), 'income' => $income, 'spending' => $spending, 'difference' => $difference];
                 @endphp
                 @endforeach
             </tbody>

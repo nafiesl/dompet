@@ -38,19 +38,31 @@ function get_years()
     return $years;
 }
 
-function monthNumber($number)
+/**
+ * Get two digits of month.
+ *
+ * @param  int|string $number
+ * @return string
+ */
+function month_number($number)
 {
     return str_pad($number, 2, '0', STR_PAD_LEFT);
 }
 
-function monthId($monthNumber)
+/**
+ * Get month name from given month number.
+ *
+ * @param  int|string  $monthNumber
+ * @return string
+ */
+function month_id($monthNumber)
 {
     if (is_null($monthNumber)) {
         return $monthNumber;
     }
 
     $months = get_months();
-    $monthNumber = monthNumber($monthNumber);
+    $monthNumber = month_number($monthNumber);
 
     return $months[$monthNumber];
 }
