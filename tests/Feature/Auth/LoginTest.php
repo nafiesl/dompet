@@ -78,7 +78,7 @@ class LoginTest extends TestCase
         $user = $this->loginAsUser();
 
         $this->seeIsAuthenticated();
-        $this->visit(route('home'));
+        $this->visit(route('welcome'));
         $this->seePageIs(route('home'));
     }
 }
