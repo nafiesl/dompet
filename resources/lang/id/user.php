@@ -26,11 +26,12 @@ return [
     'undeleted' => 'Data User gagal dihapus.',
 
     // Attributes
-    'name'          => 'Nama User',
-    'email'         => 'Alamat Email',
-    'phone'         => 'Telp/Hp.',
-    'is_active'     => 'Status User',
-    'registered_at' => 'Terdaftar sejak',
+    'name'               => 'Nama User',
+    'email'              => 'Alamat Email',
+    'phone'              => 'Telp/Hp.',
+    'is_active'          => 'Status User',
+    'registered_at'      => 'Terdaftar sejak',
+    'account_start_date' => 'Akun Mulai Digunakan',
 
     // Relations
     'groups' => 'List Member',

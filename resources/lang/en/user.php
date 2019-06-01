@@ -26,11 +26,12 @@ return [
     'undeleted' => 'User not deleted.',
 
     // Attributes
-    'name'          => 'User Name',
-    'email'         => 'Email Address',
-    'phone'         => 'Phone',
-    'is_active'     => 'User Status',
-    'registered_at' => 'Registered at',
+    'name'               => 'User Name',
+    'email'              => 'Email Address',
+    'phone'              => 'Phone',
+    'is_active'          => 'User Status',
+    'registered_at'      => 'Registered at',
+    'account_start_date' => 'Account Start Date',
 
     // Relations
     'groups' => 'Member List',
