@@ -13,6 +13,7 @@
                 <tbody>
                     <tr><td>{{ __('user.name') }}</td><td>{{ $user->name }}</td></tr>
                     <tr><td>{{ __('user.email') }}</td><td>{{ $user->email }}</td></tr>
+                    <tr><td>{{ __('user.account_start_date') }}</td><td>{{ $user->account_start_date }}</td></tr>
                 </tbody>
             </table>
             <div class="panel-footer">
