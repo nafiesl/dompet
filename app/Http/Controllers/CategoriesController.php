@@ -55,8 +55,11 @@ class CategoriesController extends Controller
         $editableTransaction = null;
         $year = request('year', date('Y'));
         $partners = $this->getPartnerList();
-        $startDate = request('start_date', date('Y-m').'-01');
+
+        $defaultStartDate = auth()->user()->account_start_date ?: date('Y-m').'-01';
+        $startDate = request('start_date', $defaultStartDate);
         $endDate = request('end_date', date('Y-m-d'));
+
         $transactions = $this->getCategoryTransactions($category, [
             'partner_id' => request('partner_id'),
             'start_date' => $startDate,
