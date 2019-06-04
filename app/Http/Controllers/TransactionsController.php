@@ -20,6 +20,8 @@ class TransactionsController extends Controller
         $yearMonth = $this->getYearMonth();
         $year = request('year', date('Y'));
         $month = request('month', date('m'));
+        $defaultStartDate = auth()->user()->account_start_date;
+        $startDate = $defaultStartDate ?: $year.'-'.$month.'-01';
 
         $transactions = $this->getTansactions($yearMonth);
 
@@ -36,7 +38,8 @@ class TransactionsController extends Controller
         return view('transactions.index', compact(
             'transactions', 'editableTransaction',
             'yearMonth', 'month', 'year', 'categories',
-            'incomeTotal', 'spendingTotal', 'partners'
+            'incomeTotal', 'spendingTotal', 'partners',
+            'startDate'
         ));
     }
 
@@ -82,7 +85,7 @@ class TransactionsController extends Controller
                     $transaction->partner_id,
                     'start_date'  => $transactionUpateForm->get('start_date'),
                     'end_date'    => $transactionUpateForm->get('end_date'),
-                    'category_id' => $transactionUpateForm->get('queried_category_id'),
+                    'category_id' => $transactionUpateForm->get('category_id'),
                     'query'       => $transactionUpateForm->get('query'),
                 ]);
             }
@@ -91,7 +94,7 @@ class TransactionsController extends Controller
                     $transaction->category_id,
                     'start_date' => $transactionUpateForm->get('start_date'),
                     'end_date'   => $transactionUpateForm->get('end_date'),
-                    'partner_id' => $transactionUpateForm->get('queried_partner_id'),
+                    'partner_id' => $transactionUpateForm->get('partner_id'),
                     'query'      => $transactionUpateForm->get('query'),
                 ]);
             }

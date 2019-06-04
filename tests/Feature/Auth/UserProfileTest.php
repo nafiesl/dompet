@@ -27,8 +27,9 @@ class UserProfileTest extends TestCase
         $this->click(__('user.profile_edit'));
         $this->seeRouteIs('profile.edit');
         $this->submitForm(__('user.profile_update'), [
-            'name'  => 'User Baru',
-            'email' => 'user3@mail.com',
+            'name'               => 'User Baru',
+            'email'              => 'user3@mail.com',
+            'account_start_date' => '2016-06-01',
         ]);
 
         $this->seeRouteIs('profile.show');
@@ -36,9 +37,10 @@ class UserProfileTest extends TestCase
         $this->seeText('User Baru');
 
         $this->seeInDatabase('users', [
-            'id'    => $user->id,
-            'name'  => 'User Baru',
-            'email' => 'user3@mail.com',
+            'id'                 => $user->id,
+            'name'               => 'User Baru',
+            'email'              => 'user3@mail.com',
+            'account_start_date' => '2016-06-01',
         ]);
     }
 }

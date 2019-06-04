@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->char('api_token', 24);
             $table->boolean('is_active')->default(1);
+            $table->date('account_start_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -50,7 +50,7 @@
                                 @php
                                     $partnerRoute = route('partners.show', [
                                         $transaction->partner_id,
-                                        'start_date' => $year.'-'.$month.'-01',
+                                        'start_date' => $startDate,
                                         'end_date' => $year.'-'.$month.'-'.date('t'),
                                     ]);
                                 @endphp
@@ -58,7 +58,7 @@
                                 @php
                                     $categoryRoute = route('categories.show', [
                                         $transaction->category_id,
-                                        'start_date' => $year.'-'.$month.'-01',
+                                        'start_date' => $startDate,
                                         'end_date' => $year.'-'.$month.'-'.date('t'),
                                     ]);
                                 @endphp
