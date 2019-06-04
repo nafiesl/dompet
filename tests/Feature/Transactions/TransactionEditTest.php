@@ -269,6 +269,7 @@ class TransactionEditTest extends TestCase
         $this->seeRouteIs('categories.show', [
             $category->id,
             'end_date'   => $year.'-'.$month.'-28',
+            'partner_id' => $partner->id,
             'start_date' => $date,
         ]);
         $this->see(__('transaction.updated'));

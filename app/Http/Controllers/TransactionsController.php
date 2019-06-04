@@ -94,7 +94,7 @@ class TransactionsController extends Controller
                     $transaction->category_id,
                     'start_date' => $transactionUpateForm->get('start_date'),
                     'end_date'   => $transactionUpateForm->get('end_date'),
-                    'partner_id' => $transactionUpateForm->get('queried_partner_id'),
+                    'partner_id' => $transactionUpateForm->get('partner_id'),
                     'query'      => $transactionUpateForm->get('query'),
                 ]);
             }
