@@ -4,7 +4,6 @@ namespace Tests\Unit\Policies;
 
 use App\Category;
 use Tests\TestCase;
-use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryPolicyTest extends TestCase

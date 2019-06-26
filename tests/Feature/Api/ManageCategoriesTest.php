@@ -3,8 +3,8 @@
 namespace Tests\Feature\Api;
 
 use App\Category;
-use App\Transaction;
 use Tests\TestCase;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageCategoriesTest extends TestCase
