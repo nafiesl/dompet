@@ -94,6 +94,7 @@
                     {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
                     <h4 class="modal-title">{{ __('category.delete') }} {{ $editableCategory->type }}</h4>
                 </div>
+                {!! Form::open(['url' => route('categories.destroy', $editableCategory), 'method' => 'DELETE']) !!}
                 <div class="modal-body">
                     <label class="control-label">{{ __('category.name') }}</label>
                     <p>{!! $editableCategory->name_label !!}</p>
@@ -102,18 +103,19 @@
                     {!! $errors->first('category_id', '<span class="form-error small">:message</span>') !!}
                 </div>
                 <hr style="margin:0">
-                <div class="modal-body">{{ __('app.delete_confirm') }}</div>
+                <div class="modal-body">
+                    {!! Form::hidden('category_id', $editableCategory->id) !!}
+                    {!! Form::hidden('delete_transactions', '0') !!}
+                    {!! Form::checkbox('delete_transactions', '1', false) !!}
+                    {!! Form::label(__('category.delete_transactions')) !!}
+                    <br>
+                    {{ __('app.delete_confirm') }}
+                </div>
                 <div class="modal-footer">
-                    {!! FormField::delete(
-                        ['route' => ['categories.destroy', $editableCategory], 'class' => ''],
-                        __('app.delete_confirm_button'),
-                        ['class'=>'btn btn-danger'],
-                        [
-                            'category_id' => $editableCategory->id,
-                        ]
-                    ) !!}
+                    {!! Form::submit(__('app.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
                     {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
