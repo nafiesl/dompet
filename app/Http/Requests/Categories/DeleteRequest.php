@@ -25,6 +25,7 @@ class DeleteRequest extends FormRequest
     {
         return [
             'category_id' => 'required',
+            'delete_transactions' => 'required',
         ];
     }
 
@@ -36,6 +37,12 @@ class DeleteRequest extends FormRequest
     public function delete()
     {
         $category = $this->route('category');
+
+        if ($this->get('delete_transactions') == 1) {
+            $category->transactions()->delete();
+        } else {
+            $category->transactions()->update(['category_id' => null]);
+        }
 
         if ($this->get('category_id') == $category->id) {
             return $category->delete();
