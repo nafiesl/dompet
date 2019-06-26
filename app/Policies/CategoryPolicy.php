@@ -58,6 +58,6 @@ class CategoryPolicy
     public function delete(User $user, Category $category)
     {
         // Update $user authorization to delete $category here.
-        return $user->id == $category->creator_id && $category->transactions->isEmpty();
+        return $user->id == $category->creator_id;
     }
 }
