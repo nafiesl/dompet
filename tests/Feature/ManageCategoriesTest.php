@@ -83,7 +83,9 @@ class ManageCategoriesTest extends TestCase
             'id' => $category->id,
         ]);
 
-        $this->press(trans('app.delete_confirm_button'));
+        $this->submitForm(__('app.delete_confirm_button'), [
+            'delete_transactions' => 1,
+        ]);
 
         $this->dontSeeInDatabase('categories', [
             'id' => $category->id,
