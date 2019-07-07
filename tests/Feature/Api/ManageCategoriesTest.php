@@ -4,6 +4,7 @@ namespace Tests\Feature\Api;
 
 use App\Category;
 use Tests\TestCase;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageCategoriesTest extends TestCase
@@ -81,15 +82,57 @@ class ManageCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_delete_a_category()
+    public function user_can_delete_a_category_without_deleting_any_transactions()
     {
         $user = $this->createUser();
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create([
+            'category_id' => $category->id,
+            'creator_id'  => $user->id,
+        ]);
 
         $this->deleteJson(route('api.categories.destroy', $category), [
             'category_id' => $category->id,
         ], [
             'Authorization' => 'Bearer '.$user->api_token,
+        ]);
+
+        // check for related transactions
+        $this->seeInDatabase('transactions', [
+            'id'          => $transaction->id,
+            'category_id' => null,
+        ]);
+
+        $this->dontSeeInDatabase('categories', [
+            'id' => $category->id,
+        ]);
+
+        $this->seeStatusCode(200);
+        $this->seeJson([
+            'message' => __('category.deleted'),
+        ]);
+    }
+
+    /** @test */
+    public function user_can_delete_a_category_and_transactions()
+    {
+        $user = $this->createUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create([
+            'category_id' => $category->id,
+            'creator_id'  => $user->id,
+        ]);
+
+        $this->deleteJson(route('api.categories.destroy', $category), [
+            'category_id'         => $category->id,
+            'delete_transactions' => 1,
+        ], [
+            'Authorization' => 'Bearer '.$user->api_token,
+        ]);
+
+        // check for related transactions
+        $this->dontSeeInDatabase('transactions', [
+            'id' => $transaction->id,
         ]);
 
         $this->dontSeeInDatabase('categories', [

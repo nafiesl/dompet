@@ -29,7 +29,8 @@ class DeleteRequestTest extends TestCase
     private function getDeleteAttributes($overrides = [])
     {
         return array_merge([
-            'category_id' => '1',
+            'category_id'         => '1',
+            'delete_transactions' => '1',
         ], $overrides);
     }
 }

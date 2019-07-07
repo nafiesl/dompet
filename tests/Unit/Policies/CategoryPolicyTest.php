@@ -4,7 +4,6 @@ namespace Tests\Unit\Policies;
 
 use App\Category;
 use Tests\TestCase;
-use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryPolicyTest extends TestCase
@@ -49,21 +48,5 @@ class CategoryPolicyTest extends TestCase
 
         $this->assertTrue($user->can('delete', $category));
         $this->assertFalse($user->can('delete', $othersCategory));
-    }
-
-    /** @test */
-    public function user_cannot_delete_used_category()
-    {
-        $user = $this->loginAsUser();
-        $usedCategory = factory(Category::class)->create(['creator_id' => $user->id]);
-        $transaction = factory(Transaction::class)->create([
-            'creator_id'  => $user->id,
-            'category_id' => $usedCategory->id,
-        ]);
-
-        $unusedCategory = factory(Category::class)->create(['creator_id' => $user->id]);
-
-        $this->assertFalse($user->can('delete', $usedCategory));
-        $this->assertTrue($user->can('delete', $unusedCategory));
     }
 }
