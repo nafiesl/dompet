@@ -105,8 +105,7 @@
                 <hr style="margin:0">
                 <div class="modal-body">
                     {!! Form::hidden('category_id', $editableCategory->id) !!}
-                    {!! Form::hidden('delete_transactions', '0') !!}
-                    {!! Form::checkbox('delete_transactions', '1', false) !!}
+                    {!! Form::checkbox('delete_transactions', 1) !!}
                     {!! Form::label(__('category.delete_transactions')) !!}
                     <br>
                     {{ __('app.delete_confirm') }}

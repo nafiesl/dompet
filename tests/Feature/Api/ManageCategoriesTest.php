@@ -82,25 +82,24 @@ class ManageCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_delete_a_category()
+    public function user_can_delete_a_category_without_deleting_any_transactions()
     {
         $user = $this->createUser();
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $transaction = factory(Transaction::class)->create([
             'category_id' => $category->id,
-            'creator_id' => $user->id,
+            'creator_id'  => $user->id,
         ]);
 
         $this->deleteJson(route('api.categories.destroy', $category), [
             'category_id' => $category->id,
-            'delete_transactions' => 0,
         ], [
             'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         // check for related transactions
         $this->seeInDatabase('transactions', [
-            'id' => $transaction->id,
+            'id'          => $transaction->id,
             'category_id' => null,
         ]);
 
@@ -121,11 +120,11 @@ class ManageCategoriesTest extends TestCase
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $transaction = factory(Transaction::class)->create([
             'category_id' => $category->id,
-            'creator_id' => $user->id,
+            'creator_id'  => $user->id,
         ]);
 
         $this->deleteJson(route('api.categories.destroy', $category), [
-            'category_id' => $category->id,
+            'category_id'         => $category->id,
             'delete_transactions' => 1,
         ], [
             'Authorization' => 'Bearer '.$user->api_token,

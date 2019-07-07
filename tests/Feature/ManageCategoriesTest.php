@@ -98,4 +98,27 @@ class ManageCategoriesTest extends TestCase
             'category_id' => $category->id,
         ]);
     }
+
+    /** @test */
+    public function user_can_delete_a_category_without_deleting_any_transactions()
+    {
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create(['category_id' => $category->id, 'creator_id' => $user->id]);
+
+        $this->visit(route('categories.index', ['action' => 'delete', 'id' => $category->id]));
+
+        $this->submitForm(__('app.delete_confirm_button'), [
+            'category_id' => $category->id,
+        ]);
+
+        $this->dontSeeInDatabase('categories', [
+            'id' => $category->id,
+        ]);
+
+        $this->seeInDatabase('transactions', [
+            'id'          => $transaction->id,
+            'category_id' => null,
+        ]);
+    }
 }
