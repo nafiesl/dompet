@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Category;
 use Tests\TestCase;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageCategoriesTest extends TestCase
@@ -70,10 +71,11 @@ class ManageCategoriesTest extends TestCase
     }
 
     /** @test */
-    public function user_can_delete_a_category()
+    public function user_can_delete_a_category_with_all_corresponding_transactions()
     {
         $user = $this->loginAsUser();
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        factory(Transaction::class)->create(['category_id' => $category->id, 'creator_id' => $user->id]);
 
         $this->visit(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
         $this->click('del-category-'.$category->id);
@@ -84,11 +86,16 @@ class ManageCategoriesTest extends TestCase
         ]);
 
         $this->submitForm(__('app.delete_confirm_button'), [
+            'category_id'         => $category->id,
             'delete_transactions' => 1,
         ]);
 
         $this->dontSeeInDatabase('categories', [
             'id' => $category->id,
+        ]);
+
+        $this->dontSeeInDatabase('transactions', [
+            'category_id' => $category->id,
         ]);
     }
 }
