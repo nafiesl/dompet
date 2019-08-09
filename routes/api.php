@@ -20,7 +20,6 @@ Route::post('register', 'Api\Auth\RegisterController@register')->name('api.regis
 // I think it's better without conflict the main project.
 
 Route::post('auth/login', 'Api\Auth\AuthController@login');
-Route::post('auth/register', 'Api\Auth\AuthController@register');
 Route::middleware('auth:api')->post('logout', 'Api\Auth\AuthController@logout');
 
 Route::group(['middleware' => 'auth:api', 'as' => 'api.', 'namespace' => 'Api'], function () {
