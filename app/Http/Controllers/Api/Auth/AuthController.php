@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -21,14 +19,14 @@ class AuthController extends Controller
                     'client_secret' => config('services.passport.client_secret'),
                     'username' => $request->emil,
                     'password' => $request->password,
-                ]
+                ],
             ]);
 
             return $response->getBody();
         } catch (\GuzzleHttp\Exception\BadResponseException $e) {
             if ($e->getCode() === 400) {
                 return response()->json('Invalid request. Please input an email or a password', $e->getCode());
-            } else if ($e->getCode() === 401) {
+            } elseif ($e->getCode() === 401) {
                 return response()->json('Your credentials are incorrect. Please try again', $e->getCode());
             }
 
