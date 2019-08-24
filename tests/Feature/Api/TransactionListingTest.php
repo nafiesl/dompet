@@ -4,6 +4,7 @@ namespace Tests\Feature\Api;
 
 use Tests\TestCase;
 use App\Transaction;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TransactionListingTest extends TestCase
@@ -14,11 +15,10 @@ class TransactionListingTest extends TestCase
     public function user_can_get_their_transaction_list()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
         $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
 
-        $this->getJson(route('api.transactions.index'), [
-            'Authorization' => 'Bearer '.$user->api_token,
-        ]);
+        $this->getJson(route('api.transactions.index'));
 
         $this->seeJson([
             'date'           => $transaction->date,
@@ -35,11 +35,10 @@ class TransactionListingTest extends TestCase
     public function user_can_get_a_transaction_detail()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
         $transaction = factory(Transaction::class)->create(['creator_id' => $user->id]);
 
-        $this->getJson(route('api.transactions.show', $transaction), [
-            'Authorization' => 'Bearer '.$user->api_token,
-        ]);
+        $this->getJson(route('api.transactions.show', $transaction));
 
         $this->seeJson([
             'date'           => $transaction->date,

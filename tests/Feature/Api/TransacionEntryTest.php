@@ -6,6 +6,7 @@ use App\Partner;
 use App\Category;
 use Tests\TestCase;
 use App\Transaction;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TransacionEntryTest extends TestCase
@@ -19,6 +20,7 @@ class TransacionEntryTest extends TestCase
         $year = '2017';
         $date = '2017-01-01';
         $user = $this->createUser();
+        Passport::actingAs($user);
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
@@ -29,8 +31,6 @@ class TransacionEntryTest extends TestCase
             'description' => 'Income description',
             'category_id' => $category->id,
             'partner_id'  => $partner->id,
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->seeInDatabase('transactions', [
@@ -59,6 +59,7 @@ class TransacionEntryTest extends TestCase
         $year = '2017';
         $date = '2017-01-01';
         $user = $this->createUser();
+        Passport::actingAs($user);
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
         $this->postJson(route('api.transactions.store'), [
@@ -67,8 +68,6 @@ class TransacionEntryTest extends TestCase
             'date'        => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->seeInDatabase('transactions', [
@@ -96,6 +95,7 @@ class TransacionEntryTest extends TestCase
         $year = '2017';
         $date = '2017-01-01';
         $user = $this->createUser();
+        Passport::actingAs($user);
         $transaction = factory(Transaction::class)->create([
             'in_out'     => 0,
             'amount'     => 99.99,
@@ -112,8 +112,6 @@ class TransacionEntryTest extends TestCase
             'description' => 'Spending description',
             'category_id' => $category->id,
             'partner_id'  => $partner->id,
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->seeStatusCode(200);
@@ -139,14 +137,13 @@ class TransacionEntryTest extends TestCase
     public function user_can_delete_a_transaction()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
         $transaction = factory(Transaction::class)->create([
             'creator_id' => $user->id,
         ]);
 
         $this->deleteJson(route('api.transactions.destroy', $transaction), [
             'transaction_id' => $transaction->id,
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->seeStatusCode(200);
