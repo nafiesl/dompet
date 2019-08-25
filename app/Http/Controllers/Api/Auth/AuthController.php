@@ -4,34 +4,26 @@ namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Route;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $http = new \GuzzleHttp\Client;
+        $form = [
+            'grant_type' => 'password',
+            'client_id' => config('services.passport.client_id'),
+            'client_secret' => config('services.passport.client_secret'),
+            'username' => $request->email,
+            'password' => $request->password,
+        ];
 
-        try {
-            $response = $http->post(url('/oauth/token'), [
-                'form_params' => [
-                    'grant_type' => 'password',
-                    'client_id' => config('services.passport.client_id'),
-                    'client_secret' => config('services.passport.client_secret'),
-                    'username' => $request->email,
-                    'password' => $request->password,
-                ],
-            ]);
+        $request->request->add($form);
 
-            return $response->getBody();
-        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
-            if ($e->getCode() === 400) {
-                return response()->json('Invalid request. Please input an email or a password', $e->getCode());
-            } elseif ($e->getCode() === 401) {
-                return response()->json('Your credentials are incorrect. Please try again', $e->getCode());
-            }
+        $requestToken = Request::create('oauth/token', 'POST');
+        $response = Route::dispatch($requestToken);
 
-            return response()->json('Something wrong on the server', $e->getCode());
-        }
+        return response()->json(json_decode((string) $response->content(), true), $response->status());
     }
 
     public function logout()
