@@ -4,6 +4,7 @@ namespace Tests\Feature\Api;
 
 use App\Partner;
 use Tests\TestCase;
+use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManagePartnerTest extends TestCase
@@ -14,11 +15,10 @@ class ManagePartnerTest extends TestCase
     public function user_can_see_partner_list_in_partner_index_page()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
-        $this->getJson(route('api.partners.index'), [
-            'Authorization' => 'Bearer '.$user->api_token,
-        ]);
+        $this->getJson(route('api.partners.index'));
 
         $this->seeJson(['name' => $partner->name]);
     }
@@ -27,12 +27,11 @@ class ManagePartnerTest extends TestCase
     public function user_can_create_a_partner()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
 
         $this->postJson(route('api.partners.store'), [
             'name'        => 'Partner 1 name',
             'description' => 'Partner 1 description',
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->seeInDatabase('partners', [
@@ -52,13 +51,12 @@ class ManagePartnerTest extends TestCase
     public function user_can_update_a_partner()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
         $partner = factory(Partner::class)->create(['name' => 'Testing 123', 'creator_id' => $user->id]);
 
         $this->patchJson(route('api.partners.update', $partner), [
             'name'        => 'Partner 1 name',
             'description' => 'Partner 1 description',
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->seeInDatabase('partners', [
@@ -78,12 +76,11 @@ class ManagePartnerTest extends TestCase
     public function user_can_delete_a_partner()
     {
         $user = $this->createUser();
+        Passport::actingAs($user);
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
         $this->deleteJson(route('api.partners.destroy', $partner), [
             'partner_id' => $partner->id,
-        ], [
-            'Authorization' => 'Bearer '.$user->api_token,
         ]);
 
         $this->dontSeeInDatabase('partners', [
