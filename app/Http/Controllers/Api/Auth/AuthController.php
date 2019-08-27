@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Route;
 
 class AuthController extends Controller
 {
