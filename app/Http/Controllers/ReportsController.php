@@ -34,7 +34,7 @@ class ReportsController extends Controller
 
     /**
      * Get transaction yearly report data.
-     * 
+     *
      * @param  int|string  $year
      * @return \Illuminate\Support\Collection
      */
