@@ -41,6 +41,7 @@ class ReportsController extends Controller
     private function getYearlyTransactionSummary($year, $userId)
     {
         $rawQuery = 'MONTH(date) as month';
+        $rawQuery .= ', YEAR(date) as year';
         $rawQuery .= ', count(`id`) as count';
         $rawQuery .= ', sum(if(in_out = 1, amount, 0)) AS income';
         $rawQuery .= ', sum(if(in_out = 0, amount, 0)) AS spending';
@@ -50,7 +51,8 @@ class ReportsController extends Controller
             ->where('creator_id', $userId)
             ->groupBy(DB::raw('YEAR(date)'))
             ->groupBy(DB::raw('MONTH(date)'))
-            ->orderBy('date', 'asc')
+            ->orderBy('year', 'ASC')
+            ->orderBy('month', 'ASC')
             ->get();
 
         $reports = [];
