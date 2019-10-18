@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -70,7 +71,7 @@ class RegisterController extends Controller
             'name'      => $data['name'],
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
-            'api_token' => str_random(24),
+            'api_token' => Str::random(24),
         ]);
     }
 }
