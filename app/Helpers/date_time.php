@@ -7,7 +7,13 @@
  */
 function get_dates()
 {
-    return range(1, 31);
+    $dates = [];
+    foreach (range(1, 31) as $date) {
+        $date = str_pad($date, 2, 0, STR_PAD_LEFT);
+        $dates[$date] = $date;
+    }
+
+    return $dates;
 }
 
 /**
