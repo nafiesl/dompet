@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * Get array of date list.
+ *
+ * @return array
+ */
+function get_dates()
+{
+    $dates = [];
+    foreach (range(1, 31) as $date) {
+        $date = str_pad($date, 2, 0, STR_PAD_LEFT);
+        $dates[$date] = $date;
+    }
+
+    return $dates;
+}
+
+/**
  * Get array of month list.
  *
  * @return array
