@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * Get array of date list.
+ *
+ * @return array
+ */
+function get_dates()
+{
+    return range(1, 31);
+}
+
+/**
  * Get array of month list.
  *
  * @return array

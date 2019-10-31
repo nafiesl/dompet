@@ -3,6 +3,7 @@
         'value' => request('query'), 'label' => false,
         'class' => 'input-sm', 'placeholder' => __('transaction.search_text'),
     ]) !!}
+    {{ Form::select('date', get_dates(), $date, ['class' => 'form-control input-sm', 'placeholder' => '--']) }}
     {{ Form::select('month', get_months(), $month, ['class' => 'form-control input-sm']) }}
     {{ Form::select('year', get_years(), $year, ['class' => 'form-control input-sm']) }}
     {!! FormField::select('category_id', $categories, ['label' => false, 'value' => request('category_id'), 'placeholder' => __('category.all'), 'class' => 'input-sm']) !!}

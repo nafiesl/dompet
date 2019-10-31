@@ -18,6 +18,7 @@ class TransactionsController extends Controller
     {
         $editableTransaction = null;
         $yearMonth = $this->getYearMonth();
+        $date = request('date');
         $year = request('year', date('Y'));
         $month = request('month', date('m'));
         $defaultStartDate = auth()->user()->account_start_date;
@@ -39,7 +40,7 @@ class TransactionsController extends Controller
             'transactions', 'editableTransaction',
             'yearMonth', 'month', 'year', 'categories',
             'incomeTotal', 'spendingTotal', 'partners',
-            'startDate'
+            'startDate', 'date'
         ));
     }
 
