@@ -9,6 +9,10 @@
 
 @include('transactions.partials.stats')
 
+@if ($category->description)
+    <div class="alert alert-info"><strong>{{ __('app.description') }}:</strong><br>{{ $category->description }}</div>
+@endif
+
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default table-responsive">
