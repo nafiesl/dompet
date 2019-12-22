@@ -143,7 +143,7 @@ class Controller extends BaseController
         $transactionQuery = $partner->transactions();
 
         $transactionQuery->when($query, function ($queryBuilder, $query) {
-            $q->where('description', 'like', '%'.$query.'%');
+            $queryBuilder->where('description', 'like', '%'.$query.'%');
         });
         $transactionQuery->when($categoryId, function ($w, $categoryId) {
             $w->where('category_id', $categoryId);
