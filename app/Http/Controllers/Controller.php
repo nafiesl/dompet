@@ -146,7 +146,7 @@ class Controller extends BaseController
             $queryBuilder->where('description', 'like', '%'.$query.'%');
         });
         $transactionQuery->when($categoryId, function ($w, $categoryId) {
-            $w->where('category_id', $categoryId);
+            $queryBuilder->where('category_id', $categoryId);
         });
 
         return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
