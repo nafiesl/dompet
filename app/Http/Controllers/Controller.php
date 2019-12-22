@@ -43,7 +43,7 @@ class Controller extends BaseController
         $transactionQuery->where('date', 'like', $yearMonth.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
 
-        $transactionQuery->when($categoryId, function ($w, $categoryId) {
+        $transactionQuery->when($categoryId, function ($queryBuilder, $categoryId) {
             $w->where('category_id', $categoryId);
         });
 
