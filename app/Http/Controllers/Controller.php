@@ -120,7 +120,7 @@ class Controller extends BaseController
             $queryBuilder->where('description', 'like', '%'.$query.'%');
         });
         $transactionQuery->when($partnerId, function ($queryBuilder, $partnerId) {
-            $w->where('partner_id', $partnerId);
+            $queryBuilder->where('partner_id', $partnerId);
         });
 
         return $transactionQuery->orderBy('date', 'desc')->with('partner')->get();
