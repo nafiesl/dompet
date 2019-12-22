@@ -48,7 +48,7 @@ class Controller extends BaseController
         });
 
         $transactionQuery->when($partnerId, function ($queryBuilder, $partnerId) {
-            $w->where('partner_id', $partnerId);
+            $queryBuilder->where('partner_id', $partnerId);
         });
 
         return $transactionQuery->orderBy('date', 'desc')->with('category', 'partner')->get();
