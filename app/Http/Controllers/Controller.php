@@ -145,6 +145,9 @@ class Controller extends BaseController
         $transactionQuery->when($query, function ($queryBuilder, $query) {
             $queryBuilder->where('description', 'like', '%'.$query.'%');
         });
+        
+        $transactionQuery->whereBetween('date', [$startDate, $endDate]);
+
         $transactionQuery->when($categoryId, function ($queryBuilder, $categoryId) {
             $queryBuilder->where('category_id', $categoryId);
         });
