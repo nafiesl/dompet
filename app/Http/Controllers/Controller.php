@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Partner;
 use App\Category;
+use App\Partner;
 use App\Transaction;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
@@ -36,17 +36,20 @@ class Controller extends BaseController
 
     protected function getTansactions($yearMonth)
     {
+        $categoryId = request('category_id');
+        $partnerId = request('partner_id');
+
         $transactionQuery = Transaction::query();
         $transactionQuery->where('date', 'like', $yearMonth.'%');
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
 
-        if ($categoryId = request('category_id')) {
-            $transactionQuery->where('category_id', $categoryId);
-        }
+        $transactionQuery->when($categoryId, function ($queryBuilder, $categoryId) {
+            $queryBuilder->where('category_id', $categoryId);
+        });
 
-        if ($partnerId = request('partner_id')) {
-            $transactionQuery->where('partner_id', $partnerId);
-        }
+        $transactionQuery->when($partnerId, function ($queryBuilder, $partnerId) {
+            $queryBuilder->where('partner_id', $partnerId);
+        });
 
         return $transactionQuery->orderBy('date', 'desc')->with('category', 'partner')->get();
     }
@@ -112,11 +115,13 @@ class Controller extends BaseController
         $partnerId = $criteria['partner_id'];
 
         $transactionQuery = $category->transactions();
-        $transactionQuery->where('description', 'like', '%'.$query.'%');
         $transactionQuery->whereBetween('date', [$startDate, $endDate]);
-        if ($partnerId) {
-            $transactionQuery->where('partner_id', $partnerId);
-        }
+        $transactionQuery->when($query, function ($queryBuilder, $query) {
+            $queryBuilder->where('description', 'like', '%'.$query.'%');
+        });
+        $transactionQuery->when($partnerId, function ($queryBuilder, $partnerId) {
+            $queryBuilder->where('partner_id', $partnerId);
+        });
 
         return $transactionQuery->orderBy('date', 'desc')->with('partner')->get();
     }
@@ -136,11 +141,16 @@ class Controller extends BaseController
         $categoryId = $criteria['category_id'];
 
         $transactionQuery = $partner->transactions();
-        $transactionQuery->where('description', 'like', '%'.$query.'%');
+
+        $transactionQuery->when($query, function ($queryBuilder, $query) {
+            $queryBuilder->where('description', 'like', '%'.$query.'%');
+        });
+
         $transactionQuery->whereBetween('date', [$startDate, $endDate]);
-        if ($categoryId) {
-            $transactionQuery->where('category_id', $categoryId);
-        }
+
+        $transactionQuery->when($categoryId, function ($queryBuilder, $categoryId) {
+            $queryBuilder->where('category_id', $categoryId);
+        });
 
         return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
     }
