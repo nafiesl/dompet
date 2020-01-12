@@ -183,6 +183,55 @@ class TransactionEditTest extends TestCase
     }
 
     /** @test */
+    public function bugfix_user_can_edit_a_transaction_with_removed_partner_and_category()
+    {
+        $month = '01';
+        $year = '2017';
+        $date = '2017-01-01';
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->create([
+            'in_out'      => 0,
+            'amount'      => 99.99,
+            'date'        => $date,
+            'creator_id'  => $user->id,
+            'category_id' => $category->id,
+            'partner_id'  => $partner->id,
+        ]);
+
+        $this->visitRoute('partners.show', [
+            $partner->id,
+            'action'     => 'edit',
+            'end_date'   => $year.'-'.$month.'-28',
+            'id'         => $transaction->id,
+            'start_date' => $date,
+        ]);
+
+        $this->submitForm(__('transaction.update'), [
+            'in_out'      => 1,
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Transaction 1 description',
+            'category_id' => null,
+            'partner_id'  => null,
+        ]);
+
+        $this->seeRouteIs('transactions.index', [
+            'month' => $transaction->month,
+            'year'  => $transaction->year,
+        ]);
+
+        $this->seeInDatabase('transactions', [
+            'amount'      => 99.99,
+            'date'        => $date,
+            'description' => 'Transaction 1 description',
+            'category_id' => null,
+            'partner_id'  => null,
+        ]);
+    }
+
+    /** @test */
     public function user_can_delete_a_transaction_from_partner_transactions_page()
     {
         $user = $this->loginAsUser();

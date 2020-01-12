@@ -82,22 +82,26 @@ class TransactionsController extends Controller
 
         if ($referencePage = $transactionUpateForm->get('reference_page')) {
             if ($referencePage == 'partner') {
-                return redirect()->route('partners.show', [
-                    $transaction->partner_id,
-                    'start_date'  => $transactionUpateForm->get('start_date'),
-                    'end_date'    => $transactionUpateForm->get('end_date'),
-                    'category_id' => $transactionUpateForm->get('category_id'),
-                    'query'       => $transactionUpateForm->get('query'),
-                ]);
+                if ($transaction->partner) {
+                    return redirect()->route('partners.show', [
+                        $transaction->partner_id,
+                        'start_date'  => $transactionUpateForm->get('start_date'),
+                        'end_date'    => $transactionUpateForm->get('end_date'),
+                        'category_id' => $transactionUpateForm->get('category_id'),
+                        'query'       => $transactionUpateForm->get('query'),
+                    ]);
+                }
             }
             if ($referencePage == 'category') {
-                return redirect()->route('categories.show', [
-                    $transaction->category_id,
-                    'start_date' => $transactionUpateForm->get('start_date'),
-                    'end_date'   => $transactionUpateForm->get('end_date'),
-                    'partner_id' => $transactionUpateForm->get('partner_id'),
-                    'query'      => $transactionUpateForm->get('query'),
-                ]);
+                if ($transaction->category) {
+                    return redirect()->route('categories.show', [
+                        $transaction->category_id,
+                        'start_date' => $transactionUpateForm->get('start_date'),
+                        'end_date'   => $transactionUpateForm->get('end_date'),
+                        'partner_id' => $transactionUpateForm->get('partner_id'),
+                        'query'      => $transactionUpateForm->get('query'),
+                    ]);
+                }
             }
         }
 
