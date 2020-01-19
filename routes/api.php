@@ -19,8 +19,8 @@ Route::post('register', 'Api\Auth\RegisterController@register')->name('api.regis
 // I make in seperate controller and make in different route
 // I think it's better without conflict the main project.
 
-Route::post('auth/login', 'Api\Auth\AuthController@login');
-Route::middleware('auth:api')->post('logout', 'Api\Auth\AuthController@logout');
+Route::post('auth/login', 'Api\Auth\AuthController@login')->name('api.auth.login');
+Route::middleware('auth:api')->post('logout', 'Api\Auth\AuthController@logout')->name('api.auth.logout');
 
 Route::group(['middleware' => 'auth:api', 'as' => 'api.', 'namespace' => 'Api'], function () {
     /*
