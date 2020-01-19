@@ -5,27 +5,16 @@ namespace App\Http\Controllers\Api\Auth;
 use Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'email'    => 'required|string|email',
-            'password' => 'required|string|min:6',
-        ]);
-    }
 
     public function login(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $request->validate([
+            'email'    => 'required|string|email',
+            'password' => 'required|string|min:6',
+        ]);
 
         $form = [
             'grant_type' => 'password',
