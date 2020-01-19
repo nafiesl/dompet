@@ -8,8 +8,14 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
+
     public function login(Request $request)
     {
+        $request->validate([
+            'email'    => 'required|string|email',
+            'password' => 'required|string|min:6',
+        ]);
+
         $form = [
             'grant_type' => 'password',
             'client_id' => config('services.passport.client_id'),
@@ -32,6 +38,8 @@ class AuthController extends Controller
             $token->revoke();
         });
 
-        return response()->json('Logged out successfully', 200);
+        return response()->json([
+            'message' => 'Logged out successfully',
+        ], 200);
     }
 }
