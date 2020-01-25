@@ -128,7 +128,11 @@ class Controller extends BaseController
             $queryBuilder->where('description', 'like', '%'.$query.'%');
         });
         $transactionQuery->when($partnerId, function ($queryBuilder, $partnerId) {
-            $queryBuilder->where('partner_id', $partnerId);
+            if ($partnerId == 'null') {
+                $queryBuilder->whereNull('partner_id');
+            } else {
+                $queryBuilder->where('partner_id', $partnerId);
+            }
         });
 
         return $transactionQuery->orderBy('date', 'desc')->with('partner')->get();
@@ -157,7 +161,11 @@ class Controller extends BaseController
         $transactionQuery->whereBetween('date', [$startDate, $endDate]);
 
         $transactionQuery->when($categoryId, function ($queryBuilder, $categoryId) {
-            $queryBuilder->where('category_id', $categoryId);
+            if ($categoryId == 'null') {
+                $queryBuilder->whereNull('category_id');
+            } else {
+                $queryBuilder->where('category_id', $categoryId);
+            }
         });
 
         return $transactionQuery->orderBy('date', 'desc')->with('category')->get();
