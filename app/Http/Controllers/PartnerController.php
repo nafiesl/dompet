@@ -58,7 +58,7 @@ class PartnerController extends Controller
         $partners = [];
         $editableTransaction = null;
         $year = request('year', date('Y'));
-        $categories = $this->getCategoryList();
+        $categories = $this->getCategoryList()->prepend('-- '.__('transaction.no_category').' --', 'null');
 
         $defaultStartDate = auth()->user()->account_start_date ?: date('Y-m').'-01';
         $startDate = request('start_date', $defaultStartDate);

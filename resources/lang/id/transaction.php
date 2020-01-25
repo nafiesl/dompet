@@ -21,6 +21,8 @@ return [
     'end_balance'     => 'Saldo Akhir',
     'current_balance' => 'Saldo Saat Ini',
     'balance'         => 'Saldo',
+    'no_category'     => 'Tanpa Kategori',
+    'no_partner'      => 'Tanpa Partner',
 
     // Actions
     'add_income'     => 'Input Pemasukan',
