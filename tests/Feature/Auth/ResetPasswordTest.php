@@ -3,9 +3,9 @@
 namespace Tests\Feature\Auth;
 
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Notification;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ResetPasswordTest extends TestCase
 {

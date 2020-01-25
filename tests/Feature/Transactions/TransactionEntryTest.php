@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Transactions;
 
-use App\Partner;
 use App\Category;
-use Tests\TestCase;
+use App\Partner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TransactionEntryTest extends TestCase
 {

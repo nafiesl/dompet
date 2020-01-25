@@ -1,7 +1,7 @@
 <?php
 
-use App\User;
 use App\Partner;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Partner::class, function (Faker $faker) {

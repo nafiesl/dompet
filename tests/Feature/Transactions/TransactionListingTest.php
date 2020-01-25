@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Transactions;
 
-use App\Partner;
 use App\Category;
-use Tests\TestCase;
+use App\Partner;
 use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TransactionListingTest extends TestCase
 {

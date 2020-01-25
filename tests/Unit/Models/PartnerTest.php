@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Models;
 
-use App\User;
 use App\Partner;
-use Tests\TestCase;
 use App\Transaction;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PartnerTest extends TestCase
 {

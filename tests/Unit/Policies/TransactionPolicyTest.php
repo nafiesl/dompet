@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Policies;
 
-use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TransactionPolicyTest extends TestCase
 {

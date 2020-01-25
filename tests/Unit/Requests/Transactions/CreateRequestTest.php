@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Requests\Transactions;
 
-use App\Partner;
 use App\Category;
+use App\Http\Requests\Transactions\CreateRequest as TransactionCreateRequest;
+use App\Partner;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\ValidateFormRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Http\Requests\Transactions\CreateRequest as TransactionCreateRequest;
 
 class CreateRequestTest extends TestCase
 {
