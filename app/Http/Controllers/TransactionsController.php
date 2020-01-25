@@ -26,8 +26,8 @@ class TransactionsController extends Controller
 
         $transactions = $this->getTansactions($yearMonth);
 
-        $categories = $this->getCategoryList();
-        $partners = $this->getPartnerList();
+        $categories = $this->getCategoryList()->prepend('-- '.__('transaction.no_category').' --', 'null');
+        $partners = $this->getPartnerList()->prepend('-- '.__('transaction.no_partner').' --', 'null');
 
         if (in_array(request('action'), ['edit', 'delete']) && request('id') != null) {
             $editableTransaction = Transaction::find(request('id'));

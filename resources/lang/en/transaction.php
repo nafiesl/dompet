@@ -21,6 +21,8 @@ return [
     'end_balance'     => 'End Balance',
     'current_balance' => 'Current Balance',
     'balance'         => 'Balance',
+    'no_category'     => 'No Category',
+    'no_partner'      => 'No Partner',
 
     // Actions
     'add_income'     => 'Add Income',

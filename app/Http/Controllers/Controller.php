@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Partner;
+use App\Category;
 use App\Transaction;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
@@ -44,11 +44,19 @@ class Controller extends BaseController
         $transactionQuery->where('description', 'like', '%'.request('query').'%');
 
         $transactionQuery->when($categoryId, function ($queryBuilder, $categoryId) {
-            $queryBuilder->where('category_id', $categoryId);
+            if ($categoryId == 'null') {
+                $queryBuilder->whereNull('category_id');
+            } else {
+                $queryBuilder->where('category_id', $categoryId);
+            }
         });
 
         $transactionQuery->when($partnerId, function ($queryBuilder, $partnerId) {
-            $queryBuilder->where('partner_id', $partnerId);
+            if ($partnerId == 'null') {
+                $queryBuilder->whereNull('partner_id');
+            } else {
+                $queryBuilder->where('partner_id', $partnerId);
+            }
         });
 
         return $transactionQuery->orderBy('date', 'desc')->with('category', 'partner')->get();
