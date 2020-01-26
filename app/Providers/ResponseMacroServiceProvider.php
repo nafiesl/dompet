@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Database\Eloquent\Collection;
 use App\Services\Transactions\CsvTransformer;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\ServiceProvider;
 
 class ResponseMacroServiceProvider extends ServiceProvider
 {

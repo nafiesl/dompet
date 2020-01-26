@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Models;
 
-use App\User;
 use App\Category;
 use App\Transaction;
-use Tests\TestCase as TestCase;
-use Illuminate\Support\Collection;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
+use Tests\TestCase as TestCase;
 
 class CategoryTest extends TestCase
 {

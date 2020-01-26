@@ -3,8 +3,8 @@
 namespace Tests\Unit\Policies;
 
 use App\Category;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CategoryPolicyTest extends TestCase
 {

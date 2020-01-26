@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Partner;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PartnerPolicy

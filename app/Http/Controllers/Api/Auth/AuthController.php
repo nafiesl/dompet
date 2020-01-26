@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Route;
 
 class AuthController extends Controller
 {
-
     public function login(Request $request)
     {
         $request->validate([
