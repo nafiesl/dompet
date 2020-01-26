@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api;
 
-use App\Partner;
 use App\Category;
-use Tests\TestCase;
+use App\Partner;
 use App\Transaction;
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class TransacionEntryTest extends TestCase
 {

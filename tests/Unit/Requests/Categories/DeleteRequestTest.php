@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Requests\Categories;
 
+use App\Http\Requests\Categories\DeleteRequest as CategoryDeleteRequest;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\ValidateFormRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Http\Requests\Categories\DeleteRequest as CategoryDeleteRequest;
 
 class DeleteRequestTest extends TestCase
 {

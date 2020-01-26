@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Api;
 
-use Tests\TestCase;
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class UserListingTest extends TestCase
 {

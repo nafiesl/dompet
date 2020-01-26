@@ -3,10 +3,10 @@
 namespace Tests\Feature\Api;
 
 use App\Category;
-use Tests\TestCase;
 use App\Transaction;
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class ManageCategoriesTest extends TestCase
 {

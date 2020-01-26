@@ -3,9 +3,9 @@
 namespace Tests\Feature\Api;
 
 use App\Partner;
-use Tests\TestCase;
-use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class ManagePartnerTest extends TestCase
 {

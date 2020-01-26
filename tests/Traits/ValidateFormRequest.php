@@ -3,8 +3,8 @@
 namespace Tests\Traits;
 
 use Closure;
-use Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Validator;
 
 trait ValidateFormRequest
 {

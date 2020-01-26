@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Category;
-use Tests\TestCase;
 use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ManageCategoriesTest extends TestCase
 {

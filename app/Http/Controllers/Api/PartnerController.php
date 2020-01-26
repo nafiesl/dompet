@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Partner;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PartnerController extends Controller
 {
