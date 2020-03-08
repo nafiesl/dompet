@@ -24,4 +24,7 @@ mix.js('resources/js/app.js', 'public/js')
         }
     }).options({
         processCssUrls: false
-    }).copyDirectory( paths.bootstrap + 'fonts/bootstrap/', 'public/fonts/bootstrap' );
+    }).copyDirectory( paths.bootstrap + 'fonts/bootstrap/', 'public/fonts/bootstrap' )
+    .postCss('resources/css/style.css', 'public/css', [
+        require('tailwindcss'),
+    ]);
