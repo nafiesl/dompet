@@ -11,19 +11,16 @@
     <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body>
-    <div id="app">
-        @include('layouts.partials.top-nav')
-
-        <div class="container">@yield('content')</div>
+<body class="bg-gray-300">
+    <div class="flex flex-col min-h-screen">
+        @include('components.header')
+        <main class="flex flex-col flex-auto">
+            @yield('content')
+        </main>
+        @include('components.footer')
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    @include('layouts.partials.noty')
-    @stack('scripts')
 </body>
 </html>
