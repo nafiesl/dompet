@@ -12,34 +12,26 @@
     <title>@yield ('title') - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/guest.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body>
-    <div class="container">
-        <div class="header clearfix">
-            @if (Route::has('login'))
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                   @auth
-                       <li role="presentation" class="active"><a href="{{ url('/home') }}">Home</a></li>
-                   @else
-                        <li role="presentation" class="active"><a href="{{ route('login') }}">Login</a></li>
-                        <li role="presentation"><a href="{{ route('register') }}">Register</a></li>
-                   @endauth
-                </ul>
+<body class="bg-gray-300">
+    <div class="flex flex-col min-h-screen">
+        <header class="shadow bg-white p-4">
+            <nav class="md:mx-16 flex items-center justify-between">
+                <a href="/">Dompet</a>
+                <a href="/login" class="border-2 border-black border-solid rounded p-2">Masuk</a>
             </nav>
-            @endif
-            <h3 class="text-muted">{{ config('app.name', 'Laravel') }}</h3>
-        </div>
-
-        @yield ('content')
-
-        <footer class="footer">
-            <p>&copy; 2018 Nafies Luthfi.</p>
+        </header>
+        <main class="flex flex-col flex-auto">
+            <div class="m-auto">
+                <h1 class="text-3xl mb-4">Pencatat Transaksi Pribadi</h1>
+                <a href="/register" class="border-2 border-orange-500 p-2 border-solid rounded block text-center text-white bg-orange-500 hover:bg-orange-600 font-bold">Daftar Dompet</a>
+            </div>
+        </main>
+        <footer class="text-sm text-center font-bold">
+            &copy; 2018 Nafies Luthfi
         </footer>
-
-    </div> <!-- /container -->
+    </div>
 </body>
 </html>
