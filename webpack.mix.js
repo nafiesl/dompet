@@ -28,3 +28,5 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/style.css', 'public/css', [
         require('tailwindcss'),
     ]);
+
+mix.browserSync('dompet.test');
