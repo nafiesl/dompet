@@ -3,45 +3,35 @@
 @section('title', __('auth.reset_password'))
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="panel-title">{{ __('auth.reset_password') }}</h3></div>
+    <div class="w-3/6 my-16 mx-auto">
+        <h1 class="text-3xl text-center mb-8">{{ __('auth.reset_password') }}</h1>
+        
+        @if (session('status'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('status') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+          </div>
+        @endif
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('password.email') }}">
+            {{ csrf_field() }}
 
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">{{ __('auth.email') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('auth.send_reset_password_link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="mb-6">
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">{{ __('auth.email') }}</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                        {{ $errors->has('email') ? 'border-red-500' : '' }}
+                        leading-tight focus:outline-none focus:shadow-outline">
+                @if ($errors->has('email'))
+                    <p class="text-red-500 text-xs italic">
+                        {{ $errors->first('email') }}
+                    </p>
+                @endif
             </div>
-        </div>
+
+            <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                {{ __('auth.send_reset_password_link') }}
+            </button>
+        </form>
     </div>
 @endsection
