@@ -3,67 +3,50 @@
 @section('title', __('auth.login'))
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="panel-title">{{ __('auth.login') }}</h3></div>
+    <div class="w-3/6 my-16 mx-auto">
+        <h1 class="text-3xl text-center mb-8">{{ __('auth.login') }}</h1>
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="{{ route('login') }}">
+            {{ csrf_field() }}
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-3 control-label">{{ __('auth.email') }}</label>
-
-                            <div class="col-md-8">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-3 control-label">{{ __('auth.password') }}</label>
-
-                            <div class="col-md-8">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-3">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('auth.remember_me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-3">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('auth.login') }}
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('auth.forgot_password') }}
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">{{ __('auth.email') }}</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                        {{ $errors->has('email') ? 'border-red-500' : '' }}
+                        leading-tight focus:outline-none focus:shadow-outline">
+                @if ($errors->has('email'))
+                    <p class="text-red-500 text-xs italic">
+                        {{ $errors->first('email') }}
+                    </p>
+                @endif
             </div>
-        </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">{{ __('auth.password') }}</label>
+                <input id="password" type="password" name="password" value="{{ old('password') }}" required
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                        {{ $errors->has('password') ? 'border-red-500' : '' }}
+                        leading-tight focus:outline-none focus:shadow-outline">
+                @if ($errors->has('password'))
+                    <p class="text-red-500 text-xs italic">
+                        {{ $errors->first('password') }}
+                    </p>
+                @endif
+            </div>
+
+            <div class="mb-6">
+                <label>
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} class="w-5 h-5 form-checkbox text-green-500"> {{ __('auth.remember_me') }}
+                </label>
+            </div>
+
+            <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                {{ __('auth.login') }}
+            </button>
+
+            <a class="underline text-blue-600" href="{{ route('password.request') }}">
+                {{ __('auth.forgot_password') }}
+            </a>
+        </form>
     </div>
 @endsection
