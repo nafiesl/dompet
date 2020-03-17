@@ -37,7 +37,7 @@
         </div>
     </div>
     @empty
-        
+        <p class="font-bold">Belum ada transaksi. Silakan diisi ya. :)</p>
     @endforelse
 </div>
 @endsection
