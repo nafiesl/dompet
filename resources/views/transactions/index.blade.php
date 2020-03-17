@@ -31,7 +31,7 @@
             <div>
                 <p class="uppercase border px-2 rounded text-white
                     {{ $transaction->in_out == '1' ? 'bg-green-600 border-green-600' : 'bg-red-600 border-red-600' }}">
-                    {{ $transaction->type }}
+                    {{ $transaction->in_out == '1' ? 'masuk' : 'keluar' }}
                 </p>
             </div>
         </div>
