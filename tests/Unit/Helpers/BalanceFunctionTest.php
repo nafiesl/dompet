@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Helpers;
 
 use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
