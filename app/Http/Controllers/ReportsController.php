@@ -15,10 +15,12 @@ class ReportsController extends Controller
      */
     public function index(Request $request)
     {
+        $partnerId = $request->get('partner_id');
+        $partners = $this->getPartnerList();
         $year = $this->getYearQuery($request->get('year'));
-        $data = $this->getYearlyTransactionSummary($year, auth()->id());
+        $data = $this->getYearlyTransactionSummary($year, auth()->id(), $partnerId);
 
-        return view('reports.index', compact('year', 'data'));
+        return view('reports.index', compact('year', 'data', 'partners', 'partnerId'));
     }
 
     /**
@@ -36,9 +38,11 @@ class ReportsController extends Controller
      * Get transaction yearly report data.
      *
      * @param  int|string  $year
+     * @param  int  $userId
+     * @param  int|null  $partnerId
      * @return \Illuminate\Support\Collection
      */
-    private function getYearlyTransactionSummary($year, $userId)
+    private function getYearlyTransactionSummary($year, $userId, $partnerId = null)
     {
         $rawQuery = 'MONTH(date) as month';
         $rawQuery .= ', YEAR(date) as year';
@@ -46,13 +50,18 @@ class ReportsController extends Controller
         $rawQuery .= ', sum(if(in_out = 1, amount, 0)) AS income';
         $rawQuery .= ', sum(if(in_out = 0, amount, 0)) AS spending';
 
-        $reportsData = DB::table('transactions')->select(DB::raw($rawQuery))
+        $reportQuery = DB::table('transactions')->select(DB::raw($rawQuery))
             ->where(DB::raw('YEAR(date)'), $year)
-            ->where('creator_id', $userId)
+            ->where('creator_id', $userId);
+
+        if ($partnerId) {
+            $reportQuery->where('partner_id', $partnerId);
+        }
+
+        $reportsData = $reportQuery->orderBy('year', 'ASC')
+            ->orderBy('month', 'ASC')
             ->groupBy(DB::raw('YEAR(date)'))
             ->groupBy(DB::raw('MONTH(date)'))
-            ->orderBy('year', 'ASC')
-            ->orderBy('month', 'ASC')
             ->get();
 
         $reports = [];
