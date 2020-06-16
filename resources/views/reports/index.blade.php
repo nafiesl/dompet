@@ -9,6 +9,7 @@
 {{ Form::label('year', __('report.view_yearly_label'), ['class' => 'control-label']) }}
 {{ Form::select('year', get_years(), $year, ['class' => 'form-control']) }}
 {{ Form::select('partner_id', $partners, $partnerId, ['class' => 'form-control', 'placeholder' => '-- '.__('partner.all').' --']) }}
+{{ Form::select('category_id', $categories, $categoryId, ['class' => 'form-control', 'placeholder' => '-- '.__('category.all').' --']) }}
 {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info btn-sm']) }}
 {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-default btn-sm']) }}
 {{ Form::close() }}

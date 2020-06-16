@@ -17,10 +17,12 @@ class ReportsController extends Controller
     {
         $partnerId = $request->get('partner_id');
         $partners = $this->getPartnerList();
+        $categoryId = $request->get('category_id');
+        $categories = $this->getCategoryList();
         $year = $this->getYearQuery($request->get('year'));
-        $data = $this->getYearlyTransactionSummary($year, auth()->id(), $partnerId);
+        $data = $this->getYearlyTransactionSummary($year, auth()->id(), $partnerId, $categoryId);
 
-        return view('reports.index', compact('year', 'data', 'partners', 'partnerId'));
+        return view('reports.index', compact('year', 'data', 'partners', 'partnerId', 'categories', 'categoryId'));
     }
 
     /**
@@ -42,7 +44,7 @@ class ReportsController extends Controller
      * @param  int|null  $partnerId
      * @return \Illuminate\Support\Collection
      */
-    private function getYearlyTransactionSummary($year, $userId, $partnerId = null)
+    private function getYearlyTransactionSummary($year, $userId, $partnerId = null, $categoryId = null)
     {
         $rawQuery = 'MONTH(date) as month';
         $rawQuery .= ', YEAR(date) as year';
@@ -56,6 +58,10 @@ class ReportsController extends Controller
 
         if ($partnerId) {
             $reportQuery->where('partner_id', $partnerId);
+        }
+
+        if ($categoryId) {
+            $reportQuery->where('category_id', $categoryId);
         }
 
         $reportsData = $reportQuery->orderBy('year', 'ASC')
