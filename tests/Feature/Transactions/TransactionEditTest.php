@@ -213,8 +213,8 @@ class TransactionEditTest extends TestCase
             'amount'      => 99.99,
             'date'        => $date,
             'description' => 'Transaction 1 description',
-            'category_id' => null,
-            'partner_id'  => null,
+            'category_id' => '',
+            'partner_id'  => '',
         ]);
 
         $this->seeRouteIs('transactions.index', [
