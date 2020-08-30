@@ -25,7 +25,7 @@ Those are basic concept of the personal bookkeeping service.
 This application can be installed on local server and online server with these specifications :
 
 #### Server Requirements
-1. PHP 7.2 (and meet [Laravel 6.x server requirements](https://laravel.com/docs/6.x#server-requirements)),
+1. PHP >=7.2.5 (and meet [Laravel 7.x server requirements](https://laravel.com/docs/7.x#server-requirements)),
 2. MySQL or MariaDB database,
 3. SQlite (for automated testing).
 
