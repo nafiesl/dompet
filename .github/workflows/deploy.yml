@@ -9,10 +9,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         # Build jS
-      - name: Yarn build
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Install dependencies
+        run: npm ci
+      - name: NPM Build
         run: |
-          yarn install
-          yarn prod
+          npm run prod
           cat public/mix-manifest.json # see version in log
       - name: Upload compile assets
         uses: actions/upload-artifact@v1
