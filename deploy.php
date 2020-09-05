@@ -32,7 +32,6 @@ task('deploy:secrets', function () {
     run('cp $HOME/env/dompet/production/.env {{deploy_path}}/shared');
 });
 
-
 // Hosts
 host('dompetku') // Name of the server
     ->hostname('178.128.104.220') // Hostname or IP address
