@@ -57,7 +57,7 @@ task('deploy', [
     'artisan:storage:link', // |
     'artisan:view:cache',   // |
     'artisan:config:cache', // | Laravel specific steps
-    // 'artisan:optimize',     // |
+    'artisan:optimize',     // |
     'artisan:migrate',      // | Run artisan migrate if you need it, if not then just comment it!
     'deploy:symlink',
     'deploy:unlock',
