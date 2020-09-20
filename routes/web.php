@@ -16,7 +16,7 @@ Route::view('/', 'welcome')->name('welcome')->middleware('guest');
 Auth::routes();
 
 // Change Password Routes
-Route::get('change-password', 'Auth\ChangePasswordController@show')->name('password.change');
+Route::get('change-password', 'Auth\ChangePasswordController@show');
 Route::patch('change-password', 'Auth\ChangePasswordController@update')->name('password.change');
 
 Route::group(['middleware' => 'auth'], function () {
