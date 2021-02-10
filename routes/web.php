@@ -57,3 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
      */
     Route::patch('lang_switch', 'LangSwitcherController@update')->name('lang.switch');
 });
+
+/*
+ * Loans Routes
+ */
+Route::resource('loans', 'LoanController');
