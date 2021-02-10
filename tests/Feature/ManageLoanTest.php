@@ -3,8 +3,9 @@
 namespace Tests\Feature;
 
 use App\Loan;
-use Tests\TestCase;
+use App\Partner;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ManageLoanTest extends TestCase
 {
@@ -23,7 +24,6 @@ class ManageLoanTest extends TestCase
     private function getCreateFields(array $overrides = [])
     {
         return array_merge([
-            'name'        => 'Loan 1 name',
             'description' => 'Loan 1 description',
         ], $overrides);
     }
@@ -31,39 +31,36 @@ class ManageLoanTest extends TestCase
     /** @test */
     public function user_can_create_a_loan()
     {
-        $this->loginAsUser();
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $this->visitRoute('loans.index');
 
         $this->click(__('loan.create'));
         $this->seeRouteIs('loans.create');
 
-        $this->submitForm(__('loan.create'), $this->getCreateFields());
+        $this->submitForm(__('loan.create'), $this->getCreateFields([
+            'partner_id' => $partner->id,
+            'type_id'    => Loan::TYPE_DEBT,
+            'amount'     => 2000,
+        ]));
 
         $this->seeRouteIs('loans.show', Loan::first());
 
-        $this->seeInDatabase('loans', $this->getCreateFields());
-    }
-
-    /** @test */
-    public function validate_loan_name_is_required()
-    {
-        $this->loginAsUser();
-
-        // name empty
-        $this->post(route('loans.store'), $this->getCreateFields(['name' => '']));
-        $this->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function validate_loan_name_is_not_more_than_60_characters()
-    {
-        $this->loginAsUser();
-
-        // name 70 characters
-        $this->post(route('loans.store'), $this->getCreateFields([
-            'name' => str_repeat('Test Title', 7),
+        $this->seeInDatabase('loans', $this->getCreateFields([
+            'partner_id' => $partner->id,
+            'type_id'    => Loan::TYPE_DEBT,
+            'amount'     => 2000,
         ]));
-        $this->assertSessionHasErrors('name');
+    }
+
+    /** @test */
+    public function validate_loan_amount_is_required()
+    {
+        $this->loginAsUser();
+
+        // amount empty
+        $this->post(route('loans.store'), $this->getCreateFields(['amount' => '']));
+        $this->assertSessionHasErrors('amount');
     }
 
     /** @test */
@@ -81,7 +78,6 @@ class ManageLoanTest extends TestCase
     private function getEditFields(array $overrides = [])
     {
         return array_merge([
-            'name'        => 'Loan 1 name',
             'description' => 'Loan 1 description',
         ], $overrides);
     }
@@ -89,51 +85,46 @@ class ManageLoanTest extends TestCase
     /** @test */
     public function user_can_edit_a_loan()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['name' => 'Testing 123']);
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create([
+            'partner_id' => $partner->id,
+            'creator_id' => $user->id,
+        ]);
 
         $this->visitRoute('loans.show', $loan);
         $this->click('edit-loan-'.$loan->id);
         $this->seeRouteIs('loans.edit', $loan);
 
-        $this->submitForm(__('loan.update'), $this->getEditFields());
+        $this->submitForm(__('loan.update'), $this->getEditFields([
+            'partner_id' => $loan->partner_id,
+            'amount'     => 1000,
+        ]));
 
         $this->seeRouteIs('loans.show', $loan);
 
         $this->seeInDatabase('loans', $this->getEditFields([
-            'id' => $loan->id,
+            'id'     => $loan->id,
+            'amount' => 1000,
         ]));
     }
 
     /** @test */
-    public function validate_loan_name_update_is_required()
+    public function validate_loan_amount_update_is_required()
     {
         $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['name' => 'Testing 123']);
+        $loan = factory(Loan::class)->create(['amount' => 500]);
 
-        // name empty
-        $this->patch(route('loans.update', $loan), $this->getEditFields(['name' => '']));
-        $this->assertSessionHasErrors('name');
-    }
-
-    /** @test */
-    public function validate_loan_name_update_is_not_more_than_60_characters()
-    {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['name' => 'Testing 123']);
-
-        // name 70 characters
-        $this->patch(route('loans.update', $loan), $this->getEditFields([
-            'name' => str_repeat('Test Title', 7),
-        ]));
-        $this->assertSessionHasErrors('name');
+        // amount empty
+        $this->patch(route('loans.update', $loan), $this->getEditFields(['amount' => '']));
+        $this->assertSessionHasErrors('amount');
     }
 
     /** @test */
     public function validate_loan_description_update_is_not_more_than_255_characters()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['name' => 'Testing 123']);
+        $user = $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id]);
 
         // description 256 characters
         $this->patch(route('loans.update', $loan), $this->getEditFields([

@@ -34,7 +34,9 @@
             <div class="panel-heading"><h3 class="panel-title">{{ __('loan.edit') }}</h3></div>
             {{ Form::model($loan, ['route' => ['loans.update', $loan], 'method' => 'patch']) }}
             <div class="panel-body">
-                {!! FormField::text('name', ['required' => true, 'label' => __('loan.name')]) !!}
+                {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}
+                {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
+                {!! FormField::text('amount', ['required' => true, 'type' => 'number', 'label' => __('loan.amount')]) !!}
                 {!! FormField::textarea('description', ['label' => __('loan.description')]) !!}
             </div>
             <div class="panel-footer">

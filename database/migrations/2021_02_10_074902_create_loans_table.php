@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateLoansTable extends Migration
 {
@@ -16,7 +16,7 @@ class CreateLoansTable extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('partner_id');
-            $table->unsignedTinyInteger('in_out');
+            $table->unsignedTinyInteger('type_id');
             $table->unsignedDecimal('amount', 12);
             $table->unsignedTinyInteger('planned_payment_count')->default(1);
             $table->string('description')->nullable();

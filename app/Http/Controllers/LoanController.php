@@ -15,7 +15,7 @@ class LoanController extends Controller
     public function index()
     {
         $loanQuery = Loan::query();
-        $loanQuery->where('name', 'like', '%'.request('q').'%');
+        $loanQuery->latest();
         $loans = $loanQuery->paginate(25);
 
         return view('loans.index', compact('loans'));
@@ -29,8 +29,13 @@ class LoanController extends Controller
     public function create()
     {
         $this->authorize('create', new Loan);
+        $partners = $this->getPartnerList();
+        $loanTypes = [
+            Loan::TYPE_DEBT       => __('loan.types.debt'),
+            Loan::TYPE_RECEIVABLE => __('loan.types.receivable'),
+        ];
 
-        return view('loans.create');
+        return view('loans.create', compact('partners', 'loanTypes'));
     }
 
     /**
@@ -44,7 +49,9 @@ class LoanController extends Controller
         $this->authorize('create', new Loan);
 
         $newLoan = $request->validate([
-            'name'        => 'required|max:60',
+            'partner_id'  => 'required|exists:partners,id',
+            'type_id'     => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
+            'amount'      => 'required|numeric',
             'description' => 'nullable|max:255',
         ]);
         $newLoan['creator_id'] = auth()->id();
@@ -74,8 +81,13 @@ class LoanController extends Controller
     public function edit(Loan $loan)
     {
         $this->authorize('update', $loan);
+        $partners = $this->getPartnerList();
+        $loanTypes = [
+            Loan::TYPE_DEBT       => __('loan.types.debt'),
+            Loan::TYPE_RECEIVABLE => __('loan.types.receivable'),
+        ];
 
-        return view('loans.edit', compact('loan'));
+        return view('loans.edit', compact('loan', 'partners', 'loanTypes'));
     }
 
     /**
@@ -90,7 +102,9 @@ class LoanController extends Controller
         $this->authorize('update', $loan);
 
         $loanData = $request->validate([
-            'name'        => 'required|max:60',
+            'partner_id'  => 'required|exists:partners,id',
+            'type_id'     => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
+            'amount'      => 'required|numeric',
             'description' => 'nullable|max:255',
         ]);
         $loan->update($loanData);
