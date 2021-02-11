@@ -5,7 +5,7 @@ return [
     'loan'          => 'Pinjaman',
     'list'          => 'Daftar Pinjaman',
     'search'        => 'Cari Pinjaman',
-    'search_text'   => 'Nama ...',
+    'search_text'   => 'Deskripsi ...',
     'all'           => 'Semua Pinjaman',
     'select'        => 'Pilih Pinjaman',
     'detail'        => 'Detail Pinjaman',

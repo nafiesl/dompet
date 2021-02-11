@@ -10,13 +10,20 @@ class LoanController extends Controller
     /**
      * Display a listing of the loan.
      *
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $loanQuery = Loan::query();
-        $loanQuery->latest();
-        $loans = $loanQuery->paginate(25);
+        if ($request->get('q')) {
+            $loanQuery->where('description', 'like', '%'.$request->get('q').'%');
+        }
+        if ($request->get('type_id')) {
+            $loanQuery->where('type_id', 'like', '%'.$request->get('type_id').'%');
+        }
+        $loanQuery;
+        $loans = $loanQuery->with(['partner'])->latest()->paginate(25);
 
         return view('loans.index', compact('loans'));
     }

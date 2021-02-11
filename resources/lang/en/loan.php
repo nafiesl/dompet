@@ -5,7 +5,7 @@ return [
     'loan'          => 'Loan',
     'list'          => 'Loan List',
     'search'        => 'Search Loan',
-    'search_text'   => 'Name ...',
+    'search_text'   => 'Description ...',
     'all'           => 'All Loan',
     'select'        => 'Select Loan',
     'detail'        => 'Loan Detail',

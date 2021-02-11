@@ -14,9 +14,10 @@ class ManageLoanTest extends TestCase
     /** @test */
     public function user_can_see_loan_list_in_loan_index_page()
     {
-        $loan = factory(Loan::class)->create();
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create(['partner_id' => $partner->id]);
 
-        $this->loginAsUser();
         $this->visitRoute('loans.index');
         $this->see($loan->name);
     }
@@ -188,9 +189,10 @@ class ManageLoanTest extends TestCase
     /** @test */
     public function user_can_delete_a_loan()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create();
-        factory(Loan::class)->create();
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create(['partner_id' => $partner->id]);
+        factory(Loan::class)->create(['partner_id' => $partner->id]);
 
         $this->visitRoute('loans.edit', $loan);
         $this->click('del-loan-'.$loan->id);
