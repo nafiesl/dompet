@@ -24,6 +24,8 @@ class ManageLoanTest extends TestCase
     private function getCreateFields(array $overrides = [])
     {
         return array_merge([
+            'type_id'     => Loan::TYPE_RECEIVABLE,
+            'amount'      => 2000,
             'description' => 'Loan 1 description',
         ], $overrides);
     }
@@ -54,6 +56,26 @@ class ManageLoanTest extends TestCase
     }
 
     /** @test */
+    public function validate_loan_partner_id_is_required()
+    {
+        $this->loginAsUser();
+
+        // partner_id empty
+        $this->post(route('loans.store'), $this->getCreateFields(['partner_id' => '']));
+        $this->assertSessionHasErrors('partner_id');
+    }
+
+    /** @test */
+    public function validate_loan_type_id_is_required()
+    {
+        $this->loginAsUser();
+
+        // type_id empty
+        $this->post(route('loans.store'), $this->getCreateFields(['type_id' => '']));
+        $this->assertSessionHasErrors('type_id');
+    }
+
+    /** @test */
     public function validate_loan_amount_is_required()
     {
         $this->loginAsUser();
@@ -78,6 +100,8 @@ class ManageLoanTest extends TestCase
     private function getEditFields(array $overrides = [])
     {
         return array_merge([
+            'type_id'     => Loan::TYPE_RECEIVABLE,
+            'amount'      => 2000,
             'description' => 'Loan 1 description',
         ], $overrides);
     }
@@ -107,6 +131,28 @@ class ManageLoanTest extends TestCase
             'id'     => $loan->id,
             'amount' => 1000,
         ]));
+    }
+
+    /** @test */
+    public function validate_loan_partner_id_update_is_required()
+    {
+        $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['partner_id' => 500]);
+
+        // partner_id empty
+        $this->patch(route('loans.update', $loan), $this->getEditFields(['partner_id' => '']));
+        $this->assertSessionHasErrors('partner_id');
+    }
+
+    /** @test */
+    public function validate_loan_type_id_update_is_required()
+    {
+        $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['type_id' => 500]);
+
+        // type_id empty
+        $this->patch(route('loans.update', $loan), $this->getEditFields(['type_id' => '']));
+        $this->assertSessionHasErrors('type_id');
     }
 
     /** @test */
