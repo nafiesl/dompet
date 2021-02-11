@@ -4,8 +4,10 @@ namespace Tests\Unit\Models;
 
 use App\Loan;
 use App\Partner;
+use App\Transaction;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Tests\TestCase;
 
 class LoanTest extends TestCase
@@ -30,6 +32,22 @@ class LoanTest extends TestCase
 
         $this->assertInstanceOf(Partner::class, $loan->partner);
         $this->assertEquals($loan->partner_id, $loan->partner->id);
+    }
+
+    /** @test */
+    public function a_loan_has_many_transactions_relation()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create(['partner_id' => $partner->id]);
+        $transaction = factory(Transaction::class)->create([
+            'partner_id' => $partner->id,
+            'loan_id'    => $loan->id,
+            'creator_id' => $user->id,
+        ]);
+
+        $this->assertInstanceOf(Collection::class, $loan->transactions);
+        $this->assertInstanceOf(Transaction::class, $loan->transactions->first());
     }
 
     /** @test */

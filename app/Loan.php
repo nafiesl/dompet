@@ -37,4 +37,9 @@ class Loan extends Model
     {
         return number_format($this->amount, 2);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

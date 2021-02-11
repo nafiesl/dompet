@@ -106,4 +106,9 @@ class Transaction extends Model
 
         return $amountString;
     }
+
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class);
+    }
 }
