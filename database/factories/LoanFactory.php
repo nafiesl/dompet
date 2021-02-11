@@ -6,7 +6,6 @@ use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Loan::class, function (Faker $faker) {
-
     return [
         'partner_id'  => function () {
             return factory(Partner::class)->create()->id;

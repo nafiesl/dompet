@@ -23,7 +23,6 @@ class LoanController extends Controller
         if ($request->get('type_id')) {
             $loanQuery->where('type_id', 'like', '%'.$request->get('type_id').'%');
         }
-        $loanQuery;
         $loans = $loanQuery->with(['partner'])->latest()->paginate(25);
 
         return view('loans.index', compact('loans'));
