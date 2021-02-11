@@ -57,6 +57,15 @@ class ManageLoanTest extends TestCase
             'type_id'    => Loan::TYPE_DEBT,
             'amount'     => 2000,
         ]));
+
+        $this->seeInDatabase('transactions', [
+            'in_out'      => 1, // 0:spending, 1:income
+            'amount'      => '2000',
+            'date'        => '2020-01-01',
+            'description' => 'Loan 1 description',
+            'category_id' => null,
+            'partner_id'  => $partner->id,
+        ]);
     }
 
     /** @test */

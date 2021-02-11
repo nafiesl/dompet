@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Loan;
+use App\Transaction;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -67,6 +68,15 @@ class LoanController extends Controller
         $newLoan['creator_id'] = auth()->id();
 
         $loan = Loan::create($newLoan);
+        $newTransaction = [
+            'in_out'      => $loan->type_id == Loan::TYPE_DEBT ? 1 : 0, // 0:spending, 1:income
+            'amount'      => $loan->amount,
+            'date'        => $loan->start_date ?: $loan->created_at->format('Y-m-d'),
+            'description' => $loan->description,
+            'partner_id'  => $loan->partner_id,
+            'creator_id'  => $loan->creator_id,
+        ];
+        Transaction::create($newTransaction);
 
         return redirect()->route('loans.show', $loan);
     }
