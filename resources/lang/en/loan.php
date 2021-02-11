@@ -1,0 +1,44 @@
+<?php
+
+return [
+    // Labels
+    'loan'          => 'Loan',
+    'list'          => 'Loan List',
+    'search'        => 'Search Loan',
+    'search_text'   => 'Name ...',
+    'all'           => 'All Loan',
+    'select'        => 'Select Loan',
+    'detail'        => 'Loan Detail',
+    'not_found'     => 'Loan not found.',
+    'empty'         => 'Loan is empty.',
+    'back_to_show'  => 'Back to Loan Detail',
+    'back_to_index' => 'Back to Loan List',
+
+    // Actions
+    'create'         => 'Create new Loan',
+    'created'        => 'A new Loan has been created.',
+    'show'           => 'View Loan Detail',
+    'edit'           => 'Edit Loan',
+    'update'         => 'Update Loan',
+    'updated'        => 'Loan data has been updated.',
+    'delete'         => 'Delete Loan',
+    'delete_confirm' => 'Are you sure to delete this Loan?',
+    'deleted'        => 'Loan has been deleted.',
+    'undeleted'      => 'Loan not deleted.',
+    'undeleteable'   => 'Loan data cannot be deleted.',
+
+    // Attributes
+    'partner'               => 'Partner',
+    'description'           => 'Loan Description',
+    'type'                  => 'Type',
+    'amount'                => 'Amount',
+    'planned_payment_count' => 'Planned Payment Count',
+    'started_date'          => 'Started Date',
+    'closed_date'           => 'Closed Date',
+
+    // Types
+    'types' => [
+        'debt'       => 'Debt',
+        'receivable' => 'Receivable',
+    ],
+];
