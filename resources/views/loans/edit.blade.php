@@ -36,8 +36,23 @@
             <div class="panel-body">
                 {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}
                 {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
-                {!! FormField::text('amount', ['required' => true, 'type' => 'number', 'label' => __('loan.amount')]) !!}
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! FormField::text('amount', ['required' => true, 'type' => 'number', 'label' => __('loan.amount')]) !!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! FormField::text('planned_payment_count', ['required' => true, 'type' => 'number', 'value' => old('planned_payment_count', $loan->planned_payment_count), 'label' => __('loan.planned_payment_count')]) !!}
+                    </div>
+                </div>
                 {!! FormField::textarea('description', ['label' => __('loan.description')]) !!}
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! FormField::text('start_date', ['type' => 'date', 'label' => __('loan.start_date')]) !!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! FormField::text('end_date', ['type' => 'date', 'label' => __('loan.end_date')]) !!}
+                    </div>
+                </div>
             </div>
             <div class="panel-footer">
                 {{ Form::submit(__('loan.update'), ['class' => 'btn btn-success']) }}

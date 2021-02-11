@@ -13,6 +13,7 @@ class Loan extends Model
 
     protected $fillable = [
         'partner_id', 'type_id', 'amount', 'description', 'creator_id',
+        'start_date', 'end_date', 'planned_payment_count',
     ];
 
     public function creator()

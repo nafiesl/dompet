@@ -33,8 +33,8 @@ return [
     'type'                  => 'Tipe',
     'amount'                => 'Jumlah',
     'planned_payment_count' => 'Rencana Tenor',
-    'started_date'          => 'Tgl. Mulai',
-    'closed_date'           => 'Tgl. Selesai',
+    'start_date'            => 'Tgl. Mulai',
+    'end_date'              => 'Tgl. Selesai',
 
     // Types
     'types' => [

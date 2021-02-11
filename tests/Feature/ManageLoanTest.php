@@ -24,9 +24,12 @@ class ManageLoanTest extends TestCase
     private function getCreateFields(array $overrides = [])
     {
         return array_merge([
-            'type_id'     => Loan::TYPE_RECEIVABLE,
-            'amount'      => 2000,
-            'description' => 'Loan 1 description',
+            'type_id'               => Loan::TYPE_RECEIVABLE,
+            'amount'                => 2000,
+            'planned_payment_count' => 5,
+            'start_date'            => '2020-01-01',
+            'end_date'              => '2020-02-29',
+            'description'           => 'Loan 1 description',
         ], $overrides);
     }
 
@@ -100,9 +103,12 @@ class ManageLoanTest extends TestCase
     private function getEditFields(array $overrides = [])
     {
         return array_merge([
-            'type_id'     => Loan::TYPE_RECEIVABLE,
-            'amount'      => 2000,
-            'description' => 'Loan 1 description',
+            'type_id'               => Loan::TYPE_RECEIVABLE,
+            'amount'                => 2000,
+            'planned_payment_count' => 5,
+            'start_date'            => '2020-01-01',
+            'end_date'              => '2020-02-29',
+            'description'           => 'Loan 1 description',
         ], $overrides);
     }
 

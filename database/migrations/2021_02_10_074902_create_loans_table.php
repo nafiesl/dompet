@@ -21,8 +21,8 @@ class CreateLoansTable extends Migration
             $table->unsignedTinyInteger('planned_payment_count')->default(1);
             $table->string('description')->nullable();
             $table->unsignedInteger('creator_id');
-            $table->date('started_date')->nullable();
-            $table->date('closed_date')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
 
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('restrict');
