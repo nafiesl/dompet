@@ -31,4 +31,25 @@ class LoanTest extends TestCase
         $this->assertInstanceOf(Partner::class, $loan->partner);
         $this->assertEquals($loan->partner_id, $loan->partner->id);
     }
+
+    /** @test */
+    public function a_loan_has_type_attribute()
+    {
+        $loan = factory(Loan::class)->make(['type_id' => Loan::TYPE_DEBT]);
+        $this->assertEquals(__('loan.types.debt'), $loan->type);
+
+        $loan->type_id = Loan::TYPE_RECEIVABLE;
+        $this->assertEquals(__('loan.types.receivable'), $loan->type);
+    }
+
+    /** @test */
+    public function a_loan_has_amount_string_attribute()
+    {
+        $amount = 1099.00;
+
+        $loan = factory(Loan::class)->make([
+            'amount' => $amount,
+        ]);
+        $this->assertEquals(number_format($amount, 2), $loan->amount_string);
+    }
 }

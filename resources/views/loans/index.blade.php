@@ -40,8 +40,8 @@
                     <tr>
                         <td class="text-center">{{ $loans->firstItem() + $key }}</td>
                         <td>{{ $loan->partner->name }}</td>
-                        <td>{{ $loan->type_id }}</td>
-                        <td class="text-right">{{ $loan->amount }}</td>
+                        <td>{{ $loan->type }}</td>
+                        <td class="text-right">{{ $loan->amount_string }}</td>
                         <td>{{ $loan->description }}</td>
                         <td>{{ $loan->start_date }}</td>
                         <td>{{ $loan->end_date }}</td>

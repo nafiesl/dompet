@@ -10,8 +10,8 @@
             <table class="table table-condensed">
                 <tbody>
                     <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
-                    <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type_id }}</td></tr>
-                    <tr><td>{{ __('loan.amount') }}</td><td>{{ $loan->amount }}</td></tr>
+                    <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>
+                    <tr><td>{{ __('loan.amount') }}</td><td>{{ $loan->amount_string }}</td></tr>
                     <tr><td>{{ __('loan.planned_payment_count') }}</td><td>{{ $loan->planned_payment_count }}</td></tr>
                     <tr><td>{{ __('loan.description') }}</td><td>{{ $loan->description }}</td></tr>
                     <tr><td>{{ __('loan.start_date') }}</td><td>{{ $loan->start_date }}</td></tr>

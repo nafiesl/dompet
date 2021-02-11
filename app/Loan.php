@@ -25,4 +25,18 @@ class Loan extends Model
     {
         return $this->belongsTo(Partner::class);
     }
+
+    public function getTypeAttribute()
+    {
+        if ($this->type_id == Loan::TYPE_DEBT) {
+            return __('loan.types.debt');
+        }
+
+        return __('loan.types.receivable');
+    }
+
+    public function getAmountStringAttribute()
+    {
+        return number_format($this->amount, 2);
+    }
 }
