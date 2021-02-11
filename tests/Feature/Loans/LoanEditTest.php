@@ -4,6 +4,7 @@ namespace Tests\Feature\Loans;
 
 use App\Loan;
 use App\Partner;
+use App\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -32,6 +33,12 @@ class LoanEditTest extends TestCase
             'partner_id' => $partner->id,
             'creator_id' => $user->id,
         ]);
+        $transaction = factory(Transaction::class)->create([
+            'loan_id'    => $loan->id,
+            'amount'     => $loan->amount,
+            'partner_id' => $partner->id,
+            'creator_id' => $user->id,
+        ]);
 
         $this->visitRoute('loans.show', $loan);
         $this->click('edit-loan-'.$loan->id);
@@ -40,6 +47,7 @@ class LoanEditTest extends TestCase
         $this->submitForm(__('loan.update'), $this->getEditFields([
             'partner_id' => $loan->partner_id,
             'amount'     => 1000,
+            'type_id'    => Loan::TYPE_RECEIVABLE,
         ]));
 
         $this->seeRouteIs('loans.show', $loan);
@@ -48,6 +56,13 @@ class LoanEditTest extends TestCase
             'id'     => $loan->id,
             'amount' => 1000,
         ]));
+
+        $this->seeInDatabase('transactions', [
+            'loan_id'    => $loan->id,
+            'amount'     => 1000,
+            'partner_id' => $partner->id,
+            'in_out'     => 0, // 0:spending, 1:income
+        ]);
     }
 
     /** @test */

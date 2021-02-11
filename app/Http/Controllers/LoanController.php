@@ -133,6 +133,15 @@ class LoanController extends Controller
             'end_date'              => 'nullable|date_format:Y-m-d',
         ]);
         $loan->update($loanData);
+        $transaction = $loan->transactions()->orderBy('created_at')->first();
+        if ($transaction) {
+            $transaction->partner_id = $loan->partner_id;
+            $transaction->amount = $loan->amount;
+            $transaction->date = $loan->start_date;
+            $transaction->description = $loan->description;
+            $transaction->in_out = $loan->type_id == Loan::TYPE_DEBT ? 1 : 0; // 0:spending, 1:income
+            $transaction->save();
+        }
 
         return redirect()->route('loans.show', $loan);
     }
