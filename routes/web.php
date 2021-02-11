@@ -42,6 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('categories', 'CategoriesController');
 
     /*
+     * Loans Routes
+     */
+    Route::resource('loans', 'LoanController');
+
+    /*
      * Report Routes
      */
     Route::get('/report', 'ReportsController@index')->name('reports.index');
@@ -57,8 +62,3 @@ Route::group(['middleware' => 'auth'], function () {
      */
     Route::patch('lang_switch', 'LangSwitcherController@update')->name('lang.switch');
 });
-
-/*
- * Loans Routes
- */
-Route::resource('loans', 'LoanController');
