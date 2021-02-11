@@ -50,7 +50,8 @@ class ManageLoanTest extends TestCase
             'amount'     => 2000,
         ]));
 
-        $this->seeRouteIs('loans.show', Loan::first());
+        $loan = Loan::first();
+        $this->seeRouteIs('loans.show', $loan);
 
         $this->seeInDatabase('loans', $this->getCreateFields([
             'partner_id' => $partner->id,
@@ -59,6 +60,7 @@ class ManageLoanTest extends TestCase
         ]));
 
         $this->seeInDatabase('transactions', [
+            'loan_id'     => $loan->id,
             'in_out'      => 1, // 0:spending, 1:income
             'amount'      => '2000',
             'date'        => '2020-01-01',

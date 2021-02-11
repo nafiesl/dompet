@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->string('description');
             $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('partner_id')->nullable();
+            $table->unsignedInteger('loan_id')->nullable();
             $table->unsignedInteger('creator_id');
             $table->timestamps();
         });

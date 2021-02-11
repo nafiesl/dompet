@@ -68,6 +68,7 @@ class LoanController extends Controller
 
         $loan = Loan::create($newLoan);
         $newTransaction = [
+            'loan_id'     => $loan->id,
             'in_out'      => $loan->type_id == Loan::TYPE_DEBT ? 1 : 0, // 0:spending, 1:income
             'amount'      => $loan->amount,
             'date'        => $loan->start_date ?: $loan->created_at->format('Y-m-d'),
