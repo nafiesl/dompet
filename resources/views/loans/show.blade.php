@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-5">
         <div class="panel panel-default">
             <div class="panel-heading"><h3 class="panel-title">{{ __('loan.detail') }}</h3></div>
             <table class="table table-condensed">
@@ -24,6 +24,33 @@
                 @endcan
                 {{ link_to_route('loans.index', __('loan.back_to_index'), [], ['class' => 'btn btn-default']) }}
             </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">{{ __('transaction.transaction') }}</h3></div>
+            <table class="table table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ __('app.table_no') }}</th>
+                        <th class="text-center">{{ __('app.date') }}</th>
+                        <th>{{ __('transaction.description') }}</th>
+                        <th class="text-right">{{ __('transaction.amount') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($transactions as $key => $transaction)
+                    <tr>
+                        <td class="text-center">{{ 1 + $key }}</td>
+                        <td class="text-center text-middle">{{ $transaction->date }}</td>
+                        <td>{{ $transaction->description }}</td>
+                        <td class="text-right">{{ $transaction->amount_string }}</td>
+                    </tr>
+                    @empty
+                    <tr><td colspan="4">{{ __('transaction.not_found') }}</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
