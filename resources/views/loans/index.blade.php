@@ -26,8 +26,12 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
-                        <th>{{ __('loan.name') }}</th>
-                        <th>{{ __('loan.description') }}</th>
+                        <th>{{ __('loan.partner') }}</th>
+                        <th>{{ __('loan.type') }}</th>
+                        <th class="text-right">{{ __('loan.amount') }}</th>
+                        <th>{{ __('app.description') }}</th>
+                        <th class="text-center">{{ __('loan.start_date') }}</th>
+                        <th class="text-center">{{ __('loan.end_date') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
                 </thead>
@@ -35,8 +39,12 @@
                     @foreach($loans as $key => $loan)
                     <tr>
                         <td class="text-center">{{ $loans->firstItem() + $key }}</td>
-                        <td>{{ $loan->name_link }}</td>
+                        <td>{{ $loan->partner->name }}</td>
+                        <td>{{ $loan->type_id }}</td>
+                        <td class="text-right">{{ $loan->amount }}</td>
                         <td>{{ $loan->description }}</td>
+                        <td>{{ $loan->start_date }}</td>
+                        <td>{{ $loan->end_date }}</td>
                         <td class="text-center">
                             @can('view', $loan)
                                 {{ link_to_route(

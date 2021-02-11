@@ -9,8 +9,13 @@
             <div class="panel-heading"><h3 class="panel-title">{{ __('loan.detail') }}</h3></div>
             <table class="table table-condensed">
                 <tbody>
-                    <tr><td>{{ __('loan.name') }}</td><td>{{ $loan->name }}</td></tr>
+                    <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
+                    <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type_id }}</td></tr>
+                    <tr><td>{{ __('loan.amount') }}</td><td>{{ $loan->amount }}</td></tr>
+                    <tr><td>{{ __('loan.planned_payment_count') }}</td><td>{{ $loan->planned_payment_count }}</td></tr>
                     <tr><td>{{ __('loan.description') }}</td><td>{{ $loan->description }}</td></tr>
+                    <tr><td>{{ __('loan.start_date') }}</td><td>{{ $loan->start_date }}</td></tr>
+                    <tr><td>{{ __('loan.end_date') }}</td><td>{{ $loan->end_date }}</td></tr>
                 </tbody>
             </table>
             <div class="panel-footer">

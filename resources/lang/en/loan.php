@@ -33,7 +33,7 @@ return [
     'type'                  => 'Type',
     'amount'                => 'Amount',
     'planned_payment_count' => 'Planned Payment Count',
-    'start_date'            => 'Started Date',
+    'start_date'            => 'Start Date',
     'end_date'              => 'End Date',
 
     // Types
