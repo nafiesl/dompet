@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Loan extends Model
 {
     const TYPE_DEBT = 1;
-    const TYPE_RECEIVABLE = 0;
+    const TYPE_RECEIVABLE = 2;
 
     protected $fillable = [
         'partner_id', 'type_id', 'amount', 'description', 'creator_id',
