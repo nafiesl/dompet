@@ -26,6 +26,8 @@ return [
     'deleted'        => 'Loan has been deleted.',
     'undeleted'      => 'Loan not deleted.',
     'undeleteable'   => 'Loan data cannot be deleted.',
+    'pay_debt'       => 'Pay Debt',
+    'add_debt'       => 'Add Debt',
 
     // Attributes
     'partner'               => 'Partner',

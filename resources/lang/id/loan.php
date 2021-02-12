@@ -26,6 +26,8 @@ return [
     'deleted'        => 'Hapus data Pinjaman telah berhasil.',
     'undeleted'      => 'Data Pinjaman gagal dihapus.',
     'undeleteable'   => 'Data Pinjaman tidak dapat dihapus.',
+    'pay_debt'       => 'Bayar Hutang',
+    'add_debt'       => 'Tambah Hutang',
 
     // Attributes
     'partner'               => 'Partner',

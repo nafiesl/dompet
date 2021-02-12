@@ -90,8 +90,15 @@ class LoanController extends Controller
     public function show(Loan $loan)
     {
         $transactions = $loan->transactions;
+        $inOutOptions = [__('loan.pay_debt'), __('loan.add_debt')];
+        if ($loan->type_id == Loan::TYPE_RECEIVABLE) {
+            $inOutOptions = [
+                $loan->partner->name.' '.__('loan.pay_debt'),
+                $loan->partner->name.' '.__('loan.add_debt'),
+            ];
+        }
 
-        return view('loans.show', compact('loan', 'transactions'));
+        return view('loans.show', compact('loan', 'transactions', 'inOutOptions'));
     }
 
     /**
