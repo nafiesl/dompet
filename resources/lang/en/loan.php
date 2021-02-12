@@ -43,5 +43,7 @@ return [
     ],
 
     // Relations
-    'add_transaction' => 'Add Transaction',
+    'add_transaction'   => 'Add Transaction',
+    'payment_total'     => 'Payment Total',
+    'payment_remaining' => 'Payment Remaining',
 ];

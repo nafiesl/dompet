@@ -11,8 +11,10 @@
                 <tbody>
                     <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
                     <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>
-                    <tr><td>{{ __('loan.amount') }}</td><td>{{ $loan->amount_string }}</td></tr>
-                    <tr><td>{{ __('loan.planned_payment_count') }}</td><td>{{ $loan->planned_payment_count }}</td></tr>
+                    <tr><td>{{ __('loan.amount') }}</td><td class="text-right">{{ $loan->amount_string }}</td></tr>
+                    <tr><td>{{ __('loan.planned_payment_count') }}</td><td class="text-right">{{ $loan->planned_payment_count }}</td></tr>
+                    <tr><td>{{ __('loan.payment_total') }}</td><td class="text-right">{{ $loan->payment_total_string }}</td></tr>
+                    <tr><td>{{ __('loan.payment_remaining') }}</td><td class="text-right">{{ $loan->payment_remaining_string }}</td></tr>
                     <tr><td>{{ __('loan.description') }}</td><td>{{ $loan->description }}</td></tr>
                     <tr><td>{{ __('loan.start_date') }}</td><td>{{ $loan->start_date }}</td></tr>
                     <tr><td>{{ __('loan.end_date') }}</td><td>{{ $loan->end_date }}</td></tr>
@@ -58,17 +60,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($transactions as $key => $transaction)
+                    @foreach ($transactions as $key => $transaction)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-center text-middle">{{ $transaction->date }}</td>
                         <td>{{ $transaction->description }}</td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                     </tr>
-                    @empty
-                    <tr><td colspan="4">{{ __('transaction.not_found') }}</td></tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3">{{ __('app.total') }}</th>
+                        <th class="text-right">
+                            @php
+                                $transactionSum = $transactions->sum(function ($transaction) {
+                                    return $transaction->in_out ? $transaction->amount : -$transaction->amount;
+                                });
+                            @endphp
+                            {{ number_format($transactionSum, 2) }}
+                        </th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

@@ -70,4 +70,120 @@ class LoanTest extends TestCase
         ]);
         $this->assertEquals(number_format($amount, 2), $loan->amount_string);
     }
+
+    /** @test */
+    public function a_debt_loan_has_payment_total_attribute()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create([
+            'type_id'    => Loan::TYPE_RECEIVABLE,
+            'amount'     => 10000,
+            'partner_id' => $partner->id,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 0, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 10000,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 1, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 7000,
+        ]);
+
+        $this->assertEquals(7000, $loan->payment_total);
+        $this->assertEquals('7,000.00', $loan->payment_total_string);
+    }
+
+    /** @test */
+    public function a_debt_loan_has_payment_remaining_attribute()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create([
+            'type_id'    => Loan::TYPE_RECEIVABLE,
+            'amount'     => 10000,
+            'partner_id' => $partner->id,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 0, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 10000,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 1, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 7000,
+        ]);
+
+        $this->assertEquals(3000, $loan->payment_remaining);
+        $this->assertEquals('3,000.00', $loan->payment_remaining_string);
+    }
+
+    /** @test */
+    public function a_receivable_loan_has_payment_total_attribute()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create([
+            'type_id'    => Loan::TYPE_DEBT,
+            'amount'     => 10000,
+            'partner_id' => $partner->id,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 1, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 10000,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 0, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 2000,
+        ]);
+
+        $this->assertEquals(2000, $loan->payment_total);
+        $this->assertEquals('2,000.00', $loan->payment_total_string);
+    }
+
+    /** @test */
+    public function a_receivable_loan_has_payment_remaining_attribute()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create([
+            'type_id'    => Loan::TYPE_DEBT,
+            'amount'     => 10000,
+            'partner_id' => $partner->id,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 1, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 10000,
+        ]);
+        factory(Transaction::class)->create([
+            'in_out'     => 0, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 2000,
+        ]);
+
+        $this->assertEquals(8000, $loan->payment_remaining);
+        $this->assertEquals('8,000.00', $loan->payment_remaining_string);
+    }
 }

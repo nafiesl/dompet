@@ -42,4 +42,26 @@ class Loan extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function getPaymentTotalAttribute()
+    {
+        $paymentType = $this->type_id == static::TYPE_DEBT ? 0 : 1;
+
+        return $this->transactions()->where('in_out', $paymentType)->sum('amount');
+    }
+
+    public function getPaymentTotalStringAttribute()
+    {
+        return number_format($this->payment_total, 2);
+    }
+
+    public function getPaymentRemainingAttribute()
+    {
+        return $this->amount - $this->payment_total;
+    }
+
+    public function getPaymentRemainingStringAttribute()
+    {
+        return number_format($this->payment_remaining, 2);
+    }
 }
