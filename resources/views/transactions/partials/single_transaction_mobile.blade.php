@@ -18,23 +18,23 @@
 </div>
 <div style="margin-bottom: 6px;">
     @if ($transaction->partner)
-    @php
-        $partnerRoute = route('partners.show', [
-            $transaction->partner_id,
-            'start_date' => $startDate,
-            'end_date' => $year.'-'.$month.'-'.date('t'),
-        ]);
-    @endphp
-    <a href="{{ $partnerRoute }}">{!! optional($transaction->partner)->name_label !!}</a>
+        @php
+            $partnerRoute = route('partners.show', [
+                $transaction->partner_id,
+                'start_date' => $startDate,
+                'end_date' => $year.'-'.$month.'-'.date('t'),
+            ]);
+        @endphp
+        <a href="{{ $partnerRoute }}">{!! optional($transaction->partner)->name_label !!}</a>
     @endif
     @if ($transaction->category)
-    @php
-        $categoryRoute = route('categories.show', [
-            $transaction->category_id,
-            'start_date' => $startDate,
-            'end_date' => $year.'-'.$month.'-'.date('t'),
-        ]);
-    @endphp
-    <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
+        @php
+            $categoryRoute = route('categories.show', [
+                $transaction->category_id,
+                'start_date' => $startDate,
+                'end_date' => $year.'-'.$month.'-'.date('t'),
+            ]);
+        @endphp
+        <a href="{{ $categoryRoute }}">{!! optional($transaction->category)->name_label !!}</a>
     @endif
 </div>
