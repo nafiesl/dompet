@@ -64,4 +64,11 @@ class Loan extends Model
     {
         return number_format($this->payment_remaining, 2);
     }
+
+    public function getTypeLabelAttribute()
+    {
+        $bgColor = $this->type_id == static::TYPE_DEBT ? '#00aabb' : '#bb004f';
+
+        return '<span class="badge" style="background-color: '.$bgColor.'">'.$this->type.'</span>';
+    }
 }
