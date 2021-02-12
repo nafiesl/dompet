@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function create(Loan $loan)
-    {
-        return view('loans.transactions.create', compact('loan'));
-    }
-
     public function store(Request $request, Loan $loan)
     {
         $newTransaction = $request->validate([
