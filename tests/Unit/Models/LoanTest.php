@@ -186,4 +186,35 @@ class LoanTest extends TestCase
         $this->assertEquals(8000, $loan->payment_remaining);
         $this->assertEquals('8,000.00', $loan->payment_remaining_string);
     }
+
+    /** @test */
+    public function a_loan_has_type_label_attribute()
+    {
+        $loan = factory(Loan::class)->make(['type_id' => Loan::TYPE_DEBT]);
+
+        $nameLabel = '<span class="badge" style="background-color: #00aabb">'.$loan->type.'</span>';
+        $this->assertEquals($nameLabel, $loan->type_label);
+
+        $loan->type_id = Loan::TYPE_RECEIVABLE;
+
+        $nameLabel = '<span class="badge" style="background-color: #bb004f">'.$loan->type.'</span>';
+        $this->assertEquals($nameLabel, $loan->type_label);
+    }
+
+    /** @test */
+    public function a_loan_type_label_attribute_will_have_checkmark_when_the_loan_has_been_ended()
+    {
+        $loan = factory(Loan::class)->make([
+            'type_id'  => Loan::TYPE_DEBT,
+            'end_date' => '2020-02-01',
+        ]);
+
+        $nameLabel = '<span class="badge" style="background-color: #00aabb">'.$loan->type.' <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>';
+        $this->assertEquals($nameLabel, $loan->type_label);
+
+        $loan->type_id = Loan::TYPE_RECEIVABLE;
+
+        $nameLabel = '<span class="badge" style="background-color: #bb004f">'.$loan->type.' <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>';
+        $this->assertEquals($nameLabel, $loan->type_label);
+    }
 }

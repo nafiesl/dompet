@@ -68,7 +68,11 @@ class Loan extends Model
     public function getTypeLabelAttribute()
     {
         $bgColor = $this->type_id == static::TYPE_DEBT ? '#00aabb' : '#bb004f';
+        $type = $this->type;
+        if ($this->end_date) {
+            $type .= ' <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+        }
 
-        return '<span class="badge" style="background-color: '.$bgColor.'">'.$this->type.'</span>';
+        return '<span class="badge" style="background-color: '.$bgColor.'">'.$type.'</span>';
     }
 }
