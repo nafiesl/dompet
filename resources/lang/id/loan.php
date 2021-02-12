@@ -41,4 +41,7 @@ return [
         'debt'       => 'Hutang',
         'receivable' => 'Piutang',
     ],
+
+    // Relations
+    'add_transaction' => 'Tambah Transaksi',
 ];

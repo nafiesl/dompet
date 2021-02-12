@@ -27,8 +27,20 @@
         </div>
     </div>
     <div class="col-md-7">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">{{ __('transaction.transaction') }}</h3></div>
+        <h3 class="page-header">
+            <div class="pull-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    {{ link_to_route(
+                        'loans.transactions.create',
+                        __('loan.add_transaction'),
+                        [$loan],
+                        ['class' => 'btn btn-success', 'id' => 'add_transaction-'.$loan->id]
+                    ) }}
+                </div>
+            </div>
+            {{ __('transaction.transaction') }}
+        </h3>
+        <div class="panel panel-default table-responsive">
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>

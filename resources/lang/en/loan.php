@@ -41,4 +41,7 @@ return [
         'debt'       => 'Debt',
         'receivable' => 'Receivable',
     ],
+
+    // Relations
+    'add_transaction' => 'Add Transaction',
 ];
