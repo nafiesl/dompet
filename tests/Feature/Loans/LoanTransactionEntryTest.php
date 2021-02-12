@@ -33,7 +33,7 @@ class LoanTransactionEntryTest extends TestCase
 
         $this->visitRoute('loans.show', $loan);
         $this->click('add_transaction-'.$loan->id);
-        $this->visitRoute('loans.transactions.create', $loan);
+        $this->visitRoute('loans.show', [$loan, 'action' => 'add_transaction']);
 
         $this->submitForm(__('loan.add_transaction'), [
             'in_out'      => 0, // 0:spending, 1:income

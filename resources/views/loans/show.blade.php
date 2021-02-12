@@ -29,17 +29,24 @@
     <div class="col-md-7">
         <h3 class="page-header">
             <div class="pull-right">
-                <div class="btn-group" role="group" aria-label="...">
-                    {{ link_to_route(
-                        'loans.transactions.create',
-                        __('loan.add_transaction'),
-                        [$loan],
-                        ['class' => 'btn btn-success', 'id' => 'add_transaction-'.$loan->id]
-                    ) }}
-                </div>
+                @can('update', $loan)
+                    @if(Request::get('action') != 'add_transaction')
+                        {{ link_to_route(
+                            'loans.show',
+                            __('loan.add_transaction'),
+                            [$loan, 'action' => 'add_transaction'],
+                            ['class' => 'btn btn-success', 'id' => 'add_transaction-'.$loan->id]
+                        ) }}
+                    @endif
+                @endcan
             </div>
             {{ __('transaction.transaction') }}
         </h3>
+        @can('update', $loan)
+            @if(Request::has('action'))
+                @include('loans.partials.single_actions')
+            @endif
+        @endcan
         <div class="panel panel-default table-responsive">
             <table class="table table-condensed table-bordered">
                 <thead>
