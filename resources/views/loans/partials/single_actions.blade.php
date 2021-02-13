@@ -1,8 +1,14 @@
 @if (Request::get('action') == 'add_transaction')
-    <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">{{ __('loan.add_transaction') }}</h3></div>
-        {{ Form::open(['route' => ['loans.transactions.store', $loan], 'method' => 'post']) }}
-            <div class="panel-body">
+<div id="transactionModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                {{ link_to_route('loans.show', '&times;', [$loan], ['class' => 'close']) }}
+                <h4 class="modal-title">{{ __('loan.add_transaction') }}</h4>
+            </div>
+            {{ Form::open(['route' => ['loans.transactions.store', $loan], 'autocomplete' => 'off']) }}
+            <div class="modal-body">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -22,10 +28,12 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="modal-footer">
                 {{ Form::submit(__('loan.add_transaction'), ['class' => 'btn btn-success']) }}
                 {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
             </div>
-        {{ Form::close() }}
+            {{ Form::close() }}
+        </div>
     </div>
+</div>
 @endif

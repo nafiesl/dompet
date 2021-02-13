@@ -87,3 +87,14 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    $('#transactionModal').modal({
+        show: true,
+        backdrop: 'static',
+    });
+})();
+</script>
+@endpush
