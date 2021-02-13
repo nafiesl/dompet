@@ -217,4 +217,36 @@ class LoanTest extends TestCase
         $nameLabel = '<span class="badge" style="background-color: #bb004f">'.$loan->type.' <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>';
         $this->assertEquals($nameLabel, $loan->type_label);
     }
+
+    /** @test */
+    public function a_loan_deletion_will_set_loan_id_to_be_null_for_the_related_transactions()
+    {
+        $user = $this->loginAsUser();
+        $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
+        $loan = factory(Loan::class)->create([
+            'type_id'    => Loan::TYPE_DEBT,
+            'amount'     => 10000,
+            'partner_id' => $partner->id,
+        ]);
+        $firstTransaction = factory(Transaction::class)->create([
+            'in_out'     => 1, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 10000,
+        ]);
+        $secondTransaction = factory(Transaction::class)->create([
+            'in_out'     => 0, // 0:spending, 1:income
+            'creator_id' => $user->id,
+            'partner_id' => $loan->partner_id,
+            'loan_id'    => $loan->id,
+            'amount'     => 2000,
+        ]);
+
+        $result = $loan->delete();
+
+        $this->assertTrue($result);
+        $this->assertNull($firstTransaction->fresh()->loan_id);
+        $this->assertNull($secondTransaction->fresh()->loan_id);
+    }
 }

@@ -75,4 +75,11 @@ class Loan extends Model
 
         return '<span class="badge" style="background-color: '.$bgColor.'">'.$type.'</span>';
     }
+
+    public function delete()
+    {
+        $this->transactions()->update(['loan_id' => null]);
+
+        return parent::delete();
+    }
 }
