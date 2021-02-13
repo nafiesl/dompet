@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Loans;
 
+use App\Events\Loans\PaymentCreated as LoanPaymentCreated;
 use App\Http\Controllers\Controller;
 use App\Loan;
 use App\Transaction;
@@ -20,7 +21,9 @@ class TransactionController extends Controller
         $newTransaction['loan_id'] = $loan->id;
         $newTransaction['partner_id'] = $loan->partner_id;
         $newTransaction['creator_id'] = auth()->id();
-        Transaction::create($newTransaction);
+        $transaction = Transaction::create($newTransaction);
+
+        event(new LoanPaymentCreated($loan, $transaction));
 
         return redirect()->route('loans.show', $loan);
     }

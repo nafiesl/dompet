@@ -45,5 +45,7 @@ return [
     ],
 
     // Relations
-    'add_transaction' => 'Tambah Transaksi',
+    'add_transaction'   => 'Tambah Transaksi',
+    'payment_total'     => 'Total Bayar',
+    'payment_remaining' => 'Sisa Pinjaman',
 ];
