@@ -99,6 +99,17 @@ class LoanEditTest extends TestCase
     }
 
     /** @test */
+    public function validate_loan_description_update_is_required()
+    {
+        $this->loginAsUser();
+        $loan = factory(Loan::class)->create();
+
+        // description empty
+        $this->patch(route('loans.update', $loan), $this->getEditFields(['description' => '']));
+        $this->assertSessionHasErrors('description');
+    }
+
+    /** @test */
     public function validate_loan_description_update_is_not_more_than_255_characters()
     {
         $user = $this->loginAsUser();

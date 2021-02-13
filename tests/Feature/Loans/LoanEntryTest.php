@@ -90,6 +90,16 @@ class LoanEntryTest extends TestCase
     }
 
     /** @test */
+    public function validate_loan_description_is_required()
+    {
+        $this->loginAsUser();
+
+        // description empty
+        $this->post(route('loans.store'), $this->getCreateFields(['description' => '']));
+        $this->assertSessionHasErrors('description');
+    }
+
+    /** @test */
     public function validate_loan_description_is_not_more_than_255_characters()
     {
         $this->loginAsUser();

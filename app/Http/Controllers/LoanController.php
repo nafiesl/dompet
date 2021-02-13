@@ -60,7 +60,7 @@ class LoanController extends Controller
             'type_id'               => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
             'amount'                => 'required|numeric',
             'planned_payment_count' => 'required|numeric',
-            'description'           => 'nullable|max:255',
+            'description'           => 'required|max:255',
             'start_date'            => 'nullable|date_format:Y-m-d',
             'end_date'              => 'nullable|date_format:Y-m-d',
         ]);
@@ -135,7 +135,7 @@ class LoanController extends Controller
             'type_id'               => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
             'amount'                => 'required|numeric',
             'planned_payment_count' => 'required|numeric',
-            'description'           => 'nullable|max:255',
+            'description'           => 'required|max:255',
             'start_date'            => 'nullable|date_format:Y-m-d',
             'end_date'              => 'nullable|date_format:Y-m-d',
         ]);
