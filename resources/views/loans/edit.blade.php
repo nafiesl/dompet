@@ -47,10 +47,10 @@
                 {!! FormField::textarea('description', ['label' => __('loan.description')]) !!}
                 <div class="row">
                     <div class="col-md-6">
-                        {!! FormField::text('start_date', ['type' => 'date', 'label' => __('loan.start_date')]) !!}
+                        {!! FormField::text('start_date', ['class' => 'date-select', 'label' => __('loan.start_date')]) !!}
                     </div>
                     <div class="col-md-6">
-                        {!! FormField::text('end_date', ['type' => 'date', 'label' => __('loan.end_date')]) !!}
+                        {!! FormField::text('end_date', ['class' => 'date-select', 'label' => __('loan.end_date')]) !!}
                     </div>
                 </div>
             </div>
@@ -67,3 +67,21 @@
 </div>
 @endif
 @endsection
+
+@section('styles')
+    {{ Html::style(url('css/plugins/jquery.datetimepicker.css')) }}
+@endsection
+
+@push('scripts')
+    {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
+<script>
+(function () {
+    $('.date-select').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d',
+        closeOnDateSelect: true,
+        scrollInput: false
+    });
+})();
+</script>
+@endpush
