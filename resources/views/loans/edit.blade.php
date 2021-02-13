@@ -10,11 +10,19 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title">{{ __('loan.delete') }}</h3></div>
                 <div class="panel-body">
-                    <label class="control-label text-primary">{{ __('loan.name') }}</label>
-                    <p>{{ $loan->name }}</p>
-                    <label class="control-label text-primary">{{ __('loan.description') }}</label>
-                    <p>{{ $loan->description }}</p>
-                    {!! $errors->first('loan_id', '<span class="form-error small">:message</span>') !!}
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
+                            <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>
+                            <tr><td>{{ __('loan.amount') }}</td><td class="text-right">{{ $loan->amount_string }}</td></tr>
+                            <tr><td>{{ __('loan.planned_payment_count') }}</td><td class="text-right">{{ $loan->planned_payment_count }}</td></tr>
+                            <tr><td>{{ __('loan.payment_total') }}</td><td class="text-right">{{ $loan->payment_total_string }}</td></tr>
+                            <tr><td>{{ __('loan.payment_remaining') }}</td><td class="text-right">{{ $loan->payment_remaining_string }}</td></tr>
+                            <tr><td>{{ __('loan.description') }}</td><td>{{ $loan->description }}</td></tr>
+                            <tr><td>{{ __('loan.start_date') }}</td><td>{{ $loan->start_date }}</td></tr>
+                            <tr><td>{{ __('loan.end_date') }}</td><td>{{ $loan->end_date }}</td></tr>
+                        </tbody>
+                    </table>
                 </div>
                 <hr style="margin:0">
                 <div class="panel-body text-danger">{{ __('loan.delete_confirm') }}</div>
