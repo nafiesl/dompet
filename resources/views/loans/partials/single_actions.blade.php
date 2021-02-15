@@ -15,7 +15,7 @@
                         {!! FormField::text('date', ['required' => true, 'label' => __('app.date'), 'value' => old('date', today()->format('Y-m-d')), 'class' => 'date-select']) !!}
                     </div>
                     <div class="col-md-8">
-                        {!! FormField::radios('in_out', $inOutOptions, ['required' => true, 'label' => __('transaction.transaction'), 'list_style' => 'inline']) !!}
+                        {!! FormField::radios('in_out', $inOutOptions, ['required' => true, 'label' => __('transaction.transaction'), 'list_style' => 'inline', 'value' => $defaultInOutValue]) !!}
                     </div>
                 </div>
                 {!! FormField::textarea('description', ['required' => true, 'label' => __('app.description')]) !!}
