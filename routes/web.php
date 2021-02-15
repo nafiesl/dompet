@@ -45,8 +45,6 @@ Route::group(['middleware' => 'auth'], function () {
      * Loans Routes
      */
     Route::resource('loans', 'LoanController');
-    Route::get('loans/{loan}/transactions/create', 'Loans\TransactionController@create')
-        ->name('loans.transactions.create');
     Route::post('loans/{loan}/transactions', 'Loans\TransactionController@store')
         ->name('loans.transactions.store');
 
