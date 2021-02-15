@@ -19,7 +19,7 @@ class CreateLoansTable extends Migration
             $table->unsignedTinyInteger('type_id');
             $table->unsignedDecimal('amount', 12);
             $table->unsignedTinyInteger('planned_payment_count')->default(1);
-            $table->string('description')->nullable();
+            $table->string('description');
             $table->unsignedInteger('creator_id');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
