@@ -48,8 +48,9 @@ class TransactionTest extends TestCase
     /** @test */
     public function a_transaction_has_belongs_to_loan_relation()
     {
-        $loan = factory(Loan::class)->create();
-        $transaction = factory(Transaction::class)->make(['loan_id' => $loan->id]);
+        $user = $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id]);
+        $transaction = factory(Transaction::class)->make(['creator_id' => $user->id, 'loan_id' => $loan->id]);
 
         $this->assertInstanceOf(Loan::class, $transaction->loan);
         $this->assertEquals($transaction->loan_id, $transaction->loan->id);

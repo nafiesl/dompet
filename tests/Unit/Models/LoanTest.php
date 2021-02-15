@@ -249,4 +249,16 @@ class LoanTest extends TestCase
         $this->assertNull($firstTransaction->fresh()->loan_id);
         $this->assertNull($secondTransaction->fresh()->loan_id);
     }
+
+    /** @test */
+    public function a_loan_has_for_user_scope()
+    {
+        $loanOwner = $this->loginAsUser();
+        $loan = factory(Loan::class)->create([
+            'creator_id' => $loanOwner->id,
+        ]);
+        $othersLoan = factory(Loan::class)->create();
+
+        $this->assertCount(1, Loan::all());
+    }
 }

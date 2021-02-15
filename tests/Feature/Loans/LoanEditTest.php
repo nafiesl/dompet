@@ -68,8 +68,8 @@ class LoanEditTest extends TestCase
     /** @test */
     public function validate_loan_partner_id_update_is_required()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['partner_id' => 500]);
+        $user = $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id, 'partner_id' => 500]);
 
         // partner_id empty
         $this->patch(route('loans.update', $loan), $this->getEditFields(['partner_id' => '']));
@@ -79,8 +79,8 @@ class LoanEditTest extends TestCase
     /** @test */
     public function validate_loan_type_id_update_is_required()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['type_id' => 500]);
+        $user = $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id, 'type_id' => 2]);
 
         // type_id empty
         $this->patch(route('loans.update', $loan), $this->getEditFields(['type_id' => '']));
@@ -90,8 +90,8 @@ class LoanEditTest extends TestCase
     /** @test */
     public function validate_loan_amount_update_is_required()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create(['amount' => 500]);
+        $user = $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id, 'amount' => 500]);
 
         // amount empty
         $this->patch(route('loans.update', $loan), $this->getEditFields(['amount' => '']));
@@ -101,8 +101,8 @@ class LoanEditTest extends TestCase
     /** @test */
     public function validate_loan_description_update_is_required()
     {
-        $this->loginAsUser();
-        $loan = factory(Loan::class)->create();
+        $user = $this->loginAsUser();
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id]);
 
         // description empty
         $this->patch(route('loans.update', $loan), $this->getEditFields(['description' => '']));
@@ -127,8 +127,8 @@ class LoanEditTest extends TestCase
     {
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
-        $loan = factory(Loan::class)->create(['partner_id' => $partner->id]);
-        factory(Loan::class)->create(['partner_id' => $partner->id]);
+        $loan = factory(Loan::class)->create(['creator_id' => $user->id, 'partner_id' => $partner->id]);
+        factory(Loan::class)->create(['creator_id' => $user->id, 'partner_id' => $partner->id]);
 
         $this->visitRoute('loans.edit', $loan);
         $this->click('del-loan-'.$loan->id);

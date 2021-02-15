@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
 
 class Loan extends Model
 {
+    use ForUser;
+
     const TYPE_DEBT = 1;
     const TYPE_RECEIVABLE = 2;
 
