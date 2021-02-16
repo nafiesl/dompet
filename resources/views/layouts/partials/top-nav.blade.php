@@ -30,6 +30,10 @@
                     <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('transaction.transaction') }}</span>
                 </a>
+                <a class="xs-navbar" href="{{ route('loans.index') }}" title="{{ __('loan.loan') }}">
+                    <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('loan.loan') }}</span>
+                </a>
                 <a class="xs-navbar" href="{{ route('reports.index') }}" title="{{ __('report.report') }}">
                     <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('report.report') }}</span>

@@ -12,4 +12,5 @@
     @endcan
 </div>
 <div>{!! optional($transaction->category)->name_label !!}</div>
+<div>{!! optional($transaction->loan)->type_label !!}</div>
 <hr style="margin: 6px 0">

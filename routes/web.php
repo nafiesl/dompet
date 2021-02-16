@@ -42,6 +42,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('categories', 'CategoriesController');
 
     /*
+     * Loans Routes
+     */
+    Route::resource('loans', 'LoanController');
+    Route::post('loans/{loan}/transactions', 'Loans\TransactionController@store')
+        ->name('loans.transactions.store');
+
+    /*
      * Report Routes
      */
     Route::get('/report', 'ReportsController@index')->name('reports.index');

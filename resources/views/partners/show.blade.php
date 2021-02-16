@@ -39,6 +39,7 @@
                             {{ $transaction->description }}
                             <div class="pull-right">
                                 {!! optional($transaction->category)->name_label !!}
+                                {!!optional($transaction->loan)->type_label !!}
                             </div>
                         </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>

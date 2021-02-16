@@ -37,7 +37,10 @@
                         <td class="text-center">{{ $transaction->date }}</td>
                         <td>
                             {{ $transaction->description }}
-                            <span class="pull-right">{!!optional($transaction->partner)->name_label !!}</span>
+                            <span class="pull-right">
+                                {!!optional($transaction->partner)->name_label !!}
+                                {!!optional($transaction->loan)->type_label !!}
+                            </span>
                         </td>
                         <td class="text-right">{{ $transaction->amount_string }}</td>
                         <td class="text-center">
