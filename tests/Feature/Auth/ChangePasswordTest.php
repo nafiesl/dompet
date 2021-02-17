@@ -15,6 +15,7 @@ class ChangePasswordTest extends TestCase
         $user = $this->loginAsUser();
 
         $this->visit(route('home'));
+        $this->click(trans('settings.settings'));
         $this->click(trans('auth.change_password'));
 
         $this->submitForm(trans('auth.change_password'), [
@@ -37,6 +38,7 @@ class ChangePasswordTest extends TestCase
         $user = $this->loginAsUser();
 
         $this->visit(route('home'));
+        $this->click(trans('settings.settings'));
         $this->click(trans('auth.change_password'));
 
         $this->submitForm(trans('auth.change_password'), [
