@@ -46,9 +46,9 @@
                     <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('partner.partner') }}</span>
                 </a>
-                <a class="xs-navbar" href="{{ route('profile.show') }}" title="{{ __('auth.profile') }}">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
-                    <span class="hidden-xs">{{ __('auth.profile') }}</span>
+                <a class="xs-navbar" href="{{ route('profile.show') }}" title="{{ __('settings.settings') }}">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
+                    <span class="hidden-xs">{{ __('settings.settings') }}</span>
                 </a>
                 <a class="xs-navbar" href="{{ route('password.change') }}" title="{{ __('auth.change_password') }}">
                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;
