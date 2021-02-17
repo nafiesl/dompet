@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.settings')
 
 @section('title', __('category.list'))
 
-@section('content')
+@section('content_settings')
 <h3 class="page-header">
     <div class="pull-right">
         @can('create', new App\Category)

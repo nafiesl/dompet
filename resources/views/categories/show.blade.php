@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.settings')
 
 @section('title', __('category.transactions'))
 
-@section('content')
+@section('content_settings')
 
 {{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-default pull-right']) }}
 <h3 class="page-header">{{ $category->name }} <small>{{ __('category.transactions') }}</small></h3>
