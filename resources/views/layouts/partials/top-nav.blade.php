@@ -50,10 +50,6 @@
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;
                     <span class="hidden-xs">{{ __('settings.settings') }}</span>
                 </a>
-                <a class="xs-navbar" href="{{ route('password.change') }}" title="{{ __('auth.change_password') }}">
-                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;
-                    <span class="hidden-xs">{{ __('auth.change_password') }}</span>
-                </a>
                 <a class="xs-navbar" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
