@@ -12,6 +12,9 @@
     <li class="{{ Request::segment(1) == 'categories' ? 'active' : '' }}">
         {!! link_to_route('categories.index', __('category.category')) !!}
     </li>
+    <li class="{{ Request::segment(1) == 'partners' ? 'active' : '' }}">
+        {!! link_to_route('partners.index', __('partner.partner')) !!}
+    </li>
 </ul>
 <br>
 @yield('content_settings')

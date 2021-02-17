@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.settings')
 
 @section('title', __('partner.transactions'))
 
-@section('content')
+@section('content_settings')
 
 {{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-sm btn-default pull-right']) }}
 <h3 class="page-header">{{ $partner->name }} <small>{{ __('partner.transactions') }}</small></h3>
