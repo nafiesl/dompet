@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.settings')
 
 @section('title', __('user.profile_edit'))
 
-@section('content')
+@section('content_settings')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">

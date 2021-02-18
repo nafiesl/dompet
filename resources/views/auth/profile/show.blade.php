@@ -1,10 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.settings')
 
 @section('title', __('auth.profile').' - '.$user->name)
 
-@section('content')
-<h3 class="page-header">@yield('title')</h3>
-
+@section('content_settings')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
