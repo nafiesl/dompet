@@ -1,4 +1,4 @@
-<span class="pull-right">{{ $transaction->amount_string }}</span>
+<span class="float-right">{{ $transaction->amount_string }}</span>
 {{ $transaction->date }}
 <div>
     {{ $transaction->description }}
@@ -7,7 +7,7 @@
             'categories.show',
             __('app.edit'),
             [$category->id, 'action' => 'edit', 'id' => $transaction->id] + request(['start_date', 'end_date', 'query', 'partner_id']),
-            ['id' => 'edit-transaction-'.$transaction->id, 'class' => 'pull-right text-danger']
+            ['id' => 'edit-transaction-'.$transaction->id, 'class' => 'float-right text-danger']
         ) !!}
     @endcan
 </div>

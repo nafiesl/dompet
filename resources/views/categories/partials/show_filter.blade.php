@@ -15,5 +15,5 @@
     {!! FormField::select('partner_id', $partners, ['label' => false, 'value' => request('partner_id'), 'placeholder' => __('partner.all'), 'class' => 'input-sm']) !!}
     {{ Form::submit(__('app.submit'), ['class' => 'btn btn-primary btn-sm']) }}
     {{ link_to_route('categories.show', __('app.reset'), $category) }}
-    {{ link_to_route('transactions.exports.by_category', __('transaction.download'), [$category] + request()->all(), ['class' => 'btn btn-info btn-sm pull-right']) }}
+    {{ link_to_route('transactions.exports.by_category', __('transaction.download'), [$category] + request()->all(), ['class' => 'btn btn-info btn-sm float-right']) }}
 {{ Form::close() }}

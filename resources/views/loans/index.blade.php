@@ -4,7 +4,7 @@
 
 @section('content')
 <h1 class="page-header">
-    <div class="pull-right">
+    <div class="float-right">
         @can('create', new App\Loan)
             {{ link_to_route('loans.create', __('loan.create'), [], ['class' => 'btn btn-success']) }}
         @endcan
@@ -16,7 +16,7 @@
     <div class="col-md-12">
         <div class="panel panel-default table-responsive">
             <div class="panel-heading">
-                <div class="pull-right">
+                <div class="float-right">
                     <div class="btn-group" role="group" aria-label="...">
                         {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-default')]) }}
                         {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-default')]) }}

@@ -3,11 +3,11 @@
 @section('title', __('transaction.list'))
 
 @section('content')
-<h3 class="page-header">
-    @include('transactions.partials.index_actions')
-    {{ __('transaction.list') }}
-    <small>{{ __('app.total') }} : {{ $transactions->count() }} {{ __('transaction.transaction') }}</small>
-</h3>
+@include('transactions.partials.index_actions')
+<div class="page-header">
+    <h1 class="page-title">{{ __('transaction.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $transactions->count() }} {{ __('transaction.transaction') }}</div>
+</div>
 <div class="row">
     <div class="col-md-12">
         @include('transactions.partials.stats')
@@ -46,7 +46,7 @@
                             </td>
                         @endif
                         <td>
-                            <span class="pull-right">
+                            <span class="float-right">
                                 @if ($transaction->loan)
                                     @php
                                         $loanRoute = route('loans.show', $transaction->loan);

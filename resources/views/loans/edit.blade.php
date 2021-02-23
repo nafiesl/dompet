@@ -66,7 +66,7 @@
                 {{ Form::submit(__('loan.update'), ['class' => 'btn btn-success']) }}
                 {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
                 @can('delete', $loan)
-                    {{ link_to_route('loans.edit', __('app.delete'), [$loan, 'action' => 'delete'], ['class' => 'btn btn-danger pull-right', 'id' => 'del-loan-'.$loan->id]) }}
+                    {{ link_to_route('loans.edit', __('app.delete'), [$loan, 'action' => 'delete'], ['class' => 'btn btn-danger float-right', 'id' => 'del-loan-'.$loan->id]) }}
                 @endcan
             </div>
             {{ Form::close() }}

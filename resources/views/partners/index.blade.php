@@ -4,7 +4,7 @@
 
 @section('content_settings')
 <h3 class="page-header">
-    <div class="pull-right">
+    <div class="float-right">
         @can('create', new App\Partner)
             {{ link_to_route('partners.index', __('partner.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
         @endcan

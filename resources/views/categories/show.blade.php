@@ -4,7 +4,7 @@
 
 @section('content_settings')
 
-{{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-default pull-right']) }}
+{{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-default float-right']) }}
 <h3 class="page-header">{{ $category->name }} <small>{{ __('category.transactions') }}</small></h3>
 
 @include('transactions.partials.stats')
@@ -37,7 +37,7 @@
                         <td class="text-center">{{ $transaction->date }}</td>
                         <td>
                             {{ $transaction->description }}
-                            <span class="pull-right">
+                            <span class="float-right">
                                 {!!optional($transaction->partner)->name_label !!}
                                 {!!optional($transaction->loan)->type_label !!}
                             </span>

@@ -21,7 +21,7 @@
         <div class="header clearfix">
             @if (Route::has('login'))
             <nav>
-                <ul class="nav nav-pills pull-right">
+                <ul class="nav nav-pills float-right">
                    @auth
                        <li role="presentation" class="active"><a href="{{ url('/home') }}">Home</a></li>
                    @else

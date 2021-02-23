@@ -1,4 +1,4 @@
-<span class="pull-right">{{ $transaction->amount_string }}</span>
+<span class="float-right">{{ $transaction->amount_string }}</span>
 {{ link_to_route('transactions.index', $transaction->date, [
     'date' => $transaction->date_only,
     'month' => $month,
@@ -12,7 +12,7 @@
             'transactions.index',
             __('app.edit'),
             ['action' => 'edit', 'id' => $transaction->id] + request(['month', 'year', 'query', 'category_id']),
-            ['id' => 'edit-transaction-'.$transaction->id, 'class' => 'pull-right text-danger']
+            ['id' => 'edit-transaction-'.$transaction->id, 'class' => 'float-right text-danger']
         ) !!}
     @endcan
 </div>

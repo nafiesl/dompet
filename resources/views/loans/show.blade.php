@@ -30,7 +30,7 @@
     </div>
     <div class="col-md-7">
         <h3 class="page-header">
-            <div class="pull-right">
+            <div class="float-right">
                 @can('update', $loan)
                     @if(Request::get('action') != 'add_transaction')
                         {{ link_to_route(
