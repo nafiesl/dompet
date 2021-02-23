@@ -19,7 +19,7 @@
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "luthfi/formfield": "^1.0",
+        "luthfi/formfield": "^2.1",
         "riverskies/laravel-mobile-detect": "^1.3"
     },
     "require-dev": {
