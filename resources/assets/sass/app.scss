@@ -2,10 +2,7 @@
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-
-// Bootstrap Theme
-@import "bootstrap-theme";
+@import '~bootstrap/scss/bootstrap';
 
 // Custom CSS
 @import "custom";
