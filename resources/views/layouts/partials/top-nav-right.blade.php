@@ -15,8 +15,11 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="dropdown-icon fe fe-log-out"></i> {{ __('Logout') }}
+            <i class="dropdown-icon fe fe-log-out"></i> {{ __('auth.logout') }}
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <input type="submit" value="{{ __('auth.logout') }}" style="display: none;">
+            @csrf
+        </form>
     </div>
 </div>

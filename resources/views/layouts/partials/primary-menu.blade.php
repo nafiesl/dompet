@@ -9,5 +9,11 @@
         <li class="nav-item">
             <a href="{{ route('loans.index') }}" class="nav-link {{ Request::segment(1) == 'loans' ? 'active' : '' }}"><i class="fe fe-truck"></i> {{ __('loan.loan') }}</a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('profile.show') }}" class="nav-link {{ Request::segment(1) == 'loans' ? 'active' : '' }}">
+                <i class="fe fe-truck"></i> {{ __('settings.settings') }}
+            </a>
+        </li>
+        @include ('layouts.partials.lang_switcher')
     </ul>
 </div>
