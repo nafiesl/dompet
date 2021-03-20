@@ -9,7 +9,7 @@
         @can('delete', $loan)
             <div class="card">
                 <div class="card-header"><h3 class="card-title">{{ __('loan.delete') }}</h3></div>
-                <div class="panel-body">
+                <div class="card-body">
                     <table class="table table-condensed">
                         <tbody>
                             <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
@@ -25,8 +25,8 @@
                     </table>
                 </div>
                 <hr style="margin:0">
-                <div class="panel-body text-danger">{{ __('loan.delete_confirm') }}</div>
-                <div class="panel-footer">
+                <div class="card-body text-danger">{{ __('loan.delete_confirm') }}</div>
+                <div class="card-footer">
                     {!! FormField::delete(
                         ['route' => ['loans.destroy', $loan]],
                         __('app.delete_confirm_button'),
@@ -41,7 +41,7 @@
         <div class="card">
             <div class="card-header"><h3 class="card-title">{{ __('loan.edit') }}</h3></div>
             {{ Form::model($loan, ['route' => ['loans.update', $loan], 'method' => 'patch']) }}
-            <div class="panel-body">
+            <div class="card-body">
                 {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}
                 {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
                 <div class="row">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 {{ Form::submit(__('loan.update'), ['class' => 'btn btn-success']) }}
                 {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
                 @can('delete', $loan)

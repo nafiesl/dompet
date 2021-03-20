@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header"><h3 class="card-title">{{ __('loan.create') }}</h3></div>
             {{ Form::open(['route' => 'loans.store']) }}
-            <div class="panel-body">
+            <div class="card-body">
                 {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}
                 {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
                 <div class="row">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 {{ Form::submit(__('loan.create'), ['class' => 'btn btn-success']) }}
                 {{ link_to_route('loans.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
             </div>

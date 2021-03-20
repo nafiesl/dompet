@@ -20,7 +20,7 @@
                     <tr><td>{{ __('loan.end_date') }}</td><td>{{ $loan->end_date }}</td></tr>
                 </tbody>
             </table>
-            <div class="panel-footer">
+            <div class="card-footer">
                 @can('update', $loan)
                     {{ link_to_route('loans.edit', __('loan.edit'), [$loan], ['class' => 'btn btn-warning', 'id' => 'edit-loan-'.$loan->id]) }}
                 @endcan

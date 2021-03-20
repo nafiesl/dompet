@@ -71,7 +71,7 @@
                 </tfoot>
             </table>
             @elsedesktop
-            <div class="panel-body">
+            <div class="card-body">
                 @foreach ($transactions as $transaction)
                     @include('partners.partials.single_transaction_mobile', ['transaction' => $transaction])
                 @endforeach

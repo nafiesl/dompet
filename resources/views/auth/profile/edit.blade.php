@@ -8,12 +8,12 @@
         <div class="card">
             <div class="card-header"><h3 class="card-title">@yield('title')</h3></div>
             {{ Form::model($user, ['route' => 'profile.update', 'method' => 'patch']) }}
-                <div class="panel-body">
+                <div class="card-body">
                     {!! FormField::text('name', ['required' => true]) !!}
                     {!! FormField::email('email', ['required' => true]) !!}
                     {!! FormField::text('account_start_date') !!}
                 </div>
-                <div class="panel-footer">
+                <div class="card-footer">
                     {{ Form::submit(__('user.profile_update'), ['class' => 'btn btn-success']) }}
                     {{ link_to_route('profile.show', __('app.cancel'), [], ['class' => 'btn btn-link']) }}
                 </div>

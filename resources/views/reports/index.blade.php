@@ -16,7 +16,7 @@
 
 <div class="card">
     <div class="card-header"><h3 class="card-title">{{ __('report.graph') }} {{ $year }}</h3></div>
-    <div class="panel-body">
+    <div class="card-body">
         <strong>{{ 'Rp' }}</strong>
         <div id="yearly-chart" style="height: 250px;"></div>
         <div class="text-center"><strong>{{ __('time.month') }}</strong></div>
@@ -25,7 +25,7 @@
 
 <div class="card table-responsive">
     <div class="card-header"><h3 class="card-title">{{ __('report.detail') }}</h3></div>
-    <div class="panel-body table-responsive">
+    <div class="card-body table-responsive">
         <table class="table table-condensed">
             <thead>
                 <th class="text-center">{{ __('time.month') }}</th>

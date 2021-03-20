@@ -67,7 +67,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="panel-body">{{ $loans->appends(Request::except('page'))->render() }}</div>
+            <div class="card-body">{{ $loans->appends(Request::except('page'))->render() }}</div>
         </div>
     </div>
 </div>

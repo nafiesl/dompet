@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header"><h3 class="card-title">{{ __('auth.reset_password') }}</h3></div>
 
-                <div class="panel-body">
+                <div class="card-body">
                     <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
                         {{ csrf_field() }}
 

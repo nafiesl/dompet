@@ -153,7 +153,7 @@
                 @endif
             </table>
             @elsedesktop
-            <div class="panel-body">
+            <div class="card-body">
                 @foreach ($transactions->groupBy('date') as $groupedTransactions)
                     @foreach ($groupedTransactions as $date => $transaction)
                         @include('transactions.partials.single_transaction_mobile', ['transaction' => $transaction, 'month' => $month, 'year' => $year])
