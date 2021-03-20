@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 offset-md-3">
         <div class="card">
             <div class="card-header"><h3 class="card-title">{{ __('loan.create') }}</h3></div>
             {{ Form::open(['route' => 'loans.store']) }}

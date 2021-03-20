@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 offset-md-3">
         @if (request('action') == 'delete' && $loan)
         @can('delete', $loan)
             <div class="card">

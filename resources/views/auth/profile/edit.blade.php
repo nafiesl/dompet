@@ -4,7 +4,7 @@
 
 @section('content_settings')
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 offset-md-3">
         <div class="card">
             <div class="card-header"><h3 class="card-title">@yield('title')</h3></div>
             {{ Form::model($user, ['route' => 'profile.update', 'method' => 'patch']) }}
