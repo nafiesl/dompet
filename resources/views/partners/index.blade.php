@@ -3,15 +3,16 @@
 @section('title', __('partner.list'))
 
 @section('content_settings')
-<h3 class="page-header">
-    <div class="float-right">
+<div class="page-header">
+    <h1 class="page-title">{{ __('partner.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $partners->count() }} {{ __('partner.partner') }}</div>
+    <div class="page-options d-flex">
         @can('create', new App\Partner)
             {{ link_to_route('partners.index', __('partner.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
         @endcan
     </div>
-    {{ __('partner.list') }}
-    <small>{{ __('app.total') }} : {{ $partners->count() }} {{ __('partner.partner') }}</small>
-</h3>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card table-responsive">

@@ -16,6 +16,6 @@
         {!! link_to_route('partners.index', __('partner.partner'), [], ['class' => 'nav-link'.(Request::segment(1) == 'partners' ? ' active' : '')]) !!}
     </li>
 </ul>
-<br>
+
 @yield('content_settings')
 @endsection

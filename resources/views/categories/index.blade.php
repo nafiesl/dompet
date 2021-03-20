@@ -3,15 +3,16 @@
 @section('title', __('category.list'))
 
 @section('content_settings')
-<h3 class="page-header">
-    <div class="float-right">
+<div class="page-header">
+    <h1 class="page-title">{{ __('category.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $categories->count() }} {{ __('category.category') }}</div>
+    <div class="page-options d-flex">
         @can('create', new App\Category)
             {{ link_to_route('categories.index', __('category.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
         @endcan
     </div>
-    {{ __('category.list') }}
-    <small>{{ __('app.total') }} : {{ $categories->count() }} {{ __('category.category') }}</small>
-</h3>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card table-responsive">

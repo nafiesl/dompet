@@ -5,8 +5,8 @@
 @section('content_settings')
 <div class="row">
     <div class="col-md-6 offset-md-3">
+        <div class="page-header"><h1 class="page-title">@yield('title')</h1></div>
         <div class="card">
-            <div class="card-header"><h3 class="card-title">@yield('title')</h3></div>
             {{ Form::model($user, ['route' => 'profile.update', 'method' => 'patch']) }}
                 <div class="card-body">
                     {!! FormField::text('name', ['required' => true]) !!}

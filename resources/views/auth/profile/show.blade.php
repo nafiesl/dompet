@@ -3,10 +3,13 @@
 @section('title', __('auth.profile').' - '.$user->name)
 
 @section('content_settings')
+
 <div class="row">
     <div class="col-md-6 offset-md-3">
+        <div class="page-header">
+            <h1 class="page-title">@yield('title')</h1>
+        </div>
         <div class="card">
-            <div class="card-header"><h3 class="card-title">@yield('title')</h3></div>
             <table class="table table-sm card-table">
                 <tbody>
                     <tr><td>{{ __('user.name') }}</td><td>{{ $user->name }}</td></tr>
