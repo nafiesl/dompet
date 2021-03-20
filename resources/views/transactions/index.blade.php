@@ -11,8 +11,8 @@
 <div class="row">
     <div class="col-md-12">
         @include('transactions.partials.stats')
-        <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
+        <div class="card table-responsive">
+            <div class="card-header">
                 @include('transactions.partials.index_filters')
             </div>
             @desktop

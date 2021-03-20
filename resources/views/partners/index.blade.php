@@ -14,7 +14,7 @@
 </h3>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default table-responsive">
+        <div class="card table-responsive">
             <table class="table table-condensed">
                 <thead>
                     <tr>

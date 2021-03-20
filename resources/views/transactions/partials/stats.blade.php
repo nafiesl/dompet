@@ -1,4 +1,4 @@
-<div class="panel panel-default table-responsive">
+<div class="card table-responsive">
     <table class="table table-condensed table-bordered">
         <tr>
             <td class="col-xs-2 text-center">{{ trans('transaction.income') }}</td>

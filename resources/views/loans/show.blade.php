@@ -5,8 +5,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-5">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">{{ __('loan.detail') }}</h3></div>
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">{{ __('loan.detail') }}</h3></div>
             <table class="table table-condensed">
                 <tbody>
                     <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
@@ -49,7 +49,7 @@
                 @include('loans.partials.single_actions')
             @endif
         @endcan
-        <div class="panel panel-default table-responsive">
+        <div class="card table-responsive">
             <table class="table table-condensed table-bordered">
                 <thead>
                     <tr>

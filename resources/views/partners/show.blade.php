@@ -15,8 +15,8 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
+        <div class="card table-responsive">
+            <div class="card-header">
                 @include('partners.partials.show_filter')
             </div>
             @desktop

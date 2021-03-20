@@ -14,8 +14,8 @@
 </h1>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
+        <div class="card table-responsive">
+            <div class="card-header">
                 <div class="float-right">
                     <div class="btn-group" role="group" aria-label="...">
                         {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-default')]) }}

@@ -14,8 +14,8 @@
 {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-default btn-sm']) }}
 {{ Form::close() }}
 
-<div class="panel panel-default">
-    <div class="panel-heading"><h3 class="panel-title">{{ __('report.graph') }} {{ $year }}</h3></div>
+<div class="card">
+    <div class="card-header"><h3 class="card-title">{{ __('report.graph') }} {{ $year }}</h3></div>
     <div class="panel-body">
         <strong>{{ 'Rp' }}</strong>
         <div id="yearly-chart" style="height: 250px;"></div>
@@ -23,8 +23,8 @@
     </div>
 </div>
 
-<div class="panel panel-default table-responsive">
-    <div class="panel-heading"><h3 class="panel-title">{{ __('report.detail') }}</h3></div>
+<div class="card table-responsive">
+    <div class="card-header"><h3 class="card-title">{{ __('report.detail') }}</h3></div>
     <div class="panel-body table-responsive">
         <table class="table table-condensed">
             <thead>

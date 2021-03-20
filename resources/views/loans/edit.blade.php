@@ -7,8 +7,8 @@
     <div class="col-md-6 col-md-offset-3">
         @if (request('action') == 'delete' && $loan)
         @can('delete', $loan)
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="panel-title">{{ __('loan.delete') }}</h3></div>
+            <div class="card">
+                <div class="card-header"><h3 class="card-title">{{ __('loan.delete') }}</h3></div>
                 <div class="panel-body">
                     <table class="table table-condensed">
                         <tbody>
@@ -38,8 +38,8 @@
             </div>
         @endcan
         @else
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">{{ __('loan.edit') }}</h3></div>
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">{{ __('loan.edit') }}</h3></div>
             {{ Form::model($loan, ['route' => ['loans.update', $loan], 'method' => 'patch']) }}
             <div class="panel-body">
                 {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}

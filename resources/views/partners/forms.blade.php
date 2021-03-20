@@ -47,7 +47,7 @@
                             'partners.index',
                             __('app.delete'),
                             ['action' => 'delete', 'id' => $editablePartner->id],
-                            ['id' => 'del-partner-'.$editablePartner->id, 'class' => 'btn btn-danger pull-left']
+                            ['id' => 'del-partner-'.$editablePartner->id, 'class' => 'btn btn-danger float-left']
                         ) !!}
                     @endcan
                 </div>

@@ -124,7 +124,7 @@
                             'transactions.index',
                             __('app.delete'),
                             ['action' => 'delete', 'id' => $editableTransaction->id] + Request::only('page', 'month', 'year'),
-                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-left']
+                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger float-left']
                         ) !!}
                     @endcan
                 </div>

@@ -4,8 +4,8 @@
 
 @section('content_settings')
 <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-        <div class="panel-heading"><h3 class="panel-title">{{ __('auth.change_password') }}</h3></div>
+    <div class="card">
+        <div class="card-header"><h3 class="card-title">{{ __('auth.change_password') }}</h3></div>
         {!! Form::open(['route' => 'password.change', 'method' => 'patch']) !!}
         <div class="panel-body">
             {!! FormField::password('old_password', ['label'=> __('auth.old_password')]) !!}

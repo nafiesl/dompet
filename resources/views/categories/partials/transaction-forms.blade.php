@@ -42,7 +42,7 @@
                             'categories.show',
                             __('app.delete'),
                             [$category->id, 'action' => 'delete', 'id' => $editableTransaction->id] + request(['start_date', 'end_date', 'query', 'partner_id']),
-                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-left']
+                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger float-left']
                         ) !!}
                     @endcan
                 </div>
