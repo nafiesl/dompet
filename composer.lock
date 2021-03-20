@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fa2d527197bbdb073792b257b9a04f8",
+    "content-hash": "389068c330778fc540e63f910f20b367",
     "packages": [
         {
             "name": "backup-manager/backup-manager",
@@ -1899,16 +1899,16 @@
         },
         {
             "name": "luthfi/formfield",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nafiesl/FormField.git",
-                "reference": "842b35a8d3647c0c830d3bebe93247edda73c93c"
+                "reference": "379d33fefca21d4fb961fd523ceec78373033bc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nafiesl/FormField/zipball/842b35a8d3647c0c830d3bebe93247edda73c93c",
-                "reference": "842b35a8d3647c0c830d3bebe93247edda73c93c",
+                "url": "https://api.github.com/repos/nafiesl/FormField/zipball/379d33fefca21d4fb961fd523ceec78373033bc5",
+                "reference": "379d33fefca21d4fb961fd523ceec78373033bc5",
                 "shasum": ""
             },
             "require": {
@@ -1949,9 +1949,9 @@
             "description": "Laravel Form Field the extension of Laravelcollective Form for Laravel 5.3 and newer with Twitter Bootstrap 4.",
             "support": {
                 "issues": "https://github.com/nafiesl/FormField/issues",
-                "source": "https://github.com/nafiesl/FormField/tree/master"
+                "source": "https://github.com/nafiesl/FormField/tree/2.2.0"
             },
-            "time": "2020-05-22T02:22:03+00:00"
+            "time": "2021-03-20T14:58:05+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
