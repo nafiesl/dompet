@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('partner.create'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
                 {{ Form::close() }}
             </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('partner.update'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                     @can('delete', $editablePartner)
                         {!! link_to_route(
                             'partners.index',
@@ -86,7 +86,7 @@
                             'partner_id' => $editablePartner->id,
                         ]
                     ) !!}
-                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         </div>

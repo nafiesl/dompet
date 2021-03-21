@@ -4,7 +4,7 @@
 
 @section('content_settings')
 
-{{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-default float-right']) }}
+{{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-secondary float-right']) }}
 <h3 class="page-header">{{ $category->name }} <small>{{ __('category.transactions') }}</small></h3>
 
 @include('transactions.partials.stats')

@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('transaction.add_income'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('transactions.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('transactions.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
                 {{ Form::close() }}
             </div>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('transaction.add_spending'), ['class' => 'btn btn-danger']) !!}
-                    {{ link_to_route('transactions.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('transactions.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
                 {{ Form::close() }}
             </div>
@@ -118,7 +118,7 @@
                     {!! Form::submit(__('transaction.update'), ['class' => 'btn btn-success']) !!}
                     {{ Form::hidden('query', request('query')) }}
                     {{ Form::hidden('queried_category_id', request('category_id')) }}
-                    {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $month, 'year' => $year], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $month, 'year' => $year], ['class' => 'btn btn-secondary']) }}
                     @can('delete', $editableTransaction)
                         {!! link_to_route(
                             'transactions.index',
@@ -176,7 +176,7 @@
                             'month' => $editableTransaction->month, 'year' => $editableTransaction->year,
                         ]
                     ) !!}
-                    {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $editableTransaction->month, 'year' => $editableTransaction->year], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('transactions.index', __('app.cancel'), ['month' => $editableTransaction->month, 'year' => $editableTransaction->year], ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         </div>

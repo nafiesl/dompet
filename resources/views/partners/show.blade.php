@@ -4,7 +4,7 @@
 
 @section('content_settings')
 
-{{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-sm btn-default float-right']) }}
+{{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-sm btn-secondary float-right']) }}
 <h3 class="page-header">{{ $partner->name }} <small>{{ __('partner.transactions') }}</small></h3>
 
 @include('transactions.partials.stats')

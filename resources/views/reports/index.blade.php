@@ -11,7 +11,7 @@
 {{ Form::select('partner_id', $partners, $partnerId, ['class' => 'form-control', 'placeholder' => '-- '.__('partner.all').' --']) }}
 {{ Form::select('category_id', $categories, $categoryId, ['class' => 'form-control', 'placeholder' => '-- '.__('category.all').' --']) }}
 {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info btn-sm']) }}
-{{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-default btn-sm']) }}
+{{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary btn-sm']) }}
 {{ Form::close() }}
 
 <div class="card">
@@ -53,7 +53,7 @@
                             __('report.view_monthly'),
                             ['month' => $monthNumber, 'year' => $year, 'partner_id' => $partnerId],
                             [
-                                'class' => 'btn btn-info btn-xs',
+                                'class' => 'btn btn-info btn-sm',
                                 'title' => __('report.monthly', ['year_month' => month_id($monthNumber)]),
                                 'title' => __('report.monthly', ['year_month' => month_id($monthNumber).' '.$year]),
                             ]

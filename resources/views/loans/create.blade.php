@@ -31,7 +31,7 @@
             </div>
             <div class="card-footer">
                 {{ Form::submit(__('loan.create'), ['class' => 'btn btn-success']) }}
-                {{ link_to_route('loans.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
             </div>
             {{ Form::close() }}
         </div>

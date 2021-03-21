@@ -24,7 +24,7 @@
                 @can('update', $loan)
                     {{ link_to_route('loans.edit', __('loan.edit'), [$loan], ['class' => 'btn btn-warning', 'id' => 'edit-loan-'.$loan->id]) }}
                 @endcan
-                {{ link_to_route('loans.index', __('loan.back_to_index'), [], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.index', __('loan.back_to_index'), [], ['class' => 'btn btn-secondary']) }}
             </div>
         </div>
     </div>

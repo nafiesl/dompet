@@ -37,7 +37,7 @@
                                     'partners.show',
                                     __('partner.view_transactions'),
                                     $partner,
-                                    ['class' => 'btn btn-xs btn-default']
+                                    ['class' => 'btn btn-sm btn-secondary']
                                 ) }}
                             @endcan
                             @can('update', $partner)
@@ -47,7 +47,7 @@
                                     ['action' => 'edit', 'id' => $partner->id],
                                     [
                                         'id' => 'edit-partner-'.$partner->id,
-                                        'class' => 'btn btn-xs btn-warning',
+                                        'class' => 'btn btn-sm btn-warning',
                                     ]
                                 ) }}
                             @endcan

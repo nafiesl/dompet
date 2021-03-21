@@ -7,7 +7,7 @@
     ],
     $langKey,
     [
-        'class' => 'btn btn-default btn-xs navbar-btn',
+        'class' => 'btn btn-secondary btn-sm navbar-btn',
         'id' => 'lang_'.$langKey
     ] + (config('app.locale') == $langKey ? ['disabled' => 'disabled'] : []),
     ['lang' => $langKey]

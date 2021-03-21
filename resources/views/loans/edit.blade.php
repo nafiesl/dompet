@@ -33,7 +33,7 @@
                         ['class' => 'btn btn-danger'],
                         ['loan_id' => $loan->id]
                     ) !!}
-                    {{ link_to_route('loans.edit', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('loans.edit', __('app.cancel'), [$loan], ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         @endcan
@@ -64,7 +64,7 @@
             </div>
             <div class="card-footer">
                 {{ Form::submit(__('loan.update'), ['class' => 'btn btn-success']) }}
-                {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-secondary']) }}
                 @can('delete', $loan)
                     {{ link_to_route('loans.edit', __('app.delete'), [$loan, 'action' => 'delete'], ['class' => 'btn btn-danger float-right', 'id' => 'del-loan-'.$loan->id]) }}
                 @endcan

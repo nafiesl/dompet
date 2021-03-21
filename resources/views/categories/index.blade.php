@@ -37,7 +37,7 @@
                                     'categories.show',
                                     __('category.view_transactions'),
                                     $category,
-                                    ['class' => 'btn btn-xs btn-default']
+                                    ['class' => 'btn btn-sm btn-secondary']
                                 ) }}
                             @endcan
                             @can('update', $category)
@@ -47,7 +47,7 @@
                                     ['action' => 'edit', 'id' => $category->id],
                                     [
                                         'id' => 'edit-category-'.$category->id,
-                                        'class' => 'btn btn-xs btn-warning',
+                                        'class' => 'btn btn-sm btn-warning',
                                     ]
                                 ) }}
                             @endcan

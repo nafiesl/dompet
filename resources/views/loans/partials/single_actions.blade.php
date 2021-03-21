@@ -30,7 +30,7 @@
             </div>
             <div class="modal-footer">
                 {{ Form::submit(__('loan.add_transaction'), ['class' => 'btn btn-success']) }}
-                {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-secondary']) }}
             </div>
             {{ Form::close() }}
         </div>

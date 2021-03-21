@@ -36,7 +36,7 @@
                     {{ Form::hidden('start_date', request('start_date')) }}
                     {{ Form::hidden('end_date', request('end_date')) }}
                     {{ Form::hidden('reference_page', 'partner') }}
-                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-secondary']) }}
                     @can('delete', $editableTransaction)
                         {!! link_to_route(
                             'partners.show',
@@ -98,7 +98,7 @@
                             'query' => request('query'),
                         ]
                     ) !!}
-                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         </div>

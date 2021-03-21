@@ -18,9 +18,9 @@
             <div class="card-header">
                 <div class="float-right">
                     <div class="btn-group" role="group" aria-label="...">
-                        {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-default')]) }}
-                        {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-default')]) }}
-                        {{ link_to_route('loans.index', __('loan.types.receivable'), ['type_id' => 2] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') === '2' ? 'btn-info active' : 'btn-default')]) }}
+                        {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-secondary')]) }}
+                        {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-secondary')]) }}
+                        {{ link_to_route('loans.index', __('loan.types.receivable'), ['type_id' => 2] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') === '2' ? 'btn-info active' : 'btn-secondary')]) }}
                     </div>
                 </div>
                 {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
@@ -59,7 +59,7 @@
                                     'loans.show',
                                     __('app.show'),
                                     [$loan],
-                                    ['class' => 'btn btn-default btn-xs', 'id' => 'show-loan-' . $loan->id]
+                                    ['class' => 'btn btn-secondary btn-sm', 'id' => 'show-loan-' . $loan->id]
                                 ) }}
                             @endcan
                         </td>
