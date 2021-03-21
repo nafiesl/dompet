@@ -3,21 +3,20 @@
 @section('title', __('loan.list'))
 
 @section('content')
-<h1 class="page-header">
-    <div class="float-right">
-        @can('create', new App\Loan)
-            {{ link_to_route('loans.create', __('loan.create'), [], ['class' => 'btn btn-success']) }}
-        @endcan
+<div class="page-header">
+    <h1 class="page-title">{{ __('loan.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $loans->total() }} {{ __('loan.loan') }}</div>
+    <div class="page-options d-flex">
+        {{ link_to_route('loans.create', __('loan.create'), [], ['class' => 'btn btn-success']) }}
     </div>
-    {{ __('loan.list') }}
-    <small>{{ __('app.total') }} : {{ $loans->total() }} {{ __('loan.loan') }}</small>
-</h1>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card table-responsive">
             <div class="card-header">
-                <div class="float-right">
-                    <div class="btn-group" role="group" aria-label="...">
+                <div class="card-options">
+                    <div class="btn-group">
                         {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-secondary')]) }}
                         {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-secondary')]) }}
                         {{ link_to_route('loans.index', __('loan.types.receivable'), ['type_id' => 2] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') === '2' ? 'btn-info active' : 'btn-secondary')]) }}

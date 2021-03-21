@@ -4,8 +4,13 @@
 
 @section('content_settings')
 
-{{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-sm btn-secondary float-right']) }}
-<h3 class="page-header">{{ $category->name }} <small>{{ __('category.transactions') }}</small></h3>
+<div class="page-header">
+    <h1 class="page-title">{{ $category->name }}</h1>
+    <div class="page-subtitle">{{ __('category.transactions') }}</div>
+    <div class="page-options d-flex">
+        {{ link_to_route('categories.index', __('category.back_to_index'), [], ['class' => 'btn btn-secondary float-right']) }}
+    </div>
+</div>
 
 @include('transactions.partials.stats')
 

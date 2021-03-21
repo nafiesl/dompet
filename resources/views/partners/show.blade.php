@@ -4,8 +4,13 @@
 
 @section('content_settings')
 
-{{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-sm btn-secondary float-right']) }}
-<h3 class="page-header">{{ $partner->name }} <small>{{ __('partner.transactions') }}</small></h3>
+<div class="page-header">
+    <h1 class="page-title">{{ $partner->name }}</h1>
+    <div class="page-subtitle">{{ __('partner.transactions') }}</div>
+    <div class="page-options d-flex">
+        {{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-secondary float-right']) }}
+    </div>
+</div>
 
 @include('transactions.partials.stats')
 
