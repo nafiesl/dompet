@@ -20,7 +20,7 @@
                 @include('categories.partials.show_filter')
             </div>
             @desktop
-            <table class="table table-condensed table-bordered">
+            <table class="table table-sm table-responsive-sm table-hover table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center col-md-1">{{ __('app.table_no') }}</th>

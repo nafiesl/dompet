@@ -26,7 +26,7 @@
 <div class="card table-responsive">
     <div class="card-header"><h3 class="card-title">{{ __('report.detail') }}</h3></div>
     <div class="card-body table-responsive">
-        <table class="table table-condensed">
+        <table class="table table-sm table-responsive-sm table-hover">
             <thead>
                 <th class="text-center">{{ __('time.month') }}</th>
                 <th class="text-center">{{ __('transaction.transaction') }}</th>

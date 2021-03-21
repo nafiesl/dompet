@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card table-responsive">
-            <table class="table table-condensed">
+            <table class="table table-sm table-responsive-sm table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>

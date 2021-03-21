@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header"><h3 class="card-title">{{ __('loan.delete') }}</h3></div>
                 <div class="card-body">
-                    <table class="table table-condensed">
+                    <table class="table table-sm table-responsive-sm table-hover">
                         <tbody>
                             <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
                             <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>

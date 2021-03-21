@@ -16,7 +16,7 @@
                 @include('transactions.partials.index_filters')
             </div>
             @desktop
-            <table class="table table-condensed table-bordered">
+            <table class="table table-sm table-responsive-sm table-hover table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
