@@ -29,7 +29,7 @@
                 {{ link_to_route('loans.index', __('app.reset'), request(['type_id'])) }}
                 {{ Form::close() }}
             </div>
-            <table class="table table-sm table-responsive-sm table-hover table-hover">
+            <table class="table table-sm table-responsive-sm table-hover table-hover mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>

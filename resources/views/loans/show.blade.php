@@ -52,7 +52,7 @@
         @endcan
 
         <div class="card table-responsive">
-            <table class="table table-sm table-responsive-sm table-hover table-bordered">
+            <table class="table table-sm table-responsive-sm table-hover table-bordered mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
