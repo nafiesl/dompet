@@ -10,7 +10,7 @@
             <i class="dropdown-icon fe fe-user"></i> {{ __('auth.profile') }}
         </a>
         <a class="dropdown-item" href="{{ route('password.change') }}">
-            <i class="dropdown-icon fe fe-lock"></i> {{ __('passwords.change_password') }}
+            <i class="dropdown-icon fe fe-lock"></i> {{ __('auth.change_password') }}
         </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('logout') }}"
