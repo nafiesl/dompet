@@ -1,5 +1,5 @@
 <div class="card table-responsive">
-    <table class="table table-sm table-responsive-sm table-hover table-bordered">
+    <table class="table table-sm table-bordered mb-0">
         <tr>
             <td class="col-xs-2 text-center">{{ trans('transaction.income') }}</td>
             <td class="col-xs-2 text-center">{{ trans('transaction.spending') }}</td>
