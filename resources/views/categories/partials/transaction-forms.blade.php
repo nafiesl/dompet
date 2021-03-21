@@ -5,8 +5,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('categories.show', '&times;', [$category] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
+                    <h5 class="modal-title">{{ __('transaction.edit') }}</h5>
+                    {{ link_to_route('categories.show', '', [$category] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
                 </div>
                 {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch', 'autocomplete' => 'off']) !!}
                 <div class="modal-body">
@@ -60,8 +60,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('categories.show', '&times;', [$category] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h4>
+                    <h5 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h5>
+                    {{ link_to_route('categories.show', '', [$category] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
                 </div>
                 <div class="modal-body">
                     <div class="row">

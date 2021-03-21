@@ -4,8 +4,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                {{ link_to_route('loans.show', '&times;', [$loan], ['class' => 'close']) }}
-                <h4 class="modal-title">{{ __('loan.add_transaction') }}</h4>
+                <h5 class="modal-title">{{ __('loan.add_transaction') }}</h5>
+                {{ link_to_route('loans.show', '', [$loan], ['class' => 'close']) }}
             </div>
             {{ Form::open(['route' => ['loans.transactions.store', $loan], 'autocomplete' => 'off']) }}
             <div class="modal-body">

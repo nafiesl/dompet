@@ -5,8 +5,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('transactions.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('transaction.add_income') }}</h4>
+                    <h5 class="modal-title">{{ __('transaction.add_income') }}</h5>
+                    {{ link_to_route('transactions.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::open(['route' => 'transactions.store', 'autocomplete' => 'off']) !!}
                 {{ Form::hidden('in_out', 1) }}
@@ -17,15 +17,7 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
-                                <label for="amount" class="control-label">{{ __('transaction.amount') }}</label>
-                                <div class="input-group"><span class="input-group-addon">Rp</span>
-                                    <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ old('amount') }}" required>
-                                </div>
-                                {!! $errors->first('amount', '<span class="help-block small">:message</span>') !!}
-                            </div>
-                        </div>
+                        <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount'), 'type' => 'number']) !!}</div>
                         <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.no_partner')]) !!}</div>
                     </div>
                 </div>
@@ -44,8 +36,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('transactions.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('transaction.add_spending') }}</h4>
+                    <h5 class="modal-title">{{ __('transaction.add_spending') }}</h5>
+                    {{ link_to_route('transactions.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::open(['route' => 'transactions.store', 'autocomplete' => 'off']) !!}
                 {{ Form::hidden('in_out', 0) }}
@@ -56,17 +48,7 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
-                                <label for="amount" class="control-label">{{ __('transaction.amount') }}</label>
-                                <div class="input-group"><span class="input-group-addon">Rp</span>
-                                    <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ old('amount') }}" required>
-                                </div>
-                                @if ($errors->has('amount'))
-                                    <span class="help-block small">{{ $errors->first('amount') }}</span>
-                                @endif
-                            </div>
-                        </div>
+                        <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount'), 'type' => 'number']) !!}</div>
                         <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.no_partner')]) !!}</div>
                     </div>
                 </div>
@@ -88,8 +70,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('transactions.index', '&times;', ['month' => $month, 'year' => $year], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
+                    <h5 class="modal-title">{{ __('transaction.edit') }}</h5>
+                    {{ link_to_route('transactions.index', '', ['month' => $month, 'year' => $year], ['class' => 'close']) }}
                 </div>
                 {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch', 'autocomplete' => 'off']) !!}
                 <div class="modal-body">
@@ -99,17 +81,7 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
-                                <label for="amount" class="control-label">{{ __('transaction.amount') }}</label>
-                                <div class="input-group"><span class="input-group-addon">Rp</span>
-                                    <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ isset($editableTransaction) ? round($editableTransaction->amount, 0) : old('amount') }}" required>
-                                </div>
-                                @if ($errors->has('amount'))
-                                    <span class="help-block small">{{ $errors->first('amount') }}</span>
-                                @endif
-                            </div>
-                        </div>
+                        <div class="col-md-4">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount'), 'type' => 'number']) !!}</div>
                         <div class="col-md-4">{!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => __('transaction.transaction')]) !!}</div>
                         <div class="col-md-4">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.empty')]) !!}</div>
                     </div>
@@ -142,8 +114,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('transactions.index', '&times;', ['date' => $editableTransaction->date], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h4>
+                    <h5 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h5>
+                    {{ link_to_route('transactions.index', '', ['date' => $editableTransaction->date], ['class' => 'close']) }}
                 </div>
                 <div class="modal-body">
                     <div class="row">
