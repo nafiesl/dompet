@@ -7,7 +7,7 @@
     <div class="col-md-5">
         <div class="card">
             <div class="card-header"><h3 class="card-title">{{ __('loan.detail') }}</h3></div>
-            <table class="table table-sm table-responsive-sm table-hover">
+            <table class="table table-sm table-responsive-sm table-hover card-table">
                 <tbody>
                     <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
                     <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>
@@ -29,8 +29,9 @@
         </div>
     </div>
     <div class="col-md-7">
-        <h3 class="page-header">
-            <div class="float-right">
+        <div class="page-header">
+            <h1 class="page-title">{{ __('transaction.list') }}</h1>
+            <div class="page-options d-flex">
                 @can('update', $loan)
                     @if(Request::get('action') != 'add_transaction')
                         {{ link_to_route(
@@ -42,13 +43,14 @@
                     @endif
                 @endcan
             </div>
-            {{ __('transaction.transaction') }}
-        </h3>
+        </div>
+
         @can('update', $loan)
             @if(Request::has('action'))
                 @include('loans.partials.single_actions')
             @endif
         @endcan
+
         <div class="card table-responsive">
             <table class="table table-sm table-responsive-sm table-hover table-bordered">
                 <thead>
