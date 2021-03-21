@@ -3,11 +3,17 @@
 @section('title', __('transaction.list'))
 
 @section('content')
-@include('transactions.partials.index_actions')
 <div class="page-header">
     <h1 class="page-title">{{ __('transaction.list') }}</h1>
     <div class="page-subtitle">{{ __('app.total') }} : {{ $transactions->count() }} {{ __('transaction.transaction') }}</div>
+    <div class="page-options d-flex">
+        @can('create', new App\Transaction)
+            {{ link_to_route('transactions.index', __('transaction.add_income'), ['action' => 'add-income', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success mr-2']) }}
+            {{ link_to_route('transactions.index', __('transaction.add_spending'), ['action' => 'add-spending', 'month' => $month, 'year' => $year], ['class' => 'btn btn-danger']) }}
+        @endcan
+    </div>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         @include('transactions.partials.stats')
