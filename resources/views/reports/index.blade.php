@@ -56,7 +56,7 @@
                             __('report.view_monthly'),
                             ['month' => $monthNumber, 'year' => $year, 'partner_id' => $partnerId],
                             [
-                                'class' => 'btn btn-info btn-sm',
+                                'class' => 'btn btn-secondary btn-sm',
                                 'title' => __('report.monthly', ['year_month' => month_id($monthNumber)]),
                                 'title' => __('report.monthly', ['year_month' => month_id($monthNumber).' '.$year]),
                             ]
