@@ -4,18 +4,21 @@
 
 @section('content')
 
-
-{{ Form::open(['method' => 'get', 'class' => 'form-inline well well-sm']) }}
-{{ Form::label('year', __('report.view_yearly_label'), ['class' => 'control-label']) }}
-{{ Form::select('year', get_years(), $year, ['class' => 'form-control']) }}
-{{ Form::select('partner_id', $partners, $partnerId, ['class' => 'form-control', 'placeholder' => '-- '.__('partner.all').' --']) }}
-{{ Form::select('category_id', $categories, $categoryId, ['class' => 'form-control', 'placeholder' => '-- '.__('category.all').' --']) }}
-{{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info btn-sm']) }}
-{{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary btn-sm']) }}
-{{ Form::close() }}
+<div class="page-header">
+    <h1 class="page-title">{{ __('report.graph') }} {{ $year }}</h1>
+    <div class="page-options d-flex">
+        {{ Form::open(['method' => 'get', 'class' => 'form-inline well well-sm']) }}
+        {{ Form::label('year', __('report.view_yearly_label'), ['class' => 'control-label mr-2']) }}
+        {{ Form::select('year', get_years(), $year, ['class' => 'form-control mr-2']) }}
+        {{ Form::select('partner_id', $partners, $partnerId, ['class' => 'form-control mr-2', 'placeholder' => '-- '.__('partner.all').' --']) }}
+        {{ Form::select('category_id', $categories, $categoryId, ['class' => 'form-control mr-2', 'placeholder' => '-- '.__('category.all').' --']) }}
+        {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info mr-2']) }}
+        {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary mr-2']) }}
+        {{ Form::close() }}
+    </div>
+</div>
 
 <div class="card">
-    <div class="card-header"><h3 class="card-title">{{ __('report.graph') }} {{ $year }}</h3></div>
     <div class="card-body">
         <strong>{{ 'Rp' }}</strong>
         <div id="yearly-chart" style="height: 250px;"></div>
