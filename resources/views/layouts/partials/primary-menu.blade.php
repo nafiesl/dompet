@@ -20,6 +20,5 @@
                 <i class="fe fe-settings"></i> {{ __('settings.settings') }}
             </a>
         </li>
-        @include ('layouts.partials.lang_switcher')
     </ul>
 </div>

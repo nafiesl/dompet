@@ -1,3 +1,6 @@
+<div class="nav-item d-md-flex">
+    @include ('layouts.partials.lang_switcher')
+</div>
 <div class="dropdown">
     <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
         <span class="avatar avatar-placeholder"></span>
