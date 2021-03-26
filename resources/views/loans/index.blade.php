@@ -23,10 +23,10 @@
                     </div>
                 </div>
                 {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
-                {!! FormField::text('q', ['label' => __('loan.search'), 'placeholder' => __('loan.search_text'), 'class' => 'input-sm']) !!}
+                {!! FormField::text('q', ['label' => __('loan.search'), 'placeholder' => __('loan.search_text'), 'class' => 'mx-2']) !!}
                 {{ Form::hidden('type_id', request('type_id')) }}
-                {{ Form::submit(__('loan.search'), ['class' => 'btn btn-sm']) }}
-                {{ link_to_route('loans.index', __('app.reset'), request(['type_id'])) }}
+                {{ Form::submit(__('loan.search'), ['class' => 'btn btn-info mr-2']) }}
+                {{ link_to_route('loans.index', __('app.reset'), request(['type_id']), ['class' => 'btn btn-secondary mr-2']) }}
                 {{ Form::close() }}
             </div>
             <table class="table table-sm table-responsive-sm table-hover table-hover mb-0">
