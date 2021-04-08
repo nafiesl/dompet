@@ -20,5 +20,15 @@
                 <i class="fe fe-settings"></i> {{ __('settings.settings') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fe fe-log-out"></i> {{ __('auth.logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <input type="submit" value="{{ __('auth.logout') }}" style="display: none;">
+                @csrf
+            </form>
+        </li>
     </ul>
 </div>
