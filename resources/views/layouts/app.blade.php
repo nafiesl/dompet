@@ -26,7 +26,7 @@
 <body>
     <div id="app" class="page">
         <div class="flex-fill">
-            @include('layouts.partials.navigation')
+            @include('layouts.partials.top_nav_bs_4')
             <div class="my-3 my-md-5">
                 <div class="container">@yield('content')</div>
             </div>
