@@ -10,7 +10,7 @@
                 @endguest
             </a>
         </div>
-        <div class="nav navbar-nav" style="margin: 0;">
+        <div class="nav navbar-nav mx-2 d-flex">
             @auth
             <a href="{{ route('home') }}" class="xs-navbar" title="{{ __('transaction.current_balance') }}">
                 <img src="{{ asset('images/icons8-coins-16.png') }}" alt=""> {{ format_number(balance(date('Y-m-d'))) }}
@@ -20,7 +20,7 @@
         </div>
 
         <!-- Right Side Of Navbar -->
-        <div class="nav navbar-nav navbar-right" style="margin: 0;">
+        <div class="nav navbar-nav ml-auto d-sm-block">
             <!-- Authentication Links -->
             <a class="xs-navbar mr-3" href="{{ route('transactions.index') }}" title="{{ __('transaction.transaction') }}">
                 <i class="fe fe-repeat"></i>
