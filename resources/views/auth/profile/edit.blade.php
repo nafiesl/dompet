@@ -11,7 +11,7 @@
                 <div class="card-body">
                     {!! FormField::text('name', ['required' => true]) !!}
                     {!! FormField::email('email', ['required' => true]) !!}
-                    {!! FormField::text('account_start_date') !!}
+                    {!! FormField::text('account_start_date', ['label' => __('user.account_start_date')]) !!}
                 </div>
                 <div class="card-footer">
                     {{ Form::submit(__('user.profile_update'), ['class' => 'btn btn-success']) }}
