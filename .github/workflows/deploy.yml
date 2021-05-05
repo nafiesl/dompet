@@ -14,10 +14,10 @@ jobs:
         with:
           node-version: '12'
       - name: Install dependencies
-        run: npm ci
-      - name: NPM Build
+        run: yarn
+      - name: YARN Build
         run: |
-          npm run prod
+          yarn run prod
           cat public/mix-manifest.json # see version in log
       - name: Upload compile assets
         uses: actions/upload-artifact@v1
