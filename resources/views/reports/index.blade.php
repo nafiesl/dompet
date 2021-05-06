@@ -17,7 +17,7 @@
 <div class="panel panel-default">
     <div class="panel-heading"><h3 class="panel-title">{{ __('report.graph') }} {{ $year }}</h3></div>
     <div class="panel-body">
-        <strong>{{ 'Rp' }}</strong>
+        <strong>{{ auth()->user()->currency_code }}</strong>
         <div id="yearly-chart" style="height: 250px;"></div>
         <div class="text-center"><strong>{{ __('time.month') }}</strong></div>
     </div>
@@ -94,7 +94,7 @@
         data: {!! collect($chartData)->toJson() !!},
         xkey: 'month',
         ykeys: ['income', 'spending', 'difference'],
-        labels: ["{{ __('transaction.income') }} {{ 'Rp' }}", "{{ __('transaction.spending') }} {{ 'Rp' }}", "{{ __('transaction.difference') }} {{ 'Rp' }}"],
+        labels: ["{{ __('transaction.income') }} {{ auth()->user()->currency_code }}", "{{ __('transaction.spending') }} {{ auth()->user()->currency_code }}", "{{ __('transaction.difference') }} {{ auth()->user()->currency_code }}"],
         parseTime:false,
         lineColors: ['green', 'orange', 'blue'],
         goals: [0],
