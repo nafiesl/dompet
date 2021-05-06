@@ -32,6 +32,7 @@ return [
     'is_active'          => 'User Status',
     'registered_at'      => 'Registered at',
     'account_start_date' => 'Account Start Date',
+    'currency_code'      => 'Currency Code',
 
     // Relations
     'groups' => 'Member List',

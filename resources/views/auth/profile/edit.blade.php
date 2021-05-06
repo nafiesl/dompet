@@ -12,6 +12,7 @@
                     {!! FormField::text('name', ['required' => true, 'label' => __('user.name')]) !!}
                     {!! FormField::email('email', ['required' => true, 'label' => __('user.email')]) !!}
                     {!! FormField::text('account_start_date', ['label' => __('user.account_start_date')]) !!}
+                    {!! FormField::text('currency_code', ['label' => __('user.currency_code')]) !!}
                 </div>
                 <div class="panel-footer">
                     {{ Form::submit(__('user.profile_update'), ['class' => 'btn btn-success']) }}
