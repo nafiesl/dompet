@@ -12,6 +12,7 @@
                     <tr><td>{{ __('user.name') }}</td><td>{{ $user->name }}</td></tr>
                     <tr><td>{{ __('user.email') }}</td><td>{{ $user->email }}</td></tr>
                     <tr><td>{{ __('user.account_start_date') }}</td><td>{{ $user->account_start_date }}</td></tr>
+                    <tr><td>{{ __('user.currency_code') }}</td><td>{{ $user->currency_code }}</td></tr>
                 </tbody>
             </table>
             <div class="panel-footer">

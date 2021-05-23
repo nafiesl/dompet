@@ -20,7 +20,7 @@
                         <div class="col-md-6">
                             <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
                                 <label for="amount" class="control-label">{{ __('transaction.amount') }}</label>
-                                <div class="input-group"><span class="input-group-addon">Rp</span>
+                                <div class="input-group"><span class="input-group-addon">{{ auth()->user()->currency_code }}</span>
                                     <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ old('amount') }}" required>
                                 </div>
                                 {!! $errors->first('amount', '<span class="help-block small">:message</span>') !!}
@@ -59,7 +59,7 @@
                         <div class="col-md-6">
                             <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
                                 <label for="amount" class="control-label">{{ __('transaction.amount') }}</label>
-                                <div class="input-group"><span class="input-group-addon">Rp</span>
+                                <div class="input-group"><span class="input-group-addon">{{ auth()->user()->currency_code }}</span>
                                     <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ old('amount') }}" required>
                                 </div>
                                 @if ($errors->has('amount'))
@@ -102,7 +102,7 @@
                         <div class="col-md-4">
                             <div class="form-group required {{ $errors->has('amount') ? 'has-error' : '' }}">
                                 <label for="amount" class="control-label">{{ __('transaction.amount') }}</label>
-                                <div class="input-group"><span class="input-group-addon">Rp</span>
+                                <div class="input-group"><span class="input-group-addon">{{ auth()->user()->currency_code }}</span>
                                     <input class="form-control text-right" name="amount" type="number" id="amount" min="0" value="{{ isset($editableTransaction) ? round($editableTransaction->amount, 0) : old('amount') }}" required>
                                 </div>
                                 @if ($errors->has('amount'))
