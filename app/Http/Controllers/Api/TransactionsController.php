@@ -8,7 +8,6 @@ use App\Http\Requests\Transactions\UpdateRequest;
 use App\Http\Resources\Transaction as TransactionResource;
 use App\Http\Resources\TransactionCollection;
 use App\Transaction;
-use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
 {
@@ -44,7 +43,7 @@ class TransactionsController extends Controller
 
         $responseData = [
             'message' => $responseMessage,
-            'data'    => new TransactionResource($transaction),
+            'data' => new TransactionResource($transaction),
         ];
 
         return response()->json($responseData, 201);
@@ -74,7 +73,7 @@ class TransactionsController extends Controller
 
         return response()->json([
             'message' => __('transaction.updated'),
-            'data'    => new TransactionResource($transaction),
+            'data' => new TransactionResource($transaction),
         ]);
     }
 

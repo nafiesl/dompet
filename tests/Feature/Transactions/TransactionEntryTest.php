@@ -26,23 +26,23 @@ class TransactionEntryTest extends TestCase
         $this->seeRouteIs('transactions.index', ['action' => 'add-income', 'month' => $month, 'year' => $year]);
 
         $this->submitForm(__('transaction.add_income'), [
-            'amount'      => 99.99,
-            'date'        => $date,
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
 
         $this->seeRouteIs('transactions.index', ['month' => $month, 'year' => $year]);
         $this->see(__('transaction.income_added'));
 
         $this->seeInDatabase('transactions', [
-            'in_out'      => 1, // 0:spending, 1:income
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 1, // 0:spending, 1:income
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
     }
 
@@ -59,8 +59,8 @@ class TransactionEntryTest extends TestCase
         $this->seeRouteIs('transactions.index', ['action' => 'add-spending', 'month' => $month, 'year' => $year]);
 
         $this->submitForm(__('transaction.add_spending'), [
-            'amount'      => 99.99,
-            'date'        => $date,
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
         ]);
 
@@ -68,9 +68,9 @@ class TransactionEntryTest extends TestCase
         $this->see(__('transaction.spending_added'));
 
         $this->seeInDatabase('transactions', [
-            'in_out'      => 0, // 0:spending, 1:income
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 0, // 0:spending, 1:income
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
         ]);
     }

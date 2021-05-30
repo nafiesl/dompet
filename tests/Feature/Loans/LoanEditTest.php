@@ -15,12 +15,12 @@ class LoanEditTest extends TestCase
     private function getEditFields(array $overrides = [])
     {
         return array_merge([
-            'type_id'               => Loan::TYPE_RECEIVABLE,
-            'amount'                => 2000,
+            'type_id' => Loan::TYPE_RECEIVABLE,
+            'amount' => 2000,
             'planned_payment_count' => 5,
-            'start_date'            => '2020-01-01',
-            'end_date'              => '2020-02-29',
-            'description'           => 'Loan 1 description',
+            'start_date' => '2020-01-01',
+            'end_date' => '2020-02-29',
+            'description' => 'Loan 1 description',
         ], $overrides);
     }
 
@@ -34,8 +34,8 @@ class LoanEditTest extends TestCase
             'creator_id' => $user->id,
         ]);
         $transaction = factory(Transaction::class)->create([
-            'loan_id'    => $loan->id,
-            'amount'     => $loan->amount,
+            'loan_id' => $loan->id,
+            'amount' => $loan->amount,
             'partner_id' => $partner->id,
             'creator_id' => $user->id,
         ]);
@@ -46,22 +46,22 @@ class LoanEditTest extends TestCase
 
         $this->submitForm(__('loan.update'), $this->getEditFields([
             'partner_id' => $loan->partner_id,
-            'amount'     => 1000,
-            'type_id'    => Loan::TYPE_RECEIVABLE,
+            'amount' => 1000,
+            'type_id' => Loan::TYPE_RECEIVABLE,
         ]));
 
         $this->seeRouteIs('loans.show', $loan);
 
         $this->seeInDatabase('loans', $this->getEditFields([
-            'id'     => $loan->id,
+            'id' => $loan->id,
             'amount' => 1000,
         ]));
 
         $this->seeInDatabase('transactions', [
-            'loan_id'    => $loan->id,
-            'amount'     => 1000,
+            'loan_id' => $loan->id,
+            'amount' => 1000,
             'partner_id' => $partner->id,
-            'in_out'     => 0, // 0:spending, 1:income
+            'in_out' => 0, // 0:spending, 1:income
         ]);
     }
 

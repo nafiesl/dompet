@@ -25,8 +25,8 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|max:60',
-            'color'       => 'required|string|max:7',
+            'name' => 'required|max:60',
+            'color' => 'required|string|max:7',
             'description' => 'nullable|string|max:255',
         ];
     }

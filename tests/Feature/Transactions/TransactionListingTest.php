@@ -31,9 +31,9 @@ class TransactionListingTest extends TestCase
         $lastMonthYear = $lastMonth->format('Y');
         $lastMonthDate = $lastMonth->format('Y-m-d');
         $lastMonthTransaction = factory(Transaction::class)->create([
-            'date'        => $lastMonthDate,
+            'date' => $lastMonthDate,
             'description' => 'Last month Transaction',
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
 
         $this->visitRoute('transactions.index');
@@ -50,16 +50,16 @@ class TransactionListingTest extends TestCase
         $category = factory(Category::class)->create();
         $todayDate = today()->format('Y-m-d');
         factory(Transaction::class)->create([
-            'date'        => $todayDate,
+            'date' => $todayDate,
             'description' => 'Unlisted transaction',
             'category_id' => null,
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
         factory(Transaction::class)->create([
-            'date'        => $todayDate,
+            'date' => $todayDate,
             'description' => 'Today listed transaction',
             'category_id' => $category->id,
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
 
         $this->visitRoute('transactions.index');
@@ -77,15 +77,15 @@ class TransactionListingTest extends TestCase
     {
         $user = $this->loginAsUser();
         $thisMonthTransaction = factory(Transaction::class)->create([
-            'date'        => today()->format('Y-m-d'),
+            'date' => today()->format('Y-m-d'),
             'description' => 'Today Transaction',
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
         $lastMonthDate = today()->subDays(31)->format('Y-m-d');
         $lastMonthTransaction = factory(Transaction::class)->create([
-            'date'        => $lastMonthDate,
+            'date' => $lastMonthDate,
             'description' => 'Last month transaction',
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
 
         $this->visitRoute('transactions.index');
@@ -100,16 +100,16 @@ class TransactionListingTest extends TestCase
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $todayDate = today()->format('Y-m-d');
         factory(Transaction::class)->create([
-            'date'        => $todayDate,
+            'date' => $todayDate,
             'description' => 'Unlisted transaction',
-            'partner_id'  => null,
-            'creator_id'  => $user->id,
+            'partner_id' => null,
+            'creator_id' => $user->id,
         ]);
         factory(Transaction::class)->create([
-            'date'        => $todayDate,
+            'date' => $todayDate,
             'description' => 'Today listed transaction',
-            'partner_id'  => $partner->id,
-            'creator_id'  => $user->id,
+            'partner_id' => $partner->id,
+            'creator_id' => $user->id,
         ]);
 
         $this->visitRoute('transactions.index');
