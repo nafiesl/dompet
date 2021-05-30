@@ -29,7 +29,7 @@ class PartnerController extends Controller
         $this->authorize('create', new Partner);
 
         $newPartner = $request->validate([
-            'name'        => 'required|max:60',
+            'name' => 'required|max:60',
             'description' => 'nullable|max:255',
         ]);
         $newPartner['creator_id'] = auth()->id();
@@ -38,7 +38,7 @@ class PartnerController extends Controller
 
         return response()->json([
             'message' => __('partner.created'),
-            'data'    => $partner,
+            'data' => $partner,
         ], 201);
     }
 
@@ -54,14 +54,14 @@ class PartnerController extends Controller
         $this->authorize('update', $partner);
 
         $partnerData = $request->validate([
-            'name'        => 'required|max:60',
+            'name' => 'required|max:60',
             'description' => 'nullable|max:255',
         ]);
         $partner->update($partnerData);
 
         return response()->json([
             'message' => __('partner.updated'),
-            'data'    => $partner,
+            'data' => $partner,
         ]);
     }
 

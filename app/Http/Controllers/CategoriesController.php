@@ -62,8 +62,8 @@ class CategoriesController extends Controller
         $transactions = $this->getCategoryTransactions($category, [
             'partner_id' => request('partner_id'),
             'start_date' => $startDate,
-            'end_date'   => $endDate,
-            'query'      => request('query'),
+            'end_date' => $endDate,
+            'query' => request('query'),
         ]);
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
