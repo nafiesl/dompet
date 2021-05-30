@@ -8,7 +8,6 @@ use App\Http\Requests\Transactions\UpdateRequest;
 use App\Http\Resources\Transaction as TransactionResource;
 use App\Http\Resources\TransactionCollection;
 use App\Transaction;
-use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
 {

@@ -7,7 +7,6 @@ use App\Http\Requests\Categories\CreateRequest;
 use App\Http\Requests\Categories\DeleteRequest;
 use App\Http\Requests\Categories\UpdateRequest;
 use App\Transaction;
-use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {

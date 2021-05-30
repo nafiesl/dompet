@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Transactions\CreateRequest;
 use App\Http\Requests\Transactions\UpdateRequest;
 use App\Transaction;
-use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
 {
