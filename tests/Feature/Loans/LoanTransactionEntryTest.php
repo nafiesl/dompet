@@ -21,12 +21,12 @@ class LoanTransactionEntryTest extends TestCase
         $loan = factory(Loan::class)->create([
             'partner_id' => $partner->id,
             'creator_id' => $user->id,
-            'type_id'    => Loan::TYPE_DEBT,
+            'type_id' => Loan::TYPE_DEBT,
         ]);
         $transaction = factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
-            'loan_id'    => $loan->id,
-            'amount'     => $loan->amount,
+            'in_out' => 1, // 0:spending, 1:income
+            'loan_id' => $loan->id,
+            'amount' => $loan->amount,
             'partner_id' => $partner->id,
             'creator_id' => $user->id,
         ]);
@@ -36,20 +36,20 @@ class LoanTransactionEntryTest extends TestCase
         $this->visitRoute('loans.show', [$loan, 'action' => 'add_transaction']);
 
         $this->submitForm(__('loan.add_transaction'), [
-            'in_out'      => 0, // 0:spending, 1:income
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 0, // 0:spending, 1:income
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Receivable transaction',
         ]);
 
         $this->seeRouteIs('loans.show', $loan);
 
         $this->seeInDatabase('transactions', [
-            'loan_id'     => $loan->id,
-            'date'        => $date,
-            'amount'      => 99.99,
-            'partner_id'  => $partner->id,
-            'in_out'      => 0, // 0:spending, 1:income
+            'loan_id' => $loan->id,
+            'date' => $date,
+            'amount' => 99.99,
+            'partner_id' => $partner->id,
+            'in_out' => 0, // 0:spending, 1:income
             'description' => 'Receivable transaction',
         ]);
 
@@ -66,13 +66,13 @@ class LoanTransactionEntryTest extends TestCase
         $loan = factory(Loan::class)->create([
             'partner_id' => $partner->id,
             'creator_id' => $user->id,
-            'type_id'    => Loan::TYPE_DEBT,
-            'amount'     => $loanAmount,
+            'type_id' => Loan::TYPE_DEBT,
+            'amount' => $loanAmount,
         ]);
         $transaction = factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
-            'loan_id'    => $loan->id,
-            'amount'     => $loanAmount,
+            'in_out' => 1, // 0:spending, 1:income
+            'loan_id' => $loan->id,
+            'amount' => $loanAmount,
             'partner_id' => $partner->id,
             'creator_id' => $user->id,
         ]);
@@ -82,9 +82,9 @@ class LoanTransactionEntryTest extends TestCase
         $this->visitRoute('loans.show', [$loan, 'action' => 'add_transaction']);
 
         $this->submitForm(__('loan.add_transaction'), [
-            'in_out'      => 0, // 0:spending, 1:income
-            'amount'      => $loanAmount,
-            'date'        => $date,
+            'in_out' => 0, // 0:spending, 1:income
+            'amount' => $loanAmount,
+            'date' => $date,
             'description' => 'Receivable transaction',
         ]);
 

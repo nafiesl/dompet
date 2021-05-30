@@ -19,7 +19,7 @@ class UserListingTest extends TestCase
         $this->getJson(route('api.user'));
 
         $this->seeJson([
-            'name'  => $user->name,
+            'name' => $user->name,
             'email' => $user->email,
         ]);
 

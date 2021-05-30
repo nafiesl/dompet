@@ -75,8 +75,8 @@ class CreateRequestTest extends TestCase
     private function getCreateAttributes($overrides = [])
     {
         return array_merge([
-            'name'        => 'Category Name',
-            'color'       => '#aabbcc',
+            'name' => 'Category Name',
+            'color' => '#aabbcc',
             'description' => 'Category description.',
         ], $overrides);
     }

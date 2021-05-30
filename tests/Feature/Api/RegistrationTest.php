@@ -12,9 +12,9 @@ class RegistrationTest extends TestCase
     private function getRegisterFields($overrides = [])
     {
         return array_merge([
-            'name'                  => 'User Name',
-            'email'                 => 'user@example.net',
-            'password'              => 'password',
+            'name' => 'User Name',
+            'email' => 'user@example.net',
+            'password' => 'password',
             'password_confirmation' => 'password',
         ], $overrides);
     }
@@ -27,7 +27,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(200);
 
         $this->seeInDatabase('users', [
-            'name'  => 'User Name',
+            'name' => 'User Name',
             'email' => 'user@example.net',
         ]);
     }
@@ -40,7 +40,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'name' => [__('validation.required')],
             ],
         ]);
@@ -56,7 +56,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'name' => [__('validation.max.string', ['attribute' => 'name', 'max' => '255'])],
             ],
         ]);
@@ -70,7 +70,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'email' => [__('validation.required')],
             ],
         ]);
@@ -86,7 +86,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'email' => [__('validation.email', ['attribute' => 'email'])],
             ],
         ]);
@@ -102,7 +102,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'email' => [
                     __('validation.email', ['attribute' => 'email']),
                     __('validation.max.string', ['attribute' => 'email', 'max' => '255']),
@@ -123,7 +123,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'email' => [
                     __('validation.unique', ['attribute' => 'email']),
                 ],
@@ -139,7 +139,7 @@ class RegistrationTest extends TestCase
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'password' => [
                     __('validation.required'),
                 ],
@@ -151,14 +151,14 @@ class RegistrationTest extends TestCase
     public function user_password_minimum_is_6_characters()
     {
         $this->postJson(route('api.register'), $this->getRegisterFields([
-            'password'              => 'ecret',
+            'password' => 'ecret',
             'password_confirmation' => 'ecret',
         ]));
 
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'password' => [
                     __('validation.min.string', ['attribute' => 'password', 'min' => '6']),
                 ],
@@ -170,14 +170,14 @@ class RegistrationTest extends TestCase
     public function user_password_must_be_same_with_password_confirmation_field()
     {
         $this->postJson(route('api.register'), $this->getRegisterFields([
-            'password'              => 'secret',
+            'password' => 'secret',
             'password_confirmation' => 'escret',
         ]));
 
         $this->seeStatusCode(422);
         $this->seeJson([
             'message' => 'The given data was invalid.',
-            'errors'  => [
+            'errors' => [
                 'password' => [
                     __('validation.confirmed', ['attribute' => 'password']),
                 ],

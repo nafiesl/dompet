@@ -139,9 +139,9 @@ class CreateRequestTest extends TestCase
     private function getCreateAttributes($overrides = [])
     {
         return array_merge([
-            'date'        => '2018-03-03',
-            'amount'      => '150000',
-            'in_out'      => '1', // 0:spending, 1:income
+            'date' => '2018-03-03',
+            'amount' => '150000',
+            'in_out' => '1', // 0:spending, 1:income
             'description' => 'Transaction description.',
         ], $overrides);
     }

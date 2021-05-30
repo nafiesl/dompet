@@ -75,8 +75,8 @@ class UpdateRequestTest extends TestCase
     private function getUpdateAttributes($overrides = [])
     {
         return array_merge([
-            'name'        => 'Category Name',
-            'color'       => '#aabbcc',
+            'name' => 'Category Name',
+            'color' => '#aabbcc',
             'description' => 'Category description.',
         ], $overrides);
     }

@@ -19,8 +19,8 @@ class ChangePasswordTest extends TestCase
         $this->click(__('auth.change_password'));
 
         $this->submitForm(__('auth.change_password'), [
-            'old_password'          => 'secret',
-            'password'              => 'rahasia',
+            'old_password' => 'secret',
+            'password' => 'rahasia',
             'password_confirmation' => 'rahasia',
         ]);
 
@@ -42,8 +42,8 @@ class ChangePasswordTest extends TestCase
         $this->click(__('auth.change_password'));
 
         $this->submitForm(__('auth.change_password'), [
-            'old_password'          => 'member1',
-            'password'              => 'rahasia',
+            'old_password' => 'member1',
+            'password' => 'rahasia',
             'password_confirmation' => 'rahasia',
         ]);
 
