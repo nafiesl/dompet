@@ -84,10 +84,10 @@ class TransactionsController extends Controller
                 if ($transaction->partner) {
                     return redirect()->route('partners.show', [
                         $transaction->partner_id,
-                        'start_date'  => $transactionUpateForm->get('start_date'),
-                        'end_date'    => $transactionUpateForm->get('end_date'),
+                        'start_date' => $transactionUpateForm->get('start_date'),
+                        'end_date' => $transactionUpateForm->get('end_date'),
                         'category_id' => $transactionUpateForm->get('category_id'),
-                        'query'       => $transactionUpateForm->get('query'),
+                        'query' => $transactionUpateForm->get('query'),
                     ]);
                 }
             }
@@ -96,19 +96,19 @@ class TransactionsController extends Controller
                     return redirect()->route('categories.show', [
                         $transaction->category_id,
                         'start_date' => $transactionUpateForm->get('start_date'),
-                        'end_date'   => $transactionUpateForm->get('end_date'),
+                        'end_date' => $transactionUpateForm->get('end_date'),
                         'partner_id' => $transactionUpateForm->get('partner_id'),
-                        'query'      => $transactionUpateForm->get('query'),
+                        'query' => $transactionUpateForm->get('query'),
                     ]);
                 }
             }
         }
 
         return redirect()->route('transactions.index', [
-            'month'       => $transaction->month,
-            'year'        => $transaction->year,
+            'month' => $transaction->month,
+            'year' => $transaction->year,
             'category_id' => $transactionUpateForm->get('queried_category_id'),
-            'query'       => $transactionUpateForm->get('query'),
+            'query' => $transactionUpateForm->get('query'),
         ]);
     }
 
@@ -130,19 +130,19 @@ class TransactionsController extends Controller
                 if ($referencePage == 'partner') {
                     return redirect()->route('partners.show', [
                         $transaction->partner_id,
-                        'start_date'  => request('start_date'),
-                        'end_date'    => request('end_date'),
+                        'start_date' => request('start_date'),
+                        'end_date' => request('end_date'),
                         'category_id' => request('queried_category_id'),
-                        'query'       => request('query'),
+                        'query' => request('query'),
                     ]);
                 }
                 if ($referencePage == 'category') {
                     return redirect()->route('categories.show', [
                         $transaction->category_id,
                         'start_date' => request('start_date'),
-                        'end_date'   => request('end_date'),
+                        'end_date' => request('end_date'),
                         'partner_id' => request('queried_partner_id'),
-                        'query'      => request('query'),
+                        'query' => request('query'),
                     ]);
                 }
             }
