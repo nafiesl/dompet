@@ -21,13 +21,13 @@ class TransactionListingTest extends TestCase
         $this->getJson(route('api.transactions.index'));
 
         $this->seeJson([
-            'date'           => $transaction->date,
-            'amount'         => $transaction->amount,
-            'amount_string'  => $transaction->amount_string,
-            'description'    => $transaction->description,
-            'category'       => optional($transaction->category)->name,
+            'date' => $transaction->date,
+            'amount' => $transaction->amount,
+            'amount_string' => $transaction->amount_string,
+            'description' => $transaction->description,
+            'category' => optional($transaction->category)->name,
             'category_color' => optional($transaction->category)->color,
-            'difference'     => $transaction->amount_string,
+            'difference' => $transaction->amount_string,
         ]);
     }
 
@@ -41,16 +41,16 @@ class TransactionListingTest extends TestCase
         $this->getJson(route('api.transactions.show', $transaction));
 
         $this->seeJson([
-            'date'           => $transaction->date,
-            'amount'         => $transaction->amount,
-            'amount_string'  => $transaction->amount_string,
-            'description'    => $transaction->description,
-            'in_out'         => $transaction->in_out,
-            'category_id'    => $transaction->category_id,
-            'category'       => optional($transaction->category)->name,
+            'date' => $transaction->date,
+            'amount' => $transaction->amount,
+            'amount_string' => $transaction->amount_string,
+            'description' => $transaction->description,
+            'in_out' => $transaction->in_out,
+            'category_id' => $transaction->category_id,
+            'category' => optional($transaction->category)->name,
             'category_color' => optional($transaction->category)->color,
-            'created_at'     => $transaction->created_at->format('Y-m-d H:i:s'),
-            'updated_at'     => $transaction->updated_at->format('Y-m-d H:i:s'),
+            'created_at' => $transaction->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $transaction->updated_at->format('Y-m-d H:i:s'),
         ]);
     }
 }

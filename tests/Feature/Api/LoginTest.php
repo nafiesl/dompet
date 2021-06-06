@@ -14,13 +14,13 @@ class LoginTest extends TestCase
     {
         $user = $this->createUser(['password' => bcrypt('testing')]);
         $this->postJson(route('api.login'), [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => 'testing',
         ]);
 
         $this->seeJson([
-            'name'      => $user->name,
-            'email'     => $user->email,
+            'name' => $user->name,
+            'email' => $user->email,
             'api_token' => $user->api_token,
         ]);
     }
@@ -29,36 +29,36 @@ class LoginTest extends TestCase
     public function invalid_user_api_login_returns_proper_message()
     {
         $this->postJson(route('api.login'), [
-            'email'    => '',
+            'email' => '',
             'password' => '',
         ]);
 
         $this->seeJsonEquals([
             'message' => 'The given data was invalid.',
-            'errors'  => [
-                'email'    => [__('validation.required')],
+            'errors' => [
+                'email' => [__('validation.required')],
                 'password' => [__('validation.required')],
             ],
         ]);
 
         $this->postJson(route('api.login'), [
-            'email'    => 'member@example.net',
+            'email' => 'member@example.net',
             'password' => '',
         ]);
 
         $this->seeJsonEquals([
             'message' => 'The given data was invalid.',
-            'errors'  => ['password' => [__('validation.required')]],
+            'errors' => ['password' => [__('validation.required')]],
         ]);
 
         $this->postJson(route('api.login'), [
-            'email'    => 'member@example.net',
+            'email' => 'member@example.net',
             'password' => 'testing',
         ]);
 
         $this->seeJsonEquals([
             'message' => 'The given data was invalid.',
-            'errors'  => ['email' => [__('auth.failed')]],
+            'errors' => ['email' => [__('auth.failed')]],
         ]);
     }
 }

@@ -25,30 +25,30 @@ class TransacionEntryTest extends TestCase
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
         $this->postJson(route('api.transactions.store'), [
-            'in_out'      => 1,
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 1,
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
 
         $this->seeInDatabase('transactions', [
-            'in_out'      => 1, // 0:spending, 1:income
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 1, // 0:spending, 1:income
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Income description',
             'category_id' => $category->id,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
 
         $this->seeStatusCode(201);
         $this->seeJson([
-            'message'     => __('transaction.income_added'),
-            'amount'      => 99.99,
-            'date'        => $date,
+            'message' => __('transaction.income_added'),
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Income description',
-            'category'    => $category->name,
+            'category' => $category->name,
         ]);
     }
 
@@ -63,28 +63,28 @@ class TransacionEntryTest extends TestCase
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
 
         $this->postJson(route('api.transactions.store'), [
-            'in_out'      => 0,
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 0,
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
         ]);
 
         $this->seeInDatabase('transactions', [
-            'in_out'      => 0, // 0:spending, 1:spending
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 0, // 0:spending, 1:spending
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
         ]);
 
         $this->seeStatusCode(201);
         $this->seeJson([
-            'message'     => __('transaction.spending_added'),
-            'amount'      => 99.99,
-            'date'        => $date,
+            'message' => __('transaction.spending_added'),
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
-            'category'    => $category->name,
+            'category' => $category->name,
         ]);
     }
 
@@ -97,39 +97,39 @@ class TransacionEntryTest extends TestCase
         $user = $this->createUser();
         Passport::actingAs($user);
         $transaction = factory(Transaction::class)->create([
-            'in_out'     => 0,
-            'amount'     => 99.99,
-            'date'       => $date,
+            'in_out' => 0,
+            'amount' => 99.99,
+            'date' => $date,
             'creator_id' => $user->id,
         ]);
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
 
         $this->patchJson(route('api.transactions.update', $transaction), [
-            'in_out'      => 1,
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 1,
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
 
         $this->seeStatusCode(200);
         $this->seeJson([
-            'message'     => __('transaction.updated'),
-            'amount'      => 99.99,
-            'date'        => $date,
+            'message' => __('transaction.updated'),
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
-            'category'    => $category->name,
+            'category' => $category->name,
         ]);
 
         $this->seeInDatabase('transactions', [
-            'in_out'      => 1, // 0:spending, 1:spending
-            'amount'      => 99.99,
-            'date'        => $date,
+            'in_out' => 1, // 0:spending, 1:spending
+            'amount' => 99.99,
+            'date' => $date,
             'description' => 'Spending description',
             'category_id' => $category->id,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
     }
 

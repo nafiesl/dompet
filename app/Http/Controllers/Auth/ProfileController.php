@@ -43,6 +43,7 @@ class ProfileController extends Controller
             'name'               => 'required|max:60',
             'email'              => 'required|max:255|unique:users,email,'.auth()->id(),
             'account_start_date' => 'nullable|date',
+            'currency_code'      => 'required|string|max:3',
         ]);
 
         auth()->user()->update($userData);

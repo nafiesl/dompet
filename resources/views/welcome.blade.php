@@ -6,7 +6,10 @@
 <div class="jumbotron">
     <h1>{{ config('app.name', 'Laravel') }}</h1>
     <p class="lead">Dompet is a personal bookkeeping web application, built with Laravel. It designed for easy bookkeeping for personal income and spending. </p>
-    <p><a class="btn btn-lg btn-success" href="{{ route('register') }}" role="button">Sign up today</a></p>
+    <p>
+        <a class="btn btn-lg btn-success mr-2" href="{{ route('register') }}" role="button">Sign up today</a>
+        <a class="btn btn-lg btn-primary" href="{{ route('login') }}" role="button">Login</a>
+    </p>
 </div>
 
 <div class="row marketing">

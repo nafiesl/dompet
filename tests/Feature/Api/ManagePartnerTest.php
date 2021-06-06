@@ -30,19 +30,19 @@ class ManagePartnerTest extends TestCase
         Passport::actingAs($user);
 
         $this->postJson(route('api.partners.store'), [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
         $this->seeInDatabase('partners', [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
         $this->seeStatusCode(201);
         $this->seeJson([
-            'message'     => __('partner.created'),
-            'name'        => 'Partner 1 name',
+            'message' => __('partner.created'),
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
     }
@@ -55,19 +55,19 @@ class ManagePartnerTest extends TestCase
         $partner = factory(Partner::class)->create(['name' => 'Testing 123', 'creator_id' => $user->id]);
 
         $this->patchJson(route('api.partners.update', $partner), [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
         $this->seeInDatabase('partners', [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
         $this->seeStatusCode(200);
         $this->seeJson([
-            'message'     => __('partner.updated'),
-            'name'        => 'Partner 1 name',
+            'message' => __('partner.updated'),
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
     }

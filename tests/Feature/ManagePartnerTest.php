@@ -30,14 +30,14 @@ class ManagePartnerTest extends TestCase
         $this->seeRouteIs('partners.index', ['action' => 'create']);
 
         $this->submitForm(__('partner.create'), [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
         $this->seeRouteIs('partners.index');
 
         $this->seeInDatabase('partners', [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
     }
@@ -53,14 +53,14 @@ class ManagePartnerTest extends TestCase
         $this->seeRouteIs('partners.index', ['action' => 'edit', 'id' => $partner->id]);
 
         $this->submitForm(__('partner.update'), [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
 
         $this->seeRouteIs('partners.index');
 
         $this->seeInDatabase('partners', [
-            'name'        => 'Partner 1 name',
+            'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
         ]);
     }

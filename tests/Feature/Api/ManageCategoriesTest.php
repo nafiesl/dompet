@@ -31,22 +31,22 @@ class ManageCategoriesTest extends TestCase
         Passport::actingAs($user);
 
         $this->postJson(route('api.categories.store'), [
-            'name'        => 'Category 1 name',
-            'color'       => '#00aabb',
+            'name' => 'Category 1 name',
+            'color' => '#00aabb',
             'description' => 'Category 1 description',
         ]);
 
         $this->seeInDatabase('categories', [
-            'name'        => 'Category 1 name',
-            'color'       => '#00aabb',
+            'name' => 'Category 1 name',
+            'color' => '#00aabb',
             'description' => 'Category 1 description',
         ]);
 
         $this->seeStatusCode(201);
         $this->seeJson([
-            'message'     => __('category.created'),
-            'color'       => '#00aabb',
-            'name'        => 'Category 1 name',
+            'message' => __('category.created'),
+            'color' => '#00aabb',
+            'name' => 'Category 1 name',
             'description' => 'Category 1 description',
         ]);
     }
@@ -59,22 +59,22 @@ class ManageCategoriesTest extends TestCase
         $category = factory(Category::class)->create(['name' => 'Testing 123', 'creator_id' => $user->id]);
 
         $this->patchJson(route('api.categories.update', $category), [
-            'name'        => 'Category 1 name',
-            'color'       => '#00aabb',
+            'name' => 'Category 1 name',
+            'color' => '#00aabb',
             'description' => 'Category 1 description',
         ]);
 
         $this->seeInDatabase('categories', [
-            'name'        => 'Category 1 name',
-            'color'       => '#00aabb',
+            'name' => 'Category 1 name',
+            'color' => '#00aabb',
             'description' => 'Category 1 description',
         ]);
 
         $this->seeStatusCode(200);
         $this->seeJson([
-            'message'     => __('category.updated'),
-            'color'       => '#00aabb',
-            'name'        => 'Category 1 name',
+            'message' => __('category.updated'),
+            'color' => '#00aabb',
+            'name' => 'Category 1 name',
             'description' => 'Category 1 description',
         ]);
     }
@@ -87,7 +87,7 @@ class ManageCategoriesTest extends TestCase
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $transaction = factory(Transaction::class)->create([
             'category_id' => $category->id,
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
 
         $this->deleteJson(route('api.categories.destroy', $category), [
@@ -96,7 +96,7 @@ class ManageCategoriesTest extends TestCase
 
         // check for related transactions
         $this->seeInDatabase('transactions', [
-            'id'          => $transaction->id,
+            'id' => $transaction->id,
             'category_id' => null,
         ]);
 
@@ -118,11 +118,11 @@ class ManageCategoriesTest extends TestCase
         $category = factory(Category::class)->create(['creator_id' => $user->id]);
         $transaction = factory(Transaction::class)->create([
             'category_id' => $category->id,
-            'creator_id'  => $user->id,
+            'creator_id' => $user->id,
         ]);
 
         $this->deleteJson(route('api.categories.destroy', $category), [
-            'category_id'         => $category->id,
+            'category_id' => $category->id,
             'delete_transactions' => 1,
         ]);
 

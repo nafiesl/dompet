@@ -18,7 +18,7 @@ class LoginTest extends TestCase
         $this->visit(route('login'));
 
         $this->submitForm(trans('auth.login'), [
-            'email'    => 'email@mail.com',
+            'email' => 'email@mail.com',
             'password' => 'secret',
         ]);
 
@@ -37,7 +37,7 @@ class LoginTest extends TestCase
         $this->visit(route('login'));
 
         $this->submitForm(trans('auth.login'), [
-            'email'    => 'email@mail.com',
+            'email' => 'email@mail.com',
             'password' => 'member',
         ]);
 
@@ -49,14 +49,14 @@ class LoginTest extends TestCase
     public function user_cannot_login_if_they_are_in_inactive_status()
     {
         $user = factory(User::class)->create([
-            'email'     => 'email@mail.com',
+            'email' => 'email@mail.com',
             'is_active' => 0,
         ]);
 
         $this->visit(route('login'));
 
         $this->submitForm(trans('auth.login'), [
-            'email'    => 'email@mail.com',
+            'email' => 'email@mail.com',
             'password' => 'secret',
         ]);
 
