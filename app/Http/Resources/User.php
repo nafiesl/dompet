@@ -16,9 +16,9 @@ class User extends JsonResource
     {
         $user = $this->resource;
         $responsData = [
-            'id'     => $user->id,
-            'name'   => $user->name,
-            'email'  => $user->email,
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
             'status' => $user->status,
         ];
 

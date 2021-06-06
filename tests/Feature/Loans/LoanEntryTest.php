@@ -14,12 +14,12 @@ class LoanEntryTest extends TestCase
     private function getCreateFields(array $overrides = [])
     {
         return array_merge([
-            'type_id'               => Loan::TYPE_RECEIVABLE,
-            'amount'                => 2000,
+            'type_id' => Loan::TYPE_RECEIVABLE,
+            'amount' => 2000,
             'planned_payment_count' => 5,
-            'start_date'            => '2020-01-01',
-            'end_date'              => '2020-02-29',
-            'description'           => 'Loan 1 description',
+            'start_date' => '2020-01-01',
+            'end_date' => '2020-02-29',
+            'description' => 'Loan 1 description',
         ], $overrides);
     }
 
@@ -35,8 +35,8 @@ class LoanEntryTest extends TestCase
 
         $this->submitForm(__('loan.create'), $this->getCreateFields([
             'partner_id' => $partner->id,
-            'type_id'    => Loan::TYPE_DEBT,
-            'amount'     => 2000,
+            'type_id' => Loan::TYPE_DEBT,
+            'amount' => 2000,
         ]));
 
         $loan = Loan::first();
@@ -44,18 +44,18 @@ class LoanEntryTest extends TestCase
 
         $this->seeInDatabase('loans', $this->getCreateFields([
             'partner_id' => $partner->id,
-            'type_id'    => Loan::TYPE_DEBT,
-            'amount'     => 2000,
+            'type_id' => Loan::TYPE_DEBT,
+            'amount' => 2000,
         ]));
 
         $this->seeInDatabase('transactions', [
-            'loan_id'     => $loan->id,
-            'in_out'      => 1, // 0:spending, 1:income
-            'amount'      => '2000',
-            'date'        => '2020-01-01',
+            'loan_id' => $loan->id,
+            'in_out' => 1, // 0:spending, 1:income
+            'amount' => '2000',
+            'date' => '2020-01-01',
             'description' => 'Loan 1 description',
             'category_id' => null,
-            'partner_id'  => $partner->id,
+            'partner_id' => $partner->id,
         ]);
     }
 

@@ -24,7 +24,7 @@ class DeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id'         => 'required',
+            'category_id' => 'required',
             'delete_transactions' => 'boolean',
         ];
     }

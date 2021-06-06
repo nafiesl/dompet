@@ -31,17 +31,17 @@ class ManageCategoriesTest extends TestCase
         $this->seePageIs(route('categories.index', ['action' => 'create']));
 
         $this->submitForm(trans('category.create'), [
-            'name'        => 'Category 1 name',
+            'name' => 'Category 1 name',
             'description' => 'Category 1 description',
-            'color'       => '#00aabb',
+            'color' => '#00aabb',
         ]);
 
         $this->seePageIs(route('categories.index'));
 
         $this->seeInDatabase('categories', [
-            'name'        => 'Category 1 name',
+            'name' => 'Category 1 name',
             'description' => 'Category 1 description',
-            'color'       => '#00aabb',
+            'color' => '#00aabb',
         ]);
     }
 
@@ -56,17 +56,17 @@ class ManageCategoriesTest extends TestCase
         $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
 
         $this->submitForm(trans('category.update'), [
-            'name'        => 'Category 1 name',
+            'name' => 'Category 1 name',
             'description' => 'Category 1 description',
-            'color'       => '#00aabb',
+            'color' => '#00aabb',
         ]);
 
         $this->seePageIs(route('categories.index'));
 
         $this->seeInDatabase('categories', [
-            'name'        => 'Category 1 name',
+            'name' => 'Category 1 name',
             'description' => 'Category 1 description',
-            'color'       => '#00aabb',
+            'color' => '#00aabb',
         ]);
     }
 
@@ -86,7 +86,7 @@ class ManageCategoriesTest extends TestCase
         ]);
 
         $this->submitForm(__('app.delete_confirm_button'), [
-            'category_id'         => $category->id,
+            'category_id' => $category->id,
             'delete_transactions' => 1,
         ]);
 
@@ -117,7 +117,7 @@ class ManageCategoriesTest extends TestCase
         ]);
 
         $this->seeInDatabase('transactions', [
-            'id'          => $transaction->id,
+            'id' => $transaction->id,
             'category_id' => null,
         ]);
     }

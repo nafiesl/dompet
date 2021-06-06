@@ -42,7 +42,7 @@ class LoanTest extends TestCase
         $loan = factory(Loan::class)->create(['partner_id' => $partner->id]);
         $transaction = factory(Transaction::class)->create([
             'partner_id' => $partner->id,
-            'loan_id'    => $loan->id,
+            'loan_id' => $loan->id,
             'creator_id' => $user->id,
         ]);
 
@@ -77,23 +77,23 @@ class LoanTest extends TestCase
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $loan = factory(Loan::class)->create([
-            'type_id'    => Loan::TYPE_RECEIVABLE,
-            'amount'     => 10000,
+            'type_id' => Loan::TYPE_RECEIVABLE,
+            'amount' => 10000,
             'partner_id' => $partner->id,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 0, // 0:spending, 1:income
+            'in_out' => 0, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 10000,
+            'loan_id' => $loan->id,
+            'amount' => 10000,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
+            'in_out' => 1, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 7000,
+            'loan_id' => $loan->id,
+            'amount' => 7000,
         ]);
 
         $this->assertEquals(7000, $loan->payment_total);
@@ -106,23 +106,23 @@ class LoanTest extends TestCase
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $loan = factory(Loan::class)->create([
-            'type_id'    => Loan::TYPE_RECEIVABLE,
-            'amount'     => 10000,
+            'type_id' => Loan::TYPE_RECEIVABLE,
+            'amount' => 10000,
             'partner_id' => $partner->id,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 0, // 0:spending, 1:income
+            'in_out' => 0, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 10000,
+            'loan_id' => $loan->id,
+            'amount' => 10000,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
+            'in_out' => 1, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 7000,
+            'loan_id' => $loan->id,
+            'amount' => 7000,
         ]);
 
         $this->assertEquals(3000, $loan->payment_remaining);
@@ -135,23 +135,23 @@ class LoanTest extends TestCase
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $loan = factory(Loan::class)->create([
-            'type_id'    => Loan::TYPE_DEBT,
-            'amount'     => 10000,
+            'type_id' => Loan::TYPE_DEBT,
+            'amount' => 10000,
             'partner_id' => $partner->id,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
+            'in_out' => 1, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 10000,
+            'loan_id' => $loan->id,
+            'amount' => 10000,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 0, // 0:spending, 1:income
+            'in_out' => 0, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 2000,
+            'loan_id' => $loan->id,
+            'amount' => 2000,
         ]);
 
         $this->assertEquals(2000, $loan->payment_total);
@@ -164,23 +164,23 @@ class LoanTest extends TestCase
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $loan = factory(Loan::class)->create([
-            'type_id'    => Loan::TYPE_DEBT,
-            'amount'     => 10000,
+            'type_id' => Loan::TYPE_DEBT,
+            'amount' => 10000,
             'partner_id' => $partner->id,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
+            'in_out' => 1, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 10000,
+            'loan_id' => $loan->id,
+            'amount' => 10000,
         ]);
         factory(Transaction::class)->create([
-            'in_out'     => 0, // 0:spending, 1:income
+            'in_out' => 0, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 2000,
+            'loan_id' => $loan->id,
+            'amount' => 2000,
         ]);
 
         $this->assertEquals(8000, $loan->payment_remaining);
@@ -205,7 +205,7 @@ class LoanTest extends TestCase
     public function a_loan_type_label_attribute_will_have_checkmark_when_the_loan_has_been_ended()
     {
         $loan = factory(Loan::class)->make([
-            'type_id'  => Loan::TYPE_DEBT,
+            'type_id' => Loan::TYPE_DEBT,
             'end_date' => '2020-02-01',
         ]);
 
@@ -224,23 +224,23 @@ class LoanTest extends TestCase
         $user = $this->loginAsUser();
         $partner = factory(Partner::class)->create(['creator_id' => $user->id]);
         $loan = factory(Loan::class)->create([
-            'type_id'    => Loan::TYPE_DEBT,
-            'amount'     => 10000,
+            'type_id' => Loan::TYPE_DEBT,
+            'amount' => 10000,
             'partner_id' => $partner->id,
         ]);
         $firstTransaction = factory(Transaction::class)->create([
-            'in_out'     => 1, // 0:spending, 1:income
+            'in_out' => 1, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 10000,
+            'loan_id' => $loan->id,
+            'amount' => 10000,
         ]);
         $secondTransaction = factory(Transaction::class)->create([
-            'in_out'     => 0, // 0:spending, 1:income
+            'in_out' => 0, // 0:spending, 1:income
             'creator_id' => $user->id,
             'partner_id' => $loan->partner_id,
-            'loan_id'    => $loan->id,
-            'amount'     => 2000,
+            'loan_id' => $loan->id,
+            'amount' => 2000,
         ]);
 
         $result = $loan->delete();
