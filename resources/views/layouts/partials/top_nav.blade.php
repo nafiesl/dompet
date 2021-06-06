@@ -23,25 +23,26 @@
         <div class="nav navbar-nav ml-auto d-block mt-3 mt-md-0">
             <!-- Authentication Links -->
             <a class="xs-navbar mr-4" href="{{ route('transactions.index') }}" title="{{ __('transaction.transaction') }}">
-                <i class="fe fe-repeat"></i>
-                <span class="d-none d-sm-inline">{{ __('transaction.transaction') }}</span>
+                <i class="fe fe-repeat h3 d-inline d-sm-none"></i>
+                <span class="d-none d-sm-inline"><i class="fe fe-repeat"></i> {{ __('transaction.transaction') }}</span>
             </a>
             <a class="xs-navbar mr-4" href="{{ route('loans.index') }}" title="{{ __('loan.loan') }}">
-                <i class="fe fe-refresh-cw"></i>
-                <span class="d-none d-sm-inline">{{ __('loan.loan') }}</span>
+                <i class="fe fe-refresh-cw h3 d-inline d-sm-none"></i>
+                <span class="d-none d-sm-inline"><i class="fe fe-refresh-cw"></i> {{ __('loan.loan') }}</span>
             </a>
             <a class="xs-navbar mr-4" href="{{ route('reports.index') }}" title="{{ __('report.report') }}">
-                <i class="fe fe-activity"></i>
-                <span class="d-none d-sm-inline">{{ __('report.report') }}</span>
+                <i class="fe fe-bar-chart-2 h3 d-inline d-sm-none"></i>
+                <span class="d-none d-sm-inline"><i class="fe fe-bar-chart-2"></i> {{ __('report.report') }}</span>
             </a>
             <a class="xs-navbar mr-4" href="{{ route('profile.show') }}" title="{{ __('settings.settings') }}">
-                <i class="fe fe-settings"></i>
-                <span class="d-none d-sm-inline">{{ __('settings.settings') }}</span>
+                <i class="fe fe-settings h3 d-inline d-sm-none"></i>
+                <span class="d-none d-sm-inline"><i class="fe fe-settings"></i> {{ __('settings.settings') }}</span>
             </a>
             <a class="xs-navbar mr-4" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
-                <i class="fe fe-log-out"></i>
+                 <i class="fe fe-log-out h3 d-inline d-sm-none"></i>
+                <i class="fe fe-log-out d-none d-sm-inline"></i>
             </a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -31,7 +31,7 @@
 <body>
     <div id="app" class="page">
         <div class="flex-fill">
-            @include('layouts.partials.top_nav_bs_4_test')
+            @include('layouts.partials.top_nav')
             <div class="my-3 my-md-5">
                 <div class="container">@yield('content')</div>
             </div>
