@@ -47,10 +47,10 @@
                 <tr>
                     <td class="text-center">{{ month_id($monthNumber) }}</td>
                     <td class="text-center">{{ $any ? $data[$monthNumber]->count : 0 }}</td>
-                    <td class="text-right">{{ format_number($income = ($any ? $data[$monthNumber]->income : 0)) }}</td>
-                    <td class="text-right">{{ format_number($spending = ($any ? $data[$monthNumber]->spending : 0)) }}</td>
-                    <td class="text-right">{{ format_number($difference = ($any ? $data[$monthNumber]->difference : 0)) }}</td>
-                    <td class="text-center">
+                    <td class="text-right text-nowrap">{{ format_number($income = ($any ? $data[$monthNumber]->income : 0)) }}</td>
+                    <td class="text-right text-nowrap">{{ format_number($spending = ($any ? $data[$monthNumber]->spending : 0)) }}</td>
+                    <td class="text-right text-nowrap">{{ format_number($difference = ($any ? $data[$monthNumber]->difference : 0)) }}</td>
+                    <td class="text-center text-nowrap">
                         {{ link_to_route(
                             'transactions.index',
                             __('report.view_monthly'),
