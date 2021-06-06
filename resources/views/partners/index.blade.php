@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
-                        <th>{{ __('partner.name') }}</th>
+                        <th class="text-nowrap">{{ __('partner.name') }}</th>
                         <th>{{ __('partner.description') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
@@ -29,9 +29,9 @@
                     @forelse($partners as $key => $partner)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td>{{ $partner->name }}</td>
+                        <td class="text-nowrap">{{ $partner->name }}</td>
                         <td>{{ $partner->description }}</td>
-                        <td class="text-center">
+                        <td class="text-center text-nowrap">
                             @can('view', $partner)
                                 {{ link_to_route(
                                     'partners.show',

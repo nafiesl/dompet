@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
-                        <th>{{ __('category.name') }}</th>
+                        <th class="text-nowrap">{{ __('category.name') }}</th>
                         <th>{{ __('category.description') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
@@ -29,9 +29,9 @@
                     @forelse($categories as $key => $category)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td>{!! $category->name_label !!}</td>
+                        <td class="text-nowrap">{!! $category->name_label !!}</td>
                         <td>{{ $category->description }}</td>
-                        <td class="text-center">
+                        <td class="text-center text-nowrap">
                             @can('view', $category)
                                 {{ link_to_route(
                                     'categories.show',
