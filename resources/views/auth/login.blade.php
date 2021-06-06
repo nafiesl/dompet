@@ -7,8 +7,8 @@
     <div class="row">
         <div class="col col-login mx-auto">
             <div class="card">
-                <div class="card-body p-6">
-                    <div class="card-title">{{ __('Login') }}</div>
+                <div class="card-header"><h3 class="card-title">{{ __('auth.login') }}</h3></div>
+                <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
