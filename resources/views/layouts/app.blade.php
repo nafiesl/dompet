@@ -29,7 +29,7 @@
     @yield('styles')
 </head>
 <body>
-    <div id="app" class="page">
+    <div id="app" class="page mb-7">
         <div class="flex-fill">
             @include('layouts.partials.top_nav')
             <div class="my-3 my-md-5">
