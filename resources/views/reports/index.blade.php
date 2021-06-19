@@ -7,13 +7,15 @@
 <div class="page-header">
     <h1 class="page-title">{{ __('report.graph') }} {{ $year }}</h1>
     <div class="page-options d-flex">
-        {{ Form::open(['method' => 'get', 'class' => 'form-inline well well-sm']) }}
+        {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
         {{ Form::label('year', __('report.view_yearly_label'), ['class' => 'control-label mr-2']) }}
         {{ Form::select('year', get_years(), $year, ['class' => 'form-control mr-2']) }}
         {{ Form::select('partner_id', $partners, $partnerId, ['class' => 'form-control mr-2', 'placeholder' => '-- '.__('partner.all').' --']) }}
         {{ Form::select('category_id', $categories, $categoryId, ['class' => 'form-control mr-2', 'placeholder' => '-- '.__('category.all').' --']) }}
-        {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info mr-2']) }}
-        {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary mr-2']) }}
+        <div class="form-group mt-4 mt-sm-0">
+            {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info mr-2']) }}
+            {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary mr-2']) }}
+        </div>
         {{ Form::close() }}
     </div>
 </div>

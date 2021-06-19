@@ -16,12 +16,14 @@
         <div class="card table-responsive">
             <div class="card-header d-block d-sm-flex">
                 {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
-                {!! FormField::text('q', ['label' => __('loan.search'), 'placeholder' => __('loan.search_text'), 'class' => 'mx-sm-2']) !!}
+                {!! FormField::text('q', ['label' => __('loan.search'), 'placeholder' => __('loan.search_text'), 'class' => 'form-control-sm mx-sm-2']) !!}
                 {{ Form::hidden('type_id', request('type_id')) }}
-                {{ Form::submit(__('loan.search'), ['class' => 'btn btn-info mr-2']) }}
-                {{ link_to_route('loans.index', __('app.reset'), request(['type_id']), ['class' => 'btn btn-secondary mr-2']) }}
+                <div class="form-group">
+                    {{ Form::submit(__('loan.search'), ['class' => 'btn btn-info btn-sm mr-2']) }}
+                    {{ link_to_route('loans.index', __('app.reset'), request(['type_id']), ['class' => 'btn btn-secondary btn-sm mr-2']) }}
+                </div>
                 {{ Form::close() }}
-                <div class="card-options my-4 my-sm-0">
+                <div class="card-options">
                     <div class="btn-group">
                         {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-secondary')]) }}
                         {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-secondary')]) }}

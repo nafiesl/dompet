@@ -1,4 +1,4 @@
-{{ Form::open(['method' => 'get','class' => 'form-inline']) }}
+{{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
     {!! Form::text('query', request('query'), ['class' => 'form-control form-control-sm mr-2', 'placeholder' => __('transaction.search_text')]) !!}
     {{ Form::select('date', get_dates(), $date, ['class' => 'form-control form-control-sm mr-2', 'placeholder' => '--']) }}
     {{ Form::select('month', get_months(), $month, ['class' => 'form-control form-control-sm mr-2']) }}
