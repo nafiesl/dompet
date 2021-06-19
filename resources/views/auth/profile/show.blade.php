@@ -20,6 +20,11 @@
             </table>
             <div class="card-footer">
                 <a href="{{ route('profile.edit') }}" class="btn btn-success">{{ __('user.profile_edit') }}</a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="float-right">
+                    <button type="submit" class="btn btn-danger"><i class="fe fe-log-out"></i> {{ __('auth.logout') }}</button>
+                    {{ csrf_field() }}
+                </form>
             </div>
         </div>
     </div>
