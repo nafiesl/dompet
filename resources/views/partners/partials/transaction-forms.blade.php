@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     {{ link_to_route('partners.show', '&times;', [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('transaction.edit') }}</h4>
+                    <h5 class="modal-title">{{ __('transaction.edit') }}</h5>
                 </div>
                 {!! Form::model($editableTransaction, ['route' => ['transactions.update', $editableTransaction], 'method' => 'patch', 'autocomplete' => 'off']) !!}
                 <div class="modal-body">
@@ -36,13 +36,13 @@
                     {{ Form::hidden('start_date', request('start_date')) }}
                     {{ Form::hidden('end_date', request('end_date')) }}
                     {{ Form::hidden('reference_page', 'partner') }}
-                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-secondary']) }}
                     @can('delete', $editableTransaction)
                         {!! link_to_route(
                             'partners.show',
                             __('app.delete'),
                             [$partner->id, 'action' => 'delete', 'id' => $editableTransaction->id] + request(['start_date', 'end_date', 'query', 'category_id']),
-                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger pull-left']
+                            ['id' => 'del-transaction-'.$editableTransaction->id, 'class' => 'btn btn-danger float-left']
                         ) !!}
                     @endcan
                 </div>
@@ -60,8 +60,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('partners.show', '&times;', [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h4>
+                    <h5 class="modal-title">{{ __('app.delete') }} {{ $editableTransaction->type }}</h5>
+                    {{ link_to_route('partners.show', '', [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'close']) }}
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -98,7 +98,7 @@
                             'query' => request('query'),
                         ]
                     ) !!}
-                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.show', __('app.cancel'), [$partner] + request(['start_date', 'end_date', 'query', 'category_id']), ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         </div>

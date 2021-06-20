@@ -3,20 +3,26 @@
 @section('title', __('transaction.list'))
 
 @section('content')
-<h3 class="page-header">
-    @include('transactions.partials.index_actions')
-    {{ __('transaction.list') }}
-    <small>{{ __('app.total') }} : {{ $transactions->count() }} {{ __('transaction.transaction') }}</small>
-</h3>
+<div class="page-header">
+    <h1 class="page-title">{{ __('transaction.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $transactions->count() }} {{ __('transaction.transaction') }}</div>
+    <div class="page-options d-flex">
+        @can('create', new App\Transaction)
+            {{ link_to_route('transactions.index', __('transaction.add_income'), ['action' => 'add-income', 'month' => $month, 'year' => $year], ['class' => 'btn btn-success mr-2']) }}
+            {{ link_to_route('transactions.index', __('transaction.add_spending'), ['action' => 'add-spending', 'month' => $month, 'year' => $year], ['class' => 'btn btn-danger']) }}
+        @endcan
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         @include('transactions.partials.stats')
-        <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
+        <div class="card table-responsive">
+            <div class="card-header">
                 @include('transactions.partials.index_filters')
             </div>
             @desktop
-            <table class="table table-condensed table-bordered">
+            <table class="table table-sm table-responsive-sm table-hover table-bordered mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
@@ -46,7 +52,7 @@
                             </td>
                         @endif
                         <td>
-                            <span class="pull-right">
+                            <span class="float-right">
                                 @if ($transaction->loan)
                                     @php
                                         $loanRoute = route('loans.show', $transaction->loan);
@@ -153,7 +159,7 @@
                 @endif
             </table>
             @elsedesktop
-            <div class="panel-body">
+            <div class="card-body">
                 @foreach ($transactions->groupBy('date') as $groupedTransactions)
                     @foreach ($groupedTransactions as $date => $transaction)
                         @include('transactions.partials.single_transaction_mobile', ['transaction' => $transaction, 'month' => $month, 'year' => $year])

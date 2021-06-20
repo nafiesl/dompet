@@ -5,8 +5,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('partners.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('partner.create') }}</h4>
+                    <h5 class="modal-title">{{ __('partner.create') }}</h5>
+                    {{ link_to_route('partners.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::open(['route' => 'partners.store']) !!}
                 <div class="modal-body">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('partner.create'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
                 {{ Form::close() }}
             </div>
@@ -31,8 +31,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('partners.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('partner.edit') }}</h4>
+                    <h5 class="modal-title">{{ __('partner.edit') }}</h5>
+                    {{ link_to_route('partners.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::model($editablePartner, ['route' => ['partners.update', $editablePartner], 'method' => 'patch']) !!}
                 <div class="modal-body">
@@ -41,13 +41,13 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('partner.update'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                     @can('delete', $editablePartner)
                         {!! link_to_route(
                             'partners.index',
                             __('app.delete'),
                             ['action' => 'delete', 'id' => $editablePartner->id],
-                            ['id' => 'del-partner-'.$editablePartner->id, 'class' => 'btn btn-danger pull-left']
+                            ['id' => 'del-partner-'.$editablePartner->id, 'class' => 'btn btn-danger float-left']
                         ) !!}
                     @endcan
                 </div>
@@ -65,8 +65,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('partners.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('partner.delete') }} {{ $editablePartner->type }}</h4>
+                    <h5 class="modal-title">{{ __('partner.delete') }} {{ $editablePartner->type }}</h5>
+                    {{ link_to_route('partners.index', '', [], ['class' => 'close']) }}
                 </div>
                 <div class="modal-body">
                     <label class="control-label">{{ __('partner.name') }}</label>
@@ -86,7 +86,7 @@
                             'partner_id' => $editablePartner->id,
                         ]
                     ) !!}
-                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('partners.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         </div>

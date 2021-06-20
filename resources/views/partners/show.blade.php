@@ -4,8 +4,13 @@
 
 @section('content_settings')
 
-{{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-sm btn-default pull-right']) }}
-<h3 class="page-header">{{ $partner->name }} <small>{{ __('partner.transactions') }}</small></h3>
+<div class="page-header">
+    <h1 class="page-title">{{ $partner->name }}</h1>
+    <div class="page-subtitle">{{ __('partner.transactions') }}</div>
+    <div class="page-options d-flex">
+        {{ link_to_route('partners.index', __('partner.back_to_index'), [], ['class' => 'btn btn-secondary float-right']) }}
+    </div>
+</div>
 
 @include('transactions.partials.stats')
 
@@ -15,12 +20,12 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
+        <div class="card table-responsive">
+            <div class="card-header">
                 @include('partners.partials.show_filter')
             </div>
             @desktop
-            <table class="table table-condensed table-bordered">
+            <table class="table table-sm table-responsive-sm table-hover table-bordered mb-0">
                 <thead>
                     <tr>
                         <th class="text-center col-md-1">{{ __('app.table_no') }}</th>
@@ -37,7 +42,7 @@
                         <td class="text-center">{{ $transaction->date }}</td>
                         <td>
                             {{ $transaction->description }}
-                            <div class="pull-right">
+                            <div class="float-right">
                                 {!! optional($transaction->category)->name_label !!}
                                 {!!optional($transaction->loan)->type_label !!}
                             </div>
@@ -71,7 +76,7 @@
                 </tfoot>
             </table>
             @elsedesktop
-            <div class="panel-body">
+            <div class="card-body">
                 @foreach ($transactions as $transaction)
                     @include('partners.partials.single_transaction_mobile', ['transaction' => $transaction])
                 @endforeach

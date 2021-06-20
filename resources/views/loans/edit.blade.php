@@ -4,13 +4,13 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 offset-md-3">
         @if (request('action') == 'delete' && $loan)
         @can('delete', $loan)
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="panel-title">{{ __('loan.delete') }}</h3></div>
-                <div class="panel-body">
-                    <table class="table table-condensed">
+            <div class="card">
+                <div class="card-header"><h3 class="card-title">{{ __('loan.delete') }}</h3></div>
+                <div class="card-body">
+                    <table class="table table-sm table-responsive-sm table-hover mb-0">
                         <tbody>
                             <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
                             <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>
@@ -25,23 +25,23 @@
                     </table>
                 </div>
                 <hr style="margin:0">
-                <div class="panel-body text-danger">{{ __('loan.delete_confirm') }}</div>
-                <div class="panel-footer">
+                <div class="card-body text-danger">{{ __('loan.delete_confirm') }}</div>
+                <div class="card-footer">
                     {!! FormField::delete(
                         ['route' => ['loans.destroy', $loan]],
                         __('app.delete_confirm_button'),
                         ['class' => 'btn btn-danger'],
                         ['loan_id' => $loan->id]
                     ) !!}
-                    {{ link_to_route('loans.edit', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('loans.edit', __('app.cancel'), [$loan], ['class' => 'btn btn-secondary']) }}
                 </div>
             </div>
         @endcan
         @else
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">{{ __('loan.edit') }}</h3></div>
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">{{ __('loan.edit') }}</h3></div>
             {{ Form::model($loan, ['route' => ['loans.update', $loan], 'method' => 'patch']) }}
-            <div class="panel-body">
+            <div class="card-body">
                 {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}
                 {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
                 <div class="row">
@@ -62,11 +62,11 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 {{ Form::submit(__('loan.update'), ['class' => 'btn btn-success']) }}
-                {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.show', __('app.cancel'), [$loan], ['class' => 'btn btn-secondary']) }}
                 @can('delete', $loan)
-                    {{ link_to_route('loans.edit', __('app.delete'), [$loan, 'action' => 'delete'], ['class' => 'btn btn-danger pull-right', 'id' => 'del-loan-'.$loan->id]) }}
+                    {{ link_to_route('loans.edit', __('app.delete'), [$loan, 'action' => 'delete'], ['class' => 'btn btn-danger float-right', 'id' => 'del-loan-'.$loan->id]) }}
                 @endcan
             </div>
             {{ Form::close() }}

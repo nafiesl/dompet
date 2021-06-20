@@ -5,9 +5,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-5">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">{{ __('loan.detail') }}</h3></div>
-            <table class="table table-condensed">
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">{{ __('loan.detail') }}</h3></div>
+            <table class="table table-sm table-responsive-sm table-hover card-table">
                 <tbody>
                     <tr><td>{{ __('loan.partner') }}</td><td>{{ $loan->partner->name }}</td></tr>
                     <tr><td>{{ __('loan.type') }}</td><td>{{ $loan->type }}</td></tr>
@@ -20,17 +20,18 @@
                     <tr><td>{{ __('loan.end_date') }}</td><td>{{ $loan->end_date }}</td></tr>
                 </tbody>
             </table>
-            <div class="panel-footer">
+            <div class="card-footer">
                 @can('update', $loan)
                     {{ link_to_route('loans.edit', __('loan.edit'), [$loan], ['class' => 'btn btn-warning', 'id' => 'edit-loan-'.$loan->id]) }}
                 @endcan
-                {{ link_to_route('loans.index', __('loan.back_to_index'), [], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.index', __('loan.back_to_index'), [], ['class' => 'btn btn-secondary']) }}
             </div>
         </div>
     </div>
     <div class="col-md-7">
-        <h3 class="page-header">
-            <div class="pull-right">
+        <div class="page-header">
+            <h1 class="page-title">{{ __('transaction.list') }}</h1>
+            <div class="page-options d-flex">
                 @can('update', $loan)
                     @if(Request::get('action') != 'add_transaction')
                         {{ link_to_route(
@@ -42,15 +43,16 @@
                     @endif
                 @endcan
             </div>
-            {{ __('transaction.transaction') }}
-        </h3>
+        </div>
+
         @can('update', $loan)
             @if(Request::has('action'))
                 @include('loans.partials.single_actions')
             @endif
         @endcan
-        <div class="panel panel-default table-responsive">
-            <table class="table table-condensed table-bordered">
+
+        <div class="card table-responsive">
+            <table class="table table-sm table-responsive-sm table-hover table-bordered mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>

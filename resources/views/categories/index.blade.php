@@ -3,23 +3,24 @@
 @section('title', __('category.list'))
 
 @section('content_settings')
-<h3 class="page-header">
-    <div class="pull-right">
+<div class="page-header">
+    <h1 class="page-title">{{ __('category.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $categories->count() }} {{ __('category.category') }}</div>
+    <div class="page-options d-flex">
         @can('create', new App\Category)
             {{ link_to_route('categories.index', __('category.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
         @endcan
     </div>
-    {{ __('category.list') }}
-    <small>{{ __('app.total') }} : {{ $categories->count() }} {{ __('category.category') }}</small>
-</h3>
+</div>
+
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default table-responsive">
-            <table class="table table-condensed">
+        <div class="card table-responsive">
+            <table class="table table-sm table-responsive-sm table-hover mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
-                        <th>{{ __('category.name') }}</th>
+                        <th class="text-nowrap">{{ __('category.name') }}</th>
                         <th>{{ __('category.description') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
@@ -28,15 +29,15 @@
                     @forelse($categories as $key => $category)
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
-                        <td>{!! $category->name_label !!}</td>
+                        <td class="text-nowrap">{!! $category->name_label !!}</td>
                         <td>{{ $category->description }}</td>
-                        <td class="text-center">
+                        <td class="text-center text-nowrap">
                             @can('view', $category)
                                 {{ link_to_route(
                                     'categories.show',
                                     __('category.view_transactions'),
                                     $category,
-                                    ['class' => 'btn btn-xs btn-default']
+                                    ['class' => 'btn btn-sm btn-secondary']
                                 ) }}
                             @endcan
                             @can('update', $category)
@@ -46,7 +47,7 @@
                                     ['action' => 'edit', 'id' => $category->id],
                                     [
                                         'id' => 'edit-category-'.$category->id,
-                                        'class' => 'btn btn-xs btn-warning',
+                                        'class' => 'btn btn-sm btn-warning',
                                     ]
                                 ) }}
                             @endcan

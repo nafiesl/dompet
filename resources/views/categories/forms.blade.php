@@ -5,8 +5,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('category.create') }}</h4>
+                    <h5 class="modal-title">{{ __('category.create') }}</h5>
+                    {{ link_to_route('categories.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::open(['route' => 'categories.store']) !!}
                 <div class="modal-body">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('category.create'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
                 {{ Form::close() }}
             </div>
@@ -44,8 +44,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('category.edit') }}</h4>
+                    <h5 class="modal-title">{{ __('category.edit') }}</h5>
+                    {{ link_to_route('categories.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::model($editableCategory, ['route' => ['categories.update', $editableCategory], 'method' => 'patch']) !!}
                 <div class="modal-body">
@@ -67,13 +67,13 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('category.update'), ['class' => 'btn btn-success']) !!}
-                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                     @can('delete', $editableCategory)
                         {!! link_to_route(
                             'categories.index',
                             __('app.delete'),
                             ['action' => 'delete', 'id' => $editableCategory->id],
-                            ['id' => 'del-category-'.$editableCategory->id, 'class' => 'btn btn-danger pull-left']
+                            ['id' => 'del-category-'.$editableCategory->id, 'class' => 'btn btn-danger float-left']
                         ) !!}
                     @endcan
                 </div>
@@ -91,8 +91,8 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    {{ link_to_route('categories.index', '&times;', [], ['class' => 'close']) }}
-                    <h4 class="modal-title">{{ __('category.delete') }} {{ $editableCategory->type }}</h4>
+                    <h5 class="modal-title">{{ __('category.delete') }} {{ $editableCategory->type }}</h5>
+                    {{ link_to_route('categories.index', '', [], ['class' => 'close']) }}
                 </div>
                 {!! Form::open(['url' => route('categories.destroy', $editableCategory), 'method' => 'DELETE']) !!}
                 <div class="modal-body">
@@ -112,7 +112,7 @@
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('app.delete_confirm_button'), ['class' => 'btn btn-danger']) !!}
-                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                    {{ link_to_route('categories.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
                 </div>
                 {!! Form::close() !!}
             </div>

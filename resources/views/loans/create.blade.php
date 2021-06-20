@@ -4,11 +4,11 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">{{ __('loan.create') }}</h3></div>
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">{{ __('loan.create') }}</h3></div>
             {{ Form::open(['route' => 'loans.store']) }}
-            <div class="panel-body">
+            <div class="card-body">
                 {!! FormField::select('partner_id', $partners, ['required' => true, 'label' => __('loan.partner')]) !!}
                 {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
                 <div class="row">
@@ -29,9 +29,9 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 {{ Form::submit(__('loan.create'), ['class' => 'btn btn-success']) }}
-                {{ link_to_route('loans.index', __('app.cancel'), [], ['class' => 'btn btn-default']) }}
+                {{ link_to_route('loans.index', __('app.cancel'), [], ['class' => 'btn btn-secondary']) }}
             </div>
             {{ Form::close() }}
         </div>

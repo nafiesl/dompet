@@ -43,6 +43,6 @@ class Partner extends Model
      */
     public function getNameLabelAttribute()
     {
-        return '<span class="label label-default">'.$this->name.'</span>';
+        return '<span class="badge badge-pill badge-secondary">'.$this->name.'</span>';
     }
 }

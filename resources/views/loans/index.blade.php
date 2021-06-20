@@ -3,34 +3,35 @@
 @section('title', __('loan.list'))
 
 @section('content')
-<h1 class="page-header">
-    <div class="pull-right">
-        @can('create', new App\Loan)
-            {{ link_to_route('loans.create', __('loan.create'), [], ['class' => 'btn btn-success']) }}
-        @endcan
+<div class="page-header">
+    <h1 class="page-title">{{ __('loan.list') }}</h1>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $loans->total() }} {{ __('loan.loan') }}</div>
+    <div class="page-options d-flex">
+        {{ link_to_route('loans.create', __('loan.create'), [], ['class' => 'btn btn-success']) }}
     </div>
-    {{ __('loan.list') }}
-    <small>{{ __('app.total') }} : {{ $loans->total() }} {{ __('loan.loan') }}</small>
-</h1>
+</div>
+
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default table-responsive">
-            <div class="panel-heading">
-                <div class="pull-right">
-                    <div class="btn-group" role="group" aria-label="...">
-                        {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-default')]) }}
-                        {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-default')]) }}
-                        {{ link_to_route('loans.index', __('loan.types.receivable'), ['type_id' => 2] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') === '2' ? 'btn-info active' : 'btn-default')]) }}
+        <div class="card table-responsive">
+            <div class="card-header d-block d-sm-flex">
+                {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
+                {!! FormField::text('q', ['label' => __('loan.search'), 'placeholder' => __('loan.search_text'), 'class' => 'form-control-sm mx-sm-2']) !!}
+                {{ Form::hidden('type_id', request('type_id')) }}
+                <div class="form-group">
+                    {{ Form::submit(__('loan.search'), ['class' => 'btn btn-info btn-sm mr-2']) }}
+                    {{ link_to_route('loans.index', __('app.reset'), request(['type_id']), ['class' => 'btn btn-secondary btn-sm mr-2']) }}
+                </div>
+                {{ Form::close() }}
+                <div class="card-options">
+                    <div class="btn-group">
+                        {{ link_to_route('loans.index', __('loan.all'), ['type_id' => null] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == null ? 'btn-info active' : 'btn-secondary')]) }}
+                        {{ link_to_route('loans.index', __('loan.types.debt'), ['type_id' => 1] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') == '1' ? 'btn-info active' : 'btn-secondary')]) }}
+                        {{ link_to_route('loans.index', __('loan.types.receivable'), ['type_id' => 2] + request(['q']), ['class' => 'btn btn-sm '.(request('type_id') === '2' ? 'btn-info active' : 'btn-secondary')]) }}
                     </div>
                 </div>
-                {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
-                {!! FormField::text('q', ['label' => __('loan.search'), 'placeholder' => __('loan.search_text'), 'class' => 'input-sm']) !!}
-                {{ Form::hidden('type_id', request('type_id')) }}
-                {{ Form::submit(__('loan.search'), ['class' => 'btn btn-sm']) }}
-                {{ link_to_route('loans.index', __('app.reset'), request(['type_id'])) }}
-                {{ Form::close() }}
             </div>
-            <table class="table table-condensed table-hover">
+            <table class="table table-sm table-responsive-sm table-hover table-hover mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
@@ -59,7 +60,7 @@
                                     'loans.show',
                                     __('app.show'),
                                     [$loan],
-                                    ['class' => 'btn btn-default btn-xs', 'id' => 'show-loan-' . $loan->id]
+                                    ['class' => 'btn btn-secondary btn-sm', 'id' => 'show-loan-' . $loan->id]
                                 ) }}
                             @endcan
                         </td>
@@ -67,7 +68,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="panel-body">{{ $loans->appends(Request::except('page'))->render() }}</div>
+            <div class="card-body">{{ $loans->appends(Request::except('page'))->render() }}</div>
         </div>
     </div>
 </div>

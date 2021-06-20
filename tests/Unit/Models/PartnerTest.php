@@ -55,7 +55,7 @@ class PartnerTest extends TestCase
     {
         $partner = factory(Partner::class)->make();
 
-        $nameLabel = '<span class="label label-default">'.$partner->name.'</span>';
+        $nameLabel = '<span class="badge badge-pill badge-secondary">'.$partner->name.'</span>';
         $this->assertEquals($nameLabel, $partner->name_label);
     }
 }
