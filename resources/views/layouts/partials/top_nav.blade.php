@@ -54,17 +54,17 @@
 </nav>
 
 <!-- Mobile Navigation -->
-<nav class="navbar fixed-bottom navbar-light bg-white d-block d-sm-none">
+<nav class="navbar fixed-bottom navbar-light bg-white d-block d-sm-none border-top">
     <div class="row text-center small justify-content-center">
-        <a class="col" href="{{ route('transactions.index') }}" title="{{ __('transaction.transaction') }}">
+        <a class="col border-right border-primary" href="{{ route('transactions.index') }}" title="{{ __('transaction.transaction') }}">
             <div><i class="fe fe-repeat h3"></i></div>
             {{ __('transaction.transaction') }}
         </a>
-        <a class="col" href="{{ route('loans.index') }}" title="{{ __('loan.loan') }}">
+        <a class="col border-right border-primary" href="{{ route('loans.index') }}" title="{{ __('loan.loan') }}">
             <div><i class="fe fe-refresh-cw h3"></i></div>
             {{ __('loan.loan') }}
         </a>
-        <a class="col" href="{{ route('reports.index') }}" title="{{ __('report.report') }}">
+        <a class="col border-right border-primary" href="{{ route('reports.index') }}" title="{{ __('report.report') }}">
             <div><i class="fe fe-bar-chart-2 h3"></i></div>
             {{ __('report.report') }}
         </a>
