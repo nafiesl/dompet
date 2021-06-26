@@ -50,7 +50,13 @@
                                 </div>
                             </td>
                             <td class="text-right">{{ $transaction->amount_string }}</td>
-                            <td class="text-center">&nbsp;</td>
+                            <td class="text-center text-nowrap">
+                                {{ link_to_route('transactions.index', __('app.show'), [
+                                    'date' => $transaction->date_only,
+                                    'month' => substr($transaction->date, 5, 2),
+                                    'year' => substr($transaction->date, 0, 4),
+                                ], ['class' => 'btn btn-secondary btn-sm']) }}
+                            </td>
                         </tr>
                         @empty
                         <tr><td colspan="5">{{ __('transaction.not_found') }}</td></tr>
