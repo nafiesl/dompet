@@ -52,9 +52,10 @@
                             <td class="text-right">{{ $transaction->amount_string }}</td>
                             <td class="text-center text-nowrap">
                                 {{ link_to_route('transactions.index', __('app.show'), [
+                                    'query' => $searchQuery,
                                     'date' => $transaction->date_only,
-                                    'month' => substr($transaction->date, 5, 2),
-                                    'year' => substr($transaction->date, 0, 4),
+                                    'month' => $transaction->month,
+                                    'year' => $transaction->year,
                                 ], ['class' => 'btn btn-secondary btn-sm']) }}
                             </td>
                         </tr>

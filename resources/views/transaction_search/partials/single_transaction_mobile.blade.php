@@ -1,8 +1,9 @@
 <span class="float-right">{{ $transaction->amount_string }}</span>
 {{ link_to_route('transactions.index', $transaction->date, [
+    'query' => $searchQuery,
     'date' => $transaction->date_only,
-    'month' => substr($transaction->date, 5, 2),
-    'year' => substr($transaction->date, 0, 4),
+    'month' => $transaction->month,
+    'year' => $transaction->year,
 ]) }}
 <div>
     {{ $transaction->description }}
