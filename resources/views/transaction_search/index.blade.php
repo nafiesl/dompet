@@ -25,6 +25,7 @@
                 {{ Form::close() }}
             </div>
             @if ($searchQuery)
+                @desktop
                 <table class="table table-sm table-responsive-sm table-hover table-bordered mb-0">
                     <thead>
                         <tr>
@@ -56,6 +57,13 @@
                         @endforelse
                     </tbody>
                 </table>
+                @elsedesktop
+                <div class="card-body">
+                    @foreach ($transactions as $transaction)
+                        @include('transaction_search.partials.single_transaction_mobile', ['transaction' => $transaction])
+                    @endforeach
+                </div>
+                @enddesktop
             @endif
         </div>
     </div>
