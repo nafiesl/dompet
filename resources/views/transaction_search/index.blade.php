@@ -44,9 +44,32 @@
                             <td>
                                 {{ $transaction->description }}
                                 <div class="float-right">
-                                    {!! optional($transaction->partner)->name_label !!}
-                                    {!! optional($transaction->category)->name_label !!}
-                                    {!! optional($transaction->loan)->type_label !!}
+                                    @if ($transaction->loan)
+                                        @php
+                                            $loanRoute = route('loans.show', $transaction->loan);
+                                        @endphp
+                                        <a href="{{ $loanRoute }}">{!! $transaction->loan->type_label !!}</a>
+                                    @endif
+                                    @if ($transaction->partner)
+                                        @php
+                                            $partnerRoute = route('partners.show', [
+                                                $transaction->partner_id,
+                                                'start_date' => $startDate,
+                                                'end_date' => $endDate,
+                                            ]);
+                                        @endphp
+                                        <a href="{{ $partnerRoute }}">{!! $transaction->partner->name_label !!}</a>
+                                    @endif
+                                    @if ($transaction->category)
+                                        @php
+                                            $categoryRoute = route('categories.show', [
+                                                $transaction->category_id,
+                                                'start_date' => $startDate,
+                                                'end_date' => $endDate,
+                                            ]);
+                                        @endphp
+                                        <a href="{{ $categoryRoute }}">{!! $transaction->category->name_label !!}</a>
+                                    @endif
                                 </div>
                             </td>
                             <td class="text-right">{{ $transaction->amount_string }}</td>
