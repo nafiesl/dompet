@@ -17,7 +17,18 @@
         <div class="card table-responsive">
             <div class="card-header">
                 {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
-                    {!! Form::text('search_query', $searchQuery, ['class' => 'form-control form-control-sm mr-2', 'placeholder' => __('transaction.search_text')]) !!}
+                    {!! FormField::text('search_query', [
+                        'value' => $searchQuery, 'label' => false,
+                        'class' => 'form-control-sm mr-2', 'placeholder' => __('transaction.search_text'),
+                    ]) !!}
+                    {!! FormField::text('start_date', [
+                        'value' => request('start_date'), 'label' => false, 'value' => $startDate,
+                        'class' => 'form-control-sm mr-2 date-select', 'placeholder' => __('time.start_date'),
+                    ]) !!}
+                    {!! FormField::text('end_date', [
+                        'value' => request('end_date'), 'label' => false, 'value' => $endDate,
+                        'class' => 'form-control-sm mr-2 date-select', 'placeholder' => __('time.end_date'),
+                    ]) !!}
                     <div class="form-group mt-4 mt-sm-0">
                         {{ Form::submit(__('app.search'), ['class' => 'btn btn-primary btn-sm mr-2']) }}
                         {{ link_to_route('transaction_search.index', __('app.reset'), [], ['class' => 'btn btn-secondary btn-sm']) }}
@@ -99,3 +110,21 @@
     </div>
 </div>
 @endsection
+
+@section('styles')
+    {{ Html::style(url('css/plugins/jquery.datetimepicker.css')) }}
+@endsection
+
+@push('scripts')
+    {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
+<script>
+(function () {
+    $('.date-select').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d',
+        closeOnDateSelect: true,
+        scrollInput: false
+    });
+})();
+</script>
+@endpush
