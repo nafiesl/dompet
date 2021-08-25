@@ -17,26 +17,11 @@
         <div class="card table-responsive">
             <div class="card-header">
                 {{ Form::open(['method' => 'get', 'class' => 'form-inline']) }}
-                    {!! FormField::text('search_query', [
-                        'value' => $searchQuery, 'label' => false,
-                        'class' => 'form-control-sm mr-2', 'placeholder' => __('transaction.search_text'),
-                    ]) !!}
-                    {!! FormField::text('start_date', [
-                        'value' => request('start_date'), 'label' => false, 'value' => $startDate,
-                        'class' => 'form-control-sm mr-2 date-select', 'placeholder' => __('time.start_date'),
-                        'style' => 'width:100px',
-                    ]) !!}
-                    {!! FormField::text('end_date', [
-                        'value' => request('end_date'), 'label' => false, 'value' => $endDate,
-                        'class' => 'form-control-sm mr-2 date-select', 'placeholder' => __('time.end_date'),
-                        'style' => 'width:100px',
-                    ]) !!}
-                    {{ Form::select('category_id', $categories, request('category_id'), [
-                        'placeholder' => __('category.all'), 'class' => 'form-control form-control-sm mr-2',
-                    ]) }}
-                    {{ Form::select('partner_id', $partners, request('partner_id'), [
-                        'placeholder' => __('partner.all'), 'class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0',
-                    ]) }}
+                    {{ Form::text('search_query', request('search_query'), ['class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0', 'placeholder' => __('transaction.search_text')]) }}
+                    {{ Form::text('start_date', $startDate, ['class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0 date-select', 'style' => 'width:100px', 'placeholder' => __('time.start_date')]) }}
+                    {{ Form::text('end_date', $endDate, ['class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0 date-select', 'style' => 'width:100px', 'placeholder' => __('time.end_date')]) }}
+                    {{ Form::select('category_id', $categories, request('category_id'), ['placeholder' => __('category.all'), 'class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0', ]) }}
+                    {{ Form::select('partner_id', $partners, request('partner_id'), ['placeholder' => __('partner.all'), 'class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0', ]) }}
                     <div class="form-group mt-4 mt-sm-0">
                         {{ Form::submit(__('app.search'), ['class' => 'btn btn-primary btn-sm mr-2']) }}
                         {{ link_to_route('transaction_search.index', __('app.reset'), [], ['class' => 'btn btn-secondary btn-sm']) }}
