@@ -24,11 +24,19 @@
                     {!! FormField::text('start_date', [
                         'value' => request('start_date'), 'label' => false, 'value' => $startDate,
                         'class' => 'form-control-sm mr-2 date-select', 'placeholder' => __('time.start_date'),
+                        'style' => 'width:100px',
                     ]) !!}
                     {!! FormField::text('end_date', [
                         'value' => request('end_date'), 'label' => false, 'value' => $endDate,
                         'class' => 'form-control-sm mr-2 date-select', 'placeholder' => __('time.end_date'),
+                        'style' => 'width:100px',
                     ]) !!}
+                    {{ Form::select('category_id', $categories, request('category_id'), [
+                        'placeholder' => __('category.all'), 'class' => 'form-control form-control-sm mr-2',
+                    ]) }}
+                    {{ Form::select('partner_id', $partners, request('partner_id'), [
+                        'placeholder' => __('partner.all'), 'class' => 'form-control form-control-sm mr-2 mt-4 mt-sm-0',
+                    ]) }}
                     <div class="form-group mt-4 mt-sm-0">
                         {{ Form::submit(__('app.search'), ['class' => 'btn btn-primary btn-sm mr-2']) }}
                         {{ link_to_route('transaction_search.index', __('app.reset'), [], ['class' => 'btn btn-secondary btn-sm']) }}
