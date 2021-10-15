@@ -9,6 +9,8 @@ class Category extends Model
 {
     use ForUser;
 
+    const STATUS_ACTIVE = 1;
+
     /**
      * The attributes that are mass assignable.
      *

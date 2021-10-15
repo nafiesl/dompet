@@ -42,6 +42,7 @@ class ManageCategoriesTest extends TestCase
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
     }
 
@@ -67,6 +68,7 @@ class ManageCategoriesTest extends TestCase
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
     }
 
