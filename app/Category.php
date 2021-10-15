@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Traits\Models\ConstantsGetter;
 use App\Traits\Models\ForUser;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use ForUser;
+    use ForUser, ConstantsGetter;
 
+    const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
 
     /**
@@ -16,7 +18,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'color', 'creator_id'];
+    protected $fillable = ['name', 'description', 'color', 'status_id', 'creator_id'];
 
     /**
      * Category belongs to user creator relation.

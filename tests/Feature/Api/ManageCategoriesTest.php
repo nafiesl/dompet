@@ -62,12 +62,14 @@ class ManageCategoriesTest extends TestCase
             'name' => 'Category 1 name',
             'color' => '#00aabb',
             'description' => 'Category 1 description',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
 
         $this->seeInDatabase('categories', [
             'name' => 'Category 1 name',
             'color' => '#00aabb',
             'description' => 'Category 1 description',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
 
         $this->seeStatusCode(200);
@@ -76,6 +78,7 @@ class ManageCategoriesTest extends TestCase
             'color' => '#00aabb',
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
     }
 
