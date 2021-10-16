@@ -31,7 +31,7 @@
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-nowrap">{{ $partner->name }}</td>
-                        <td class="text-center">{{ $partner->status }}</td>
+                        <td class="text-nowrap text-center">{{ $partner->status }}</td>
                         <td>{{ $partner->description }}</td>
                         <td class="text-center text-nowrap">
                             @can('view', $partner)

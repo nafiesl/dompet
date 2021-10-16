@@ -31,7 +31,7 @@
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-nowrap">{!! $category->name_label !!}</td>
-                        <td class="text-center">{{ $category->status }}</td>
+                        <td class="text-nowrap text-center">{{ $category->status }}</td>
                         <td>{{ $category->description }}</td>
                         <td class="text-center text-nowrap">
                             @can('view', $category)
