@@ -10,7 +10,7 @@ class AddStatusIdColumnOnCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->unsignedTinyInteger('status_id')->default(Category::STATUS_ACTIVE);
+            $table->unsignedTinyInteger('status_id')->after('creator_id')->default(Category::STATUS_ACTIVE);
         });
     }
 

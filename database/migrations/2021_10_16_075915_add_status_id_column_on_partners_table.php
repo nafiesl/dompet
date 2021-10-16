@@ -10,7 +10,7 @@ class AddStatusIdColumnOnPartnersTable extends Migration
     public function up()
     {
         Schema::table('partners', function (Blueprint $table) {
-            $table->unsignedTinyInteger('status_id')->default(Partner::STATUS_ACTIVE);
+            $table->unsignedTinyInteger('status_id')->after('creator_id')->default(Partner::STATUS_ACTIVE);
         });
     }
 
