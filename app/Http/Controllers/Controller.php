@@ -105,7 +105,7 @@ class Controller extends BaseController
      */
     protected function getCategoryList()
     {
-        return Category::orderBy('name')->pluck('name', 'id');
+        return Category::orderBy('name')->where('status_id', Category::STATUS_ACTIVE)->pluck('name', 'id');
     }
 
     /**
