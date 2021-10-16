@@ -54,6 +54,6 @@ class Category extends Model
 
     public function getStatusAttribute()
     {
-        return $this->status_id == static::STATUS_INACTIVE ? __('app.in_active') : __('app.active');
+        return $this->status_id == static::STATUS_INACTIVE ? __('app.inactive') : __('app.active');
     }
 }

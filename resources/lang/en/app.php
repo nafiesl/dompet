@@ -9,7 +9,7 @@ return [
     'action'            => 'Action',
     'welcome'           => 'Welcome',
     'active'            => 'Active',
-    'in_active'         => 'In Active',
+    'inactive'          => 'Inactive',
     'show_detail_title' => 'View :name :type detail',
     'status'            => 'Status',
     'type'              => 'Type',

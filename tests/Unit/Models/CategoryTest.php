@@ -66,6 +66,6 @@ class CategoryTest extends TestCase
         $this->assertEquals(__('app.active'), $category->status);
 
         $category->status_id = Category::STATUS_INACTIVE;
-        $this->assertEquals(__('app.in_active'), $category->status);
+        $this->assertEquals(__('app.inactive'), $category->status);
     }
 }
