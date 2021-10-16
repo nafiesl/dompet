@@ -111,7 +111,7 @@ class Controller extends BaseController
     /**
      * Get transaction listing of a category.
      *
-     * @param  \App\Category   $category
+     * @param  \App\Category  $category
      * @param  array  $criteria
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -141,7 +141,7 @@ class Controller extends BaseController
     /**
      * Get transaction listing of a partner.
      *
-     * @param  \App\Partner   $partner
+     * @param  \App\Partner  $partner
      * @param  array  $criteria
      * @return \Illuminate\Database\Eloquent\Collection
      */
