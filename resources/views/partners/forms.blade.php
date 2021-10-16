@@ -38,6 +38,7 @@
                 <div class="modal-body">
                     {!! FormField::text('name', ['required' => true, 'label' => __('partner.name')]) !!}
                     {!! FormField::textarea('description', ['label' => __('partner.description')]) !!}
+                    {!! FormField::radios('status_id', [App\Partner::STATUS_INACTIVE => __('app.inactive'), App\Partner::STATUS_ACTIVE => __('app.active')], ['label' => __('app.status')]) !!}
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('partner.update'), ['class' => 'btn btn-success']) !!}

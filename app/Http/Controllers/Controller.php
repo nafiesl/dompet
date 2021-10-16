@@ -95,7 +95,7 @@ class Controller extends BaseController
      */
     protected function getPartnerList()
     {
-        return Partner::orderBy('name')->pluck('name', 'id');
+        return Partner::orderBy('name')->where('status_id', Partner::STATUS_ACTIVE)->pluck('name', 'id');
     }
 
     /**
