@@ -21,6 +21,7 @@
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
                         <th class="text-nowrap">{{ __('category.name') }}</th>
+                        <th class="text-center">{{ __('app.status') }}</th>
                         <th>{{ __('category.description') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
@@ -30,6 +31,7 @@
                     <tr>
                         <td class="text-center">{{ 1 + $key }}</td>
                         <td class="text-nowrap">{!! $category->name_label !!}</td>
+                        <td class="text-center">{{ $category->status }}</td>
                         <td>{{ $category->description }}</td>
                         <td class="text-center text-nowrap">
                             @can('view', $category)
