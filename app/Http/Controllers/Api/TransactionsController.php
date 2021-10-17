@@ -52,7 +52,7 @@ class TransactionsController extends Controller
     /**
      * Show the specified transaction data.
      *
-     * @param  \App\Transaction $transaction
+     * @param  \App\Transaction  $transaction
      * @return \App\Http\Controllers\Api\TransactionResource
      */
     public function show(Transaction $transaction)

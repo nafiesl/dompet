@@ -57,7 +57,7 @@ function get_years()
 /**
  * Get two digits of month.
  *
- * @param  int|string $number
+ * @param  int|string  $number
  * @return string
  */
 function month_number($number)
