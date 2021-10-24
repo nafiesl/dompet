@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Partner;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PartnerController extends Controller
 {
@@ -98,6 +99,7 @@ class PartnerController extends Controller
         $partnerData = $request->validate([
             'name'        => 'required|max:60',
             'description' => 'nullable|max:255',
+            'status_id' => ['required', Rule::in(Partner::getConstants('STATUS'))],
         ]);
         $partner->update($partnerData);
 

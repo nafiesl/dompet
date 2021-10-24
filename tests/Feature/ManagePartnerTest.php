@@ -39,6 +39,7 @@ class ManagePartnerTest extends TestCase
         $this->seeInDatabase('partners', [
             'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
+            'status_id' => Partner::STATUS_ACTIVE,
         ]);
     }
 
@@ -55,6 +56,7 @@ class ManagePartnerTest extends TestCase
         $this->submitForm(__('partner.update'), [
             'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
+            'status_id' => Partner::STATUS_ACTIVE,
         ]);
 
         $this->seeRouteIs('partners.index');
@@ -62,6 +64,7 @@ class ManagePartnerTest extends TestCase
         $this->seeInDatabase('partners', [
             'name' => 'Partner 1 name',
             'description' => 'Partner 1 description',
+            'status_id' => Partner::STATUS_ACTIVE,
         ]);
     }
 

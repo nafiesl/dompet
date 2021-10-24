@@ -58,4 +58,14 @@ class CategoryTest extends TestCase
         $nameLabel = '<span class="badge" style="background-color: '.$category->color.'">'.$category->name.'</span>';
         $this->assertEquals($nameLabel, $category->name_label);
     }
+
+    /** @test */
+    public function a_category_has_status_attribute()
+    {
+        $category = factory(Category::class)->make();
+        $this->assertEquals(__('app.active'), $category->status);
+
+        $category->status_id = Category::STATUS_INACTIVE;
+        $this->assertEquals(__('app.inactive'), $category->status);
+    }
 }

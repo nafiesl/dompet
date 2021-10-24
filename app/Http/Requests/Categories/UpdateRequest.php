@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Categories;
 
+use App\Category;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -27,6 +29,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required|max:60',
             'color' => 'required|string|max:7',
             'description' => 'nullable|string|max:255',
+            'status_id' => ['required', Rule::in(Category::getConstants('STATUS'))],
         ];
     }
 

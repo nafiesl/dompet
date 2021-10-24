@@ -64,6 +64,7 @@
                         </div>
                     </div>
                     {!! FormField::textarea('description', ['label' => __('category.description')]) !!}
+                    {!! FormField::radios('status_id', [App\Category::STATUS_INACTIVE => __('app.inactive'), App\Category::STATUS_ACTIVE => __('app.active')], ['label' => __('app.status')]) !!}
                 </div>
                 <div class="modal-footer">
                     {!! Form::submit(__('category.update'), ['class' => 'btn btn-success']) !!}

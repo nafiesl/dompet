@@ -9,7 +9,7 @@ return [
     'action'            => 'Pilihan',
     'welcome'           => 'Selamat Datang',
     'active'            => 'Aktif',
-    'in_active'         => 'Non Aktif',
+    'inactive'          => 'Non Aktif',
     'show_detail_title' => 'Lihat detail :type :name',
     'status'            => 'Status',
     'type'              => 'Jenis',

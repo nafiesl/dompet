@@ -95,7 +95,7 @@ class Controller extends BaseController
      */
     protected function getPartnerList()
     {
-        return Partner::orderBy('name')->pluck('name', 'id');
+        return Partner::orderBy('name')->where('status_id', Partner::STATUS_ACTIVE)->pluck('name', 'id');
     }
 
     /**
@@ -105,13 +105,13 @@ class Controller extends BaseController
      */
     protected function getCategoryList()
     {
-        return Category::orderBy('name')->pluck('name', 'id');
+        return Category::orderBy('name')->where('status_id', Category::STATUS_ACTIVE)->pluck('name', 'id');
     }
 
     /**
      * Get transaction listing of a category.
      *
-     * @param  \App\Category   $category
+     * @param  \App\Category  $category
      * @param  array  $criteria
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -141,7 +141,7 @@ class Controller extends BaseController
     /**
      * Get transaction listing of a partner.
      *
-     * @param  \App\Partner   $partner
+     * @param  \App\Partner  $partner
      * @param  array  $criteria
      * @return \Illuminate\Database\Eloquent\Collection
      */

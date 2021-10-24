@@ -42,6 +42,7 @@ class ManageCategoriesTest extends TestCase
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
     }
 
@@ -59,6 +60,7 @@ class ManageCategoriesTest extends TestCase
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
+            'status_id' => Category::STATUS_ACTIVE,
         ]);
 
         $this->seePageIs(route('categories.index'));
@@ -67,6 +69,34 @@ class ManageCategoriesTest extends TestCase
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
+            'status_id' => Category::STATUS_ACTIVE,
+        ]);
+    }
+
+    /** @test */
+    public function user_can_edit_a_category_status()
+    {
+        $user = $this->loginAsUser();
+        $category = factory(Category::class)->create(['creator_id' => $user->id]);
+
+        $this->visit(route('categories.index'));
+        $this->click('edit-category-'.$category->id);
+        $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
+
+        $this->submitForm(trans('category.update'), [
+            'name' => 'Category 1 name',
+            'description' => 'Category 1 description',
+            'color' => '#00aabb',
+            'status_id' => Category::STATUS_INACTIVE,
+        ]);
+
+        $this->seePageIs(route('categories.index'));
+
+        $this->seeInDatabase('categories', [
+            'name' => 'Category 1 name',
+            'description' => 'Category 1 description',
+            'color' => '#00aabb',
+            'status_id' => Category::STATUS_INACTIVE,
         ]);
     }
 

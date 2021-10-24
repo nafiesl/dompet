@@ -58,4 +58,14 @@ class PartnerTest extends TestCase
         $nameLabel = '<span class="badge badge-pill badge-secondary">'.$partner->name.'</span>';
         $this->assertEquals($nameLabel, $partner->name_label);
     }
+
+    /** @test */
+    public function a_partner_has_status_attribute()
+    {
+        $partner = factory(Partner::class)->make();
+        $this->assertEquals(__('app.active'), $partner->status);
+
+        $partner->status_id = Partner::STATUS_INACTIVE;
+        $this->assertEquals(__('app.inactive'), $partner->status);
+    }
 }
