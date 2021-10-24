@@ -11,7 +11,7 @@ class LoanController extends Controller
     /**
      * Display a listing of the loan.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
     public function index(Request $request)
