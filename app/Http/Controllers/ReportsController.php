@@ -21,8 +21,14 @@ class ReportsController extends Controller
         $categories = $this->getCategoryList();
         $year = $this->getYearQuery($request->get('year'));
         $reportFormat = $request->get('format', 'in_months');
-        $data = $this->getYearlyTransactionSummary($year, auth()->id(), $partnerId, $categoryId);
-        $chartData = $this->getYearlyReportChartData($data);
+
+        if ($reportFormat == 'in_weeks') {
+            $data = $this->getYearlyTransactionInWeeksSummary($year, auth()->id(), $partnerId, $categoryId);
+            $chartData = $this->getYearlyReportInWeeksChartData($year, $data);
+        } else {
+            $data = $this->getYearlyTransactionSummary($year, auth()->id(), $partnerId, $categoryId);
+            $chartData = $this->getYearlyReportChartData($data);
+        }
 
         return view('reports.index', compact(
             'year', 'data', 'partners', 'partnerId', 'categories', 'categoryId', 'chartData', 'reportFormat'
@@ -98,6 +104,62 @@ class ReportsController extends Controller
         $chartData = $reportData->map(function ($item) {
             return [
                 'month' => month_id($item->month),
+                'income' => $item->income,
+                'spending' => $item->spending,
+                'difference' => $item->difference,
+            ];
+        });
+
+        return $defaultMonthValues->replace($chartData)->values();
+    }
+
+    private function getYearlyTransactionInWeeksSummary($year, $userId, $partnerId = null, $categoryId = null)
+    {
+        $rawQuery = 'WEEK(date, 1) as week';
+        $rawQuery .= ', count(`id`) as count';
+        $rawQuery .= ', sum(if(in_out = 1, amount, 0)) AS income';
+        $rawQuery .= ', sum(if(in_out = 0, amount, 0)) AS spending';
+
+        $reportQuery = DB::table('transactions')->select(DB::raw($rawQuery))
+            ->where(DB::raw('YEAR(date)'), $year)
+            ->where('creator_id', $userId);
+
+        if ($partnerId) {
+            $reportQuery->where('partner_id', $partnerId);
+        }
+
+        if ($categoryId) {
+            $reportQuery->where('category_id', $categoryId);
+        }
+
+        $reportsData = $reportQuery->orderBy('date', 'ASC')
+            ->groupBy(DB::raw('WEEK(date, 1)'))
+            ->get();
+
+        $reports = [];
+        foreach ($reportsData as $report) {
+            $key = $report->week;
+            $reports[$key] = $report;
+            $reports[$key]->difference = $report->income - $report->spending;
+        }
+
+        return collect($reports);
+    }
+
+    public function getYearlyReportInWeeksChartData($year, $reportData)
+    {
+        $defaultMonthValues = collect(get_week_numbers($year))->map(function ($item, $key) {
+            return [
+                'week' => $key,
+                'income' => 0,
+                'spending' => 0,
+                'difference' => 0,
+            ];
+        });
+
+        $chartData = $reportData->map(function ($item) {
+            return [
+                'week' => $item->week,
                 'income' => $item->income,
                 'spending' => $item->spending,
                 'difference' => $item->difference,

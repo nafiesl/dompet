@@ -32,6 +32,7 @@
     <div class="card-header"><h3 class="card-title">{{ __('report.detail') }}</h3></div>
     <div class="card-body table-responsive">
         @includeWhen($reportFormat == 'in_months', 'reports.partials.yearly_in_months', compact('data'))
+        @includeWhen($reportFormat == 'in_weeks', 'reports.partials.yearly_in_weeks', compact('data'))
     </div>
 </div>
 @endsection
@@ -48,7 +49,7 @@
     new Morris.Line({
         element: 'yearly-chart',
         data: {!! collect($chartData)->toJson() !!},
-        xkey: 'month',
+        xkey: "{{ in_array(request('format'), ['in_weeks']) ? 'week' : 'month' }}",
         ykeys: ['income', 'spending', 'difference'],
         labels: ["{{ __('transaction.income') }} {{ auth()->user()->currency_code }}", "{{ __('transaction.spending') }} {{ auth()->user()->currency_code }}", "{{ __('transaction.difference') }} {{ auth()->user()->currency_code }}"],
         parseTime:false,
