@@ -28,23 +28,28 @@
             <td class="text-right text-nowrap">{{ format_number($spending = ($any ? $data[$weekNumber]->spending : 0)) }}</td>
             <td class="text-right text-nowrap">{{ format_number($difference = ($any ? $data[$weekNumber]->difference : 0)) }}</td>
             <td class="text-center text-nowrap">
-                {{-- {{ link_to_route(
-                    'transactions.index',
+                {{ link_to_route(
+                    'transaction_search.index',
                     __('report.view_weekly'),
-                    ['week' => $weekNumber, 'year' => $year, 'partner_id' => $partnerId],
+                    [
+                        'search_query' => '---',
+                        'start_date' => $startDate,
+                        'end_date' => $endDate,
+                        'partner_id' => $partnerId,
+                        'category_id' => $categoryId
+                    ],
                     [
                         'class' => 'btn btn-secondary btn-sm',
-                        'title' => __('report.weekly', ['year_week' => week_id($weekNumber)]),
-                        'title' => __('report.weekly', ['year_week' => week_id($weekNumber).' '.$year]),
+                        'title' => __('report.weekly', ['year_week' => $year.'-'.$weekNumber]),
                     ]
-                ) }} --}}
+                ) }}
             </td>
         </tr>
         @endforeach
     </tbody>
     <tfoot>
         <tr>
-            <th class="text-center" colspan="2">{{ trans('app.total') }}</th>
+            <th class="text-center" colspan="2">{{ __('app.total') }}</th>
             <th class="text-center">{{ $data->sum('count') }}</th>
             <th class="text-right">{{ format_number($data->sum('income')) }}</th>
             <th class="text-right">{{ format_number($data->sum('spending')) }}</th>

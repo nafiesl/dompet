@@ -22,10 +22,9 @@
                 {{ link_to_route(
                     'transactions.index',
                     __('report.view_monthly'),
-                    ['month' => $monthNumber, 'year' => $year, 'partner_id' => $partnerId],
+                    ['month' => $monthNumber, 'year' => $year, 'partner_id' => $partnerId, 'category_id' => $categoryId],
                     [
                         'class' => 'btn btn-secondary btn-sm',
-                        'title' => __('report.monthly', ['year_month' => month_id($monthNumber)]),
                         'title' => __('report.monthly', ['year_month' => month_id($monthNumber).' '.$year]),
                     ]
                 ) }}
@@ -35,7 +34,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <th class="text-center">{{ trans('app.total') }}</th>
+            <th class="text-center">{{ __('app.total') }}</th>
             <th class="text-center">{{ $data->sum('count') }}</th>
             <th class="text-right">{{ format_number($data->sum('income')) }}</th>
             <th class="text-right">{{ format_number($data->sum('spending')) }}</th>

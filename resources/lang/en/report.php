@@ -10,4 +10,7 @@ return [
     'graph' => 'Summary Graph',
     'detail' => 'Report Detail',
     'view_monthly' => 'View Monthly',
+    'monthly' => 'Report Month :year_month',
+    'view_weekly' => 'View Weekly',
+    'weekly' => 'Report Week :year_week',
 ];

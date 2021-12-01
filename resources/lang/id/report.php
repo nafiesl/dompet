@@ -10,4 +10,7 @@ return [
     'graph' => 'Grafik Summary',
     'detail' => 'Detail Laporan',
     'view_monthly' => 'Lihat Bulanan',
+    'monthly' => 'Laporan Bulan :year_month',
+    'view_weekly' => 'Lihat Mingguan',
+    'weekly' => 'Laporan Minggu :year_week',
 ];
