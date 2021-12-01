@@ -20,9 +20,13 @@ class ReportsController extends Controller
         $categoryId = $request->get('category_id');
         $categories = $this->getCategoryList();
         $year = $this->getYearQuery($request->get('year'));
+        $reportFormat = $request->get('format', 'in_months');
         $data = $this->getYearlyTransactionSummary($year, auth()->id(), $partnerId, $categoryId);
+        $chartData = $this->getYearlyReportChartData($data);
 
-        return view('reports.index', compact('year', 'data', 'partners', 'partnerId', 'categories', 'categoryId'));
+        return view('reports.index', compact(
+            'year', 'data', 'partners', 'partnerId', 'categories', 'categoryId', 'chartData', 'reportFormat'
+        ));
     }
 
     /**
@@ -78,5 +82,28 @@ class ReportsController extends Controller
         }
 
         return collect($reports);
+    }
+
+    public function getYearlyReportChartData($reportData)
+    {
+        $defaultMonthValues = collect(get_months())->map(function ($item, $key) {
+            return [
+                'month' => month_id($key),
+                'income' => 0,
+                'spending' => 0,
+                'difference' => 0,
+            ];
+        });
+
+        $chartData = $reportData->map(function ($item) {
+            return [
+                'month' => month_id($item->month),
+                'income' => $item->income,
+                'spending' => $item->spending,
+                'difference' => $item->difference,
+            ];
+        });
+
+        return $defaultMonthValues->replace($chartData)->values();
     }
 }
