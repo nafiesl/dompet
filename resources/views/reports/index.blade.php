@@ -16,6 +16,7 @@
             {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info mr-2']) }}
             {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary mr-2']) }}
         </div>
+        {{ Form::hidden('format', request('format')) }}
         {{ Form::close() }}
     </div>
 </div>
@@ -29,7 +30,13 @@
 </div>
 
 <div class="card table-responsive">
-    <div class="card-header"><h3 class="card-title">{{ __('report.detail') }}</h3></div>
+    <div class="card-header">
+        <h3 class="card-title">{{ __('report.detail') }}</h3>
+        <div class="card-options btn-group" role="group">
+            {{ link_to_route('reports.index', __('report.in_months'), array_merge(request()->all(), ['format' => 'in_months']), ['class' => 'btn btn-sm '.(in_array(request('format'), ['in_months', null]) ? 'btn-info' : 'btn-secondary')]) }}
+            {{ link_to_route('reports.index', __('report.in_weeks'), array_merge(request()->all(), ['format' => 'in_weeks']), ['class' => 'btn btn-sm '.(in_array(request('format'), ['in_weeks']) ? 'btn-info' : 'btn-secondary')]) }}
+        </div>
+    </div>
     <div class="card-body table-responsive">
         @includeWhen($reportFormat == 'in_months', 'reports.partials.yearly_in_months', compact('data'))
         @includeWhen($reportFormat == 'in_weeks', 'reports.partials.yearly_in_weeks', compact('data'))

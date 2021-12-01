@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'date'  => 'Date',
+    'date' => 'Date',
+    'week' => 'Week',
     'month' => 'Month',
 
     'months' => [
@@ -20,5 +21,5 @@ return [
     ],
 
     'start_date' => 'Start Date',
-    'end_date'   => 'End Date',
+    'end_date' => 'End Date',
 ];
