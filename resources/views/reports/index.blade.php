@@ -16,6 +16,7 @@
             {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info mr-2']) }}
             {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary mr-2']) }}
         </div>
+        {{ Form::hidden('format', request('format')) }}
         {{ Form::close() }}
     </div>
 </div>
@@ -29,58 +30,16 @@
 </div>
 
 <div class="card table-responsive">
-    <div class="card-header"><h3 class="card-title">{{ __('report.detail') }}</h3></div>
+    <div class="card-header">
+        <h3 class="card-title">{{ __('report.detail') }}</h3>
+        <div class="card-options btn-group" role="group">
+            {{ link_to_route('reports.index', __('report.in_months'), array_merge(request()->all(), ['format' => 'in_months']), ['class' => 'btn btn-sm '.(in_array(request('format'), ['in_months', null]) ? 'btn-info' : 'btn-secondary')]) }}
+            {{ link_to_route('reports.index', __('report.in_weeks'), array_merge(request()->all(), ['format' => 'in_weeks']), ['class' => 'btn btn-sm '.(in_array(request('format'), ['in_weeks']) ? 'btn-info' : 'btn-secondary')]) }}
+        </div>
+    </div>
     <div class="card-body table-responsive">
-        <table class="table table-sm table-responsive-sm table-hover">
-            <thead>
-                <th class="text-center">{{ __('time.month') }}</th>
-                <th class="text-center">{{ __('transaction.transaction') }}</th>
-                <th class="text-right">{{ __('transaction.income') }}</th>
-                <th class="text-right">{{ __('transaction.spending') }}</th>
-                <th class="text-right">{{ __('transaction.difference') }}</th>
-                <th class="text-center">{{ __('app.action') }}</th>
-            </thead>
-            <tbody>
-                @php $chartData = []; @endphp
-                @foreach(get_months() as $monthNumber => $monthName)
-                @php
-                    $any = isset($data[$monthNumber]);
-                @endphp
-                <tr>
-                    <td class="text-center">{{ month_id($monthNumber) }}</td>
-                    <td class="text-center">{{ $any ? $data[$monthNumber]->count : 0 }}</td>
-                    <td class="text-right text-nowrap">{{ format_number($income = ($any ? $data[$monthNumber]->income : 0)) }}</td>
-                    <td class="text-right text-nowrap">{{ format_number($spending = ($any ? $data[$monthNumber]->spending : 0)) }}</td>
-                    <td class="text-right text-nowrap">{{ format_number($difference = ($any ? $data[$monthNumber]->difference : 0)) }}</td>
-                    <td class="text-center text-nowrap">
-                        {{ link_to_route(
-                            'transactions.index',
-                            __('report.view_monthly'),
-                            ['month' => $monthNumber, 'year' => $year, 'partner_id' => $partnerId],
-                            [
-                                'class' => 'btn btn-secondary btn-sm',
-                                'title' => __('report.monthly', ['year_month' => month_id($monthNumber)]),
-                                'title' => __('report.monthly', ['year_month' => month_id($monthNumber).' '.$year]),
-                            ]
-                        ) }}
-                    </td>
-                </tr>
-                @php
-                    $chartData[] = ['month' => month_id($monthNumber), 'income' => $income, 'spending' => $spending, 'difference' => $difference];
-                @endphp
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th class="text-center">{{ trans('app.total') }}</th>
-                    <th class="text-center">{{ $data->sum('count') }}</th>
-                    <th class="text-right">{{ format_number($data->sum('income')) }}</th>
-                    <th class="text-right">{{ format_number($data->sum('spending')) }}</th>
-                    <th class="text-right">{{ format_number($data->sum('difference')) }}</th>
-                    <td>&nbsp;</td>
-                </tr>
-            </tfoot>
-        </table>
+        @includeWhen($reportFormat == 'in_months', 'reports.partials.yearly_in_months', compact('data'))
+        @includeWhen($reportFormat == 'in_weeks', 'reports.partials.yearly_in_weeks', compact('data'))
     </div>
 </div>
 @endsection
@@ -97,7 +56,7 @@
     new Morris.Line({
         element: 'yearly-chart',
         data: {!! collect($chartData)->toJson() !!},
-        xkey: 'month',
+        xkey: "{{ in_array(request('format'), ['in_weeks']) ? 'week' : 'month' }}",
         ykeys: ['income', 'spending', 'difference'],
         labels: ["{{ __('transaction.income') }} {{ auth()->user()->currency_code }}", "{{ __('transaction.spending') }} {{ auth()->user()->currency_code }}", "{{ __('transaction.difference') }} {{ auth()->user()->currency_code }}"],
         parseTime:false,

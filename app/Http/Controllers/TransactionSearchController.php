@@ -19,8 +19,10 @@ class TransactionSearchController extends Controller
         $partnerId = $request->get('partner_id');
         if ($searchQuery) {
             $transactionQuery = Transaction::orderBy('date', 'desc');
-            $transactionQuery->where('description', 'like', '%'.$searchQuery.'%');
             $transactionQuery->whereBetween('date', [$startDate, $endDate]);
+            if ($searchQuery != '---') {
+                $transactionQuery->where('description', 'like', '%'.$searchQuery.'%');
+            }
             if ($categoryId) {
                 $transactionQuery->where('category_id', $categoryId);
             }

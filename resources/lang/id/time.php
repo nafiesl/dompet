@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'date'  => 'Tanggal',
+    'date' => 'Tanggal',
+    'week' => 'Minggu',
     'month' => 'Bulan',
 
     'months' => [
@@ -20,5 +21,5 @@ return [
     ],
 
     'start_date' => 'Tanggal Mulai',
-    'end_date'   => 'Tanggal Akhir',
+    'end_date' => 'Tanggal Akhir',
 ];

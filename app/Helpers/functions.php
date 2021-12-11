@@ -1,4 +1,7 @@
 <?php
+
+use Carbon\Carbon;
+
 /**
  * Function helper to add flash notification.
  *
@@ -55,4 +58,11 @@ function balance($perDate = null, $startDate = null, $categoryId = null, $partne
     return $transactions->sum(function ($transaction) {
         return $transaction->in_out ? $transaction->amount : -$transaction->amount;
     });
+}
+
+function get_week_numbers(string $year): array
+{
+    $lastWeekOfTheYear = Carbon::parse($year.'-01-01')->weeksInYear();
+
+    return range(0, $lastWeekOfTheYear);
 }
