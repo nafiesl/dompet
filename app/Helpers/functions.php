@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+
 /**
  * Function helper to add flash notification.
  *
