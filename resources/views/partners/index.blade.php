@@ -5,7 +5,7 @@
 @section('content_settings')
 <div class="page-header">
     <h1 class="page-title">{{ __('partner.list') }}</h1>
-    <div class="page-subtitle">{{ __('app.total') }} : {{ $partners->count() }} {{ __('partner.partner') }}</div>
+    <div class="page-subtitle">{{ __('app.total') }} : {{ $partners->total() }} {{ __('partner.partner') }}</div>
     <div class="page-options d-flex">
         @can('create', new App\Partner)
             {{ link_to_route('partners.index', __('partner.create'), ['action' => 'create'], ['class' => 'btn btn-success']) }}
@@ -29,7 +29,7 @@
                 <tbody>
                     @forelse($partners as $key => $partner)
                     <tr>
-                        <td class="text-center">{{ 1 + $key }}</td>
+                        <td class="text-center">{{ $key + $partners->firstItem() }}</td>
                         <td class="text-nowrap">{{ $partner->name }}</td>
                         <td class="text-nowrap text-center">{{ $partner->status }}</td>
                         <td>{{ $partner->description }}</td>
@@ -61,6 +61,7 @@
                 </tbody>
             </table>
         </div>
+        {{ $partners->links() }}
     </div>
     <div class="col-md-4">
         @if(Request::has('action'))
