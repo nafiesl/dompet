@@ -11,7 +11,7 @@ return [
     'throttle' => 'Terlalu banyak usaha masuk. Silahkan coba lagi dalam :seconds detik.',
     'logout' => 'Keluar',
     'logged_out' => 'Anda telah logout.',
-    'user_inactive' => 'User ini tidak aktif',
+    'user_inactive' => 'User tidak aktif.',
     'remember_me' => 'Ingat Saya',
     'have_account' => 'Saya sudah mendaftar',
 
