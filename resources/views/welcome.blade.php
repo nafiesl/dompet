@@ -1,6 +1,6 @@
 @extends('layouts.guest')
 
-@section('title', trans('app.welcome'))
+@section('title', __('app.welcome'))
 
 @section('content')
 <div class="jumbotron">
