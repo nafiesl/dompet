@@ -14,7 +14,7 @@ class RegistrationTest extends TestCase
     {
         $this->visit(route('register'));
 
-        $this->submitForm(trans('auth.register'), [
+        $this->submitForm(__('auth.register'), [
             'name' => 'Nama Member',
             'email' => 'email@mail.com',
             'password' => 'password.111',

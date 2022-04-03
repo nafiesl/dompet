@@ -17,16 +17,16 @@ class LoginTest extends TestCase
 
         $this->visit(route('login'));
 
-        $this->submitForm(trans('auth.login'), [
+        $this->submitForm(__('auth.login'), [
             'email' => 'email@mail.com',
             'password' => 'secret',
         ]);
 
-        $this->see(trans('auth.welcome', ['name' => $user->name]));
+        $this->see(__('auth.welcome', ['name' => $user->name]));
         $this->seePageIs(route('home'));
         $this->seeIsAuthenticated();
 
-        $this->press(trans('auth.logout'));
+        $this->press(__('auth.logout'));
 
         $this->seePageIs(route('welcome'));
     }
@@ -36,7 +36,7 @@ class LoginTest extends TestCase
     {
         $this->visit(route('login'));
 
-        $this->submitForm(trans('auth.login'), [
+        $this->submitForm(__('auth.login'), [
             'email' => 'email@mail.com',
             'password' => 'member',
         ]);
@@ -55,12 +55,12 @@ class LoginTest extends TestCase
 
         $this->visit(route('login'));
 
-        $this->submitForm(trans('auth.login'), [
+        $this->submitForm(__('auth.login'), [
             'email' => 'email@mail.com',
             'password' => 'secret',
         ]);
 
-        $this->see(trans('auth.user_inactive'));
+        $this->see(__('auth.user_inactive'));
         $this->seePageIs(route('login'));
         $this->dontSeeIsAuthenticated();
     }

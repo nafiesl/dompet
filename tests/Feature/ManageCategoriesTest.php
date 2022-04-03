@@ -27,10 +27,10 @@ class ManageCategoriesTest extends TestCase
         $this->loginAsUser();
         $this->visit(route('categories.index'));
 
-        $this->click(trans('category.create'));
+        $this->click(__('category.create'));
         $this->seePageIs(route('categories.index', ['action' => 'create']));
 
-        $this->submitForm(trans('category.create'), [
+        $this->submitForm(__('category.create'), [
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
@@ -56,7 +56,7 @@ class ManageCategoriesTest extends TestCase
         $this->click('edit-category-'.$category->id);
         $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
 
-        $this->submitForm(trans('category.update'), [
+        $this->submitForm(__('category.update'), [
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
@@ -83,7 +83,7 @@ class ManageCategoriesTest extends TestCase
         $this->click('edit-category-'.$category->id);
         $this->seePageIs(route('categories.index', ['action' => 'edit', 'id' => $category->id]));
 
-        $this->submitForm(trans('category.update'), [
+        $this->submitForm(__('category.update'), [
             'name' => 'Category 1 name',
             'description' => 'Category 1 description',
             'color' => '#00aabb',
