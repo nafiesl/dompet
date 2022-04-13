@@ -16,7 +16,7 @@
             {{ Form::submit(__('report.view_report'), ['class' => 'btn btn-info mr-2']) }}
             {{ link_to_route('reports.index', __('report.this_year'), [], ['class' => 'btn btn-secondary mr-2']) }}
         </div>
-        {{ Form::hidden('format', request('format')) }}
+        {{ Form::hidden('format', request('format', 'in_months')) }}
         {{ Form::close() }}
     </div>
 </div>
