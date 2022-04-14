@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 || ^8.0",
         "backup-manager/laravel": "dev-laravel_8_support",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
