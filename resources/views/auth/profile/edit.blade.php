@@ -36,7 +36,8 @@
         timepicker:false,
         format:'Y-m-d',
         closeOnDateSelect: true,
-        scrollInput: false
+        scrollInput: false,
+        dayOfWeekStart: 1
     });
 })();
 </script>
