@@ -34,7 +34,7 @@
                     <thead>
                         <tr>
                             <th class="text-center col-md-1">{{ __('app.table_no') }}</th>
-                            <th class="text-center col-md-2">{{ __('app.date') }}</th>
+                            <th class="col-md-2">{{ __('app.date') }}</th>
                             <th class="col-md-7">{{ __('transaction.description') }}</th>
                             <th class="text-right col-md-2">{{ __('transaction.amount') }}</th>
                             <th class="text-center">{{ __('app.action') }}</th>
@@ -44,7 +44,7 @@
                         @forelse ($transactions as $key => $transaction)
                         <tr>
                             <td class="text-center">{{ 1 + $key }}</td>
-                            <td class="text-center">{{ $transaction->date }}</td>
+                            <td class="text-center">{{ $transaction->date }} ({{ $transaction->day_name }})</td>
                             <td>
                                 {{ $transaction->description }}
                                 <div class="float-right">
