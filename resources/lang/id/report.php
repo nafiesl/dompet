@@ -11,6 +11,8 @@ return [
     'detail' => 'Detail Laporan',
     'view_monthly' => 'Lihat Bulanan',
     'monthly' => 'Laporan Bulan :year_month',
+    'prev_month' => 'Bulan Sblm',
+    'next_month' => 'Bulan Brkt',
     'view_weekly' => 'Lihat Mingguan',
     'weekly' => 'Laporan Minggu :year_week',
 ];

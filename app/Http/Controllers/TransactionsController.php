@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Transactions\CreateRequest;
 use App\Http\Requests\Transactions\UpdateRequest;
 use App\Transaction;
+use Carbon\Carbon;
 
 class TransactionsController extends Controller
 {
@@ -34,12 +35,14 @@ class TransactionsController extends Controller
 
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
+        $prevMonthDate = Carbon::parse($yearMonth.'-10')->subMonth();
+        $nextMonthDate = Carbon::parse($yearMonth.'-10')->addMonth();
 
         return view('transactions.index', compact(
             'transactions', 'editableTransaction',
             'yearMonth', 'month', 'year', 'categories',
             'incomeTotal', 'spendingTotal', 'partners',
-            'startDate', 'date'
+            'startDate', 'date', 'prevMonthDate', 'nextMonthDate'
         ));
     }
 

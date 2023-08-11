@@ -19,7 +19,7 @@
     <div class="col-md-12">
         @include('transactions.partials.stats')
         <div class="card table-responsive">
-            <div class="card-header">
+            <div class="card-header px-4">
                 @include('transactions.partials.index_filters')
             </div>
             @desktop
