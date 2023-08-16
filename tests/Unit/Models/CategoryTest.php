@@ -7,7 +7,7 @@ use App\Transaction;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
-use Tests\TestCase as TestCase;
+use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
