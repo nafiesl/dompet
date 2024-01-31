@@ -38,7 +38,7 @@ class LoanController extends Controller
         $this->authorize('create', new Loan);
         $partners = $this->getPartnerList();
         $loanTypes = [
-            Loan::TYPE_DEBT       => __('loan.types.debt'),
+            Loan::TYPE_DEBT => __('loan.types.debt'),
             Loan::TYPE_RECEIVABLE => __('loan.types.receivable'),
         ];
 
@@ -56,25 +56,25 @@ class LoanController extends Controller
         $this->authorize('create', new Loan);
 
         $newLoan = $request->validate([
-            'partner_id'            => 'required|exists:partners,id',
-            'type_id'               => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
-            'amount'                => 'required|numeric',
+            'partner_id' => 'required|exists:partners,id',
+            'type_id' => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
+            'amount' => 'required|numeric',
             'planned_payment_count' => 'required|numeric',
-            'description'           => 'required|max:255',
-            'start_date'            => 'nullable|date_format:Y-m-d',
-            'end_date'              => 'nullable|date_format:Y-m-d',
+            'description' => 'required|max:255',
+            'start_date' => 'nullable|date_format:Y-m-d',
+            'end_date' => 'nullable|date_format:Y-m-d',
         ]);
         $newLoan['creator_id'] = auth()->id();
 
         $loan = Loan::create($newLoan);
         $newTransaction = [
-            'loan_id'     => $loan->id,
-            'in_out'      => $loan->type_id == Loan::TYPE_DEBT ? 1 : 0, // 0:spending, 1:income
-            'amount'      => $loan->amount,
-            'date'        => $loan->start_date ?: $loan->created_at->format('Y-m-d'),
+            'loan_id' => $loan->id,
+            'in_out' => $loan->type_id == Loan::TYPE_DEBT ? 1 : 0, // 0:spending, 1:income
+            'amount' => $loan->amount,
+            'date' => $loan->start_date ?: $loan->created_at->format('Y-m-d'),
             'description' => $loan->description,
-            'partner_id'  => $loan->partner_id,
-            'creator_id'  => $loan->creator_id,
+            'partner_id' => $loan->partner_id,
+            'creator_id' => $loan->creator_id,
         ];
         Transaction::create($newTransaction);
 
@@ -114,7 +114,7 @@ class LoanController extends Controller
         $this->authorize('update', $loan);
         $partners = $this->getPartnerList();
         $loanTypes = [
-            Loan::TYPE_DEBT       => __('loan.types.debt'),
+            Loan::TYPE_DEBT => __('loan.types.debt'),
             Loan::TYPE_RECEIVABLE => __('loan.types.receivable'),
         ];
 
@@ -133,13 +133,13 @@ class LoanController extends Controller
         $this->authorize('update', $loan);
 
         $loanData = $request->validate([
-            'partner_id'            => 'required|exists:partners,id',
-            'type_id'               => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
-            'amount'                => 'required|numeric',
+            'partner_id' => 'required|exists:partners,id',
+            'type_id' => 'required|in:'.Loan::TYPE_DEBT.','.Loan::TYPE_RECEIVABLE,
+            'amount' => 'required|numeric',
             'planned_payment_count' => 'required|numeric',
-            'description'           => 'required|max:255',
-            'start_date'            => 'nullable|date_format:Y-m-d',
-            'end_date'              => 'nullable|date_format:Y-m-d',
+            'description' => 'required|max:255',
+            'start_date' => 'nullable|date_format:Y-m-d',
+            'end_date' => 'nullable|date_format:Y-m-d',
         ]);
         $loan->update($loanData);
         $transaction = $loan->transactions()->orderBy('created_at')->first();
