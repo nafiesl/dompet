@@ -43,7 +43,7 @@ class Loan extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class)->orderBy('date');
     }
 
     public function getPaymentTotalAttribute()
