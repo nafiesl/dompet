@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\Transactions\CreateRequest;
 use App\Http\Requests\Transactions\UpdateRequest;
 use App\Transaction;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TransactionsController extends Controller
 {
@@ -44,6 +46,16 @@ class TransactionsController extends Controller
             'incomeTotal', 'spendingTotal', 'partners',
             'startDate', 'date', 'prevMonthDate', 'nextMonthDate'
         ));
+    }
+
+    public function create(Request $request)
+    {
+        $partners = $this->getPartnerList()->prepend('-- '.__('transaction.no_partner').' --', 'null');
+        $categories = Category::orderBy('name')
+            ->where('status_id', Category::STATUS_ACTIVE)
+            ->pluck('name', 'id');
+
+        return view('transactions.create', compact('categories', 'partners'));
     }
 
     /**
