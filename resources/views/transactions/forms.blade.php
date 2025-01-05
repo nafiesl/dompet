@@ -16,9 +16,17 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-4">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount'), 'type' => 'number']) !!}</div>
-                        <div class="col-md-4">{!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => __('transaction.transaction')]) !!}</div>
-                        <div class="col-md-4">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.empty')]) !!}</div>
+                        <div class="col-md-6">
+                            {!! FormField::text('amount', [
+                                'required' => true,
+                                'value' => old('amount', format_number($editableTransaction->amount)),
+                                'label' => __('transaction.amount'),
+                                'addon' => ['before' => auth()->user()->currency_code],
+                                'step' => '0.01',
+                            ]) !!}
+                        </div>
+                        <div class="col-md-6">{!! FormField::radios('in_out', [__('transaction.spending'), __('transaction.income')], ['required' => true, 'label' => __('transaction.transaction')]) !!}</div>
+                        <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.empty')]) !!}</div>
                     </div>
                 </div>
                 <div class="modal-footer">

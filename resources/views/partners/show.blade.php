@@ -98,6 +98,7 @@
 @push('scripts')
     {{ Html::script(url('js/plugins/bootstrap-colorpicker.min.js')) }}
     {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
+    {{ Html::script(url('js/plugins/number-format.js')) }}
 <script>
 (function () {
     $('#transactionModal').modal({
@@ -111,6 +112,7 @@
         scrollInput: false,
         dayOfWeekStart: 1
     });
+    initNumberFormatter('#amount');
 })();
 </script>
 @endpush

@@ -21,7 +21,12 @@
                 {!! FormField::textarea('description', ['required' => true, 'label' => __('app.description')]) !!}
                 <div class="row">
                     <div class="col-md-6">
-                        {!! FormField::text('amount', ['required' => true, 'type' => 'number', 'min' => '0', 'label' => __('transaction.amount'), 'class' => 'text-right']) !!}
+                        {!! FormField::text('amount', [
+                            'required' => true,
+                            'label' => __('transaction.amount'),
+                            'addon' => ['before' => auth()->user()->currency_code],
+                            'step' => '0.01',
+                        ]) !!}
                     </div>
                     <div class="col-md-6">
                         {!! FormField::textDisplay('partner', $loan->partner->name) !!}

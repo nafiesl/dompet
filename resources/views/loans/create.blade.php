@@ -13,7 +13,12 @@
                 {!! FormField::radios('type_id', $loanTypes, ['required' => true, 'label' => __('loan.type')]) !!}
                 <div class="row">
                     <div class="col-md-6">
-                        {!! FormField::text('amount', ['required' => true, 'type' => 'number', 'label' => __('loan.amount')]) !!}
+                        {!! FormField::text('amount', [
+                            'required' => true,
+                            'label' => __('loan.amount'),
+                            'addon' => ['before' => auth()->user()->currency_code],
+                            'step' => '0.01',
+                        ]) !!}
                     </div>
                     <div class="col-md-6">
                         {!! FormField::text('planned_payment_count', ['required' => true, 'type' => 'number', 'value' => old('planned_payment_count', 1), 'label' => __('loan.planned_payment_count')]) !!}
@@ -45,6 +50,7 @@
 
 @push('scripts')
     {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
+    {{ Html::script(url('js/plugins/number-format.js')) }}
 <script>
 (function () {
     $('.date-select').datetimepicker({
@@ -54,6 +60,7 @@
         scrollInput: false,
         dayOfWeekStart: 1
     });
+    initNumberFormatter('#amount');
 })();
 </script>
 @endpush

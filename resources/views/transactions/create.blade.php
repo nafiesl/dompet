@@ -24,7 +24,14 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount'), 'type' => 'number', 'currency' => config('money.currency_code'), 'step' => '0.01']) !!}</div>
+                        <div class="col-md-6">
+                            {!! FormField::text('amount', [
+                                'required' => true,
+                                'label' => __('transaction.amount'),
+                                'addon' => ['before' => auth()->user()->currency_code],
+                                'step' => '0.01',
+                            ]) !!}
+                        </div>
                         <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.no_partner')]) !!}</div>
                     </div>
                 </div>
@@ -53,7 +60,14 @@
                     </div>
                     {!! FormField::textarea('description', ['required' => true, 'label' => __('transaction.description')]) !!}
                     <div class="row">
-                        <div class="col-md-6">{!! FormField::price('amount', ['required' => true, 'label' => __('transaction.amount'), 'type' => 'number', 'currency' => config('money.currency_code'), 'step' => '0.01']) !!}</div>
+                        <div class="col-md-6">
+                            {!! FormField::text('amount', [
+                                'required' => true,
+                                'label' => __('transaction.amount'),
+                                'addon' => ['before' => auth()->user()->currency_code],
+                                'step' => '0.01',
+                            ]) !!}
+                        </div>
                         <div class="col-md-6">{!! FormField::select('partner_id', $partners, ['label' => __('partner.partner'), 'placeholder' => __('partner.no_partner')]) !!}</div>
                     </div>
                 </div>
@@ -75,6 +89,7 @@
 
 @push('scripts')
     {{ Html::script(url('js/plugins/jquery.datetimepicker.js')) }}
+    {{ Html::script(url('js/plugins/number-format.js')) }}
 <script>
 (function () {
     $('.date-select').datetimepicker({
@@ -84,6 +99,7 @@
         scrollInput: false,
         dayOfWeekStart: 1
     });
+    initNumberFormatter('#amount');
 })();
 </script>
 @endpush
