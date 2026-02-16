@@ -25,8 +25,8 @@ class ExportController extends Controller
         $transactions = $this->getCategoryTransactions($category, [
             'partner_id' => request('partner_id'),
             'start_date' => $startDate,
-            'end_date'   => $endDate,
-            'query'      => request('query'),
+            'end_date' => $endDate,
+            'query' => request('query'),
         ]);
 
         return Response::csv($transactions);
@@ -38,9 +38,9 @@ class ExportController extends Controller
         $endDate = request('end_date', date('Y-m-d'));
         $transactions = $this->getPartnerTransactions($partner, [
             'category_id' => request('category_id'),
-            'start_date'  => $startDate,
-            'end_date'    => $endDate,
-            'query'       => request('query'),
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'query' => request('query'),
         ]);
 
         return Response::csv($transactions);

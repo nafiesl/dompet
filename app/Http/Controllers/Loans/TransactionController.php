@@ -13,9 +13,9 @@ class TransactionController extends Controller
     public function store(Request $request, Loan $loan)
     {
         $newTransaction = $request->validate([
-            'amount'      => 'required|numeric',
-            'date'        => 'required|date_format:Y-m-d',
-            'in_out'      => 'required|boolean',
+            'amount' => 'required|numeric',
+            'date' => 'required|date_format:Y-m-d',
+            'in_out' => 'required|boolean',
             'description' => 'required|max:255',
         ]);
         $newTransaction['loan_id'] = $loan->id;

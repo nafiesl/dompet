@@ -38,7 +38,7 @@ class PartnerController extends Controller
         $this->authorize('create', new Partner);
 
         $newPartner = $request->validate([
-            'name'        => 'required|max:60',
+            'name' => 'required|max:60',
             'description' => 'nullable|max:255',
         ]);
         $newPartner['creator_id'] = auth()->id();
@@ -67,9 +67,9 @@ class PartnerController extends Controller
 
         $transactions = $this->getPartnerTransactions($partner, [
             'category_id' => request('category_id'),
-            'start_date'  => $startDate,
-            'end_date'    => $endDate,
-            'query'       => request('query'),
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'query' => request('query'),
         ]);
         $incomeTotal = $this->getIncomeTotal($transactions);
         $spendingTotal = $this->getSpendingTotal($transactions);
@@ -97,7 +97,7 @@ class PartnerController extends Controller
         $this->authorize('update', $partner);
 
         $partnerData = $request->validate([
-            'name'        => 'required|max:60',
+            'name' => 'required|max:60',
             'description' => 'nullable|max:255',
             'status_id' => ['required', Rule::in(Partner::getConstants('STATUS'))],
         ]);
